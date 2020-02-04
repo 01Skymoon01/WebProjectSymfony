@@ -113,7 +113,7 @@ input {
   background: #fd4339;
 }
 .cyan-dark {
-  background: #00bcd4;
+  background: #ffd66a;
 }
 .border-left {
   border-left: 1px solid #e0e0e0;
@@ -673,7 +673,7 @@ input {
   border-right: 3px solid transparent;
 }
 .tz-main-menu > li > a span.cyan-dark:before {
-  border-top: 3px solid #00bcd4;
+  border-top: 3px solid #ffd66a;
   border-left: 3px solid transparent;
   border-right: 3px solid transparent;
 }
