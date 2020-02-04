@@ -1,0 +1,3 @@
+baskel_homepage:
+    path:     /
+    defaults: { _controller: BaskelBundle:Default:index }

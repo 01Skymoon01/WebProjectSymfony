@@ -1,0 +1,7 @@
+baskel:
+    resource: "@BaskelBundle/Resources/config/routing.yml"
+    prefix:   /Baskel
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
