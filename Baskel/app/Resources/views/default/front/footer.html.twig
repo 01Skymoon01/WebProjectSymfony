@@ -1,177 +1,7 @@
-
+{% block footer %}
 <!DOCTYPE html>
 <html lang="fr">
-{% block headheader %}
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard Admin</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- favicon
-		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('front/img/favicon.ico') }}">
-    <!-- Google Fonts
-		============================================ -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
-    <!-- Bootstrap CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/css/bootstrap.min.css') }}">
-    <!-- Bootstrap CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/css/font-awesome.min.css') }}">
-    <!-- nalika Icon CSS
-        ============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/css/nalika-icon.css') }}">
-    <!-- owl.carousel CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/css/owl.carousel.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/owl.theme.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/owl.transitions.css') }}">
-    <!-- animate CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/css/animate.css') }}">
-    <!-- normalize CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/css/normalize.css') }}">
-    <!-- meanmenu icon CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/css/meanmenu.min.css') }}">
-    <!-- main CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
-    <!-- morrisjs CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/css/morrisjs/morris.css') }}">
-    <!-- mCustomScrollbar CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/css/scrollbar/jquery.mCustomScrollbar.min.css') }}">
-    <!-- metisMenu CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/css/metisMenu/metisMenu.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/metisMenu/metisMenu-vertical.css') }}">
-    <!-- calendar CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/css/calendar/fullcalendar.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/calendar/fullcalendar.print.min.css') }}">
-    <!-- style CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/style.css') }}">
-    <!-- responsive CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{ asset('front/css/responsive.css') }}">
-
-
-    <!-- modernizr JS
-		============================================ -->
-    <script src="{{ asset('front/js/vendor/modernizr-2.8.3.min.js') }}"></script>
-</head>
-
-<body>
-<!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
-
-<div class="left-sidebar-pro">
-    <nav id="sidebar" class="">
-        <div class="sidebar-header">
-
-
-        </div>
-        <div class="nalika-profile">
-            <div class="main-logo" >
-                <a href="#"><img src="{{ asset('front/img/notification/logobaskel.png') }}" alt="" class="logo1" /></a>
-
-            </div>
-            <div class="profile-social-dtl">
-                <ul class="dtl-social">
-                    <li><a href="#"><i class="icon nalika-facebook"></i></a></li>
-                    <li><a href="#"><i class="icon nalika-twitter"></i></a></li>
-                    <li><a href="#"><i class="icon nalika-linkedin"></i></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="left-custom-menu-adp-wrap comment-scrollbar">
-            <nav class="sidebar-nav left-sidebar-menu-pro">
-                <ul class="metismenu" id="menu1">
-                    <li>
-                        <a class="has-arrow" href="index.html" aria-expanded="false">
-                            <i class="fa fa-bicycle" aria-hidden="true"></i>
-                            <span class="mini-click-non">Produits</span>
-                        </a>
-                        <ul class="submenu-angle" aria-expanded="true">
-                            <li><a title="Dashboard v.1" href="index.html"><span class="mini-sub-pro">Dashboard v.1</span></a></li>
-                            <li><a title="Dashboard v.2" href="index-1.html"><span class="mini-sub-pro">Dashboard v.2</span></a></li>
-                            <li><a title="Dashboard v.3" href="index-2.html"> <span class="mini-sub-pro">Dashboard v.3</span></a></li>
-                            <li><a title="Product List" href="product-list.html"><span class="mini-sub-pro">Product List</span></a></li>
-                            <li><a title="Product Edit" href="product-edit.html"><span class="mini-sub-pro">Product Edit</span></a></li>
-                            <li><a title="Product Detail" href="product-detail.html"><span class="mini-sub-pro">Product Detail</span></a></li>
-                            <li><a title="Product Cart" href="product-cart.html"><span class="mini-sub-pro">Product Cart</span></a></li>
-                            <li><a title="Product Payment" href="product-payment.html"><span class="mini-sub-pro">Product Payment</span></a></li>
-                            <li><a title="Analytics" href="analytics.html"><span class="mini-sub-pro">Analytics</span></a></li>
-                            <li><a title="Widgets" href="widgets.html"><span class="mini-sub-pro">Widgets</span></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> <span class="mini-click-non">Utilisateurs</span></a>
-                        <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="Inbox" href="mailbox.html"><span class="mini-sub-pro">Inbox</span></a></li>
-                            <li><a title="View Mail" href="mailbox-view.html"><span class="mini-sub-pro">View Mail</span></a></li>
-                            <li><a title="Compose Mail" href="mailbox-compose.html"><span class="mini-sub-pro">Compose Mail</span></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="mini-click-non">Commandes</span></a>
-                        <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="Google Map" href="google-map.html"><span class="mini-sub-pro">Google Map</span></a></li>
-                            <li><a title="Data Maps" href="data-maps.html"><span class="mini-sub-pro">Data Maps</span></a></li>
-                            <li><a title="Pdf Viewer" href="pdf-viewer.html"><span class="mini-sub-pro">Pdf Viewer</span></a></li>
-                            <li><a title="X-Editable" href="x-editable.html"><span class="mini-sub-pro">X-Editable</span></a></li>
-                            <li><a title="Code Editor" href="code-editor.html"><span class="mini-sub-pro">Code Editor</span></a></li>
-                            <li><a title="Tree View" href="tree-view.html"><span class="mini-sub-pro">Tree View</span></a></li>
-                            <li><a title="Preloader" href="preloader.html"><span class="mini-sub-pro">Preloader</span></a></li>
-                            <li><a title="Images Cropper" href="images-cropper.html"><span class="mini-sub-pro">Images Cropper</span></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="fa fa-calendar" aria-hidden="true"></i><span class="mini-click-non">Evenements</span></a>
-                        <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="File Manager" href="file-manager.html"><span class="mini-sub-pro">File Manager</span></a></li>
-                            <li><a title="Blog" href="blog.html"><span class="mini-sub-pro">Blog</span></a></li>
-                            <li><a title="Blog Details" href="blog-details.html"><span class="mini-sub-pro">Blog Details</span></a></li>
-                            <li><a title="404 Page" href="404.html"><span class="mini-sub-pro">404 Page</span></a></li>
-                            <li><a title="500 Page" href="500.html"><span class="mini-sub-pro">500 Page</span></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="fa fa-truck" aria-hidden="true"></i> <span class="mini-click-non">Livraisons</span></a>
-                        <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="Bar Charts" href="bar-charts.html"><span class="mini-sub-pro">Bar Charts</span></a></li>
-                            <li><a title="Line Charts" href="line-charts.html"><span class="mini-sub-pro">Line Charts</span></a></li>
-                            <li><a title="Area Charts" href="area-charts.html"><span class="mini-sub-pro">Area Charts</span></a></li>
-                            <li><a title="Rounded Charts" href="rounded-chart.html"><span class="mini-sub-pro">Rounded Charts</span></a></li>
-                            <li><a title="C3 Charts" href="c3.html"><span class="mini-sub-pro">C3 Charts</span></a></li>
-                            <li><a title="Sparkline Charts" href="sparkline.html"><span class="mini-sub-pro">Sparkline Charts</span></a></li>
-                            <li><a title="Peity Charts" href="peity.html"><span class="mini-sub-pro">Peity Charts</span></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="fa fa-wrench" aria-hidden="true"></i> <span class="mini-click-non">SAV</span></a>
-                        <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="Peity Charts" href="static-table.html"><span class="mini-sub-pro">Static Table</span></a></li>
-                            <li><a title="Data Table" href="data-table.html"><span class="mini-sub-pro">Data Table</span></a></li>
-                        </ul>
-                    </li>
-
-                </ul>
-            </nav>
-        </div>
-    </nav>
-</div>
-{% endblock %}
-<head>
-    {% block header %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -188,11 +18,7 @@
     <link href="{{ asset('front/css/custom.css') }}" rel="stylesheet" type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-    <!--[if lt IE 9]
-    <script src="html5shiv.min.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
-    {% endblock %}
+
 </head>
 <body>
 
@@ -202,7 +28,6 @@
 
 <!--Start Footer-->
 <footer class="tz-footer">
-    {% block footer %}
     <div class="footer-widget">
         <div class="container">
 
@@ -264,7 +89,7 @@
                 <div class="tz-widget-clients widget">
                     <h3 class="widget-title">Avis Clients!</h3>
                     <div class="tz-widget-say">
-                        <img src="{{ asset('web/front/images/say.jpg') }}" alt="Kathy Young">
+                        <img src="{{ asset('front/images/say.jpg') }}" alt="Kathy Young">
                         <div class="entry-say">
                             <p>goods services with friendly delivery and wonderful events #Baskel</p>
                             <span>Erij</span>
@@ -364,7 +189,7 @@
 <!--End class site-->
 
 <script type='text/javascript' src="{{ asset('front/js/jquery.min.js') }}"></script>
-<script type='text/javascript' src="{{ asset('front/js/bootstrap.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('front/bootstrap.min.js') }}"></script>
 <script type='text/javascript' src="{{ asset('front/js/off-canvas.js') }}"></script>
 <!--jQuery Countdow-->
 <script type='text/javascript' src="{{ asset('front/js/jquery.plugin.min.js') }}"></script>
@@ -373,10 +198,9 @@
 <script type='text/javascript' src="{{ asset('front/js/jquery.parallax-1.1.3.js') }}"></script>
 <script type='text/javascript' src="{{ asset('front/js/owl.carousel.js') }}"></script>
 <script type='text/javascript' src="{{ asset('front/js/custom.js') }}"></script>
-<script type='text/javascript' src="{{ asset('front/js/jquery.themepunch.tools.min.js') }}"></script>
-<script type='text/javascript' src="{{ asset('front/js/jquery.themepunch.revolution.min.js') }}"></script>
-<script type='text/javascript' src="{{ asset('front/js/custom-rs.js') }}"></script>
-{% endblock %}
+<script type='text/javascript' src='{{ asset('front/js/jquery.themepunch.tools.min.js') }}'></script>
+<script type='text/javascript' src='{{ asset('front/js/jquery.themepunch.revolution.min.js') }}'></script>
+<script type='text/javascript' src='{{ asset('front/js/custom-rs.js') }}'></script>
 </body>
 </html>
-
+{% endblock %}
