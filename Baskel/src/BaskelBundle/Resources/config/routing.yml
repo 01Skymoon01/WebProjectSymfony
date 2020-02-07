@@ -1,3 +1,8 @@
 baskel_homepage:
     path:     /
     defaults: { _controller: BaskelBundle:Default:index }
+
+
+afficherProduits:
+    path:     /afficherProduits
+    defaults: { _controller: BaskelBundle:Produits:afficherProduits }
