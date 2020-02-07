@@ -10,4 +10,8 @@ class DefaultController extends Controller
     {
         return $this->render('@Baskel/Default/index.html.twig');
     }
+    public function indexAdminAction()
+    {
+        return $this->render('@Baskel/Default/indexadmin.html.twig');
+    }
 }

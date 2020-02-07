@@ -1,3 +1,6 @@
 baskel_homepage:
     path:     /
     defaults: { _controller: BaskelBundle:Default:index }
+admin_homepage:
+    path:     /admin
+    defaults: { _controller: BaskelBundle:Default:indexAdmin }
