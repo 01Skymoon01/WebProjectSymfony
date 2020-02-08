@@ -4,3 +4,5 @@ baskel_homepage:
 admin_homepage:
     path:     /admin
     defaults: { _controller: BaskelBundle:Default:indexAdmin }
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
