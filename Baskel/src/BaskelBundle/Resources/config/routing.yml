@@ -6,3 +6,17 @@ baskel_homepage:
 afficherProduits:
     path:     /afficherProduits
     defaults: { _controller: BaskelBundle:Produits:afficherProduits }
+
+
+ajouterCategorie:
+    path:     /ajouterCategorie
+    defaults: { _controller: BaskelBundle:Produits:ajouterCategorie }
+
+
+afficherCategories:
+  path:     /afficherCategories
+  defaults: { _controller: BaskelBundle:Produits:afficherCategories }
+
+supprimerCategorie:
+  path:     /SupprimerCategorie/{ref_c}
+  defaults: { _controller: BaskelBundle:Produits:SupprimerCategorie }

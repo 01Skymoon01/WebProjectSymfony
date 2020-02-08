@@ -1,0 +1,87 @@
+
+{% extends 'default/back/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+    <style>
+        #div-cat-list{
+            margin-left: 18%;
+            margin-top: 5%;
+            width: 77%;
+        }
+        #delete-cat ,#edit-cat{
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 3px;
+            border: 1px solid rgba(0,0,0,.12);
+            background: #152036;
+            display: inline-block;
+            margin-right: 5px;
+            color: whitesmoke;
+        }
+        #add-cat-link {
+            background: #fd4339;
+            border-color: #fd4339;
+        }
+    </style>
+{% endblock %}
+
+{% block container %}
+
+
+
+
+
+<div class="product-status mg-b-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap" id="div-cat-list">
+                    <h4>Liste Des Catégories</h4>
+                    <div class="add-product">
+                        <a href="{{ path('ajouterCategorie') }}" id="add-cat-link">Ajouter Une Catégorie</a>
+                    </div>
+                    <table >
+                        <tr>
+
+                            <th>Référence</th>
+
+                            <th>Libellé</th>
+
+                            <th style="width: 13%"></th>
+                        </tr>
+
+
+                        {% for c in categorie %}
+                            <tr>
+                                <td>{{ c.refC }}</td>
+                                <td>{{ c.libelle }}</td>
+                                <td>
+                                    <a data-toggle="tooltip" title="Edit" class="pd-setting-ed" id="edit-cat"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a data-toggle="tooltip" title="Trash" class="pd-setting-ed" id="delete-cat" href="{{ path('supprimerCategorie', { 'ref_c': c.refC }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                    <div class="custom-pagination">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
