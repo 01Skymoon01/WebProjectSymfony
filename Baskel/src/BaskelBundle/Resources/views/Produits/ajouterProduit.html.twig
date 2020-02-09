@@ -1,0 +1,138 @@
+
+{% extends 'default/back/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+    <style>
+        #div-add-product{
+            margin-left: 18%;
+            margin-top: 5%;
+            width: 80%;
+        }
+        #inputs-div{
+            margin-left: 27%;
+        }
+    </style>
+{% endblock %}
+
+{% block container %}
+
+    {{ form_start(form) }}
+    <div class="single-product-tab-area mg-b-30" >
+        <!-- Single pro tab review Start-->
+        <div class="single-pro-review-area" >
+
+            <div class="container-fluid" >
+
+                <div class="row" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                        <div class="review-tab-pro-inner" id="div-add-product">
+
+                            <div id="myTabContent" class="tab-content custom-product-edit" >
+                                <div class="product-tab-list tab-pane fade active in" id="description">
+                                    <div class="row">
+
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="inputs-div">
+                                            <div class="review-content-section">
+
+                                                <div class="input-group mg-b-pro-edt" >
+                                                    <span class="input-group-addon"><i class="icon nalika-edit" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.ref_p, { 'attr': {'class': 'form-control' ,'placeholder': "Référence"} }) }}
+                                                </div>
+
+
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="icon nalika-favorites" aria-hidden="true"></i></span>
+                                                    {{ form_widget(form.nomP, { 'attr': {'class': 'form-control' ,'placeholder': "Nom Produit"} }) }}
+                                                </div>
+
+                                                <div class="input-group mg-b-pro-edt" >
+                                                    <span class="input-group-addon"><i class="fa fa-transgender" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.genreP, { 'attr': {'class': 'form-control' ,'placeholder': "Genre"} }) }}
+                                                </div>
+
+
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="icon nalika-like" aria-hidden="true"></i></span>
+                                                    {{ form_widget(form.couleurP,{'attr': {'class':'form-control'}}) }}
+                                                </div>
+
+                                                <div class="input-group mg-b-pro-edt" >
+                                                    <span class="input-group-addon"><i class="fa fa-archive" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.quantiteP, { 'attr': {'class': 'form-control' ,'placeholder': "Quantité"} }) }}
+                                                </div>
+
+
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                                                    {{ form_widget(form.prixP, { 'attr': {'class': 'form-control' ,'placeholder': "Prix"} }) }}
+                                                </div>
+
+                                                <div class="input-group mg-b-pro-edt" >
+                                                    <span class="input-group-addon"><i class="fa fa-diamond" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.marqueP, { 'attr': {'class': 'form-control' ,'placeholder': "Marque"} }) }}
+                                                </div>
+
+                                                <div class="input-group mg-b-pro-edt" >
+                                                    <span class="input-group-addon"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.description, { 'attr': {'class': 'form-control' ,'placeholder': "Description"} }) }}
+                                                </div>
+
+
+                                                    <div class="file-upload-inner ts-forms">
+                                                        <div class="input prepend-small-btn">
+                                                            <div class="file-button">
+
+                                                                {{ form_widget(form.image ,{ 'attr': {'class': 'file-upload-inner-right' } }) }}
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="fa fa-th" aria-hidden="true"></i></span>
+                                                    {{ form_widget(form.ref_c, {'attr': {'class':'form-control pro-edt-select form-control-primary'}}) }}
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="text-center custom-pro-edt-ds">
+
+                                                {{ form_widget(form.Ajouter, { 'attr': {'class': 'btn btn-ctl-bt waves-effect waves-light m-r-10' ,'placeholder': "Libellé"} }) }}
+                                                <a type="button" class="btn btn-ctl-bt waves-effect waves-light" href="{{ path('baskel_homepage') }}">Annuler
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+
+{% endblock %}
+
+
+
+

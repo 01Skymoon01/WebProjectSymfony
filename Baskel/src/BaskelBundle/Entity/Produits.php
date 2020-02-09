@@ -3,6 +3,8 @@
 namespace BaskelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -70,6 +72,18 @@ class Produits
      * @ORM\JoinColumn(name="ref_c",referencedColumnName="ref_c",nullable=false)
      */
     private $ref_c;
+
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="description", type="text", length=255)
+     */
+    private $description;
+
+
+
+
 
 
 
@@ -262,13 +276,7 @@ class Produits
         return $this -> ref_c;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLibelle()
-    {
-        return $this -> libelle;
-    }
+
 
     /**
      * @param mixed $ref_c
@@ -279,12 +287,64 @@ class Produits
     }
 
     /**
-     * @param mixed $libelle
+     * @return text
      */
-    public function setLibelle($libelle)
+    public function getDescription()
     {
-        $this -> libelle = $libelle;
+        return $this -> description;
     }
+
+    /**
+     * @param text $description
+     */
+    public function setDescription($description)
+    {
+        $this -> description = $description;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * @var string
+     * @Assert\NotBlank(message="Upload your image")
+     * @Assert\Image()
+     * @ORM\Column(name="image",type="string" ,length=255)
+     */
+    private $image;
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this -> image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this -> image = $image;
+    }
+
+
+
+
 
 
 }

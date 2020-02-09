@@ -13,8 +13,8 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
     public function FindAllProducts()
     {
         $query = $this->getEntityManager()->createQuery(
-            'SELECT p.nomP, p.prixP FROM BaskelBundle:Produits p'
-        )->setMaxResults(3);
+            'SELECT p.nomP, p.prixP, p.image, p.couleurP FROM BaskelBundle:Produits p'
+        )->setMaxResults(8);
 
         return $query->getResult();
     }

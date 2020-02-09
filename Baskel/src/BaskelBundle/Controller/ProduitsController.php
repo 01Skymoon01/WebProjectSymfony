@@ -5,7 +5,9 @@ namespace BaskelBundle\Controller;
 use BaskelBundle\Entity\Categories;
 use BaskelBundle\Entity\Produits;
 use BaskelBundle\Form\CategoriesType;
+use BaskelBundle\Form\ProduitsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProduitsController extends Controller
@@ -28,7 +30,7 @@ class ProduitsController extends Controller
         if ($form -> isSubmitted() and $form -> isValid()) {
             $em -> persist($categorie);
             $em -> flush();
-            //return $this -> redirectToRoute('afficherClub');
+
         }
 
         return $this -> render('@Baskel/Produits/ajouterCategorie.html.twig',
@@ -56,6 +58,42 @@ class ProduitsController extends Controller
         return $this -> redirectToRoute('afficherCategories');
 
     }
+
+
+    public function ajouterProduitAction(Request $request)
+    {
+        $produit = new Produits();
+        $form = $this -> createForm(ProduitsType::class, $produit) -> handleRequest($request);
+        $em = $this -> getDoctrine() -> getManager();
+
+        if ($form -> isSubmitted() and $form -> isValid()) {
+            /**
+             * @var UploadedFile $file
+             */
+
+            $file = $produit->getImage();
+
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // moves the file to the directory where brochures are stored
+            $file->move(
+                $this->getParameter('image_directory'),
+                $fileName
+            );
+
+            $produit->setImage($fileName);
+
+            $em -> persist($produit);
+            $em -> flush();
+
+        }
+
+        return $this -> render('@Baskel/Produits/ajouterProduit.html.twig',
+            array('form' => $form -> createView()));
+    }
+
+
+
 
 
 }

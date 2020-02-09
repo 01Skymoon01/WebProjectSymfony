@@ -20,3 +20,9 @@ afficherCategories:
 supprimerCategorie:
   path:     /SupprimerCategorie/{ref_c}
   defaults: { _controller: BaskelBundle:Produits:SupprimerCategorie }
+
+
+
+ajouterProduit:
+  path:     /ajouterProduit
+  defaults: { _controller: BaskelBundle:Produits:ajouterProduit }
