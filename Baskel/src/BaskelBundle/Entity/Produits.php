@@ -38,9 +38,9 @@ class Produits
     private $genreP;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="couleur_p", type="string", length=255)
+     * @ORM\Column(name="couleur_p", type="json_array", length=255)
      */
     private $couleurP;
 

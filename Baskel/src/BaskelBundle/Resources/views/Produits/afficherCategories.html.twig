@@ -41,7 +41,7 @@
                 <div class="product-status-wrap" id="div-cat-list">
                     <h4>Liste Des Catégories</h4>
                     <div class="add-product">
-                        <a href="{{ path('ajouterCategorie') }}" id="add-cat-link">Ajouter Une Catégorie</a>
+                        <a href="{{ path('ajouterCategorie') }}" id="add-cat-link">+ Une Catégorie</a>
                     </div>
                     <table >
                         <tr>
@@ -59,7 +59,7 @@
                                 <td>{{ c.refC }}</td>
                                 <td>{{ c.libelle }}</td>
                                 <td>
-                                    <a data-toggle="tooltip" title="Edit" class="pd-setting-ed" id="edit-cat"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a data-toggle="tooltip" title="Edit" class="pd-setting-ed" id="edit-cat" href="{{ path('modifierCategorie', { 'ref_c': c.refC }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     <a data-toggle="tooltip" title="Trash" class="pd-setting-ed" id="delete-cat" href="{{ path('supprimerCategorie', { 'ref_c': c.refC }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 </td>
 

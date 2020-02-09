@@ -26,3 +26,25 @@ supprimerCategorie:
 ajouterProduit:
   path:     /ajouterProduit
   defaults: { _controller: BaskelBundle:Produits:ajouterProduit }
+
+
+
+
+afficherProduitsBack:
+  path:     /afficherProduitsBack
+  defaults: { _controller: BaskelBundle:Produits:afficherProduitsBack }
+
+
+supprimerProduit:
+  path:     /supprimerProduit/{ref_p}
+  defaults: { _controller: BaskelBundle:Produits:supprimerProduit }
+
+
+modifierCategorie:
+  path:     /modifierCategorie/{ref_c}
+  defaults: { _controller: BaskelBundle:Produits:modifierCategorie }
+
+
+modifierProduit:
+  path:     /modifierProduit/{ref_p}
+  defaults: { _controller: BaskelBundle:Produits:modifierProduit }

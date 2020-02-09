@@ -46,9 +46,9 @@
                                     <div class="product-thubnail">
                                         <img src="{{ asset('uploads/images/' ~ p.image) }}" alt="product 1"  style="width: 300px; height: 280px;"/>
                                         <div class="product-meta">
-                                            <a class="add-to-cart" href="#">Ajouter Au Panier</a>
+                                            <a class="add-to-cart" href="#"><i class="fa fa-cart-plus"></i></a>
                                             <span class="quick-view">
-                                                    <a href="#">Détails</a>
+                                                    <a href="#"><i class="fa fa-info-circle"></i></a>
                                                 </span>
                                         </div>
                                     </div>
@@ -56,7 +56,12 @@
                                         <h4><a>{{ p.nomP }}</a></h4>
                                         <span class="product-price">{{ p.prixP }}DT</span>
                                         <span class="product-attr">
-                                                <i class="fa fa-circle {{ p.couleurP }}"></i>
+
+
+                                            {% for item in p.couleurP %}
+                                                <i class="fa fa-circle" style="color: {{ item }}"></i>
+
+                                            {% endfor %}
 
                                         </span>
                                     </div>

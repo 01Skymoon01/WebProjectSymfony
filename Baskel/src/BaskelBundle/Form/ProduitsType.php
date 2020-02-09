@@ -20,14 +20,30 @@ class ProduitsType extends AbstractType
         $builder->add('ref_p')
             ->add('nomP')
             ->add('genreP')
-            ->add('couleurP')
+            ->add('couleurP', ChoiceType::class,
+                array(
+                    'choices' => array(
+                        'Noir' => 'black',
+                        'Bleu' => 'blue',
+                        'Vert' => 'green',
+                        'Jaune' => 'yellow',
+                        'Rose' => 'pink',
+                        'Rouge' => 'darkred',
+                        'mauve' => 'purple',
+                        'Blanc' => 'whitesmoke',
+                    ),'expanded'  => true,
+                    'multiple'  => true
+                ))
 
             ->add('quantiteP')
             ->add('prixP')
             ->add('marqueP')
             ->add('description')
 
-            ->add('image',FileType::class,array('label' => 'Image'))
+            ->add('image',FileType::class,array('label' => 'Image',
+                'data_class' => null,
+                'required' => false
+            ))
 
             ->add('ref_c',EntityType::class,
                     array('class'=>'BaskelBundle:Categories',

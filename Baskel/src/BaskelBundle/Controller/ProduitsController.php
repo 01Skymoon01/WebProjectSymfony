@@ -7,6 +7,7 @@ use BaskelBundle\Entity\Produits;
 use BaskelBundle\Form\CategoriesType;
 use BaskelBundle\Form\ProduitsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -30,6 +31,8 @@ class ProduitsController extends Controller
         if ($form -> isSubmitted() and $form -> isValid()) {
             $em -> persist($categorie);
             $em -> flush();
+
+            return $this -> redirectToRoute('afficherCategories');
 
         }
 
@@ -86,6 +89,8 @@ class ProduitsController extends Controller
             $em -> persist($produit);
             $em -> flush();
 
+            return $this -> redirectToRoute('afficherProduitsBack');
+
         }
 
         return $this -> render('@Baskel/Produits/ajouterProduit.html.twig',
@@ -93,7 +98,111 @@ class ProduitsController extends Controller
     }
 
 
+    public function afficherProduitsBackAction()
+    {
+        $produit = $this -> getDoctrine()
+            -> getRepository(Produits::class)
+            ->findAll();
 
+        return $this -> render('@Baskel/Produits/afficherProduitsBack.html.twig', array('produits' => $produit));
+    }
+
+
+    function supprimerProduitAction($ref_p)
+    {
+
+        $produit = $this -> getDoctrine()
+            -> getRepository(Produits::class)
+            -> find($ref_p);
+
+        $image=$produit->getImage();
+        $path=$this->getParameter('image_directory').'/'.$image;
+        $fs=new Filesystem();
+        $fs->remove(array($path));
+        $em = $this -> getDoctrine() -> getManager();
+        $em -> remove($produit);
+        $em -> flush();
+
+        return $this -> redirectToRoute('afficherProduitsBack');
+
+    }
+
+
+    function modifierCategorieAction(Request $request, $ref_c)
+    {
+        $em = $this -> getDoctrine() -> getManager();
+        $categorie = $this -> getDoctrine()
+            -> getRepository(Categories::class)
+            -> find($ref_c);
+        $form = $this -> createForm(CategoriesType::class, $categorie);
+        $form -> handleRequest($request);
+        if ($form -> isSubmitted() && $form -> isValid()) {
+
+            $categorie->setRefC($ref_c);
+            $em -> flush();
+            return $this -> redirectToRoute('afficherCategories');
+        }
+        return $this->render('@Baskel/Produits/modififerCategorie.html.twig',
+            array('form'=>$form->createView()));
+    }
+
+    function modifierProduitAction(Request $request, $ref_p)
+    {
+        $em = $this -> getDoctrine() -> getManager();
+        $produit = $this -> getDoctrine()
+            -> getRepository(Produits::class)
+            -> find($ref_p);
+
+        $form = $this -> createForm(ProduitsType::class, $produit);
+        $form -> handleRequest($request);
+
+        if ($form -> isSubmitted() && $form -> isValid()) {
+
+            /*-------------------------supprimer l'ancienne image-------------------------*/
+
+
+            $image=$produit->getImage();
+
+            /*---------------------------------------------------------------------------*/
+
+            /*-------------------------ajouter une nouvelle-------------------------*/
+
+            /**
+             * @var UploadedFile $file
+             */
+
+
+
+            $fileName = md5(uniqid()).'.'.$image->guessExtension();
+
+
+            // moves the file to the directory where brochures are stored
+            $image->move(
+                $this->getParameter('image_directory'),
+                $fileName
+            );
+
+            $produit->setImage($fileName);
+
+
+
+            /*---------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+            $produit->setRefP($ref_p);
+
+            $em -> flush();
+            return $this -> redirectToRoute('afficherProduitsBack');
+        }
+        return $this->render('@Baskel/Produits/modifierProduit.html.twig',
+            array('form'=>$form->createView()));
+    }
 
 
 }

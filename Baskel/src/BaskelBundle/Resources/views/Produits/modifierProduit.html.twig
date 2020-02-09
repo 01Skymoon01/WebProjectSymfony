@@ -12,6 +12,11 @@
             width: 80%;
         }
 
+        .form-control:disabled {
+            background-color: #101829;
+            color: #fd4339;
+        }
+
     </style>
 
 {% endblock %}
@@ -44,7 +49,7 @@
                                                 <div class="input-group mg-b-pro-edt" >
                                                     <span class="input-group-addon"><i class="icon nalika-edit" aria-hidden="true"></i></span>
 
-                                                    {{ form_widget(form.ref_p, { 'attr': {'class': 'form-control' ,'placeholder': "Référence"} }) }}
+                                                    {{ form_widget(form.ref_p, { 'attr': {'class': 'form-control' ,'placeholder': "Référence" , 'disabled':'disabled'} }) }}
                                                 </div>
 
 
@@ -100,7 +105,8 @@
 
                                                 <div class="input-group mg-b-pro-edt">
 
-                                                                        {{ form_widget(form.image,{ 'attr': {'class': 'file-button' } }) }}
+
+                                                    {{ form_widget(form.image,{ 'attr': {'class': 'file-button' } }) }}
 
                                                 </div>
 
@@ -134,16 +140,16 @@
 
 
 
-</div>
                                 </div>
-
-
                             </div>
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     {{ form_end(form) }}
 
