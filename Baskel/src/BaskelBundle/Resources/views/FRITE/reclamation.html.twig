@@ -1,0 +1,82 @@
+
+{% extends 'default/front/header.html.twig' %}
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+    <div class="blog">
+        <div class="container">
+            <ul class="tz-breadcrumbs">
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li class="current">
+                    Contact
+                </li>
+            </ul>
+            <div class="blog-container">
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <!--Blog Sidebar-->
+                        <div class="blog-sidebar">
+                            <aside class="contact-info widget no-border">
+                                <h4 class="widget-title">Contactez-nous</h4>
+                                <p>Recevez vos velos et accesoires les plus attendus sur Baskel.tn! Attendez beaucoup de nouveaute a venir.</p>
+                                <ul>
+                                    <li>
+                                        <span>Adresse :</span>
+                                        <adress>
+                                            123 Rue Hedi Nouira Ariana <br> Tunisie
+                                        </adress>
+                                    </li>
+                                    <li>
+                                        <span>Telephone :</span>
+                                        (216) 71 801 802
+                                    </li>
+                                    <li>
+                                        <span>Email :</span>
+                                        BaskelTeam@baskel.tn
+                                    </li>
+                                </ul>
+                            </aside>
+                        </div>
+                        <!--End Blog Sidebar-->
+                    </div>
+                    <div class="col-md-8 tz-blog-content">
+                        <h1 class="large-ttle">Vos reclamations</h1>
+                        <div id="contact-form" class="contact-respond">
+                            <h3 class="tz-title">Laissez-nous vos reclamations</h3>
+                           <!-- <div class="contact-form-7"> -->
+                            <div class="contact-form-7">
+                                {{ form_start(form )  }}
+                                <p class="comment-for-url">
+                                    <label>Objet Reclamation</label> <br>
+                                    {{ form_widget(form.objetR, { 'attr': {'class': 'input-group-sm'} }) }}
+                                    <i class="fa fa-link"></i>
+                                </p>
+                                <p class="comment-for-content">
+                                    <label>Details Reclamation</label> <br>
+                                    {{ form_widget(form.detailsR, { 'attr': {'class': 'comment'} }) }}
+                                    <i class="fa fa-comment"></i>
+                                </p>
+                                <p class="comment-for-submit">
+                                    {{ form_widget(form.Ajouter, { 'attr': {'class': 'submit'} }) }}
+                                </p>
+                            {{ form_end(form) }}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+

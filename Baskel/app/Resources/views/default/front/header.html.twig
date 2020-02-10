@@ -73,7 +73,13 @@
                         <a href="#">Livraison</a>
                     </li>
                     <li class="tz-header-login">
-                        <a href="#">Se Connecter</a>
+
+                        {% if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('fos_user_security_logout') }}">Se Deconnecter</a> </li>
+                    {% else %}
+                        <a href="{{ path('fos_user_security_login') }}">Se Connecter</a>
+                    {% endif %}
+
                         <div class="tz-login-form">
                             <form>
                                 <p class="form-content">
@@ -241,13 +247,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="contact.html">Contact</a>
+                        <a href="{{path('reclamation')}}">Contact</a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="contact.html">Reclamation</a>
+                                <a href="{{path('reclamation')}}">Reclamation</a>
                             </li>
                             <li>
-                                <a href="RDV.html">Rendez-vous</a>
+                                <a href="{{path('rdv')}}">Rendez-vous</a>
                             </li>
                         </ul>
                     </li>

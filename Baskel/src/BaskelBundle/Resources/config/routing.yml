@@ -4,3 +4,27 @@ baskel_homepage:
 admin_homepage:
     path:     /admin
     defaults: { _controller: BaskelBundle:Default:indexAdmin }
+rdv:
+    path:     /rdv
+    defaults: { _controller: BaskelBundle:Default:AjouterRDV }
+reclamation:
+    path:     /reclamation
+    defaults: { _controller: BaskelBundle:Default:AjouterReclamation }
+AfficherReclamations:
+    path:     /recBack
+    defaults: { _controller: BaskelBundle:Default:AfficherReclamations }
+AfficherRDV:
+    path:     /rdvBack
+    defaults: { _controller: BaskelBundle:Default:AfficherRDV }
+AfficherTechniciens:
+    path:     /tecBack
+    defaults: { _controller: BaskelBundle:Default:AfficherTechniciens }
+SupprimerRDV:
+    path:     /SupprimerRDVBack/{id}
+    defaults: { _controller: BaskelBundle:Default:SupprimerRDV }
+SupprimerReclamation:
+    path:     /SupprimerRecBack/{id}
+    defaults: { _controller: BaskelBundle:Default:SupprimerReclamation }
+SupprimerTechnicien:
+    path:     /SupprimerThecBack/{id}
+    defaults: { _controller: BaskelBundle:Default:SupprimerTechnicien }

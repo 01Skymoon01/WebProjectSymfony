@@ -1,0 +1,23 @@
+{% extends 'default/front/header.html.twig' %}
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+    <section class="default-page">
+        <div class="container">
+            <div class="tz-register">
+                <h2>Connectez-Vous</h2>
+
+                <!--Start form-->
+                <p class="form-row form-row-wide">
+                    {% block fos_user_content %}
+                </p>
+                    {% endblock %}
+                <!--End form-->
+            </div>
+        </div>
+    </section>
+{% endblock %}
