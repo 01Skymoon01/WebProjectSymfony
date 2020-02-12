@@ -2911,6 +2911,8 @@ input {
 }
 .form-row input[type='text'],
 .form-row input[type='email'],
+.form-row input[type='date'],
+
 .form-row select {
   width: 100%;
   height: 40px;

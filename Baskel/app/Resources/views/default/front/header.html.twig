@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Accueil</title>
+    <title>{% block title %}{% endblock %}</title>
 
     <link href="{{ asset('front/css/bootstrap.min.css') }}" rel="stylesheet" type='text/css'>
     <link href='{{ asset('front/css/font-awesome.min.css') }}' rel='stylesheet' type='text/css'>
@@ -70,7 +70,7 @@
                         <a href="shop-checkout.html">Commande</a>
                     </li>
                     <li>
-                        <a href="#">Livraison</a>
+                        <a href="{{ path('fos_user_registration_register') }}">Livraison</a>
                     </li>
                     <li class="tz-header-login">
                         <a href="#">Se Connecter</a>

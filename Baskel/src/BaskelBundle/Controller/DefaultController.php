@@ -14,4 +14,8 @@ class DefaultController extends Controller
     {
         return $this->render('@Baskel/Default/indexadmin.html.twig');
     }
+    public function indexLivreurAction()
+    {
+        return $this->render('@Baskel/Default/indexlivreur.html.twig');
+    }
 }

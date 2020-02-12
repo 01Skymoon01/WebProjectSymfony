@@ -4,3 +4,18 @@ baskel_homepage:
 admin_homepage:
     path:     /admin
     defaults: { _controller: BaskelBundle:Default:indexAdmin }
+livreur_homepage:
+    path:     /livreur
+    defaults: { _controller: BaskelBundle:Default:indexLivreur }
+affvehicule:
+    path:     /affvehicule
+    defaults: { _controller: BaskelBundle:Vehicule:afficheVehicule }
+ajoutvehicule:
+    path:     /ajoutvehicule
+    defaults: { _controller: BaskelBundle:Vehicule:ajout }
+suppvehicule:
+    path:     /suppvehicule/{id}
+    defaults: { _controller: BaskelBundle:Vehicule:supprimer }
+modifiervehicule:
+    path:     /modifiervehicule/{id}
+    defaults: { _controller: BaskelBundle:Vehicule:modifier }
