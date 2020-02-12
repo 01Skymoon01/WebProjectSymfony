@@ -1,0 +1,86 @@
+{% extends 'default/front/header.html.twig' %}
+
+        {% block head %}
+            {{ parent() }}
+
+
+        {% endblock %}
+        {% block container %}
+
+
+<section class="shop-checkout">
+    <div class="container">
+        <!--Start Breadcrumbs-->
+        <ul class="tz-breadcrumbs">
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li class="current">
+                Liste de vos reclamations
+            </li>
+
+        </ul>
+        <!--End Breadcrumbs-->
+        <h1 class="page-title">Liste de vos reclamations</h1>
+        <p>NB: Toute modification ou suppression seras impossible apres minuit.</p>
+
+        <!--Start form table-->
+        <form>
+            <table class="shop_table cart">
+                <!--Table header-->
+                <thead>
+                <tr>
+
+                    <th class="product-thumbnail">Date de depot</th>
+                    <th class="product-price">Objet</th>
+                    <th class="product-quantity" > Etat </th>
+                    <th class="product-subtotal">Details</th>
+                    <th class="product-remove">&nbsp;</th>
+                    <th class="product-remove">&nbsp;</th>
+                </tr>
+                </thead>
+                <!--End table header-->
+
+                <!--Table body-->
+                <tbody>
+                {% for r in reclamations %}
+
+                <tr class="cart_item">
+
+
+
+                    <td class="product-thumbnail">{{ r.dateR|date('Y-m-d') }}</td>
+                    <td class="product-name">{{ r.objetR }}</td>
+                    <td class="product-price"><span class="amount">{{ r.etatR }}</span></td>
+
+                    <td class="product-subtotal">
+                        <span class="amount">{{ r.detailsR }}</span>
+                    </td>
+
+                    <td>
+                        <a class="remove" title="Modifier" href="{{ path('ModifierReclamation', {'id': r.idR}) }}">Modif</a>
+                    </td>
+
+                    <td class="product-remove">
+                        <a data-toggle="tooltip"  href="{{ path('DeleteReclamation', {'id': r.idR}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+                <tr>
+                    <td class="actions" colspan="6">
+                        <a class="back-shop" href="#"><i class="fa fa-angle-left"></i> BACK TO SHOP</a>
+
+                    </td>
+                </tr>
+
+
+
+                </tbody>
+                <!--End table body-->
+            </table>
+        </form>
+        <!--End form table-->
+        {% endblock %}
+

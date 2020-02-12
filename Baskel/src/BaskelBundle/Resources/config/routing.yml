@@ -26,5 +26,29 @@ SupprimerReclamation:
     path:     /SupprimerRecBack/{id}
     defaults: { _controller: BaskelBundle:Default:SupprimerReclamation }
 SupprimerTechnicien:
-    path:     /SupprimerThecBack/{id}
+    path:     /SupprimerTecBack/{id}
     defaults: { _controller: BaskelBundle:Default:SupprimerTechnicien }
+AjouterTechnicien:
+    path:     /AjouterTecBack
+    defaults: { _controller: BaskelBundle:Default:AjouterTechnicien }
+DisplayReclamation:
+    path:     /ListRec
+    defaults: { _controller: BaskelBundle:Default:DisplayReclamation }
+DisplayRdv:
+    path:     /ListRdv
+    defaults: { _controller: BaskelBundle:Default:DisplayRdv }
+DeleteReclamation:
+    path:     /RecDelete/{id}
+    defaults: { _controller: BaskelBundle:Default:DeleteReclamation }
+DeleteRDV:
+    path:     /RdvDelete/{id}
+    defaults: { _controller: BaskelBundle:Default:DeleteRDV }
+ModifierReclamation:
+    path:     /ModifRec/{id}
+    defaults: { _controller: BaskelBundle:Default:ModifierReclamation }
+ModifierRDV:
+    path:     /ModifRDV/{id}
+    defaults: { _controller: BaskelBundle:Default:ModifierRDV }
+ModifierTechnicien:
+    path:     /ModifTech/{id}
+    defaults: { _controller: BaskelBundle:Default:ModifierTechnicien }

@@ -52,7 +52,7 @@
                                 <th>E-mail</th>
                                 <th>NumTel</th>
                             </tr>
-                            <tr>
+
                                 {% for t in techniciens %}
                             <tr>
                                 <td>{{ t.idT }}</td>
@@ -62,8 +62,8 @@
                                 <td>{{ t.email }}</td>
                                 <td>{{ t.numtel }}</td>
                                 <td>
-                                    <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                    <a data-toggle="tooltip" class="pd-setting-ed" href="{{ path('SupprimerTechnicien', {'id': t.idT}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    <a data-toggle="tooltip" title="Modifier" class="pd-setting-ed" href="{{ path('ModifierTechnicien', {'id': t.idT}) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a style="margin-left: 10%" data-toggle="tooltip" title="Supprimer" class="pd-setting-ed" href="{{ path('SupprimerTechnicien', {'id': t.idT}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
 
                                 </td>
 

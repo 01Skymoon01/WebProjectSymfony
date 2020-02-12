@@ -48,7 +48,7 @@ class RDV
     public function __construct()
     {
         $this->dateDepotRDV = new \DateTime();
-        $this->technicienid=NULL;
+        $this->technicienid= 'a affecter';
     }
     /**
      * @var \DateTime

@@ -5,9 +5,13 @@ namespace BaskelBundle\Controller;
 use BaskelBundle\Entity\RDV;
 use BaskelBundle\Entity\Reclamation;
 use BaskelBundle\Entity\Technicien;
+use BaskelBundle\Form\RDV1Type;
 use BaskelBundle\Form\RDVType;
+use BaskelBundle\Form\Reclamation1Type;
 use BaskelBundle\Form\ReclamationType;
+use BaskelBundle\Form\Technicien1Type;
 use BaskelBundle\Form\TechnicienType;
+use BaskelBundle\Repository\ReclamationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,10 +21,12 @@ class DefaultController extends Controller
     {
         return $this->render('@Baskel/Default/index.html.twig');
     }
+
     public function indexAdminAction()
     {
         return $this->render('@Baskel/Default/indexadmin.html.twig');
     }
+
     /*
     public function rdvAction()
     {
@@ -31,17 +37,15 @@ class DefaultController extends Controller
         return $this->render('@Baskel/FRITE/reclamation.html.twig');
     }*/
 
-
-    /**************************************************END CRUD RECLAMATION**********************************************************************/
+    /************************************************** CRUD RECLAMATION**********************************************************************/
 
     public function AjouterReclamationAction(Request $request)
     {
-        $em=$this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $Reclamation = new Reclamation();
-        $form=$this->createForm(ReclamationType::class,$Reclamation);
+        $form = $this->createForm(ReclamationType::class, $Reclamation);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->container->get('security.token_storage')->getToken()->getUser();
             $user->getId();
             $Reclamation->setEtatR('non traitee');
@@ -50,38 +54,59 @@ class DefaultController extends Controller
             $em->flush();
             return $this->redirectToRoute('reclamation');
         }
-        return $this->render('@Baskel/FRITE/reclamation.html.twig',array('form'=>$form->createView()));
+        return $this->render('@Baskel/FRITE/reclamation.html.twig', array('form' => $form->createView()));
     }
 
     public function AfficherReclamationsAction()
     {
-        $reclamations= $this->getDoctrine()->getManager()->getRepository(Reclamation::class)->findAll();
-        return $this->render('@Baskel/FRITE/reclamationBack.html.twig',array('reclamations'=>$reclamations));
+        $reclamations = $this->getDoctrine()->getManager()->getRepository(Reclamation::class)->findAll();
+        return $this->render('@Baskel/FRITE/reclamationBack.html.twig', array('reclamations' => $reclamations));
     }
 
-   public function SupprimerReclamationAction($id)
+    public function SupprimerReclamationAction($id)
     {
-        $em=$this->getDoctrine()->getManager();
-        $reclamation=$em->getRepository(Reclamation::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $reclamation = $em->getRepository(Reclamation::class)->find($id);
         $em->remove($reclamation);
         $em->flush();
         return $this->redirectToRoute("AfficherReclamations");
+
     }
 
-   /* public function ModifierReclamationAction($id,Request $request)
+    public function DeleteReclamationAction($id)
     {
-        $em= $this->getDoctrine()->getManager();
-        $reclamation=$em->getRepository(Reclamation::class)->find($id);
-        $form=$this->createForm(Amende1Type::class,$amende);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $em->persist($amende);
+        $em = $this->getDoctrine()->getManager();
+        $reclamation = $em->getRepository(Reclamation::class)->find($id);
+
+            $em->remove($reclamation);
             $em->flush();
-            return $this->redirectToRoute('AfficherAmendes');
-        }
-        return $this->render('@Amends/Default/AjouterAmende.html.twig',array('form'=>$form->createView()));
-    }*/
+            return $this->redirectToRoute("DisplayReclamation");
+    }
+
+    public function DisplayReclamationAction()
+    {
+        $usr = $this->get('security.token_storage')->getToken()->getUser();
+        // $reclamations=$reclamationRepository->findby( a);
+        $reclamations = $this->getDoctrine()->getRepository(Reclamation::class)->findBy(array('userid' => $usr));
+        return $this->render('@Baskel/FRITE/listRec.html.twig', array('reclamations' => $reclamations));
+    }
+
+
+    public function ModifierReclamationAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $reclamation = $em->getRepository(Reclamation::class)->find($id);
+        $form = $this->createForm(Reclamation1Type::class, $reclamation);
+        $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em->persist($reclamation);
+                $em->flush();
+                return $this->redirectToRoute('DisplayReclamation');
+            }
+            return $this->render('@Baskel/FRITE/reclamationModif.html.twig', array('form' => $form->createView()));
+       
+    }
+
 
     /**************************************************END CRUD RECLAMATION**********************************************************************/
 
@@ -120,26 +145,42 @@ class DefaultController extends Controller
         return $this->redirectToRoute("AfficherRDV");
     }
 
+    public function DeleteRDVAction($id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $rdv=$em->getRepository(RDV::class)->find($id);
+        $em->remove($rdv);
+        $em->flush();
+        return $this->redirectToRoute("DisplayRdv");
+    }
 
-    /* public function ModifierReclamationAction($id,Request $request)
+    public function DisplayRdvAction ()
+    {
+        $usr= $this->get('security.token_storage')->getToken()->getUser();
+        $rdv=$this->getDoctrine()->getRepository(RDV::class)->findBy(array('userid'=> $usr));
+        return $this->render('@Baskel/FRITE/listRDV.html.twig',array('rdv'=>$rdv));
+    }
+
+
+     public function ModifierRDVAction($id,Request $request)
     {
         $em= $this->getDoctrine()->getManager();
-        $reclamation=$em->getRepository(Reclamation::class)->find($id);
-        $form=$this->createForm(Amende1Type::class,$amende);
+        $rdv=$em->getRepository(RDV::class)->find($id);
+        $form=$this->createForm(RDV1Type::class,$rdv);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
-            $em->persist($amende);
+            $em->persist($rdv);
             $em->flush();
-            return $this->redirectToRoute('AfficherAmendes');
+            return $this->redirectToRoute('DisplayRdv');
         }
-        return $this->render('@Amends/Default/AjouterAmende.html.twig',array('form'=>$form->createView()));
-    }*/
-    /**************************************************END CRUD RECLAMATION**********************************************************************/
+        return $this->render('@Baskel/FRITE/rdvModif.html.twig',array('form'=>$form->createView()));
+    }
+    /**************************************************END CRUD RDV**********************************************************************/
 
 
     /**************************************************CRUD TECHNICIEN**********************************************************************/
-  /*  public function AjouterTechnicienAction(Request $request)
+    public function AjouterTechnicienAction(Request $request)
     {
         $em=$this->getDoctrine()->getManager();
         $technicien = new Technicien();
@@ -149,10 +190,10 @@ class DefaultController extends Controller
         {
             $em->persist($technicien);
             $em->flush();
-            //return $this->redirectToRoute('');
+            return $this->redirectToRoute('AfficherTechniciens');
         }
-        return $this->render('@Baskel/FRITE/technicienBACK.html.twig',array('form'=>$form->createView()));
-    }*/
+        return $this->render('@Baskel/FRITE/ajoutertechnicien.html.twig',array('form'=>$form->createView()));
+    }
 
     public function AfficherTechniciensAction()
     {
@@ -169,20 +210,22 @@ class DefaultController extends Controller
         return $this->redirectToRoute("AfficherTechniciens");
     }
 
-    /* public function ModifierReclamationAction($id,Request $request)
-{
+     public function ModifierTechnicienAction($id,Request $request)
+
+     {
     $em= $this->getDoctrine()->getManager();
-    $reclamation=$em->getRepository(Reclamation::class)->find($id);
-    $form=$this->createForm(Amende1Type::class,$amende);
+    $technicien=$em->getRepository(Technicien::class)->find($id);
+    $form=$this->createForm(Technicien1Type::class,$technicien);
     $form->handleRequest($request);
     if($form->isSubmitted() && $form->isValid())
     {
-        $em->persist($amende);
+        $em->persist($technicien);
         $em->flush();
-        return $this->redirectToRoute('AfficherAmendes');
+        return $this->redirectToRoute('AfficherTechniciens');
     }
-    return $this->render('@Amends/Default/AjouterAmende.html.twig',array('form'=>$form->createView()));
-}*/
+    return $this->render('@Baskel/FRITE/modifiertechnicien.html.twig',array('form'=>$form->createView()));
+
+     }
 
     /**************************************************END CRUD TECHNICIEN**********************************************************************/
 

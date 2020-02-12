@@ -7,7 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TechnicienType extends AbstractType
+class Technicien1Type extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -20,10 +20,10 @@ class TechnicienType extends AbstractType
             ->add('prenom')
             ->add('email')
             ->add('numtel')
-            ->add('Ajouter',SubmitType::class);
+            ->add('Modifier',SubmitType::class);
     }/**
-     * {@inheritdoc}
-     */
+ * {@inheritdoc}
+ */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
