@@ -7,6 +7,8 @@
 
 {% endblock %}
 {% block container %}
+<div class="tz-site">
+    <div class="container">
 <div class="blog">
     <div class="container">
         <ul class="tz-breadcrumbs">
@@ -52,7 +54,7 @@
                         <h3 class="tz-title">Laissez-nous vos reclamations</h3>
                         <!-- <div class="contact-form-7"> -->
                         <div class="contact-form-7">
-                            {{ form_start(form )  }}
+                            {{ form_start(form  , {'attr':{'class':'contact-form-7', 'id':'commentform'}})  }}
                             <p class="comment-for-url">
                                 <label>Objet Reclamation</label> <br>
                                 {{ form_widget(form.objetR, { 'attr': {'class': 'input-group-sm'} }) }}
@@ -64,7 +66,7 @@
                                 <i class="fa fa-comment"></i>
                             </p>
                             <p class="comment-for-submit">
-                                {{ form_widget(form.Modifier, { 'attr': {'class': 'submit'} }) }}
+                                <input  class="button" type="submit" value="Modifier" />
                             </p>
                             {{ form_end(form) }}
 
@@ -75,6 +77,9 @@
             </div>
         </div>
     </div>
+</div>
+    </div>
+
 
     {% endblock %}
 

@@ -48,7 +48,7 @@ class RDV
     public function __construct()
     {
         $this->dateDepotRDV = new \DateTime();
-        $this->technicienid= 'a affecter';
+
     }
     /**
      * @var \DateTime
@@ -80,7 +80,7 @@ class RDV
 
     /**
      * @ORM\ManyToOne(targetEntity="BaskelBundle\Entity\Technicien")
-     * @ORM\JoinColumn(name="technicienid",referencedColumnName="idT")
+     * @ORM\JoinColumn(name="technicienid",referencedColumnName="idT", nullable=true)
      */
     private $technicienid;
 

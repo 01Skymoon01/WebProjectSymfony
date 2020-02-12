@@ -29,8 +29,7 @@ class RDV1Type extends AbstractType
                 ],])
             ->add('dateRDV')
             ->add('detailsRDV', TextareaType::class, array(
-                'data' => 'Donnez-nous plus de details'))
-            ->add('Modifier',SubmitType::class);
+                'data' => 'Donnez-nous plus de details'));
 
 
     }/**

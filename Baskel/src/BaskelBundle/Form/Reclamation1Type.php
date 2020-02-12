@@ -29,8 +29,8 @@ class Reclamation1Type extends AbstractType
 
                 ],])
             ->add('detailsR', TextareaType::class, array(
-                'data' => 'Donnez-nous plus de details'))
-            ->add('Modifier',SubmitType::class);
+                'data' => 'Donnez-nous plus de details'));
+
     }/**
  * {@inheritdoc}
  */

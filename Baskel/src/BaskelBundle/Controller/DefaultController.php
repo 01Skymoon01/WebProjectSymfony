@@ -52,7 +52,7 @@ class DefaultController extends Controller
             $Reclamation->setUserid($user);
             $em->persist($Reclamation);
             $em->flush();
-            return $this->redirectToRoute('reclamation');
+            return $this->redirectToRoute('DisplayReclamation');
         }
         return $this->render('@Baskel/FRITE/reclamation.html.twig', array('form' => $form->createView()));
     }
@@ -125,7 +125,7 @@ class DefaultController extends Controller
             $rdv->setEtatRDV('non traitee');
             $em->persist($rdv);
             $em->flush();
-            return $this->redirectToRoute('rdv');
+            return $this->redirectToRoute('DisplayRdv');
         }
         return $this->render('@Baskel/FRITE/rdv.html.twig',array('form'=>$form->createView()));
     }
