@@ -4,3 +4,48 @@ baskel_homepage:
 admin_homepage:
     path:     /admin
     defaults: { _controller: BaskelBundle:Default:indexAdmin }
+
+AjoutEv:
+    path:     /AjoutEv
+    defaults: { _controller: BaskelBundle:Event:AjoutEvent }
+
+AjoutP:
+    path:     /AjoutP
+    defaults: { _controller: BaskelBundle:Partenaire:AjoutPartenaire }
+
+AfficheEv:
+    path:     /AfficheEv
+    defaults: { _controller: BaskelBundle:Event:AfficheEvent }
+
+AfficheEvfront:
+    path:     /AfficheEvf
+    defaults: { _controller: BaskelBundle:Event:AfficheEventfront }
+
+Supprimer:
+    path:     /SupprimerEv/{id}
+    defaults: { _controller: BaskelBundle:Event:SupprimerEvent }
+
+ModifierEv:
+    path:     /ModifeEv/{id}
+    defaults: { _controller: BaskelBundle:Event:ModifierEvent }
+
+AfficheP:
+    path:     /AfficheP
+    defaults: { _controller: BaskelBundle:Partenaire:AffichePartenaire }
+
+SupprimerP:
+    path:     /SupprimerP/{id}
+    defaults: { _controller: BaskelBundle:Partenaire:SupprimerPartenaire }
+
+ModifierP:
+    path:     /ModifeP/{id}
+    defaults: { _controller: BaskelBundle:Partenaire:ModifierPartenaire }
+
+
+SignerC:
+    path:     /SignerC/{id}
+    defaults: { _controller: BaskelBundle:Contrat:SignerContrat }
+
+
+
+

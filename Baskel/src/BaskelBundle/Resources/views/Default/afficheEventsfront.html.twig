@@ -1,0 +1,98 @@
+
+{% extends 'default/front/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+<div >
+
+    <div class="tz-shop">
+        <div class="container">
+
+        <!--Start shop content-->
+    <div class="tz-shop-content">
+
+        <div class="shop-banner">
+            <img src="{{ asset('front/images/BASKEL EVENTS.png') }}">
+        </div>
+        <div class="catalog-meta">
+            <div class="catalog_top">
+                                <span class="style-switch">
+                                    <a class="nav-grid-view fa fa-th-large active"></a>
+                                    <a class="nav-list-view fa fa-list"></a>
+                                </span>
+                <form class="shop-order">
+                    <label class="form-arrow">
+                        <select class="number-item" name="number_item">
+                            <option value="12">12 items/page</option>
+                            <option value="6">6 items/page</option>
+                            <option value="3">3 items/page</option>
+                        </select>
+                    </label>
+                    <label class="form-arrow">
+                        <select name="orderby" class="orderby">
+                            <option value="'">Sort By: Position</option>
+                            <option value="rating">Sort by rating</option>
+                            <option value="date">Sort by newness</option>
+                        </select>
+                    </label>
+                </form>
+            </div>
+        </div>
+
+
+
+        <!--Product item-->
+        <div class="product-item col-md-4 col-sm-6">
+            {% for e in events %}
+            <div class="item">
+                <div class="product-item-inner">
+                    <div class="product-thumb">
+                        <img src="{{ asset('front/images/EVENTS PLACEHOLDER.png' ) }}">
+                    </div>
+                    <div class="product-info">
+                        <h4>{{ e.nom }}</h4>
+                        <span class="p-meta">
+                                                <span class="p-price">{{ e.nbParticipants }}</span>
+                                                <span class="p-vote">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                </span>
+                                            </span>
+                        <span class="p-color">
+                                                 <i class="fa fa-circle light-blue"></i>
+                                                <i class="fa fa-circle orange"></i>
+                                                <i class="fa fa-circle blueviolet"></i>
+                                                <i class="fa fa-circle orange-dark"></i>
+                                                <i class="fa fa-circle steelblue"></i>
+                                            </span>
+                        <p>
+                            {{ e.description }}
+                        </p>
+                        <span class="p-mask">
+                                                <a href="shop-cart.html" class="add-to-cart">Register</a>
+
+                                               <span class="quick-view">
+                                                    <a href="#"><i class="fa fa-eye"></i> Why Attend ?</a>
+                                                </span>
+                                            </span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+
+             </div>
+        </div>
+
+        {% endblock %}
