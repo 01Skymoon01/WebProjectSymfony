@@ -5,9 +5,11 @@ namespace BaskelBundle\Controller;
 use BaskelBundle\Entity\Categories;
 use BaskelBundle\Entity\Produits;
 use BaskelBundle\Form\CategoriesType;
+use BaskelBundle\Form\ProduitsModifType;
 use BaskelBundle\Form\ProduitsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,7 +19,7 @@ class ProduitsController extends Controller
     {
         $produit = $this -> getDoctrine()
             -> getRepository(Produits::class)
-            -> FindAllProducts();
+            ->findAll();
 
         return $this -> render('@Baskel/Produits/afficherProduits.html.twig', array('produit' => $produit));
     }
@@ -153,55 +155,62 @@ class ProduitsController extends Controller
             -> getRepository(Produits::class)
             -> find($ref_p);
 
-        $form = $this -> createForm(ProduitsType::class, $produit);
+        $form = $this -> createForm(ProduitsModifType::class, $produit);
         $form -> handleRequest($request);
 
-        if ($form -> isSubmitted() && $form -> isValid()) {
+        if ($form -> isSubmitted()) {
 
-            /*-------------------------supprimer l'ancienne image-------------------------*/
-
-
-            $image=$produit->getImage();
-
-            /*---------------------------------------------------------------------------*/
-
-            /*-------------------------ajouter une nouvelle-------------------------*/
-
-            /**
-             * @var UploadedFile $file
-             */
+            /*------------------------------------------------------------------------------------------------------------*/
 
 
-
-            $fileName = md5(uniqid()).'.'.$image->guessExtension();
-
-
-            // moves the file to the directory where brochures are stored
-            $image->move(
-                $this->getParameter('image_directory'),
-                $fileName
-            );
-
-            $produit->setImage($fileName);
-
-
-
-            /*---------------------------------------------------------------------------*/
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $form['image'] -> getData();
+            if ($uploadedFile) {
+                $destination = $this -> getParameter('image_directory');
+                $originalFilename = pathinfo($uploadedFile -> getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $produit -> getImage($originalFilename) . '-' . uniqid() . '.' . $uploadedFile -> guessExtension();
+                $uploadedFile -> move(
+                    $destination,
+                    $newFilename
+                );
+                $produit -> setImage($newFilename);
+            }
 
 
+            /*------------------------------------------------------------------------------------------------------------*/
 
-
-
-
-
-
-            $produit->setRefP($ref_p);
 
             $em -> flush();
+
             return $this -> redirectToRoute('afficherProduitsBack');
         }
+
         return $this->render('@Baskel/Produits/modifierProduit.html.twig',
             array('form'=>$form->createView()));
+    }
+
+
+
+
+    /*public function modalContentAction($refP)
+    {
+        $em = $this -> getDoctrine() -> getManager();
+        $produit = $this -> getDoctrine()
+            -> getRepository(Produits::class)
+            -> find($refP);
+
+        return $this -> render('@Baskel/Produits/modalContent.html.twig', array('produit' => $produit));
+    }*/
+
+
+    /**
+     * @Route("/", name="modalContent")
+     */
+    public function modalContentAction( Request $request ){
+        $id = $request->query->get('id');
+
+        return $this -> render('@Baskel/Produits/modalContent.html.twig', array('id' => $id));
+
     }
 
 

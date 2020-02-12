@@ -28,6 +28,7 @@
         }
 
 
+
     </style>
 {% endblock %}
 
@@ -69,6 +70,8 @@
 
                                 <th>Description</th>
 
+                                <th>Stock</th>
+
 
 
                                 <th style="width: 9%"></th>
@@ -81,14 +84,20 @@
                                     <td>{{ c.refP }}</td>
                                     <td>{{ c.nomP }}</td>
                                     <td>{{ c.genreP }}</td>
-                                    <td>{% for clr in c.couleurP %}
-                                            {{ clr }} /
-                                    {% endfor %}</td>
+                                    <td>[ {% for clr in c.couleurP %}
+                                           {{ clr }} ,
+                                    {% endfor %} ]</td>
                                     <td>{{ c.quantiteP }}</td>
                                     <td>{{ c.prixP }}</td>
                                     <td>{{ c.marqueP }}</td>
                                     <td>{{ c.refC.libelle }}</td>
                                     <td>{{ c.description }}</td>
+                                    <td>{% if c.quantiteP == 0 %}
+                                        <label style=" background-color: #FD4339; border-radius: 5px; padding: 5px 5px 5px 5px;">Rupture de stock</label>
+                                            {% else %}
+                                        <label style=" background-color: #5e7ee1; border-radius: 5px; padding: 5px 5px 5px 5px; ">En stock</label>
+                                            {% endif %}
+                                    </td>
 
                                     <td>
                                         <a data-toggle="tooltip" title="Edit" class="pd-setting-ed" id="edit-cat" href="{{ path('modifierProduit', { 'ref_p': c.refP }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

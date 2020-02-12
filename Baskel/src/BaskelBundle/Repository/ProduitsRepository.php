@@ -18,4 +18,14 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getResult();
     }
+
+    public function UpdateProducts($refP)
+    {
+        $query = $this->getEntityManager()->createQuery(
+
+            'UPDATE BaskelBundle:Produits p SET p.image = :image or p.nomP = :nomP WHERE p.refP= :refP'
+        )->setParameter('refP',$refP);
+
+        return $query->getResult();
+    }
 }

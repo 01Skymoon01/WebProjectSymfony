@@ -1,0 +1,37 @@
+<div id="divimg">
+    <img src="{{ asset('uploads/images/' ~ p.image) }}" alt="product 1"  style="width: 300px; height: 280px;"/>
+</div>
+
+<div id="detailprod">
+    <ul class="product-event-content">
+        <li>
+            <h3><a href="#">{{ p.nomP }}</a></h3>
+            <span class="product-rating">
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star-half-o"></i>
+                                                                </span>
+            <span class="event-price">{{ p.prixP }}DT</span>
+        </li>
+
+        <li class="product-event-attr">
+                                                                <span class="tz-color">
+                                                                    Color:
+                                                                     {% for item in p.couleurP %}
+                                                                         <i class="fa fa-circle" style="color: {{ item }}"></i>
+                                                                     {% endfor %}
+                                                                </span>
+
+            <span class="tz-stock">
+                                                                    In stock : 10
+                                                                </span>
+        </li>
+
+        <li class="event-footer">
+            <a href="shop-cart.html" class="add-to-cart">Ajouter Au Panier.</a>
+            <a href="#" class="add-to-wishlist"><i class="fas fa-heart"></i></a>
+        </li>
+    </ul>
+</div>

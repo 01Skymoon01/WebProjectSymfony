@@ -48,3 +48,8 @@ modifierCategorie:
 modifierProduit:
   path:     /modifierProduit/{ref_p}
   defaults: { _controller: BaskelBundle:Produits:modifierProduit }
+
+
+modalContent:
+  path:     /modalContent
+  defaults: { _controller: BaskelBundle:Produits:modalContent }
