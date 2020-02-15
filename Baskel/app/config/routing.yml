@@ -1,3 +1,7 @@
+panier:
+    resource: "@PanierBundle/Resources/config/routing.yml"
+    prefix:   /Panier
+
 baskel:
     resource: "@BaskelBundle/Resources/config/routing.yml"
     prefix:   /Baskel

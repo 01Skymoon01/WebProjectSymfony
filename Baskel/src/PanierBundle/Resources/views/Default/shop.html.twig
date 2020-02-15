@@ -272,18 +272,19 @@
                         </div>
 
                         <div class="tz-product row grid-eff">
+                            {% for p in produit %}
 
                             <!--Product item-->
                             <div class="product-item col-md-4 col-sm-6">
                                 <div class="item">
                                     <div class="product-item-inner">
                                         <div class="product-thumb">
-                                            <img src="{{ asset('front/images/product/shop1.jpg') }}" alt="Liv Race Day Short Finger..">
+                                            <img src="{{ asset('front/images/product/'~p.image) }}" alt="Liv Race Day Short Finger..">
                                         </div>
                                         <div class="product-info">
-                                            <h4><a href="shop.html">Liv Race Day Short Finger..</a></h4>
+                                            <h4><a href="shop.html">{{ p.nomP }}</a></h4>
                                             <span class="p-meta">
-                                                <span class="p-price">$30.00</span>
+                                                <span class="p-price">{{ p.prixP }}DT</span>
                                                 <span class="p-vote">
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
@@ -303,7 +304,7 @@
                                                 Excellence is never an accident. It is always the result of high intention and intelligent execution; it represents the wise choice of many alternatives.
                                             </p>
                                             <span class="p-mask">
-                                                <a href="shop-cart.html" class="add-to-cart">Add to cart</a>
+                                                <a href="{{ path('ajouter', {'refP' : p.refP }) }}" class="add-to-cart addcart">Add to cart</a>
                                                 <a href="#" class="add-to-wishlist"><i class="fa fa-heart"></i> Add to wishlist</a>
                                                <span class="quick-view">
                                                     <a href="#"><i class="fa fa-eye"></i> Quick view</a>
@@ -314,101 +315,7 @@
                                 </div>
                             </div>
                             <!--End product item-->
-
-                            <!--Product item-->
-                            <div class="product-item col-md-4 col-sm-6">
-                                <div class="item">
-                                    <div class="product-item-inner">
-                                        <div class="product-thumb">
-                                            <img src="{{ asset('front/images/product/shop2.jpg') }}" alt="Team Hoody">
-                                        </div>
-                                        <div class="product-info">
-                                            <h4><a href="shop.html">Team Hoody</a></h4>
-                                            <span class="p-meta">
-                                                <span class="p-price">$105.00</span>
-                                                <span class="p-vote">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half-o"></i>
-                                                </span>
-                                            </span>
-                                            <span class="p-color">
-                                                <i class="fa fa-circle steelblue"></i>
-                                                <i class="fa fa-circle light-blue"></i>
-                                                <i class="fa fa-circle orange"></i>
-                                                <i class="fa fa-circle blueviolet"></i>
-                                                <i class="fa fa-circle orange-dark"></i>
-                                            </span>
-                                            <p>
-                                                Excellence is never an accident. It is always the result of high intention and intelligent execution; it represents the wise choice of many alternatives.
-                                            </p>
-                                            <span class="p-mask">
-                                                <a href="shop-cart.html" class="add-to-cart">Add to cart</a>
-                                                <a href="#" class="add-to-wishlist"><i class="fa fa-heart"></i> Add to wishlist</a>
-                                               <span class="quick-view">
-                                                    <a href="#"><i class="fa fa-eye"></i> Quick view</a>
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--End product item-->
-
-                            <!--Product item-->
-                            <div class="product-item col-md-4 col-sm-6">
-                                <div class="item">
-                                    <div class="product-item-inner">
-                                        <div class="product-thumb">
-                                            <img src="{{ asset('front/images/product/shop3.jpg') }}" alt="Team Hoody">
-                                        </div>
-                                        <div class="product-info">
-                                            <h4><a href="shop.html">Defy Advanced</a></h4>
-                                            <span class="p-meta">
-                                                <span class="p-price">$2650.00</span>
-                                                <span class="p-vote">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half-o"></i>
-                                                </span>
-                                            </span>
-                                            <span class="p-color">
-                                                <i class="fa fa-circle steelblue"></i>
-                                                <i class="fa fa-circle light-blue"></i>
-                                                <i class="fa fa-circle orange"></i>
-                                                <i class="fa fa-circle blueviolet"></i>
-                                                <i class="fa fa-circle orange-dark"></i>
-                                            </span>
-                                            <p>
-                                                Excellence is never an accident. It is always the result of high intention and intelligent execution; it represents the wise choice of many alternatives.
-                                            </p>
-                                            <span class="p-mask">
-                                                <a href="shop-cart.html" class="add-to-cart">Add to cart</a>
-                                                <a href="#" class="add-to-wishlist"><i class="fa fa-heart"></i> Add to wishlist</a>
-                                               <span class="quick-view">
-                                                    <a href="#"><i class="fa fa-eye"></i> Quick view</a>
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--End product item-->
-
-
-
-
-
-
-
-
-
-
-
+                            {% endfor %}
 
 
                         </div>
@@ -446,5 +353,7 @@
     </div>
     <!--End Shop-->
 {% endblock %}
+
+
 
 

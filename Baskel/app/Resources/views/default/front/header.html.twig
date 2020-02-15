@@ -260,9 +260,9 @@
                         <a href="#"><strong>0</strong></a>
                     </li>
                     <li class="tz-mini-cart">
-                        <a href="shop-cart.html"><strong>2</strong>Panier.</a>
+                        <a href="shop-cart.html"><strong id="countItems">{{ nbr }}</strong>Panier.</a>
 
-                        <!--Mini cart-->
+                        <!--Mini cart--
                         <ul class="cart-inner">
                             <li class="mini-cart-content">
                                 <div class="mini-cart-img"><img src="{{ asset('front/images/product-cart1.png') }}" alt="product search one"></div>
@@ -317,7 +317,7 @@
                                 <a href="shop-checkout.html" class="check-out">Checkout</a>
                             </li>
                         </ul>
-                        <!--End mini cart-->
+                        --End mini cart-->
 
                     </li>
                 </ul>
@@ -570,6 +570,7 @@
     <script type='text/javascript' src='{{ asset('front/js/jquery.themepunch.tools.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('front/js/jquery.themepunch.revolution.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('front/js/custom-rs.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('front/Panier.js') }}' async></script>
     </body>
     </html>
 {% endblock %}

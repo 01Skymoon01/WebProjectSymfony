@@ -1,0 +1,40 @@
+panier_homepage:
+    path:     /
+    defaults: { _controller: PanierBundle:Default:index }
+
+panier:
+   path:     /Panier
+   defaults: { _controller: PanierBundle:Panier:panier }
+
+ajouter:
+    path:     /ajouter/{refP}
+    defaults: { _controller: PanierBundle:Panier:Ajouter }
+
+afficherProduit:
+    path:     /afficherProduit
+    defaults: { _controller: PanierBundle:Panier:afficherProduit }
+
+supprimer:
+  path:     /supprimer/{refP}
+  defaults: { _controller: PanierBundle:Panier:Supprimer }
+
+ValiderCommande:
+  path:     /ValiderCommande/{PrixTotal}/{date}/{nbr}
+  defaults: { _controller: PanierBundle:Panier:ValiderCommande }
+
+AfficherCommande:
+  path:     /AfficherCommande/
+  defaults: { _controller: PanierBundle:Panier:AfficherCommande }
+
+ModifierEtatCommande:
+  path:     /ModifierEtatCommande/{id}/{etat}
+  defaults: { _controller: PanierBundle:Panier:ModifierEtatCommande }
+
+AfficherDetailsCommande:
+  path:     /AfficherDetailsCommande/{id}
+  defaults: { _controller: PanierBundle:Panier:AfficherDetailsCommande }
+
+
+SupprimerCommande:
+  path:     /SupprimerCommande/{id}
+  defaults: { _controller: PanierBundle:Panier:SupprimerCommande }

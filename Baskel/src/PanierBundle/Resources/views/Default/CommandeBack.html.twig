@@ -1,0 +1,101 @@
+
+{% extends 'default/back/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+    <!-- HOUNII COMMANDE§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§-->
+    <div class="product-status mg-b-30" style="margin-top:50px;margin-left: 15%">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <div>
+                            <h4>Liste des commandes</h4>
+                        </div>
+
+                            <div style="display: flex;">
+                                <div class="input-group mb-3" >
+                                    <div class="breadcome-heading">
+                                        <form role="search" class="">
+                                            <input id="myInput" style="color:white;"  type="text" placeholder="Search..."  onkeyup="myFunction()" class="form-control">
+
+                                    </div></div>
+
+
+                            </div>
+
+
+
+                        <div class="add-product">
+
+                        </div>
+                        <table id="myTable">
+                            <tr>
+                                <th>   </th>
+                                <th>N°</th>
+                                <th>DATE</th>
+                                <th>PRIX TOTAL</th>
+                                <th>NOMBRE C°</th>
+                                <th>CIN CLIENT</th>
+                                <th>ETAT DE PAYMENT</th>
+                                <th>LIVRAISON</th>
+                                <th>DETAILS</th>
+
+                            </tr>
+
+                            {% for cc in c %}
+                            {%  if( cc.etat == 0)  %}
+
+                                <tr style="background-color:#3B6B9A;">
+                                    {% else %}
+
+                                <tr style="background-color:#365D84;">
+                                {% endif %}
+                                    <td>
+                                        <a href=" {{ path('SupprimerCommande', {'id' : cc.id}) }}"><i class="fa fa-trash-o"></i></a>
+
+
+                                    </td>
+                                    <td>{{ cc.id }}</td>
+                                    <td>{{ cc.date|date }}</td>
+                                    <td>{{ cc.totalPrix }} TDN</td>
+                                    <td>{{ cc.nbrProduit }}</td>
+                                    <td>{{ cc.idClient }}</td>
+                                    <td>
+                                        <a href="{{ path('ModifierEtatCommande', {'id' : cc.id, 'etat' : cc.etat }) }}">
+                                        <i class="fa fa-edit"></i>{% if(cc.etat == 1) %} VALIDE {% else %} NON {% endif %}
+
+                                           </a>
+
+                                        </td>
+                                    <td>  </td>
+                                    <td>
+
+                                        <a href="{{ path('AfficherDetailsCommande',{ 'id' :cc.id}) }}">    <i class="fa fa-eye"></i></a>
+
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

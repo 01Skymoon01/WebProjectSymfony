@@ -1,0 +1,59 @@
+
+{% extends 'default/back/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+    <!-- HOUNII COMMANDE§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§-->
+    <div class="product-status mg-b-30" style="margin-top:50px;margin-left: 15%">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <div>
+                            <h4>Liste des Produits</h4>
+                        </div>
+
+
+                        <div class="add-product">
+
+                        </div>
+                        <table id="myTable">
+                            <tr>
+
+
+                            </tr>
+
+                            {% for cc in c %}
+
+
+                          <tr style="background-color:#3B6B9A;">
+
+                                <td>{{ cc.idCommande.id}}</td>
+                                <td>{{ cc.nomProduit }}</td>
+                                <td>{{ cc.idProduit }} </td>
+                                <td>{{ cc.qteProduit }}</td>
+                                <td>{{ cc.PrixPrduit }} TDN</td>
+                                    </tr>
+                            {% endfor %}
+                        </table>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
