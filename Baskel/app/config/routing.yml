@@ -1,6 +1,10 @@
+frite:
+    resource: "@FriteBundle/Resources/config/routing.yml"
+    prefix:   /
+
 baskel:
-    resource: "@BaskelBundle/Resources/config/routing.yml"
-    prefix:   /Baskel
+    resource: "@FriteBundle/Resources/config/routing.yml"
+    prefix:   /Frite
 
 app:
     resource: '@AppBundle/Controller/'

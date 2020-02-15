@@ -19,7 +19,7 @@
                                     <i class="icon nalika-home"></i>
                                 </div>
                                 <div class="breadcomb-ctn">
-                                    <h2>Liste des Rendez-Vous</h2>
+                                    <h2>Liste des Techniciens</h2>
                                 </div>
                             </div>
                         </div>
@@ -41,38 +41,30 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap">
-                        <h4>Liste des Rendez-vous</h4>
+                        <h4>Liste des Techniciens </h4>
 
                         <table>
                             <tr>
                                 <th>ID</th>
-                                <th>Date de depot</th>
-                                <th>Date de Rdv</th>
-                                <th>Objet</th>
-                                <th>Etat</th>
-                                <th>Details</th>
-                                <th>User</th>
-                                <th>Technicien</th>
+                                <th>CIN</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>E-mail</th>
+                                <th>NumTel</th>
                             </tr>
-                            <tr>
-                                {% for rd in rdv %}
-                            <tr>
-                                <td>{{ rd.idRDV }}</td>
-                                <td>{{ rd.dateDepotRDV|date('Y-m-d') }}</td>
-                                <td>{{ rd.dateRDV|date('Y-m-d') }}</td>
-                                <td>{{ rd.objetRDV }}</td>
-                                <td>{{ rd.etatRDV }}</td>
-                                <td>{{ rd.detailsRDV }}</td>
-                                <td>{{ rd.userid}}</td>
-                                {% if rd.technicienid != NULL %}
-                                <td>{{ rd.technicienid.getNom()}} {{ rd.technicienid.getPrenom()}} </td>
-                                    {% else %}
-                                        <td>non affecter</td>
-                                {% endif %}
-                                <td>
-                                    <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
 
-                                    <a data-toggle="tooltip" class="pd-setting-ed" href="{{ path('SupprimerRDV', {'id': rd.idRDV}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                {% for t in techniciens %}
+                            <tr>
+                                <td>{{ t.idT }}</td>
+                                <td>{{ t.cin }}</td>
+                                <td>{{ t.nom }}</td>
+                                <td>{{ t.prenom }}</td>
+                                <td>{{ t.email }}</td>
+                                <td>{{ t.numtel }}</td>
+                                <td>
+                                    <a data-toggle="tooltip" title="Modifier" class="pd-setting-ed" href="{{ path('ModifierTechnicien', {'id': t.idT}) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a style="margin-left: 10%" data-toggle="tooltip" title="Supprimer" class="pd-setting-ed" href="{{ path('SupprimerTechnicien', {'id': t.idT}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
                                 </td>
 
                                 {% endfor %}

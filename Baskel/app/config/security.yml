@@ -28,6 +28,6 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/Baskel/rdv, role: ROLE_USER }
-        - { path: ^/Baskel/reclamation, role: ROLE_USER }
+        - { path: ^/Frite/rdv, role: ROLE_USER }
+        - { path: ^/Frite/reclamation, role: ROLE_USER }
         

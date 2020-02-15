@@ -1,0 +1,54 @@
+frite_homepage:
+    path:     /
+    defaults: { _controller: FriteBundle:Default:index }
+admin_homepage:
+    path:     /admin
+    defaults: { _controller: FriteBundle:Default:indexAdmin }
+rdv:
+    path:     /rdv
+    defaults: { _controller: FriteBundle:Default:AjouterRDV }
+reclamation:
+    path:     /reclamation
+    defaults: { _controller: FriteBundle:Default:AjouterReclamation }
+AfficherReclamations:
+    path:     /recBack
+    defaults: { _controller: FriteBundle:Default:AfficherReclamations }
+AfficherRDV:
+    path:     /rdvBack
+    defaults: { _controller: FriteBundle:Default:AfficherRDV }
+AfficherTechniciens:
+    path:     /tecBack
+    defaults: { _controller: FriteBundle:Default:AfficherTechniciens }
+SupprimerRDV:
+    path:     /SupprimerRDVBack/{id}
+    defaults: { _controller: FriteBundle:Default:SupprimerRDV }
+SupprimerReclamation:
+    path:     /SupprimerRecBack/{id}
+    defaults: { _controller: FriteBundle:Default:SupprimerReclamation }
+SupprimerTechnicien:
+    path:     /SupprimerTecBack/{id}
+    defaults: { _controller: FriteBundle:Default:SupprimerTechnicien }
+AjouterTechnicien:
+    path:     /AjouterTecBack
+    defaults: { _controller: FriteBundle:Default:AjouterTechnicien }
+DisplayReclamation:
+    path:     /ListRec
+    defaults: { _controller: FriteBundle:Default:DisplayReclamation }
+DisplayRdv:
+    path:     /ListRdv
+    defaults: { _controller: FriteBundle:Default:DisplayRdv }
+DeleteReclamation:
+    path:     /RecDelete/{id}
+    defaults: { _controller: FriteBundle:Default:DeleteReclamation }
+DeleteRDV:
+    path:     /RdvDelete/{id}
+    defaults: { _controller: FriteBundle:Default:DeleteRDV }
+ModifierReclamation:
+    path:     /ModifRec/{id}
+    defaults: { _controller: FriteBundle:Default:ModifierReclamation }
+ModifierRDV:
+    path:     /ModifRDV/{id}
+    defaults: { _controller: FriteBundle:Default:ModifierRDV }
+ModifierTechnicien:
+    path:     /ModifTech/{id}
+    defaults: { _controller: FriteBundle:Default:ModifierTechnicien }

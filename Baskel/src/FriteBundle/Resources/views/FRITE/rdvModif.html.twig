@@ -1,0 +1,90 @@
+{% extends 'default/front/header.html.twig' %}
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+    <!-- start-->
+<div class="tz-site">
+    <div class="container">
+    <div class="blog">
+        <div class="container">
+            <ul class="tz-breadcrumbs">
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li class="current">
+                    Contact
+                </li>
+            </ul>
+            <div class="blog-container">
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <!--Blog Sidebar-->
+                        <div class="blog-sidebar">
+                            <aside class="contact-info widget no-border">
+                                <h4 class="widget-title">Contactez-nous</h4>
+                                <p>Recevez vos velos et accesoires les plus attendus sur Baskel.tn! Attendez beaucoup de nouveaute a venir.</p>
+                                <ul>
+                                    <li>
+                                        <span>Adresse :</span>
+                                        <adress>
+                                            123 Rue Hedi Nouira Ariana <br> Tunisie
+                                        </adress>
+                                    </li>
+                                    <li>
+                                        <span>Telephone :</span>
+                                        (216) 71 801 802
+                                    </li>
+                                    <li>
+                                        <span>Email :</span>
+                                        BaskelTeam@baskel.tn
+                                    </li>
+                                </ul>
+                            </aside>
+                        </div>
+                        <!--End Blog Sidebar-->
+                    </div>
+                    <div class="col-md-8 tz-blog-content">
+                        <h1 class="large-ttle">Vos Reparations</h1>
+                        <div id="contact-form" class="contact-respond">
+                            <h3 class="tz-title">Prenez rendez-vous</h3>
+
+                            {{ form_start(form  , {'attr':{'class':'contact-form-7', 'id':'commentform'}})  }}
+                            <p class="comment-for-url">
+                                {{ form_widget(form.objetRDV, { 'attr': {'class': 'input-group-sm'} }) }}
+                                <i class="fa fa-link"></i>
+                            </p>
+                            <p class="comment-for-url">
+
+                                {{ form_widget(form.dateRDV, { 'attr': {'class': 'url'} }) }}
+
+                            </p>
+                            <p class="comment-for-content">
+                                {{ form_widget(form.detailsRDV, { 'attr': {'class': 'comment'} }) }}
+                                <i class="fa fa-comment"></i>
+                            </p>
+                            <p class="comment-for-submit">
+                                <input  class="button" type="submit" value="Modifier" />
+                            </p>
+                            {{ form_end(form) }}
+
+                        </div>
+                        <div class="map">
+                            <h3 class="tz-title">Visitez-nous</h3>
+                            <div class="map-iframe">
+                                <iframe src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=ariana%20%20hedi%20nouira%20tunisie+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0"   allowfullscreen></iframe><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}
