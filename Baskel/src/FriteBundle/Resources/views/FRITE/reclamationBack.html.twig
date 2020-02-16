@@ -71,11 +71,13 @@
                                 <td>{{ r.userid}}</td>
                                 <td>
                                     {% if r.etatR == 'non traitee' %}
-                                    <a data-toggle="tooltip" title="Traiter" class="pd-setting-ed" href="{{ path('TraiterReclamation', {'id': r.idR}) }}"><i style="color: whitesmoke" class="fa fa-square-o" aria-hidden="true"></i> </i></a>
+                                 <a data-toggle="tooltip" title="Traiter" class="pd-setting-ed" href="{{ path('TraiterReclamation', {'id': r.idR}) }}"><i style="color: whitesmoke" class="fa fa-square-o" aria-hidden="true"></i> </i></a>
+
                                     {% else %}
-                                        <a data-toggle="tooltip" title="Done" class="pd-setting-ed"><i style="color: whitesmoke" class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                                   <a data-toggle="tooltip" title="Done" class="pd-setting-ed"><i style="color: whitesmoke" class="fa fa-check-square-o" aria-hidden="true"></i></a>
                                     {% endif %}
-                                    <a data-toggle="tooltip" title="Supprimer" class="pd-setting-ed" href="{{ path('SupprimerReclamation', {'id': r.idR}) }}"> <i style="color: whitesmoke" class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+                                <td>   <a data-toggle="tooltip" title="Supprimer" class="pd-setting-ed" href="{{ path('SupprimerReclamation', {'id': r.idR}) }}"> <i style="color: whitesmoke" class="fa fa-trash-o" aria-hidden="true"></i></a>
 
                                 </td>
 

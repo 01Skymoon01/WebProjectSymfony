@@ -13,7 +13,7 @@
         <!--Start Breadcrumbs-->
         <ul class="tz-breadcrumbs">
             <li>
-                <a href="#">Home</a>
+                <a href="#">Acceuil</a>
             </li>
             <li class="current">
                 Liste de vos reclamations
@@ -45,8 +45,12 @@
                 <tbody>
                 {% for r in reclamations %}
 
-                <tr class="cart_item">
+                    {% if r.etatR == 'traitee'  %}
+                        <tr class="cart_item" style="background-color: hsl(312, 100%, 95%) " >
 
+                    {% else %}
+                        <tr class="cart_item">
+                    {% endif %}
 
 
                     <td class="product-thumbnail">{{ r.dateR|date('Y-m-d') }}</td>
@@ -64,6 +68,13 @@
                     <td class="product-remove">
                         <a data-toggle="tooltip"  href="{{ path('DeleteReclamation', {'id': r.idR}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </td>
+                    {% else %}
+                        <td class="product-remove" >
+                            <i style="color: #f44336" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </td>
+                        <td class="product-remove" >
+                            <i style="color: #F44336" class="fa fa-trash-o" aria-hidden="true"></i>
+                        </td>
                     {% endif %}
                 </tr>
 

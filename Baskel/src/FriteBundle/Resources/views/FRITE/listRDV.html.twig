@@ -13,7 +13,7 @@
         <!--Start Breadcrumbs-->
         <ul class="tz-breadcrumbs">
             <li>
-                <a href="#">Home</a>
+                <a href="#">Acceuil</a>
             </li>
             <li class="current">
                 Liste de vos rendez-vous
@@ -46,7 +46,15 @@
                 <tbody>
                 {% for rd in rdv %}
 
-                    <tr class="cart_item">
+                    {% if rd.etatRDV == 'Accepte'  %}
+                        <tr class="cart_item" style="background-color: hsl(43, 100%, 95%) " >
+                    {% elseif rd.etatRDV == 'Refuse'%}
+                        <tr class="cart_item" style="background-color:hsl(274, 100%, 95%)  ">
+                    {% else %}
+                        <tr class="cart_item">
+                    {% endif %}
+
+
 
                         <td class="product-thumbnail">{{ rd.dateDepotRDV|date('Y-m-d') }}</td>
                         <td class="product-thumbnail">{{ rd.dateRDV|date('Y-m-d') }}</td>
