@@ -4,3 +4,6 @@ baskel_homepage:
 admin_homepage:
     path:     /admin
     defaults: { _controller: BaskelBundle:Default:indexAdmin }
+pdf:
+    path:     /pdf
+    defaults: { _controller: BaskelBundle:Default:pdf }

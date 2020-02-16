@@ -1,0 +1,10 @@
+{
+    "name": "vendor/knplabs",
+    "authors": [
+        {
+            "name": "01Skymon10",
+            "email": "nour.khedher@esprit.tn"
+        }
+    ],
+    "require": {}
+}
