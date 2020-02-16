@@ -53,7 +53,7 @@ class RDV
     }
     /**
      * @var \DateTime
-     * @Assert\GreaterThan("today")
+     *
      *
      * @Assert\NotBlank
      * @ORM\Column(name="dateRDV", type="date")

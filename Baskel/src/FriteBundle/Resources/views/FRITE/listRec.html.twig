@@ -33,8 +33,8 @@
 
                     <th class="product-thumbnail">Date de depot</th>
                     <th class="product-price">Objet</th>
-                    <th class="product-quantity" > Etat </th>
                     <th class="product-subtotal">Details</th>
+                    <th class="product-quantity" > Etat </th>
                     <th class="product-remove">&nbsp;</th>
                     <th class="product-remove">&nbsp;</th>
                 </tr>
@@ -55,14 +55,12 @@
 
                     <td class="product-thumbnail">{{ r.dateR|date('Y-m-d') }}</td>
                     <td class="product-name">{{ r.objetR }}</td>
+                    <td class="product-name"><span class="amount">{{ r.detailsR }}</span></td>
                     <td class="product-price"><span class="amount">{{ r.etatR }}</span></td>
 
-                    <td class="product-subtotal">
-                        <span class="amount">{{ r.detailsR }}</span>
-                    </td>
                     {% if  r.dateR|date('Y-m-d') == "now"|date('Y-m-d')  %}
-                    <td>
-                        <a class="remove" title="Modifier" href="{{ path('ModifierReclamation', {'id': r.idR}) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <td class="product-remove">
+                        <a  title="Modifier" href="{{ path('ModifierReclamation', {'id': r.idR}) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </td>
 
                     <td class="product-remove">

@@ -14,6 +14,7 @@ use FriteBundle\Form\Technicien1Type;
 use FriteBundle\Form\TechnicienType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -100,9 +101,40 @@ class DefaultController extends Controller
         $em=$this->getDoctrine()->getManager();
         $variable=$em->getRepository(Reclamation::class)->find($id);
         $variable->setEtatR('traitee');
+
+        $message = \Swift_Message::newInstance()
+            -> setSubject('Traitement de Votre Reclamation')
+            -> setFrom('zeineb.sfaxi@esprit.tn')
+            -> setTo('gintokiismyhusband@gmail.com')
+            -> setBody('tchtch');
+        $this->get('mailer')->send($message);
+
+
         $em->persist($variable);
         $em->flush();
+
         return $this->redirectToRoute('AfficherReclamations');
+    }
+
+    public function pdfRecAction($id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $r=$em->getRepository(Reclamation::class)->find($id);
+        $snappy=$this->get('knp_snappy.pdf');
+        $html = $this -> renderView("@Frite/FRITE/pdf1.html.twig", array(
+                'rec'=>$r
+            )
+        );
+        $filename="friiiiiteuuu";
+        return new Response(
+            $snappy->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition'=> 'attachment ; filename="' .$filename.'.pdf"'
+            )
+        );
+
     }
 
     /**************************************************END CRUD RECLAMATION**********************************************************************/
@@ -206,6 +238,27 @@ class DefaultController extends Controller
             return $this->redirectToRoute('AfficherRDV');
         }
         return $this->render('@Frite/FRITE/affecterTech.html.twig',array('form'=>$form->createView(), 'RDV'=>$rdv));
+    }
+
+    public function pdfAction($id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $rdv=$em->getRepository(RDV::class)->find($id);
+        $snappy=$this->get('knp_snappy.pdf');
+        $html = $this -> renderView("@Frite/FRITE/pdf.html.twig", array(
+                'rdv'=>$rdv
+        )
+    );
+        $filename="friiiiiteuuu";
+        return new Response(
+            $snappy->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition'=> 'attachment ; filename="' .$filename.'.pdf"'
+            )
+        );
+
     }
     /**************************************************END CRUD RDV**********************************************************************/
 

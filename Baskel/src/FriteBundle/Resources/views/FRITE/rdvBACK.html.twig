@@ -82,6 +82,8 @@
                                    <td> <a data-toggle="tooltip" title="Technicien" class="pd-setting-ed" href="{{ path('AffecterTechnicien', {'id': rd.idRDV}) }}"><i style="color: whitesmoke" class="fa fa-user" aria-hidden="true"></i> </i></a> </td>
                                 <td>  <a data-toggle="tooltip" title="Supprimer" class="pd-setting-ed" href="{{ path('SupprimerRDV', {'id': rd.idRDV}) }}"> <i style="color: whitesmoke" class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 </td>
+                                <td>  <a data-toggle="tooltip" title="Download" class="pd-setting-ed" href="{{ path('pdf', {'id': rd.idRDV}) }}"> <i style="color: whitesmoke" class="fa fa-download" aria-hidden="true"></i></a>
+                                </td>
                                 {% endif %}
                                 {% endfor %}
 

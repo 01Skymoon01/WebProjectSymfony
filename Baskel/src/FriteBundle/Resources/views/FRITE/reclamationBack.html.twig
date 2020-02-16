@@ -80,6 +80,9 @@
                                 <td>   <a data-toggle="tooltip" title="Supprimer" class="pd-setting-ed" href="{{ path('SupprimerReclamation', {'id': r.idR}) }}"> <i style="color: whitesmoke" class="fa fa-trash-o" aria-hidden="true"></i></a>
 
                                 </td>
+                                <td>   <a data-toggle="tooltip" title="Download" class="pd-setting-ed" href="{{ path('pdfRec', {'id': r.idR}) }}"> <i style="color: whitesmoke" class="fa fa-download" aria-hidden="true"></i></a>
+
+                                </td>
 
                             {% endif %}
                                 {% endfor %}

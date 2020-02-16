@@ -33,8 +33,8 @@
                     <th class="product-thumbnail">Date depot</th>
                     <th class="product-thumbnail">Date RDV</th>
                     <th class="product-price">Objet</th>
-                    <th class="product-quantity"> Etat</th>
                     <th class="product-subtotal">Details</th>
+                    <th class="product-quantity"> Etat</th>
                     <th class="product-subtotal">Technicien</th>
                     <th class="product-remove">&nbsp;</th>
                     <th class="product-remove">&nbsp;</th>
@@ -59,12 +59,12 @@
                         <td class="product-thumbnail">{{ rd.dateDepotRDV|date('Y-m-d') }}</td>
                         <td class="product-thumbnail">{{ rd.dateRDV|date('Y-m-d') }}</td>
                         <td class="product-name">{{ rd.objetRDV }}</td>
+                    <td class="product-name"><span class="amount">{{ rd.detailsRDV }}</span></td>
                         <td class="product-price"><span class="amount">{{ rd.etatRDV }}</span></td>
-                        <td class="product-subtotal"><span class="amount">{{ rd.detailsRDV }}</span></td>
                         {% if rd.technicienid != NULL %}
                             <td class="product-subtotal"><span class="amount">{{ rd.technicienid.getNom()}} {{ rd.technicienid.getPrenom()}} </span> </td>
                         {% else %}
-                            <td>non affecter</td>
+                            <td class="product-price"><span class="amount">non affecter </span> </td>
                         {% endif %}
 
                         {% if  rd.dateDepotRDV|date('Y-m-d') == "now"|date('Y-m-d')  %}

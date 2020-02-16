@@ -64,3 +64,9 @@ RefusRDV:
 AffecterTechnicien:
     path:     /AffecterTechnicien/{id}
     defaults: { _controller: FriteBundle:Default:AffecterTechnicien }
+pdf:
+    path:     /pdf/{id}
+    defaults: { _controller: FriteBundle:Default:pdf }
+pdfRec:
+    path:     /pdfRec/{id}
+    defaults: { _controller: FriteBundle:Default:pdfRec }

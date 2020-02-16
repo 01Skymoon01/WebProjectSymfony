@@ -69,6 +69,11 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+    encryption: ssl
+    stream_options:
+        ssl:
+            allow_self_signed: true
+            verify_peer: false
 
 sensio_framework_extra:
     router:
@@ -82,3 +87,19 @@ fos_user:
     from_email:
         address: "zeineb.sfaxi@esprit.tn"
         sender_name: "zeineb"
+
+
+# Windows configuration
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
+        options:
+            ##Set default setiings from config.yml
+            no-outline: true
+            page-size:  LETTER
+            encoding:   UTF-8
+    image:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\""
+        options:    []
