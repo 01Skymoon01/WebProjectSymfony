@@ -56,7 +56,15 @@
                             </tr>
                             <tr>
                                 {% for rd in rdv %}
-                            <tr>
+                                {% if  rd.dateDepotRDV|date('Y-m-d') < "now"|date('Y-m-d')  %}
+                                {% if rd.etatRDV == 'Accepte'  %}
+                             <tr style="background-color: #107a94">
+                                {% elseif rd.etatRDV == 'Refuse'%}
+                            <tr style="background-color:#A40086 ">
+                                {% else %}
+                                <tr>
+                                {% endif %}
+
                                 <td>{{ rd.idRDV }}</td>
                                 <td>{{ rd.dateDepotRDV|date('Y-m-d') }}</td>
                                 <td>{{ rd.dateRDV|date('Y-m-d') }}</td>
@@ -69,12 +77,12 @@
                                     {% else %}
                                         <td>non affecter</td>
                                 {% endif %}
-                                <td>
-                                    <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-
-                                    <a data-toggle="tooltip" class="pd-setting-ed" href="{{ path('SupprimerRDV', {'id': rd.idRDV}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                <td><a  data-toggle="tooltip" title="Traiter" class="pd-setting-ed" href="{{ path('AcceptRDV', {'id': rd.idRDV}) }}"><i style="color: whitesmoke" class="fa fa-check" aria-hidden="true"></i> </i></a></td>
+                                <td>     <a  data-toggle="tooltip" title="Traiter" class="pd-setting-ed" href="{{ path('RefusRDV', {'id': rd.idRDV}) }}"><i style="color: whitesmoke" class="fa fa-times" aria-hidden="true"></i> </i></a> </td>
+                                   <td> <a data-toggle="tooltip" title="Technicien" class="pd-setting-ed" href="{{ path('AffecterTechnicien', {'id': rd.idRDV}) }}"><i style="color: whitesmoke" class="fa fa-user" aria-hidden="true"></i> </i></a> </td>
+                                <td>  <a data-toggle="tooltip" title="Supprimer" class="pd-setting-ed" href="{{ path('SupprimerRDV', {'id': rd.idRDV}) }}"> <i style="color: whitesmoke" class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 </td>
-
+                                {% endif %}
                                 {% endfor %}
 
 

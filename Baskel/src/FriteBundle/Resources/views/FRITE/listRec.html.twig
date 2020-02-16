@@ -56,15 +56,15 @@
                     <td class="product-subtotal">
                         <span class="amount">{{ r.detailsR }}</span>
                     </td>
-
+                    {% if  r.dateR|date('Y-m-d') == "now"|date('Y-m-d')  %}
                     <td>
-                        <a class="remove" title="Modifier" href="{{ path('ModifierReclamation', {'id': r.idR}) }}">Modif</a>
+                        <a class="remove" title="Modifier" href="{{ path('ModifierReclamation', {'id': r.idR}) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </td>
 
                     <td class="product-remove">
                         <a data-toggle="tooltip"  href="{{ path('DeleteReclamation', {'id': r.idR}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </td>
-
+                    {% endif %}
                 </tr>
 
                 {% endfor %}

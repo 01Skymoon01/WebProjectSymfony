@@ -54,21 +54,33 @@
                             </tr>
 
                                     {% for r in reclamations %}
+
+                            {% if  r.dateR|date('Y-m-d') < "now"|date('Y-m-d')  %}
+
+                            {% if r.etatR == 'traitee'  %}
+
+                            <tr style="background-color: #A40086">
+                                {% else %}
                             <tr>
-                                <td>{{ r.idR }}</td>
+                                {% endif %}
+                                <td >{{ r.idR }}</td>
                                 <td>{{ r.dateR|date('Y-m-d') }}</td>
                                 <td>{{ r.objetR }}</td>
                                 <td>{{ r.etatR }}</td>
                                 <td>{{ r.detailsR }}</td>
                                 <td>{{ r.userid}}</td>
                                 <td>
-                                    <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                    <a data-toggle="tooltip" class="pd-setting-ed" href="{{ path('SupprimerReclamation', {'id': r.idR}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    {% if r.etatR == 'non traitee' %}
+                                    <a data-toggle="tooltip" title="Traiter" class="pd-setting-ed" href="{{ path('TraiterReclamation', {'id': r.idR}) }}"><i style="color: whitesmoke" class="fa fa-square-o" aria-hidden="true"></i> </i></a>
+                                    {% else %}
+                                        <a data-toggle="tooltip" title="Done" class="pd-setting-ed"><i style="color: whitesmoke" class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                                    {% endif %}
+                                    <a data-toggle="tooltip" title="Supprimer" class="pd-setting-ed" href="{{ path('SupprimerReclamation', {'id': r.idR}) }}"> <i style="color: whitesmoke" class="fa fa-trash-o" aria-hidden="true"></i></a>
 
                                 </td>
 
-                            {% endfor %}
-
+                            {% endif %}
+                                {% endfor %}
 
                             </tr>
                         </table>

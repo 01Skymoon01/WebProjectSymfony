@@ -48,8 +48,8 @@
 
                     <tr class="cart_item">
 
-                        <td class="product-thumbnail">{{ rd.dateRDV|date('Y-m-d') }}</td>
                         <td class="product-thumbnail">{{ rd.dateDepotRDV|date('Y-m-d') }}</td>
+                        <td class="product-thumbnail">{{ rd.dateRDV|date('Y-m-d') }}</td>
                         <td class="product-name">{{ rd.objetRDV }}</td>
                         <td class="product-price"><span class="amount">{{ rd.etatRDV }}</span></td>
                         <td class="product-subtotal"><span class="amount">{{ rd.detailsRDV }}</span></td>
@@ -58,14 +58,23 @@
                         {% else %}
                             <td>non affecter</td>
                         {% endif %}
-                        <td>
-                            <a class="remove" title="Modifier" href="{{ path('ModifierRDV', {'id': rd.idRdv}) }}">Modif</a>
+
+                        {% if  rd.dateDepotRDV|date('Y-m-d') == "now"|date('Y-m-d')  %}
+                        <td class="product-remove">
+                            <a  title="Modifier" href="{{ path('ModifierRDV', {'id': rd.idRdv}) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                         </td>
                         <td class="product-remove">
                             <a data-toggle="tooltip"  href="{{ path('DeleteRDV', {'id': rd.idRDV}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
 
                         </td>
-
+                            {% else %}
+                            <td class="product-remove" >
+                                <i style="color: #f44336" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </td>
+                            <td class="product-remove" >
+                                <i style="color: #F44336" class="fa fa-trash-o" aria-hidden="true"></i>
+                            </td>
+                        {% endif %}
                     </tr>
 
                 {% endfor %}

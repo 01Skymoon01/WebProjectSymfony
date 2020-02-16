@@ -3,6 +3,7 @@
 namespace FriteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Technicien
@@ -21,29 +22,43 @@ class Technicien
      */
     private $idT;
 
+    public function __toString()
+    {
+        return (string) $this->getIdT();
+    }
     /**
      * @var integer
-     *
+     *@Assert\NotBlank
+     *@Assert\Length(
+     *      min = 8,
+     *      max = 8,
+     *      minMessage = "La CIN doit comporter 8 charactere",
+     *      maxMessage = "La CIN doit comporter 8 charactere"
+     * )
      * @ORM\Column(name="cin", type="integer")
      */
     private $cin;
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank
      * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank
      * @ORM\Column(name="prenom", type="string", length=255)
      */
     private $prenom;
 
     /**
      * @var string
+     * @Assert\NotBlank
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      *
      * @ORM\Column(name="email", type="string", length=255)
      */
@@ -51,7 +66,14 @@ class Technicien
 
     /**
      * @var int
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 8,
+     *      minMessage="La CIN doit comporter 8 charactere",
+     *     max="La CIN doit comporter 8 charactere"
+     * )
+     * @Assert\NotBlank(message="error")
      * @ORM\Column(name="numtel", type="integer")
      */
     private $numtel;

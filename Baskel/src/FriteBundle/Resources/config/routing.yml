@@ -52,3 +52,15 @@ ModifierRDV:
 ModifierTechnicien:
     path:     /ModifTech/{id}
     defaults: { _controller: FriteBundle:Default:ModifierTechnicien }
+TraiterReclamation:
+    path:     /TraiterRec/{id}
+    defaults: { _controller: FriteBundle:Default:TraiterReclamation }
+AcceptRDV:
+    path:     /AcceptRDV/{id}
+    defaults: { _controller: FriteBundle:Default:AcceptRDV }
+RefusRDV:
+    path:     /RefusRDV/{id}
+    defaults: { _controller: FriteBundle:Default:RefusRDV }
+AffecterTechnicien:
+    path:     /AffecterTechnicien/{id}
+    defaults: { _controller: FriteBundle:Default:AffecterTechnicien }

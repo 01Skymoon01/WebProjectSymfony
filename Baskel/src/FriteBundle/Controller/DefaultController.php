@@ -5,6 +5,7 @@ namespace FriteBundle\Controller;
 use FriteBundle\Entity\RDV;
 use FriteBundle\Entity\Reclamation;
 use FriteBundle\Entity\Technicien;
+use FriteBundle\Form\AffecterTechType;
 use FriteBundle\Form\RDV1Type;
 use FriteBundle\Form\RDVType;
 use FriteBundle\Form\Reclamation1Type;
@@ -63,9 +64,9 @@ class DefaultController extends Controller
 
     public function DeleteReclamationAction($id)
     {
+
         $em = $this->getDoctrine()->getManager();
         $reclamation = $em->getRepository(Reclamation::class)->find($id);
-
         $em->remove($reclamation);
         $em->flush();
         return $this->redirectToRoute("DisplayReclamation");
@@ -92,6 +93,16 @@ class DefaultController extends Controller
         }
         return $this->render('@Frite/FRITE/reclamationModif.html.twig', array('form' => $form->createView()));
 
+    }
+
+    public function TraiterReclamationAction($id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $variable=$em->getRepository(Reclamation::class)->find($id);
+        $variable->setEtatR('traitee');
+        $em->persist($variable);
+        $em->flush();
+        return $this->redirectToRoute('AfficherReclamations');
     }
 
     /**************************************************END CRUD RECLAMATION**********************************************************************/
@@ -161,6 +172,40 @@ class DefaultController extends Controller
             return $this->redirectToRoute('DisplayRdv');
         }
         return $this->render('@Frite/FRITE/rdvModif.html.twig',array('form'=>$form->createView()));
+    }
+
+    public function AcceptRDVAction($id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $variable=$em->getRepository(RDV::class)->find($id);
+        $variable->setEtatRDV('Accepte');
+        $em->persist($variable);
+        $em->flush();
+        return $this->redirectToRoute('AfficherRDV');
+    }
+    public function RefusRDVAction($id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $variable=$em->getRepository(RDV::class)->find($id);
+        $variable->setEtatRDV('Refuse');
+        $em->persist($variable);
+        $em->flush();
+        return $this->redirectToRoute('AfficherRDV');
+    }
+
+    public function AffecterTechnicienAction($id,Request $request)
+    {
+        $em= $this->getDoctrine()->getManager();
+        $rdv=$em->getRepository(RDV::class)->find($id);
+        $form=$this->createForm(AffecterTechType::class,$rdv);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $em->persist($rdv);
+            $em->flush();
+            return $this->redirectToRoute('AfficherRDV');
+        }
+        return $this->render('@Frite/FRITE/affecterTech.html.twig',array('form'=>$form->createView(), 'RDV'=>$rdv));
     }
     /**************************************************END CRUD RDV**********************************************************************/
 

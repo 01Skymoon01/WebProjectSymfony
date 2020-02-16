@@ -2,14 +2,17 @@
 
 namespace FriteBundle\Form;
 
+use FriteBundle\Entity\Technicien;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RDVType extends AbstractType
+class AffecterTechType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -18,19 +21,12 @@ class RDVType extends AbstractType
     {
         $builder
 
-            ->add('objetRDV', ChoiceType::class , [
-                'choices'  => [
-                    'Reparation' => 'Reparation',
-                    'Maintenance technique' => 'Maintenance technique',
-                    'Rendez-vous technicien' => 'Rendez-vous technicien',
-                    'Probleme de facturation' => 'Probleme de facturation',
-                    'Autres..' => 'Autres..',
-
-                ],])
-            ->add('dateRDV')
-            ->add('detailsRDV', TextareaType::class, array());
-
-
+            ->add('technicienid', EntityType::class , array(
+                'class'=>Technicien::class,
+                'choice_label'=> function (Technicien$technicien) {
+                    return $technicien->getnom() . ' ' . $technicien->getprenom();  }
+            ))
+            ->add('Affecter',SubmitType::class);
     }/**
  * {@inheritdoc}
  */
