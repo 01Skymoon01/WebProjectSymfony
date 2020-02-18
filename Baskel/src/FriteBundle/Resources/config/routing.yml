@@ -70,3 +70,6 @@ pdf:
 pdfRec:
     path:     /pdfRec/{id}
     defaults: { _controller: FriteBundle:Default:pdfRec }
+sendMail:
+    path:     /mail
+    defaults: { _controller: FriteBundle:Default:sendMail }

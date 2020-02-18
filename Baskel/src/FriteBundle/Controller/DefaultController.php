@@ -2,10 +2,12 @@
 
 namespace FriteBundle\Controller;
 
+use FriteBundle\Entity\Mail;
 use FriteBundle\Entity\RDV;
 use FriteBundle\Entity\Reclamation;
 use FriteBundle\Entity\Technicien;
 use FriteBundle\Form\AffecterTechType;
+use FriteBundle\Form\MailType;
 use FriteBundle\Form\RDV1Type;
 use FriteBundle\Form\RDVType;
 use FriteBundle\Form\Reclamation1Type;
@@ -36,6 +38,7 @@ class DefaultController extends Controller
         $form = $this->createForm(ReclamationType::class, $Reclamation);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash("success","Reclamation cree avec succes");
             $user = $this->container->get('security.token_storage')->getToken()->getUser();
             $user->getId();
             $Reclamation->setEtatR('non traitee');
@@ -88,6 +91,7 @@ class DefaultController extends Controller
         $form = $this->createForm(Reclamation1Type::class, $reclamation);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash("success","Reclamation modifie avec succes");
             $em->persist($reclamation);
             $em->flush();
             return $this->redirectToRoute('DisplayReclamation');
@@ -148,6 +152,7 @@ class DefaultController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $this->addFlash("success","Rendez-vous cree avec succes");
             $user = $this->container->get('security.token_storage')->getToken()->getUser();
             $user->getId();
             $rdv->setUserid($user);
@@ -171,6 +176,7 @@ class DefaultController extends Controller
         $rdv=$em->getRepository(RDV::class)->find($id);
         $em->remove($rdv);
         $em->flush();
+        $this->addFlash("success","Rendez-vous supprime avec succes");
         return $this->redirectToRoute("AfficherRDV");
     }
 
@@ -198,6 +204,7 @@ class DefaultController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $this->addFlash("success","Rendez-vous modifie avec succes");
             $em->persist($rdv);
             $em->flush();
             return $this->redirectToRoute('DisplayRdv');
@@ -233,6 +240,7 @@ class DefaultController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $this->addFlash("success","Technicien affecte avec succes");
             $em->persist($rdv);
             $em->flush();
             return $this->redirectToRoute('AfficherRDV');
@@ -271,6 +279,7 @@ class DefaultController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $this->addFlash("success","Technicien ajoute avec succes");
             $em->persist($technicien);
             $em->flush();
             return $this->redirectToRoute('AfficherTechniciens');
@@ -290,6 +299,7 @@ class DefaultController extends Controller
         $technicien=$em->getRepository(Technicien::class)->find($id);
         $em->remove($technicien);
         $em->flush();
+        $this->addFlash("success","Technicien supprime avec succes");
         return $this->redirectToRoute("AfficherTechniciens");
     }
 
@@ -302,6 +312,7 @@ class DefaultController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $this->addFlash("success","Technicien modifie avec succes");
             $em->persist($technicien);
             $em->flush();
             return $this->redirectToRoute('AfficherTechniciens');
@@ -312,7 +323,29 @@ class DefaultController extends Controller
 
     /**************************************************END CRUD TECHNICIEN**********************************************************************/
 
+    /****************************************************SEND MAIL********************************************************************************/
 
+    public function sendMailAction(Request $request)
+    {
+        $mail = new Mail();
+        $form = $this->createForm(MailType::class, $mail);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $subject = $mail->getSubject();
+            $mail = $mail->getMail();
+            $objet = $request->get('form')['objet'];
+            $username ='gintokiismyhusband@gmail.com';
+            $message = \Swift_Message::newInstance()
+                ->setSubject($objet)
+                ->setFrom($username)
+                ->setTo($mail)
+                ->setBody($subject);
+            $this->get('mailer')->send($message);
+
+        }
+        return $this->render('@Frite/FRITE/Mail.html.twig', array('f' => $form->createView()));
+    }
 
 
 
