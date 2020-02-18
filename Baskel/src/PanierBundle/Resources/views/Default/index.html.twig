@@ -1,0 +1,91 @@
+
+
+{% extends 'default/front/header.html.twig' %}
+
+
+
+{% block container %}
+<script src="{{ asset('jquery-3.4.1.min.js')}}"> </script>
+
+<script  type="application/javascript" async>
+    $(document).ready(function(){
+        console.log("here jquery");
+        $(".addcart2").click(function(){
+           // $(this).hide();
+            console.log("clicked addcart");
+           $data=$(this).parent().parent().parent().html();
+
+            console.log($data);
+
+            //$data=$data.hasClass('name').val();
+
+            console.log($(this).parent().parent().parent().find('.refProduct').val());
+            $ref=$(this).parent().parent().parent().find('.refProduct').val();
+            $.ajax({
+                url:'{{ path('ajouterAuPanier') }}',
+                type: "GET",
+                data: {
+                    'ref' : $ref
+                },
+                dataType:"text",
+                success: function (data)
+                {
+                    console.log(data);
+                   // console.log(data.qte);
+                    $date=$.parseJSON(data);
+                    console.log($date.etat);
+                    if (!($date.etat = 1)) {
+                    } else {
+                        alert("Deja ajouter");
+                    }
+                    $("#countItems").text($date.articles);
+                }
+
+        });
+
+        });
+
+
+
+
+    });
+</script>
+
+<div id="page">
+
+    <div id="fh5co-product">
+        <!-- Button trigger modal -->
+
+
+
+
+    {% for p in produit %}
+
+        <div class="product-item">
+            <div class="product-thubnail">
+                <img src="{{ asset('front/images/'~p.image)}}" alt="product 3" />
+                <input class="imgItem" type="hidden" name="" value="{{ asset('front/images/'~p.image)}}">
+                <div class="product-meta">
+                    <a class="add-to-cart addcart addcart2"  >Add to cart</a>
+                    <span class="quick-view">
+
+                                                </span>
+                </div>
+            </div>
+            <div class="product-infomation desc">
+                <input type="hidden" class="refProduct" value="{{ p.refP }}" >
+                <h4><a class="name ">{{ p.nomP }}</a></h4>
+                <span class="product-price price">${{ p.prixP }}</span>
+                <span class="product-attr">
+                                                <i class="fa fa-circle light-blue"></i>
+                                                <i class="fa fa-circle orange"></i>
+                                                <i class="fa fa-circle blueviolet"></i>
+                                                <i class="fa fa-circle orange-dark"></i>
+                                                <i class="fa fa-circle steelblue"></i>
+                                            </span>
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock  %}

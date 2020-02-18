@@ -1,0 +1,18 @@
+panier_homepage:
+    path:     /
+    defaults: { _controller: PanierBundle:Default:afficherProduits }
+afficherProduit:
+    path:     /afficherProduit
+    defaults: { _controller: PanierBundle:Default:afficherProduits }
+ajouterAuPanier:
+    path:     /ajouterAuPanier
+    defaults: { _controller: PanierBundle:Default:ajouterAuPanier }
+MyCart:
+    path:     /MyCart
+    defaults: { _controller: PanierBundle:Default:MyCart }
+ModifierQte:
+    path:     /ModifierQte
+    defaults: { _controller: PanierBundle:Default:ModifierQte }
+SupprimerItem:
+    path:     /SupprimerItem
+    defaults: { _controller: PanierBundle:Default:SupprimerItem }

@@ -7,6 +7,7 @@
 
     <title>Accueil</title>
 
+
     <link href="{{ asset('front/css/bootstrap.min.css') }}" rel="stylesheet" type='text/css'>
     <link href='{{ asset('front/css/font-awesome.min.css') }}' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -21,7 +22,9 @@
 
 </head>
 <body>
+<div class="fh5co-loader"></div>
 <!--Start class site-->
+
 <div class="tz-site">
 
     <!--Start id tz header-->
@@ -182,7 +185,7 @@
                 <!--Main Menu-->
                 <ul class="tz-main-menu pull-left nav-collapse">
                     <li>
-                        <a href="index.html">Accueil</a>
+                        <a  href="{{  path('panier_homepage') }}" >Accueil</a>
                     </li>
 
 
@@ -253,70 +256,16 @@
                     </li>
                 </ul>
                 <!--End Main menu-->
-
+                <div id="fh5co-product">
                 <!--Shop meta-->
                 <ul class="tz-ecommerce-meta pull-right">
-                    <li class="tz-menu-wishlist">
-                        <a href="#"><strong>0</strong></a>
-                    </li>
+                  <!-----wishlist ------>
                     <li class="tz-mini-cart">
-                        <a href="shop-cart.html"><strong>2</strong>Panier.</a>
+                        <a  href="{{  path('MyCart') }}">  <span> <strong id="countItems">{{ panier|length   }}</strong> </span></a>
 
                         <!--Mini cart-->
-                        <ul class="cart-inner">
-                            <li class="mini-cart-content">
-                                <div class="mini-cart-img"><img src="{{ asset('front/images/product-cart1.png') }}" alt="product search one"></div>
-                                <div class="mini-cart-ds">
-                                    <h6><a href="single-product.html">Liv Race Day Short</a></h6>
-                                    <span class="mini-cart-meta">
-                                            <a href="single-product.html">DT2650.00</a>
-                                            <span class="mini-meta">
-                                               <span class="mini-color">Color: <i class="orange"></i></span>
-                                               <span class="mini-qty">Qty: 5</span>
-                                            </span>
-                                        </span>
-                                </div>
-                                <span class="mini-cart-delete"><img src="{{ asset('front/images/delete.png') }}" alt="delete"></span>
-                            </li>
-                            <li class="mini-cart-content">
-                                <div class="mini-cart-img"><img src="{{ asset('front/images/product-cart2.png') }}" alt="product search one"></div>
-                                <div class="mini-cart-ds">
-                                    <h6><a href="single-product.html">City Pedals Sport</a></h6>
-                                    <span class="mini-cart-meta">
-                                            <a href="single-product.html">DT2650.00</a>
-                                            <span class="mini-meta">
-                                               <span class="mini-color">Color: <i class="orange"></i></span>
-                                               <span class="mini-qty">Qty: 5</span>
-                                            </span>
-                                        </span>
-                                </div>
-                                <span class="mini-cart-delete"><img src="{{ asset('front/images/delete.png') }}" alt="delete"></span>
-                            </li>
-                            <li class="mini-cart-content">
-                                <div class="mini-cart-img"><img src="{{ asset('front/images/product-cart3.png') }}" alt="product search one"></div>
-                                <div class="mini-cart-ds">
-                                    <h6><a href="single-product.html">Gloss</a></h6>
-                                    <span class="mini-cart-meta">
-                                            <a href="single-product.html">DT2650.00</a>
-                                            <span class="mini-meta">
-                                               <span class="mini-color">Color: <i class="orange"></i></span>
-                                               <span class="mini-qty">Qty: 5</span>
-                                            </span>
-                                        </span>
-                                </div>
-                                <span class="mini-cart-delete"><img src="{{ asset('front/images/delete.png') }}" alt="delete"></span>
-                            </li>
-                            <li class="mini-subtotal">
-                                    <span class="subtotal-content">
-                                        Subtotal:
-                                        <strong class="pull-right">DT1,100.00</strong>
-                                    </span>
-                            </li>
-                            <li class="mini-footer">
-                                <a href="shop-cart.html" class="view-cart">View Cart</a>
-                                <a href="shop-checkout.html" class="check-out">Checkout</a>
-                            </li>
-                        </ul>
+
+
                         <!--End mini cart-->
 
                     </li>
@@ -334,6 +283,8 @@
 
     </header>
     <!--End id tz header-->
+
+
 
 
 
