@@ -55,14 +55,13 @@ class RDV
      * @var \DateTime
      *
      *
-     * @Assert\NotBlank
+     *
      * @ORM\Column(name="dateRDV", type="date")
      */
     private $dateRDV;
 
     /**
      * @var string
-     * @Assert\NotBlank (message="author.name.not_blank")
      * @ORM\Column(name="objetRDV", type="string", length=255)
      */
     private $objetRDV;
@@ -76,11 +75,6 @@ class RDV
 
     /**
      * @var string
-     * @Assert\Regex(
-     *        pattern  = "/[^a-z A-Z À-þ 0-9]+/",
-     *     match=false, message="HEEEEEEEEEEEEEEEHIIII"
-     *
-     * )
      * @ORM\Column(name="detailsRDV", type="string", length=255)
      */
     private $detailsRDV;

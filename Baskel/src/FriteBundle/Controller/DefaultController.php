@@ -109,7 +109,6 @@ class DefaultController extends Controller
             -> setBody('tchtch');
         $this->get('mailer')->send($message);
 
-
         $em->persist($variable);
         $em->flush();
 
@@ -215,6 +214,7 @@ class DefaultController extends Controller
         $em->flush();
         return $this->redirectToRoute('AfficherRDV');
     }
+
     public function RefusRDVAction($id)
     {
         $em=$this->getDoctrine()->getManager();
