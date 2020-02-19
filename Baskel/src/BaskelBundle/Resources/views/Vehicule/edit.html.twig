@@ -33,7 +33,7 @@
 
                             <div id="myTabContent" class="tab-content custom-product-edit">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
-                                    {{ form_start(form) }}
+                                    {{ form_start(form, {'method': 'post',  'attr': {'class': 'fos_user_registration_register form-horizontal','id':'signupForm1'}}) }}
 
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -91,6 +91,97 @@
 
 
 
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+    <script type="text/javascript">
+        (function($) {
+
+            $.validator.addMethod("phonenumber", function(value, element) {
+                return $('#fos_user_registration_form_numtel1').val() != $('#fos_user_registration_form_numtel2').val()
+            }, "* nwemer mouch kif kif");
+            $.validator.addMethod("letters", function(value, element) {
+                return this.optional(element) || /^[a-z A-Z À-þ]+$/i.test(value);
+            }, "Letters only please");
+            $( document ).ready( function () {
+
+
+                $( "#signupForm1" ).validate( {
+                    rules: {
+                        'appbundle_vehicule[matricule]': "required",
+                        'appbundle_vehicule[marque]': "required",
+
+
+
+                        'appbundle_vehicule[matricule]': {
+                            required: true,
+                            minlength: 2
+                        },
+                        'appbundle_vehicule[marque]': {
+                            required: true,
+                            minlength: 2
+                        },
+
+
+
+
+
+
+                        agree1: "required"
+                    },
+                    messages: {
+                        'appbundle_vehicule[matricule]': {
+                            required: "Matricule ne doit pas être vide",
+                            minlength: "Matrcule doit contenir 2 caractéres au minimum"
+                        },
+                        'appbundle_vehicule[description]': {
+                            required: "Description ne doit pas être vide",
+                            minlength: "Description doit contenir 2 caractéres au minimum"
+                        },
+
+
+
+                        email1: "Please enter a valid email address",
+                        agree1: "Please accept our policy"
+                    },
+                    errorElement: "em",
+                    errorPlacement: function ( error, element ) {
+                        // Add the `help-block` class to the error element
+                        error.addClass( "help-block" );
+
+                        // Add `has-feedback` class to the parent div.form-group
+                        // in order to add icons to inputs
+                        element.parents( ".input-group" ).addClass( "has-feedback" );
+
+                        if ( element.prop( "type" ) === "checkbox" ) {
+                            error.insertAfter( element.parent( "label" ) );
+                        } else {
+                            error.insertAfter( element );
+                        }
+
+                        // Add the span element, if doesn't exists, and apply the icon classes to it.
+                        if ( !element.next( "span" )[ 0 ] ) {
+                            $( "<span class='glyphicon glyphicon-remove form-control-feedback'></span>" ).insertAfter( element );
+                        }
+                    },
+                    success: function ( label, element ) {
+                        // Add the span element, if doesn't exists, and apply the icon classes to it.
+                        if ( !$( element ).next( "span" )[ 0 ] ) {
+                            $( "<span class='glyphicon glyphicon-ok form-control-feedback'></span>" ).insertAfter( $( element ) );
+                        }
+                    },
+                    highlight: function ( element, errorClass, validClass ) {
+                        $( element ).parents( ".input-group" ).addClass( "has-error" ).removeClass( "has-success" );
+                        $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+                    },
+                    unhighlight: function ( element, errorClass, validClass ) {
+                        $( element ).parents( ".input-group " ).addClass( "has-success" ).removeClass( "has-error" );
+                        $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+                    }
+                } );
+            } );
+        })(jQuery);
+
+    </script>
 
 
 

@@ -10,13 +10,32 @@
 {% endblock %}
 {% block container %}
 
+    <link rel="stylesheet" href="{{asset('back/css/jquery.dataTables.min.css')}}">
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(function() {
+            $('#ajax-table').DataTable({
+                "language": {
+                    "lengthMenu": "afficher _MENU_ enregistement par page",
+                    "zeroRecords": "Aucun enregistrement a été trouvé !",
+                    "info": "Page _PAGE_ de _PAGES_ pages",
+                    "infoEmpty": "Aucun enregistrement",
+                    "infoFiltered": "(filtré de  _MAX_ total enregistement)",
+                    "search": "Recherche:",
+                    "paginate": {
+                        "previous": "Precédent",
+                        "next" : "suivant"
+                    }
+                }
+
+            });
+        });
+    </script>
 
 
 
-
-
-
-<div class="breadcome-area" style="margin-left:14%"
+    <div class="breadcome-area" style="margin-left:14%">
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -52,36 +71,76 @@
                 <div class="product-status-wrap">
                     <h4>Liste des vehicules</h4>
 
-                    <table>
+                    <table id="ajax-table" class="tab">
+                        <thead>
                         <tr>
                             <th>Matricule</th>
                             <th>Marque</th>
                             <th>Type</th>
+                            <th>Nom& Prenom</th>
+                            <th>Action</th>
 
                         </tr>
-                        <tr>
+                        </thead>
+                        <tbody>
                             {% for v in vehicules %}
+
                         <tr>
                             <td>{{ v.matricule }}</td>
 
                             <td>{{ v.marque }}</td>
                             <td>{{ v.type }}</td>
+                            <td>{{ v.user.getNom() }} {{ v.user.getPrenom() }}</td>
 
                             <td>
                                 <a data-toggle="tooltip" title="Modifier" class="pd-setting-ed" href="{{ path('modifiervehicule', {'id': v.id}) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 
-                                <a data-toggle="tooltip" class="pd-setting-ed" href="{{ path('suppvehicule', {'id': v.id}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                <a data-toggle="tooltip" class="pd-setting-ed deleteBtn" href="#" data-id="{{ v.id }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                             </td>
+                        </tr>
 
                             {% endfor %}
 
+                        </tbody>
 
-                        </tr>
                     </table>
+
 
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
+
+    <script>
+        $(document).ready(function(){
+            var myLink = "{{ app.request.requestUri }}";
+            var ajaxTableLink = myLink +" #ajax-table ";
+
+            $('.deleteBtn').click(function (e) {
+                e.preventDefault();
+                id = $(this).data('id');
+                $.ajax({
+                    url: "/Baskel/suppvehicule/"+id,
+                    method: 'get',
+                    success: function (data, reponse) {
+
+                        $('#ajax-table').load(ajaxTableLink)
+
+                        },
+                    error: function () {
+                        //appear pop to say error blabla
+                    },
+                });
+
+            });
+        });
+    </script>
+
+
+
+
+
+
 {% endblock %}

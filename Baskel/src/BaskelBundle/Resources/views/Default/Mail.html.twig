@@ -1,0 +1,21 @@
+{% extends 'default/back/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+    {{ form_start(f) }}
+    {{ form_widget(f) }}
+    <center>
+    <table>
+        <tr>
+            <td>  {{ form_widget(f.envoyer,{'attr': {'class':'btn btn-success'}}) }}</td>
+        </tr>
+    </table>
+    {{ form_end(f) }}
+    </center>
+{% endblock %}

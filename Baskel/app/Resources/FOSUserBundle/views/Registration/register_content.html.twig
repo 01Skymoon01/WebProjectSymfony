@@ -1,70 +1,72 @@
 {% trans_default_domain 'FOSUserBundle' %}
+
 <section class="default-page">
     <div class="container">
         <div class="tz-register">
             <h2>Inscription Livreur</h2>
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-            <p class="form-row form-row-wide">
-                <label >Email *</label>
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register form-horizontal','id':'signupForm1'}}) }}
 
-                {{ form_widget(form.email, { 'attr': {'class': 'input-text'} }) }}
-                {{ form_errors(form.email) }}
 
-            </p>
-            <p class="form-row form-row-wide">
-                <label> Pseudo *</label>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="firstname1">E-mail *</label>
+                <div class="col-sm-5">
+                    {{ form_widget(form.email, { 'attr': {'placeholder':'E-mail'} }) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="firstname1">Pseudo *</label>
+                <div class="col-sm-5">
+                    {{ form_widget(form.username, { 'attr': {'placeholder': 'Pseudo'} }) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="firstname1">Nom *</label>
+                <div class="col-sm-5">
+                    {{ form_widget(form.nom, { 'attr': {'placeholder': 'Votre Nom'} }) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="firstname1">Prenom *</label>
+                <div class="col-sm-5">
+                    {{ form_widget(form.prenom, { 'attr': {'placeholder': 'Votre Prenom'} }) }}
+                </div>
+            </div>
 
-                {{ form_widget(form.username, { 'attr': {'class': 'input-text'} }) }}
-                {{ form_errors(form.username) }}
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="firstname1">Mot de passe *</label>
+                <div class="col-sm-5">
+                    {{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'Votre Mot de passe'} }) }}
+                </div>
+            </div>
 
-            </p>
-            <p class="form-row form-row-wide">
-                <label >Nom *</label>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="firstname1">Confirmer Mot de passe *</label>
+                <div class="col-sm-5">
+                    {{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'Confirmer Votre Mot de passe'} }) }}
+                </div>
+            </div>
 
-                {{ form_widget(form.nom, { 'attr': {'class': 'input-text'} }) }}
-                {{ form_errors(form.nom) }}
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="firstname1">Date de naissance *</label>
+                <div class="col-sm-5">
+                    {{ form_widget(form.dateNaiss, { 'attr': {'placeholder': 'Votre date de naissance'} }) }}
+                </div>
+            </div>
 
-            </p>
-            <p class="form-row form-row-wide">
-                <label >Prenom *</label>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="firstname1">Numero téléphone 1 *</label>
+                <div class="col-sm-5">
+                    {{ form_widget(form.numtel1 ,{ 'attr': {'placeholder': 'Votre Numéro de téléphone 1'} }) }}
+                </div>
+            </div>
 
-                {{ form_widget(form.prenom, { 'attr': {'class': 'input-text'} }) }}
-                {{ form_errors(form.prenom) }}
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="firstname1">Numero téléphone 2</label>
+                <div class="col-sm-5">
+                    {{ form_widget(form.numtel2 ,{ 'attr': {'placeholder': 'Votre Numéro de téléphone 2'} }) }}
+                </div>
+            </div>
 
-            </p>
-            <p class="form-row form-row-wide">
-                <label >Mot de passe *</label>
-
-                {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'input-text'} }) }}
-                {{ form_errors(form.plainPassword.first) }}
-
-            </p>
-            <p class="form-row form-row-wide">
-                <label >Confirmer mot de passe *</label>
-
-                {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'input-text'} }) }}
-                {{ form_errors(form.plainPassword.second) }}
-
-            </p>
-            <p class="form-row form-row-wide">
-                <label >Date de naissance *</label>
-
-                {{ form_widget(form.dateNaiss, { 'attr': {'class': 'input-group-sm'} }) }}
-                {{ form_errors(form.dateNaiss) }}
-
-            </p>
-            <p class="form-row form-row-wide">
-                <label >Numéro téléphone 1 *</label>
-
-                {{ form_widget(form.numtel1, { 'attr': {'class': 'input-text'} }) }}
-                {{ form_errors(form.numtel1) }}
-
-            </p>
-            <p class="form-row form-row-wide">
-                <label >Numéro téléphone 2 </label>
-
-                {{ form_widget(form.numtel2, { 'attr': {'class': 'input-text'} }) }}
-            </p>
 
             <div>
                 <p class="form-row">
@@ -75,3 +77,146 @@
         </div>
     </div>
 </section>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+    (function($) {
+
+        $.validator.addMethod("phonenumber", function(value, element) {
+            return $('#fos_user_registration_form_numtel1').val() != $('#fos_user_registration_form_numtel2').val()
+        }, "* nwemer mouch kif kif");
+        $.validator.addMethod("letters", function(value, element) {
+            return this.optional(element) || /^[a-z A-Z À-þ]+$/i.test(value);
+        }, "Letters only please");
+        $( document ).ready( function () {
+
+
+            $( "#signupForm1" ).validate( {
+                rules: {
+                    'fos_user_registration_form[email]': "required",
+                    'fos_user_registration_form[username]': "required",
+                    'fos_user_registration_form[nom]': "required",
+                    'fos_user_registration_form[prenom]': "required",
+                    'fos_user_registration_form[plainPassword][first]': "required",
+                    'fos_user_registration_form[plainPassword][second]': "required",
+                    'fos_user_registration_form[datenNaiss]': "required",
+                    'fos_user_registration_form[numtel1]': "required",
+
+
+                    'fos_user_registration_form[email]': {
+                        required: true,
+                        email: true
+                    },
+                    'fos_user_registration_form[username]': {
+                        required: true,
+                        minlength: 2
+                    },
+                    'fos_user_registration_form[nom]': {
+                        required: true,
+                        minlength: 2,
+                        letters:true
+                    },
+                    'fos_user_registration_form[prenom]': {
+                        required: true,
+                        minlength: 2,
+                        letters:true
+
+                    },
+                    'fos_user_registration_form[plainPassword][first]': {
+                        required: true,
+                        minlength: 5
+                    },
+
+                   'fos_user_registration_form[plainPassword][second]': {
+                        required: true,
+                        minlength: 5,
+                        equalTo: "#fos_user_registration_form_plainPassword_first"
+                    },
+                    'fos_user_registration_form[numtel1]': {
+                        required: true,
+                        minlength: 8,
+                        maxlength: 8,
+                        phonenumber: true,
+                        digits: true
+
+
+                    },
+                    'fos_user_registration_form[numtel2]': {
+                        required: false,
+                        minlength: 8,
+                        maxlength: 8,
+                        phonenumber: true,
+                        digits: true
+                    },
+
+                    agree1: "required"
+                },
+                messages: {
+                    'fos_user_registration_form[username]': {
+                        required: "Please enter a username",
+                        minlength: "Your username must consist of at least 2 characters"
+                    },
+                    'fos_user_registration_form[plainPassword][first]': {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 5 characters long"
+                    },
+                    'fos_user_registration_form[plainPassword][second]': {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 5 characters long",
+                        equalTo: "Please enter the same password as above"
+                    },
+                    'fos_user_registration_form[numtel1]': {
+                        required: "Please enter a username",
+                        minlength: "Telifoun bou 8",
+                        maxlength: "Telifoun bou 8"
+                    },
+                    'fos_user_registration_form[numtel2]': {
+                        required: "Please enter a username",
+                        minlength: "Telifoun bou 8",
+                        maxlength: "Telifoun bou 8",
+                        equalTo: "TELIFOUNET KIF KIF "
+
+                    },
+                    email1: "Please enter a valid email address",
+                    agree1: "Please accept our policy"
+                },
+                errorElement: "em",
+                errorPlacement: function ( error, element ) {
+                    // Add the `help-block` class to the error element
+                    error.addClass( "help-block" );
+
+                    // Add `has-feedback` class to the parent div.form-group
+                    // in order to add icons to inputs
+                    element.parents( ".col-sm-5" ).addClass( "has-feedback" );
+
+                    if ( element.prop( "type" ) === "checkbox" ) {
+                        error.insertAfter( element.parent( "label" ) );
+                    } else {
+                        error.insertAfter( element );
+                    }
+
+                    // Add the span element, if doesn't exists, and apply the icon classes to it.
+                    if ( !element.next( "span" )[ 0 ] ) {
+                        $( "<span class='glyphicon glyphicon-remove form-control-feedback'></span>" ).insertAfter( element );
+                    }
+                },
+                success: function ( label, element ) {
+                    // Add the span element, if doesn't exists, and apply the icon classes to it.
+                    if ( !$( element ).next( "span" )[ 0 ] ) {
+                        $( "<span class='glyphicon glyphicon-ok form-control-feedback'></span>" ).insertAfter( $( element ) );
+                    }
+                },
+                highlight: function ( element, errorClass, validClass ) {
+                    $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+                    $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+                },
+                unhighlight: function ( element, errorClass, validClass ) {
+                    $( element ).parents( ".col-sm-5 " ).addClass( "has-success" ).removeClass( "has-error" );
+                    $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+                }
+            } );
+        } );
+    })(jQuery);
+
+</script>

@@ -19,3 +19,19 @@ suppvehicule:
 modifiervehicule:
     path:     /modifiervehicule/{id}
     defaults: { _controller: BaskelBundle:Vehicule:modifier }
+consliv:
+    path:     /consliv
+    defaults: { _controller: BaskelBundle:Livreur:afficheLivreur }
+modifetat:
+    path:     /modifetat/{id}
+    defaults: { _controller: BaskelBundle:Livreur:modifEtat }
+modifsolde:
+    path:     /modifsolde/{id}
+    defaults: { _controller: BaskelBundle:Livreur:modifSolde }
+
+sendMail:
+    path:     /Mail
+    defaults: { _controller: AppBundle:Mail:sendMail }
+pdf:
+    path:     /pdf/{id}
+    defaults: { _controller: BaskelBundle\Controller\LivreurController::pdfAction }

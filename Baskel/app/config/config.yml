@@ -65,11 +65,15 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: '%mailer_transport%'
-    host: '%mailer_host%'
-    username: '%mailer_user%'
-    password: '%mailer_password%'
-    spool: { type: memory }
+    transport: %mailer_transport%
+    host: %mailer_host%
+    port: %mailer_port%
+    encryption: %mailer_encryption%
+    username: %mailer_user%
+    password: %mailer_password%
+    spool:     { type: memory }
+
+
 
 sensio_framework_extra:
    router:
@@ -81,11 +85,35 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
     from_email:
-        address: "baskel@esprit.tn"
-        sender_name: "baskel"
+        address: "achraf9585@gmail.com"
+        sender_name: "achraf9585"
+    service:
+        mailer: fos_user.mailer.twig_swift
     registration:
+        confirmation:
+            enabled:    true
+            template:   FOSUserBundle:Registration:email.txt.twig
+            from_email:
+                address: "achraf9585@gmail.com"
+                sender_name: "achraf9585"
+
         form:
             type: AppBundle\Form\RegistrationFormType
+
     profile:
         form:
             type: AppBundle\Form\ProfileFormType
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
+        options:
+            ##Set default setiings from config.yml
+            no-outline: true
+            page-size:  LETTER
+            encoding:   UTF-8
+    image:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\""
+        options:    []

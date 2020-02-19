@@ -1,0 +1,14 @@
+<br>
+<br>
+<h1>Fiche Technique du Livreur</h1> <br>
+<hr>
+<h3>  ID Livreur:   {{ user.id }} </h3> <br>
+<h3> Nom livreur:    {{ user.nom }} </h3> <br>
+<h3> Prenom livreur:    {{ user.prenom }} </h3> <br>
+<h3> Etat livreur:    {{ user.etat }} </h3> <br>
+<h3> Solde livreur:    {{ user.solde }} </h3> <br>
+{% for v in vehicule %}
+<h3>  Matricule vehicule:  {{ v.matricule }} </h3> <br>
+<h3> Type vehicule:    {{ v.type }} </h3> <br>
+<h3>  Marque Vehicule:    {{ v.marque }}  </h3> <br>
+{% endfor %}
