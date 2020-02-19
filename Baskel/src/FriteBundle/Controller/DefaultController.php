@@ -108,9 +108,9 @@ class DefaultController extends Controller
 
         $message = \Swift_Message::newInstance()
             -> setSubject('Traitement de Votre Reclamation')
-            -> setFrom('zeineb.sfaxi@esprit.tn')
-            -> setTo('gintokiismyhusband@gmail.com')
-            -> setBody('tchtch');
+            -> setFrom('gintokiismyhusband@gmail.com')
+            -> setTo('zeinebsfaxy@gmail.com')
+            -> setBody('Votre reclamation a ete traitee avec succees');
         $this->get('mailer')->send($message);
 
         $em->persist($variable);
@@ -217,6 +217,15 @@ class DefaultController extends Controller
         $em=$this->getDoctrine()->getManager();
         $variable=$em->getRepository(RDV::class)->find($id);
         $variable->setEtatRDV('Accepte');
+
+
+        $message = \Swift_Message::newInstance()
+            -> setSubject('Rendez-vous Acceptee')
+            -> setFrom('gintokiismyhusband@gmail.com')
+            -> setTo('zeinebsfaxy@gmail.com')
+            -> setBody('Votre Rendez-vous a ete accepte');
+        $this->get('mailer')->send($message);
+
         $em->persist($variable);
         $em->flush();
         return $this->redirectToRoute('AfficherRDV');
@@ -227,6 +236,16 @@ class DefaultController extends Controller
         $em=$this->getDoctrine()->getManager();
         $variable=$em->getRepository(RDV::class)->find($id);
         $variable->setEtatRDV('Refuse');
+
+
+        $message = \Swift_Message::newInstance()
+            -> setSubject('Rendez-vous refuse')
+            -> setFrom('gintokiismyhusband@gmail.com')
+            -> setTo('zeinebsfaxy@gmail.com')
+            -> setBody('Votre Rendez-vous a ete malheureusement refuse');
+        $this->get('mailer')->send($message);
+
+
         $em->persist($variable);
         $em->flush();
         return $this->redirectToRoute('AfficherRDV');

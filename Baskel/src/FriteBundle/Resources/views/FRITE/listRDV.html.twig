@@ -30,6 +30,11 @@
 
         <!--Start form table-->
         <form>
+
+            <form role="search">
+                <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+            </form>
+
             <table class="shop_table cart">
                 <!--Table header-->
                 <thead>
@@ -48,7 +53,7 @@
                 <!--End table header-->
 
                 <!--Table body-->
-                <tbody>
+                <tbody id="myTable" >
                 {% for rd in rdv %}
 
                     {% if rd.etatRDV == 'Accepte'  %}
@@ -58,8 +63,6 @@
                     {% else %}
                         <tr class="cart_item">
                     {% endif %}
-
-
 
                         <td class="product-thumbnail">{{ rd.dateDepotRDV|date('Y-m-d') }}</td>
                         <td class="product-thumbnail">{{ rd.dateRDV|date('Y-m-d') }}</td>
@@ -102,6 +105,25 @@
                 <!--End table body-->
             </table>
         </form>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                $("#myInput").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+
+
+        </script>
+
         <!--End form table-->
         {% endblock %}
 
