@@ -16,3 +16,26 @@ ModifierQte:
 SupprimerItem:
     path:     /SupprimerItem
     defaults: { _controller: PanierBundle:Default:SupprimerItem }
+Valider:
+    path:     /Valider
+    defaults: { _controller: PanierBundle:Default:Valider }
+
+AfficherCommande:
+    path:     /AfficherCommande/
+    defaults: { _controller: PanierBundle:Default:AfficherCommande }
+
+ModifierEtatCommande:
+    path:     /ModifierEtatCommande/{id}/{etat}
+    defaults: { _controller: PanierBundle:Default:ModifierEtatCommande }
+
+AfficherDetailsCommande:
+    path:     /AfficherDetailsCommande/{id}
+    defaults: { _controller: PanierBundle:Default:AfficherDetailsCommande }
+
+
+SupprimerCommande:
+    path:     /SupprimerCommande/{id}
+    defaults: { _controller: PanierBundle:Default:SupprimerCommande }
+connect:
+    path:     /connect
+    defaults: { _controller: PanierBundle:Default:connect }

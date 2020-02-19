@@ -7,3 +7,4 @@ admin_homepage:
 pdf:
     path:     /pdf
     defaults: { _controller: BaskelBundle:Default:pdf }
+

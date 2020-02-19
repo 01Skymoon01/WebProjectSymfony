@@ -1,0 +1,145 @@
+
+{% extends 'default/back/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+
+<script src="{{ asset('jquery-3.4.1.min.js')}}"> </script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <!-- HOUNII COMMANDE§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§-->
+
+    <div class="product-status mg-b-30" style="margin-top:50px;margin-left: 15%">
+
+
+
+<div style="background-color: #1b2a47" >
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style=" margin-bottom: 2%" >
+
+            <div class="admin-content analysis-progrebar-ctn res-mg-t-30" style="background-color:#1b2a47;color:red;">
+                <div class="stats-icon pull-right">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                </div>
+                <h4 class="text-left text-uppercase" style="color:red; "><b>Non PAYE:</b></h4>
+                <div class="row vertical-center-box vertical-center-box-tablet">
+                    <div class="col-xs-9 cus-gh-hd-pro">
+                        <h2 class="text-right no-margin" style="color:red;font-size:20px; "> {{ nonPaye }}<span style="color: darkred">commandes</span></h2>
+                    </div>
+                </div>
+                <div class="progress progress-mini">
+                    <div style="width: 100%;" class="progress-bar progress-bar-danger bg-red "></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"  style="margin-left: 2% ;margin-bottom: 2%">
+            <div class="admin-content analysis-progrebar-ctn res-mg-t-30" style="background-color:#1b2a47;color:darkgreen;">
+                <div class="stats-icon pull-right">
+                    <i class="fa fa-line-chart" aria-hidden="true"></i>
+                </div>
+                <h4 class="text-left text-uppercase" style="color:green; "><b>Revenue Du Jour:</b></h4>
+                <div class="row vertical-center-box vertical-center-box-tablet">
+                    <div class="col-xs-9 cus-gh-hd-pro">
+                        {% set totalss=0 %}
+                        {% for p in Paye %} {% set totalss = totalss + p.totalPrix %} {% endfor %}
+                        <h2 class="text-right no-margin" style="color:green;font-size:20px; ">{{ totalss }} <span style="color: darkgreen">DT</span> </h2>
+
+                    </div>
+                </div>
+                <div class="progress progress-mini">
+                    <div style="width: 100%;" class="progress-bar bg-green"></div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <div>
+                            <h4>Liste des commandes</h4>
+                        </div>
+
+
+
+
+                        <div class="add-product">
+
+                        </div>
+                        <table id="myTable">
+                            <tr>
+                                <th>   </th>
+                                <th>N°</th>
+                                <th>DATE</th>
+                                <th>PRIX TOTAL</th>
+                                <th>NOMBRE C°</th>
+                                <th>CIN CLIENT</th>
+                                <th>ETAT DE PAYMENT</th>
+                                <th>LIVRAISON</th>
+                                <th>DETAILS</th>
+
+                            </tr>
+
+                            {% for cc in c %}
+                                {%  if( cc.etat == 0)  %}
+
+                                    <tr id="myTable" style="background-color:#1b2a47">
+                                {% else %}
+
+                                    <tr id="myTable" style="background-color:#365D84;">
+                                {% endif %}
+                                <td>
+                                    <a href=" {{ path('SupprimerCommande', {'id' : cc.id}) }}"><i class="fa fa-trash-o"></i></a>
+
+
+                                </td>
+                                <td>{{ cc.id }}</td>
+                                <td>{{ cc.date|date }}</td>
+                                <td>{{ cc.totalPrix }} TDN</td>
+                                <td>{{ cc.nbrProduit }}</td>
+                                <td>{{ cc.idClient }}</td>
+                                <td>
+                                    <a href="{{ path('ModifierEtatCommande', {'id' : cc.id, 'etat' : cc.etat }) }}">
+                                        <i class="fa fa-edit"></i>{% if(cc.etat == 1) %} VALIDE {% else %} NON {% endif %}
+
+                                    </a>
+
+                                </td>
+                                <td>  </td>
+                                <td>
+
+                                    <a href="{{ path('AfficherDetailsCommande',{ 'id' :cc.id}) }}">    <i class="fa fa-eye"></i></a>
+
+
+                                </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

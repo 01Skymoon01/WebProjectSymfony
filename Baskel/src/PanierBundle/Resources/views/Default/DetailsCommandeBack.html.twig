@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+<div style="margin-left: 10%;margin-top: 10%;margin-right: 10%">
+
+<table >
+
+    <td>
+            <h4>Liste des Produits N {{ c0.id }} Pour Client {{ c0.idClient }}</h4>
+    </td>
+    <td>
+        <img src="{{ absolute_url('file:///C:/wamp64/www/WebProjectSymfony/Baskel/web/back/img/notification/logobaskel.png') }}" style="width: 100px ; height: 100px; margin-bottom: 5px ; margin-left: 250%">
+
+    </td>
+    </table >
+<table >
+
+        <tr>Commande N : {{ c0.id }}</tr> </br>
+        <tr>Date du Commande : {{ c0.date|date }}</tr></br>
+
+        <tr>{{ c0.nbrProduit }} produits</tr></br>
+        <tr>Client N°: {{ c0.idClient }}</tr></br>
+        <tr></br>
+            Etat de payement : {% if(c0.etat == 1) %} PAYE {% else %} NON PAYE{% endif %}
+
+        </tr>
+        <tr>  </tr>
+
+
+
+</table>
+{% set totalPrix = c0.totalPrix %}
+
+                   <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Produit</th>
+                        <th scope="col">Reference</th>
+                        <th scope="col">Quantite</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Prix Total</th>
+                    </tr>
+                    </thead>
+                    {% set i=0 %}
+                    {% for cc in c %}
+                    <tr>
+                        <th scope="row">{{ i }}</th>
+                        <td>{{ cc.nomProduit }}</td>
+                        <td>{{ cc.idProduit }} </td>
+                        <td>{{ cc.qteProduit }}</td>
+                        <td>{{ cc.PrixPrduit }} TDN</td>
+                        <td>{{ cc.PrixPrduit * cc.qteProduit}} TDN</td>
+                    </tr>
+                        {%  set i= i+1 %}
+                    {% endfor %}
+                    <tr>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <td colspan="2">Total :</td>
+                        <td>{{ c0.totalPrix }}DT</td>
+                    </tr>
+
+                    </table>
+
+</div>

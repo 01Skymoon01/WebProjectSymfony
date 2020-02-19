@@ -76,26 +76,13 @@
                         <a href="#">Livraison</a>
                     </li>
                     <li class="tz-header-login">
-                        <a href="#">Se Connecter</a>
-                        <div class="tz-login-form">
-                            <form>
-                                <p class="form-content">
-                                    <label for="username">pseudo / Email</label>
-                                    <input type="text" name="username" id="username" value="">
-                                </p>
-                                <p class="form-content">
-                                    <label for="password">mot de passe</label>
-                                    <input type="password" name="username" id="password" value="">
-                                </p>
-                                <p class="form-footer">
-                                    <a href="#">mot de passe oublié?</a>
-                                    <button type="submit" class="pull-right button_class">Se connecter</button>
-                                </p>
-                                <p class="form-text">
-                                    vous n'avez pas un compte? <a href="shop-register.html">Inscription</a>
-                                </p>
-                            </form>
-                        </div>
+                    <li class="search"><a href="#" class="js-header-search-toggle"><i class="fa fa-search"></i></a></li>
+                    {% if is_granted('ROLE_USER') %}
+                        <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+                    {% endif %}
+
                     </li>
 
                 </ul>

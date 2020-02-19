@@ -6,8 +6,8 @@
 {% block head %}
     {{ parent() }}
 
-
 {% endblock %}
+
 {% block container %}
     <script src="{{ asset('jquery-3.4.1.min.js')}}"> </script>
 
@@ -16,11 +16,11 @@
           //  console.log("here jquery");
         $(".remove").click(function() {
            // console.log("remove2");
-           // console.log($(this).parent().parent().html());
+           console.log($(this).parent().parent().html());
 
             $ref=$(this).parent().parent().find('.refProduct').val();
 
-
+            $remove=$(this).parent().parent();
             $.ajax({
                 url:'{{ path('SupprimerItem') }}',
                 type: "GET",
@@ -33,7 +33,8 @@
                     //console.log($date.total);
                     $( "#TOTALBABY").text($date.total+'DT');
                     $("#countItems").text($date.articles);
-                 alert("Produit est bien supprimer");
+                    $remove.remove();
+                 //alert("Produit est bien supprimer");
                 }
 
             });
@@ -55,6 +56,7 @@
                 $price =$(this).parent().parent().find('.price ').text();
                 $price= parseFloat($price.replace('DT', ''));
                 $qte=$(this).val();
+                $update=$(this);
                 $.ajax({
                     url:'{{ path('ModifierQte') }}',
                     type: "GET",
@@ -71,9 +73,19 @@
                         $TotalPrice.text($total+'DT');
 
                         $date=$.parseJSON(data);
-                      //  console.log($date.total);
+                       //console.log($date.quantite);
                         $( "#TOTALBABY").text($date.total+'DT');
                         $("#countItems").text($date.articles);
+
+                        if($date.quantite <= $update.val() ) {
+                           // console.log("date.quantite <= $update.val()");
+                            $update.val(1);
+                            alert("hors stock");
+                        } else if ($date.quantite > $update.val()  ){
+                            //console.log("$date.quantite > $update.val()");
+                            //$update.val(1);
+
+                        }
 
                     }
 
@@ -245,8 +257,7 @@
             <tr>
                 <td class="actions" colspan="6">
                     <a class="back-shop" href="{{  path('panier_homepage') }}" ><i class="fa fa-angle-left"></i> BACK TO SHOP</a>
-                    <!--a class="update-cart" href=" path('ValiderCommande' ,{'PrixTotal' : totalHT  ,'date': date('now')|date ,'nbr': nbr}  )">update cart</a-->
-
+                    <a class="update-cart" href="{{ path('Valider' )}}">Valider</a>
                 </td>
             </tr>
 

@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new BaskelBundle\BaskelBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new PanierBundle\PanierBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

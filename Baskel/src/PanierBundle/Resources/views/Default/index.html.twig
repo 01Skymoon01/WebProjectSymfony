@@ -51,15 +51,20 @@
     });
 </script>
 
-<div id="page">
-
-    <div id="fh5co-product">
-        <!-- Button trigger modal -->
 
 
 
+
+
+
+        <div class="tab-content">
+
+            <!--Tab item-->
+            <div class="tab-pane active" id="one_read">
+                <div class="row">
 
     {% for p in produit %}
+                    <div class="col-md-4 col-sm-6">
 
         <div class="product-item">
             <div class="product-thubnail">
@@ -85,7 +90,9 @@
                                             </span>
             </div>
         </div>
+                        </div>
     {% endfor %}
-
-
-{% endblock  %}
+                </div>
+            </div>
+        </div>
+{% endblock  container%}

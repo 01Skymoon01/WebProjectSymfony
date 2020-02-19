@@ -45,6 +45,12 @@
       <path value="$PROJECT_DIR$/Baskel/vendor/symfony/polyfill-php56" />
       <path value="$PROJECT_DIR$/Baskel/vendor/symfony/symfony" />
       <path value="$PROJECT_DIR$/Baskel/vendor/symfony/polyfill-php70" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/friendsofsymfony/user-bundle" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/zendframework/zend-eventmanager" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/zendframework/zend-code" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/ocramius/proxy-manager" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/doctrine/doctrine-migrations-bundle" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/doctrine/migrations" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.5.0" />
