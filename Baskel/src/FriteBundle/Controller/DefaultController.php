@@ -108,11 +108,12 @@ class DefaultController extends Controller
         $em=$this->getDoctrine()->getManager();
         $variable=$em->getRepository(Reclamation::class)->find($id);
         $variable->setEtatR('traitee');
+        $mm=$variable->getUserid()->getEmail();
 
         $message = \Swift_Message::newInstance()
             -> setSubject('Traitement de Votre Reclamation')
             -> setFrom('gintokiismyhusband@gmail.com')
-            -> setTo('zeinebsfaxy@gmail.com')
+            -> setTo($mm)
             -> setBody('Votre reclamation a ete traitee avec succees');
         $this->get('mailer')->send($message);
 
@@ -223,12 +224,12 @@ class DefaultController extends Controller
         $em=$this->getDoctrine()->getManager();
         $variable=$em->getRepository(RDV::class)->find($id);
         $variable->setEtatRDV('Accepte');
-
+        $mm=$variable->getUserid()->getEmail();
 
         $message = \Swift_Message::newInstance()
             -> setSubject('Rendez-vous Acceptee')
             -> setFrom('gintokiismyhusband@gmail.com')
-            -> setTo('zeinebsfaxy@gmail.com')
+            -> setTo($mm)
             -> setBody('Votre Rendez-vous a ete accepte');
         $this->get('mailer')->send($message);
 
@@ -242,12 +243,12 @@ class DefaultController extends Controller
         $em=$this->getDoctrine()->getManager();
         $variable=$em->getRepository(RDV::class)->find($id);
         $variable->setEtatRDV('Refuse');
-
+        $mm=$variable->getUserid()->getEmail();
 
         $message = \Swift_Message::newInstance()
             -> setSubject('Rendez-vous refuse')
             -> setFrom('gintokiismyhusband@gmail.com')
-            -> setTo('zeinebsfaxy@gmail.com')
+            -> setTo($mm)
             -> setBody('Votre Rendez-vous a ete malheureusement refuse');
         $this->get('mailer')->send($message);
 

@@ -7,6 +7,30 @@
 
 {% endblock %}
 {% block container %}
+
+    <link rel="stylesheet" href="{{asset('back/css/jquery.dataTables.min.css')}}">
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(function() {
+            $('#ajax-table').DataTable({
+                "language": {
+
+                    "zeroRecords": "Aucun enregistrement a été trouvé !",
+
+                    "infoEmpty": "Aucun enregistrement",
+                    "infoFiltered": "(filtré de  MAX total enregistement)",
+                    "search": "Recherche:",
+                    "paginate": {
+                        "previous": "Precédent",
+                        "next" : "suivant"
+                    }
+                }
+
+            });
+        });
+    </script>
+
     <div class="breadcome-area" style="margin-left:14%"
         <div class="container-fluid">
             <div class="row">
@@ -43,7 +67,8 @@
                     <div class="product-status-wrap">
                         <h4>Liste des Reclamations</h4>
 
-                        <table>
+                        <table id="ajax-table">
+                            <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Date de Rec</th>
@@ -51,7 +76,11 @@
                                 <th>Etat</th>
                                 <th>Details</th>
                                 <th>User</th>
+                                <th>Action</th>
                             </tr>
+
+                            </thead>
+                            <tbody>
 
                                     {% for r in reclamations %}
 
@@ -77,15 +106,16 @@
                                    <a data-toggle="tooltip" title="Done" class="pd-setting-ed"><i style="color: whitesmoke" class="fa fa-check-square-o" aria-hidden="true"></i></a>
                                     {% endif %}
 
-                                <td>   <a data-toggle="tooltip" title="Supprimer" class="pd-setting-ed" href="{{ path('SupprimerReclamation', {'id': r.idR}) }}"> <i style="color: whitesmoke" class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                   <a data-toggle="tooltip" title="Supprimer" class="pd-setting-ed" href="{{ path('SupprimerReclamation', {'id': r.idR}) }}"> <i style="color: whitesmoke" class="fa fa-trash-o" aria-hidden="true"></i></a>
 
-                                </td>
-                                <td>   <a data-toggle="tooltip" title="Download" class="pd-setting-ed" href="{{ path('pdfRec', {'id': r.idR}) }}"> <i style="color: whitesmoke" class="fa fa-download" aria-hidden="true"></i></a>
+
+                                  <a data-toggle="tooltip" title="Download" class="pd-setting-ed" href="{{ path('pdfRec', {'id': r.idR}) }}"> <i style="color: whitesmoke" class="fa fa-download" aria-hidden="true"></i></a>
 
                                 </td>
 
                             {% endif %}
                                 {% endfor %}
+                            </tbody>
 
                             </tr>
                         </table>

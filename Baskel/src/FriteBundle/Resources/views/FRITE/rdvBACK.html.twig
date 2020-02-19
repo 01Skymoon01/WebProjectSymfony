@@ -7,6 +7,32 @@
 
 {% endblock %}
 {% block container %}
+
+    <link rel="stylesheet" href="{{asset('back/css/jquery.dataTables.min.css')}}">
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(function() {
+            $('#ajax-table').DataTable({
+                "language": {
+
+                    "zeroRecords": "Aucun enregistrement a été trouvé !",
+
+                    "infoEmpty": "Aucun enregistrement",
+                    "infoFiltered": "(filtré de  MAX total enregistement)",
+                    "search": "Recherche:",
+                    "paginate": {
+                        "previous": "Precédent",
+                        "next" : "suivant"
+                    }
+                }
+
+            });
+        });
+    </script>
+
+
+
     <div class="breadcome-area" style="margin-left:14%"
     <div class="container-fluid">
         <div class="row">
@@ -43,7 +69,8 @@
                     <div class="product-status-wrap">
                         <h4>Liste des Rendez-vous</h4>
 
-                        <table>
+                        <table id="ajax-table">
+                            <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Date de depot</th>
@@ -53,8 +80,11 @@
                                 <th>Details</th>
                                 <th>User</th>
                                 <th>Technicien</th>
+                                <th>Action</th>
+
                             </tr>
-                            <tr>
+                            </thead>
+                            <tbody>
                                 {% for rd in rdv %}
                                 {% if  rd.dateDepotRDV|date('Y-m-d') < "now"|date('Y-m-d')  %}
                                 {% if rd.etatRDV == 'Accepte'  %}
@@ -77,17 +107,16 @@
                                     {% else %}
                                         <td>non affecter</td>
                                 {% endif %}
-                                <td><a  data-toggle="tooltip" title="Traiter" class="pd-setting-ed" href="{{ path('AcceptRDV', {'id': rd.idRDV}) }}"><i style="color: whitesmoke" class="fa fa-check" aria-hidden="true"></i> </i></a></td>
-                                <td>     <a  data-toggle="tooltip" title="Traiter" class="pd-setting-ed" href="{{ path('RefusRDV', {'id': rd.idRDV}) }}"><i style="color: whitesmoke" class="fa fa-times" aria-hidden="true"></i> </i></a> </td>
-                                   <td> <a data-toggle="tooltip" title="Technicien" class="pd-setting-ed" href="{{ path('AffecterTechnicien', {'id': rd.idRDV}) }}"><i style="color: whitesmoke" class="fa fa-user" aria-hidden="true"></i> </i></a> </td>
-                                <td>  <a data-toggle="tooltip" title="Supprimer" class="pd-setting-ed" href="{{ path('SupprimerRDV', {'id': rd.idRDV}) }}"> <i style="color: whitesmoke" class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                </td>
-                                <td>  <a data-toggle="tooltip" title="Download" class="pd-setting-ed" href="{{ path('pdf', {'id': rd.idRDV}) }}"> <i style="color: whitesmoke" class="fa fa-download" aria-hidden="true"></i></a>
+                                <td><a  data-toggle="tooltip" title="Traiter" class="pd-setting-ed" href="{{ path('AcceptRDV', {'id': rd.idRDV}) }}"><i style="color: whitesmoke" class="fa fa-check" aria-hidden="true"></i> </a>
+                                 <a  data-toggle="tooltip" title="Traiter" class="pd-setting-ed" href="{{ path('RefusRDV', {'id': rd.idRDV}) }}"><i style="color: whitesmoke" class="fa fa-times" aria-hidden="true"></i></a>
+                           <a data-toggle="tooltip" title="Technicien" class="pd-setting-ed" href="{{ path('AffecterTechnicien', {'id': rd.idRDV}) }}"><i style="color: whitesmoke" class="fa fa-user" aria-hidden="true"></i> </a>
+                                 <a data-toggle="tooltip" title="Supprimer" class="pd-setting-ed" href="{{ path('SupprimerRDV', {'id': rd.idRDV}) }}"> <i style="color: whitesmoke" class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                  <a data-toggle="tooltip" title="Download" class="pd-setting-ed" href="{{ path('pdf', {'id': rd.idRDV}) }}"> <i style="color: whitesmoke" class="fa fa-download" aria-hidden="true"></i></a>
                                 </td>
                                 {% endif %}
                                 {% endfor %}
 
-
+                            </tbody>
                             </tr>
                         </table>
 
