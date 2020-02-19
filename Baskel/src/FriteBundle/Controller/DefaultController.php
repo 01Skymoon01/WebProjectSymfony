@@ -15,6 +15,7 @@ use FriteBundle\Form\ReclamationType;
 use FriteBundle\Form\Technicien1Type;
 use FriteBundle\Form\TechnicienType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -66,14 +67,16 @@ class DefaultController extends Controller
 
     }
 
-    public function DeleteReclamationAction($id)
+    public function DeleteReclamationAction($id, Request $request)
     {
-
-        $em = $this->getDoctrine()->getManager();
-        $reclamation = $em->getRepository(Reclamation::class)->find($id);
-        $em->remove($reclamation);
-        $em->flush();
-        return $this->redirectToRoute("DisplayReclamation");
+        if($request->isXmlHttpRequest()) {
+            $id = $request->get('id');
+            $em = $this->getDoctrine()->getManager();
+            $reclamation = $em->getRepository(Reclamation::class)->find($id);
+            $em->remove($reclamation);
+            $em->flush();
+            return new JsonResponse('good');
+        }
     }
 
     public function DisplayReclamationAction()
@@ -180,13 +183,16 @@ class DefaultController extends Controller
         return $this->redirectToRoute("AfficherRDV");
     }
 
-    public function DeleteRDVAction($id)
+    public function DeleteRDVAction($id, Request $request)
     {
-        $em=$this->getDoctrine()->getManager();
-        $rdv=$em->getRepository(RDV::class)->find($id);
-        $em->remove($rdv);
-        $em->flush();
-        return $this->redirectToRoute("DisplayRdv");
+        if($request->isXmlHttpRequest()) {
+            $id = $request->get('id');
+            $em = $this->getDoctrine()->getManager();
+            $rdv = $em->getRepository(RDV::class)->find($id);
+            $em->remove($rdv);
+            $em->flush();
+            return new JsonResponse('good');
+        }
     }
 
     public function DisplayRdvAction ()
@@ -312,14 +318,17 @@ class DefaultController extends Controller
         return $this->render('@Frite/FRITE/technicienBACK.html.twig',array('techniciens'=>$technicien));
     }
 
-    public function SupprimerTechnicienAction($id)
+    public function SupprimerTechnicienAction($id, Request $request)
     {
-        $em=$this->getDoctrine()->getManager();
-        $technicien=$em->getRepository(Technicien::class)->find($id);
-        $em->remove($technicien);
-        $em->flush();
-        $this->addFlash("success","Technicien supprime avec succes");
-        return $this->redirectToRoute("AfficherTechniciens");
+        if($request->isXmlHttpRequest()) {
+            $id = $request->get('id');
+            $em = $this->getDoctrine()->getManager();
+            $technicien = $em->getRepository(Technicien::class)->find($id);
+            $em->remove($technicien);
+            $em->flush();
+            $this->addFlash("success", "Technicien supprime avec succes");
+            return new JsonResponse('good');
+        }
     }
 
     public function ModifierTechnicienAction($id,Request $request)

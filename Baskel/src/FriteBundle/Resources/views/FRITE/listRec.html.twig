@@ -37,7 +37,7 @@
                 <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
             </form>
 
-            <table class="shop_table cart">
+            <table id="ajax-table" class="shop_table cart">
                 <!--Table header-->
                 <thead>
                 <tr>
@@ -75,7 +75,7 @@
                     </td>
 
                     <td class="product-remove">
-                        <a data-toggle="tooltip"  href="{{ path('DeleteReclamation', {'id': r.idR}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        <a data-toggle="tooltip" class="deleteBtn" data-id="{{ r.idR }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </td>
                     {% else %}
                         <td class="product-remove" >
@@ -116,6 +116,33 @@
                 });
             });
 
+        </script>
+
+
+
+        <script>
+            $(document).ready(function(){
+                var myLink = "{{ app.request.requestUri }}";
+                var ajaxTableLink = myLink +" #ajax-table ";
+
+                $('.deleteBtn').click(function (e) {
+                    e.preventDefault();
+                    id = $(this).data('id');
+                    $.ajax({
+                        url: "/Frite/RecDelete/"+id,
+                        method: 'get',
+                        success: function (data, reponse) {
+
+                            $('#ajax-table').load(ajaxTableLink)
+
+                        },
+                        error: function () {
+                            //appear pop to say error blabla
+                        },
+                    });
+
+                });
+            });
         </script>
 
         <!--End form table-->

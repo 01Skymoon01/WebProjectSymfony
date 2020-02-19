@@ -35,7 +35,7 @@
                 <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
             </form>
 
-            <table class="shop_table cart">
+            <table class="shop_table cart" id="ajax-table">
                 <!--Table header-->
                 <thead>
                 <tr>
@@ -80,7 +80,7 @@
                             <a  title="Modifier" href="{{ path('ModifierRDV', {'id': rd.idRdv}) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                         </td>
                         <td class="product-remove">
-                            <a data-toggle="tooltip"  href="{{ path('DeleteRDV', {'id': rd.idRDV}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            <a data-toggle="tooltip" class="deleteBtn" data-id="{{  rd.idRDV }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
 
                         </td>
                             {% else %}
@@ -122,6 +122,31 @@
             });
 
 
+        </script>
+
+        <script>
+            $(document).ready(function(){
+                var myLink = "{{ app.request.requestUri }}";
+                var ajaxTableLink = myLink +" #ajax-table ";
+
+                $('.deleteBtn').click(function (e) {
+                    e.preventDefault();
+                    id = $(this).data('id');
+                    $.ajax({
+                        url: "/Frite/RdvDelete/"+id,
+                        method: 'get',
+                        success: function (data, reponse) {
+
+                            $('#ajax-table').load(ajaxTableLink)
+
+                        },
+                        error: function () {
+                            //appear pop to say error blabla
+                        },
+                    });
+
+                });
+            });
         </script>
 
         <!--End form table-->
