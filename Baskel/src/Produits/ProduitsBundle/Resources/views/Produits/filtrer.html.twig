@@ -1,0 +1,334 @@
+
+{% extends 'default/front/header.html.twig' %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    {{ parent() }}
+
+    <style>
+        #divimg{
+
+            float: left;
+            width:70%;
+            height:95%;
+        }
+
+        #detailprod{
+            margin-left:35%;
+        }
+        #square{
+            font-size: 30px;
+        }
+    </style>
+
+    <script>
+        $(function() {
+            $( "#slider-range" ).slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: [ 75, 300 ],
+                slide: function( event, ui ) {
+                    jQuery('.from').text('$' + ui.values[ 0 ]);
+                    jQuery('.to').text('$' + ui.values[ 1 ]);
+                }
+            });
+            jQuery('.from').text('$' + $( "#slider-range" ).slider( "values", 0 ));
+            jQuery('.to').text('$' + $( "#slider-range" ).slider( "values", 1 ));
+        });
+    </script>
+
+{% endblock %}
+
+
+
+
+{% block container %}
+
+<!--Start shop-->
+<div class="tz-shop">
+    <div class="container js-filter">
+        <div class="row">
+            <!---------------------FIIIIIIIIIIIIIIIIIIILTER----------------------------------------------!>
+            <div class="col-md-3">
+                <!--Start for shop sidebar-->
+                <div class="tz-shop-sidebar">
+
+                    <aside class="product-catlog widget">
+                        <h3 class="widget-title">Catalog</h3>
+                        <div class="widget_price_filter">
+                            <h4 class="widget-title-children">
+                                FILTRE PRIX
+                            </h4>
+                            <form>
+                                <div id="slider-range"></div>
+                                <div class="price_label">
+                                    <a href="{{ path('filtrerPrix', { 'prix': 50 }) }}">Prix > 50</a><br>
+                                    <a href="{{ path('filtrerPrix', { 'prix': 100  }) }}">Prix > 100</a><br>
+                                    <a href="{{ path('filtrerPrix', { 'prix': 200 }) }}">Prix > 200</a><br>
+                                    <a href="{{ path('filtrerPrix', { 'prix': 300 }) }}">Prix > 300</a><br>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <div class="widget_color_filter">
+                            <h4 class="widget-title-children">
+                                FILTRE COULEUR
+                            </h4>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('filtrerCouleur', { 'couleur': 'black' }) }}" class="fa fa-square" style="color: black" id="square"></a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('filtrerCouleur', { 'couleur': 'blue' }) }}" class="fa fa-square" style="color: blue" id="square"></a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('filtrerCouleur', { 'couleur': 'green' }) }}" class="fa fa-square" style="color: green" id="square"></a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('filtrerCouleur', { 'couleur': 'yellow' }) }}" class="fa fa-square" style="color: yellow" id="square"></a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('filtrerCouleur', { 'couleur': 'pink' }) }}" class="fa fa-square" style="color: pink" id="square"></a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('filtrerCouleur', { 'couleur': 'darkred' }) }}" class="fa fa-square" style="color: darkred" id="square"></a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('filtrerCouleur', { 'couleur': 'purple' }) }}" class="fa fa-square" style="color: purple" id="square"></a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('filtrerCouleur', { 'couleur': 'whitesmoke' }) }}" class="fa fa-square" style="color: whitesmoke;" id="square" ></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="widget-size-filter">
+                            <h4 class="widget-title-children">
+                                FILTRE SEXE
+                            </h4>
+                            <ul>
+                                <li>
+                                    <a href="shop.html">S - Small  <span>(24)</span></a>
+                                </li>
+                                <li>
+                                    <a href="shop.html">M - Medium  <span>(18)</span></a>
+                                </li>
+                                <li>
+                                    <a href="shop.html">L - Large <span>(9)</span></a>
+                                </li>
+                                <li>
+                                    <a href="shop.html"> XL - Extra Large <span>(39)</span></a>
+                                </li>
+                                <li>
+                                    <a href="shop.html">xtra Extra Large  <span>(24)</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                </div>
+                <!--End shop sidebar-->
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-----------------------------------------------------------------------------------------------------------!>
+
+            <div class="col-md-9">
+
+                <!--Start shop content-->
+                <div class="tz-shop-content">
+                    <ul class="tz-breadcrumbs">
+                        <li>
+                            <a href="{{ path('afficherProduits') }}">Index</a>
+                        </li>
+                        <li class="current">
+                            Magasin
+                        </li>
+                    </ul>
+
+                    <div class="shop-banner">
+                        <img src="{{ asset('front/images/product/banner.jpg') }}" alt="banner">
+                    </div>
+                    <div class="catalog-meta">
+                        <div class="catalog_top">
+                                <span class="style-switch">
+                                    <a class="nav-grid-view fa fa-th-large active"></a>
+                                    <a class="nav-list-view fa fa-list"></a>
+                                </span>
+                            <form class="shop-order">
+                                <label class="form-arrow">
+                                    <select name="orderby" class="orderby">
+                                        <option value="'">Sort By: Position</option>
+                                        <option value="rating">Sort by rating</option>
+                                        <option value="date">Sort by newness</option>
+                                    </select>
+                                </label>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="tz-product row grid-eff">
+
+                        <!--Product item-->
+                        <!--Tab item-->
+                        <div class="tab-pane active" id="one_read" >
+                            <div class="row">
+                                {% for p in produit %}
+                                    <div class="col-md-4 col-sm-6"  >
+
+
+
+
+                                        <!--Start product item-->
+                                        <div class="product-item" >
+                                            <div class="product-thubnail">
+                                                <img src="{{ asset('uploads/images/' ~ p.image) }}" alt="product 1"  style="width: 200px; height: 200px;"/>
+                                                <div class="product-meta">
+                                                    <a class="add-to-cart" href="#" ><i class="fa fa-cart-plus" style="padding: 12px 12px 12px 12px; font-size: 20px; "></i></a>
+                                                    <span class="quick-view">
+                                             <a type="button" data-toggle="modal" data-target="#myModal{{ p.refP }}" ><i class="fa fa-info-circle" style="padding: 12px 12px 12px 12px; font-size: 20px; "></i></a>
+
+                                            </span>
+                                                </div>
+
+
+
+
+
+                                            </div>
+                                            <div class="product-infomation">
+                                                <h4><a>{{ p.nomP }}</a></h4>
+                                                <span class="product-price">{{ p.prixP }}DT</span>
+                                                <span class="product-attr">
+
+
+                                            {% for item in p.couleurP %}
+                                                <i class="fa fa-circle" style="color: {{ item }}"></i>
+
+                                            {% endfor %}
+
+                                        </span>
+                                            </div>
+                                        </div>
+
+                                        <!--End product item-->
+                                    </div>
+
+
+                                    <div id="myModal{{ p.refP }}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header" >
+                                                    <button type="button" class="close" data-dismiss="modal" style="margin-left: 15px;">&times;</button>
+                                                    <h3 class="modal-title" style="margin-right: 510px;">Détail du produit:</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div id="divimg">
+                                                        <img src="{{ asset('uploads/images/' ~ p.image) }}" alt="product 1"  style="width: 300px; height: 400px;"/>
+                                                        <p style="font-size: large; font-weight: bold; text-decoration: underline;">Description: </p>
+                                                        <p style="width:180px;">{{ p.description }}</p>
+                                                    </div>
+
+                                                    <div id="detailprod">
+                                                        <ul class="product-event-content">
+
+                                                            <li>
+                                                                <h3><a href="#" style="margin-left: 79px;">{{ p.nomP }}</a></h3>
+                                                                <span class="product-rating" >
+                                                                    <i class="fa fa-star" style="margin-left: 75px;"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star-half-o"></i>
+
+                                                            </span>
+                                                                <center> <span class="event-price" >Prix: {{ p.prixP }}DT</span></center>
+
+
+                                                            </li>
+
+                                                            <li class="product-event-attr" style="margin-top: -200px;" >
+                                                                <span class="tz-color" style="margin-left: -190px;">
+                                                                    Color:
+                                                                     {% for item in p.couleurP %}
+                                                                         <i class="fa fa-circle" style="color: {{ item }}"></i>
+                                                                     {% endfor %}
+                                                                </span>
+
+                                                                <span class="tz-stock">
+                                                                    In stock : 10
+                                                                </span>
+
+
+                                                            </li>
+
+
+                                                            <li class="event-footer" style="margin-top: -100px;">
+                                                                <a href="#" class="add-to-cart" style="margin-left: 10px;">Ajouter Au Panier.</a>
+                                                                <a href="{{ path('ajouterWishlists', { 'refP': p.refP }) }}" class="add-to-wishlist" style="margin-left: -10px;">Ajouter A Wishlist.</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                {% endfor %}
+                            </div>
+
+                            <!--End product item-->
+
+                        </div>
+
+
+                    </div>
+                    <nav class="pagination" style="margin-left: 15px;">
+                        <div class="custom-pagination">
+                            {# display navigation #}
+                            <div class="navigation">
+                                {{ knp_pagination_render(produit) }}
+                            </div>
+                        </div>
+                    </nav>
+                    <!--End shop content-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Shop-->
+    {% endblock %}
+
+
+
+

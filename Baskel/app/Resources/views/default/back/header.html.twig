@@ -67,6 +67,9 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="{{ asset('back/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+
+
+
     {% endblock %}
 </head>
 
@@ -83,9 +86,10 @@
 
         </div>
         <div class="nalika-profile">
+
             <div class="main-logo" >
                 <a href="#"><img src="{{ asset('back/img/notification/logobaskel.png') }}" alt="" class="logo1" /></a>
-
+                <p>Connecté en tant que: {{ user }}</p>
             </div>
             <div class="profile-social-dtl">
                 <ul class="dtl-social">
@@ -108,6 +112,7 @@
                             <li><a title="Dashboard v.2" href="{{ path('afficherCategories') }}"><span class="mini-sub-pro">Liste Catégories</span></a></li>
                             <li><a title="Dashboard v.3" href="{{ path('ajouterProduit') }}"><span class="mini-sub-pro">(+) Produit</span></a></li>
                             <li><a title="Dashboard v.2" href="{{ path('afficherProduitsBack') }}"><span class="mini-sub-pro">Liste Produits</span></a></li>
+                            <li><a title="Dashboard v.2" href="{{ path('sendMail') }}"><span class="mini-sub-pro">Envoyer Mail</span></a></li>
 
 
                         </ul>
@@ -209,7 +214,7 @@
                                     <div class="header-top-menu tabl-d-n hd-search-rp">
                                         <div class="breadcome-heading">
                                             <form role="search" class="">
-                                                <input type="text" placeholder="Recherche..." class="form-control">
+                                                <input type="text" placeholder="Recherche..." class="form-control" id="myInput">
                                                 <a href=""><i class="fa fa-search"></i></a>
                                             </form>
                                         </div>
@@ -323,7 +328,9 @@
                                                         </li>
                                                         <li>
                                                             <a href="#">
+
                                                                 <div class="notification-icon">
+
                                                                     <i class="icon nalika-bar-chart" aria-hidden="true"></i>
                                                                 </div>
                                                                 <div class="notification-content">
@@ -334,12 +341,15 @@
                                                             </a>
                                                         </li>
                                                     </ul>
+
                                                     <div class="notification-view">
                                                         <a href="#">View All Notification</a>
                                                     </div>
                                                 </div>
                                             </li>
                                             <li class="nav-item">
+                                                <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i></a>
+
                                                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
                                                     <i class="icon nalika-user"></i>
                                                     <span class="admin-name">Mon Compte</span>

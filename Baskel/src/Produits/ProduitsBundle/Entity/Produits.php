@@ -1,17 +1,18 @@
 <?php
 
-namespace BaskelBundle\Entity;
+namespace Produits\ProduitsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
+
 /**
  * Produits
  *
  * @ORM\Table(name="produits")
- * @ORM\Entity(repositoryClass="BaskelBundle\Repository\ProduitsRepository")
+ * @ORM\Entity(repositoryClass="Produits\ProduitsBundle\Repository\ProduitsRepository")
  */
 class Produits
 {
@@ -20,6 +21,8 @@ class Produits
      *
      * @ORM\Column(name="ref_p", type="integer")
      * @ORM\Id
+     * @Assert\Length(min = 3, minMessage = "La reference doit contenir au moins 6 chiffres", max=6 ,maxMessage = "La reference doit contenir au plus 6 chiffres")
+     * @Assert\NotBlank(message="Veuillez remplir ce champ!")
      */
     private $ref_p;
 
@@ -27,6 +30,8 @@ class Produits
      * @var string
      *
      * @ORM\Column(name="nom_p", type="string", length=255)
+     * @Assert\Length(min = 2, minMessage = "Le nom doit contenir au moins 2 caractères.")
+     * @Assert\NotBlank(message="Veuillez remplir ce champ!")
      */
     private $nomP;
 
@@ -34,6 +39,7 @@ class Produits
      * @var string
      *
      * @ORM\Column(name="genre_p", type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez remplir ce champ!")
      */
     private $genreP;
 
@@ -41,6 +47,7 @@ class Produits
      * @var array
      *
      * @ORM\Column(name="couleur_p", type="json_array", length=255)
+     * @Assert\NotBlank(message="Veuillez remplir ce champ!")
      */
     private $couleurP;
 
@@ -48,6 +55,11 @@ class Produits
      * @var int
      *
      * @ORM\Column(name="quantite_p", type="integer")
+     * @Assert\GreaterThanOrEqual(
+     *     value = 0,
+     *     message="Quantite ne peut pas etre négative."
+     * )
+     * @Assert\NotBlank(message="Veuillez remplir ce champ!")
      */
     private $quantiteP;
 
@@ -55,6 +67,11 @@ class Produits
      * @var float
      *
      * @ORM\Column(name="prix_p", type="float")
+     * * @Assert\GreaterThan(
+     *     value = 0,
+     *     message="Prix ne peut pas etre négative ou nul."
+     * )
+     * @Assert\NotBlank(message="Veuillez remplir ce champ!")
      */
     private $prixP;
 
@@ -62,6 +79,8 @@ class Produits
      * @var string
      *
      * @ORM\Column(name="marque_p", type="string", length=255)
+     * @Assert\Length(min = 2, minMessage = "Le nom de la marque doit contenir au moins 6 caractères.")
+     * @Assert\NotBlank(message="Veuillez remplir ce champ!")
      */
     private $marqueP;
 
@@ -70,6 +89,7 @@ class Produits
      * @var
      * @ORM\ManyToOne(targetEntity="Categories")
      * @ORM\JoinColumn(name="ref_c",referencedColumnName="ref_c",nullable=false)
+     * @Assert\NotBlank(message="Veuillez remplir ce champ!")
      */
     private $ref_c;
 
@@ -78,6 +98,7 @@ class Produits
      * @var text
      *
      * @ORM\Column(name="description", type="text", length=255)
+     * @Assert\NotBlank(message="Veuillez remplir ce champ!")
      */
     private $description;
 

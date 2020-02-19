@@ -7,6 +7,8 @@ use BaskelBundle\Entity\Produits;
 use BaskelBundle\Form\CategoriesType;
 use BaskelBundle\Form\ProduitsModifType;
 use BaskelBundle\Form\ProduitsType;
+use BaskelBundle\Form\rechercherProdBackType;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
@@ -15,6 +17,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProduitsController extends Controller
 {
+
+    public function alertAction()
+    {
+
+        return $this -> render('@Baskel/Produits/alert.html.twig');
+    }
+
     public function afficherProduitsAction()
     {
         $produit = $this -> getDoctrine()
@@ -57,11 +66,16 @@ class ProduitsController extends Controller
         $categorie = $this -> getDoctrine()
             -> getRepository(Categories::class)
             -> find($ref_c);
-        $em -> remove($categorie);
-        $em -> flush();
+        try {
+            $em -> remove($categorie);
+            $em -> flush();
+
+
+        } catch (ForeignKeyConstraintViolationException $e){
+            $this->addFlash('error',"Vous ne pouvez pas supprimer une catégorie pleine.");
+        }
 
         return $this -> redirectToRoute('afficherCategories');
-
     }
 
 
@@ -210,6 +224,30 @@ class ProduitsController extends Controller
         $id = $request->query->get('id');
 
         return $this -> render('@Baskel/Produits/modalContent.html.twig', array('id' => $id));
+
+    }
+
+
+    public function rechercherProdBackAction(Request $request)
+    {
+
+        $produit= new Produits();
+        $Form=$this->createForm(rechercherProdBackType::class,$produit);
+        $em = $this->getDoctrine()->getManager();
+        $Form->handleRequest($request);
+        if($Form->isSubmitted()){
+            $produit = $this
+                ->getDoctrine()
+                ->getRepository(Produits::class)
+                ->findBy(array('ref_p'=>$produit->getRefP()));
+        } else {
+            $produit = $em->getRepository("BaskelBundle:Produits")->findAll();
+        }
+
+
+        return $this->render('@Baskel/Produits/afficherProduitsBack.html.twig',
+            array('form' => $Form->createView() ,
+                'prod'=>$produit));
 
     }
 

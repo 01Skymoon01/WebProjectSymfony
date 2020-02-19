@@ -41,6 +41,17 @@
       <path value="$PROJECT_DIR$/Baskel/vendor/doctrine/cache" />
       <path value="$PROJECT_DIR$/Baskel/vendor/doctrine/doctrine-cache-bundle" />
       <path value="$PROJECT_DIR$/Baskel/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/jms/metadata" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/vich/uploader-bundle" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/friendsofsymfony/user-bundle" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/ocramius/proxy-manager" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/zendframework/zend-code" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/zendframework/zend-eventmanager" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/doctrine/migrations" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/doctrine/doctrine-migrations-bundle" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/knplabs/knp-paginator-bundle" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/knplabs/knp-components" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/ocramius/package-versions" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.5.0" />

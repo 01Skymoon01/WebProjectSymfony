@@ -58,10 +58,10 @@
                 </ul>
                 <ul class="pull-right">
                     <li>
-                        <a href="shop-register.html"> Compte</a>
+                        <a href="shop-register.html"> Compte {{ user }}</a>
                     </li>
                     <li>
-                        <a href="#">Wishlist</a>
+                        <a href="{{ path('afficherWishlists',{'user':user}) }}">Wishlist</a>
                     </li>
                     <li>
                         <a href="shop-cart.html">Panier</a>
@@ -73,6 +73,7 @@
                         <a href="#">Livraison</a>
                     </li>
                     <li class="tz-header-login">
+
                         <a href="#">Se Connecter</a>
                         <div class="tz-login-form">
                             <form>
@@ -94,6 +95,12 @@
                             </form>
                         </div>
                     </li>
+
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i></a>
+                    </li>
+
+
 
                 </ul>
             </div>

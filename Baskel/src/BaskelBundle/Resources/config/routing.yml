@@ -53,3 +53,12 @@ modifierProduit:
 modalContent:
   path:     /modalContent
   defaults: { _controller: BaskelBundle:Produits:modalContent }
+
+
+rechercherProdBack:
+  path:     /rechercherProdBack
+  defaults: { _controller: BaskelBundle:Produits:rechercherProdBack }
+
+alert:
+  path:     /alert
+  defaults: { _controller: BaskelBundle:Produits:alert }

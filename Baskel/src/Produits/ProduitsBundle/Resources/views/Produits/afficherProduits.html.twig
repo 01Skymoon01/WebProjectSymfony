@@ -4,6 +4,11 @@
 
 {% block head %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -34,6 +39,7 @@
     <!--Start section large top for tabs content-->
     <div class="section-large-top">
         <div class="container">
+
             <!--Tabs Shop-->
             <div class="tz-shortcode-tabs">
 
@@ -41,8 +47,8 @@
                 <div class="tz-tabs-header">
                     <h2 class="tz-tabs-title pull-left">Produits En Vente</h2>
                     <ul class="nav nav-tabs pull-right tz-nav-tabs">
-                        {% for p in produit %}
-                        <li role="presentation" class="active"><a  data-toggle="tab">{{ p.refC.libelle }} <i class="fa fa-circle"></i></a></li>
+                        {% for c in categorie %}
+                        <li role="presentation" class="active"><a  data-toggle="tab">{{ c.libelle }} <i class="fa fa-circle"></i></a></li>
                        {% endfor %}
                     </ul>
                 </div>
@@ -124,6 +130,8 @@
 
                                                             </span>
                                                            <center> <span class="event-price" >Prix: {{ p.prixP }}DT</span></center>
+
+
                                                         </li>
 
                                                         <li class="product-event-attr" style="margin-top: -200px;" >
@@ -144,7 +152,7 @@
 
                                                         <li class="event-footer" style="margin-top: -100px;">
                                                             <a href="#" class="add-to-cart" style="margin-left: 10px;">Ajouter Au Panier.</a>
-                                                            <a href="#" class="add-to-wishlist" style="margin-left: -10px;">Ajouter A Wishlist.</a>
+                                                            <a href="{{ path('ajouterWishlists', { 'refP': p.refP }) }}" class="add-to-wishlist" style="margin-left: -10px;">Ajouter A Wishlist.</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -181,7 +189,6 @@
         </div>
 
         </div>
-
 
 
 {% endblock %}

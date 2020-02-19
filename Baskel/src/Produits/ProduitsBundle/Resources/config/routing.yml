@@ -1,0 +1,99 @@
+produits_homepage:
+    path:     /index
+    defaults: { _controller: ProduitsBundle:Default:index }
+
+
+
+afficherProduits:
+    path:     /afficherProduits
+    defaults: { _controller: ProduitsBundle:Produits:afficherProduits }
+
+
+ajouterCategorie:
+    path:     /admin/ajouterCategorie
+    defaults: { _controller: ProduitsBundle:Produits:ajouterCategorie }
+
+
+afficherCategories:
+    path:     /admin/afficherCategories
+    defaults: { _controller: ProduitsBundle:Produits:afficherCategories }
+
+supprimerCategorie:
+    path:     /admin/SupprimerCategorie/{ref_c}
+    defaults: { _controller: ProduitsBundle:Produits:SupprimerCategorie }
+
+
+
+ajouterProduit:
+    path:     /admin/ajouterProduit
+    defaults: { _controller: ProduitsBundle:Produits:ajouterProduit }
+
+
+
+
+afficherProduitsBack:
+    path:     /admin/afficherProduitsBack
+    defaults: { _controller: ProduitsBundle:Produits:afficherProduitsBack }
+
+
+supprimerProduit:
+    path:     /admin/supprimerProduit/{ref_p}
+    defaults: { _controller: ProduitsBundle:Produits:supprimerProduit }
+
+
+modifierCategorie:
+    path:     /admin/modifierCategorie/{ref_c}
+    defaults: { _controller: ProduitsBundle:Produits:modifierCategorie }
+
+
+modifierProduit:
+    path:     /admin/modifierProduit/{ref_p}
+    defaults: { _controller: ProduitsBundle:Produits:modifierProduit }
+
+
+modalContent:
+    path:     /modalContent
+    defaults: { _controller: ProduitsBundle:Produits:modalContent }
+
+
+rechercherProdBack:
+    path:     /rechercherProdBack
+    defaults: { _controller: ProduitsBundle:Produits:rechercherProdBack }
+
+alert:
+    path:     /alert
+    defaults: { _controller: ProduitsBundle:Produits:alert }
+
+
+afficherWishlists:
+    path:     client/afficherWishlists
+    defaults: { _controller: ProduitsBundle:Produits:afficherWishlists }
+
+
+ajouterWishlists:
+    path:     client/ajouterWishlists/{refP}
+    defaults: { _controller: ProduitsBundle:Produits:ajouterWishlists }
+
+
+sendMail:
+    path:     /admin/sendMail
+    defaults: { _controller: ProduitsBundle:Produits:sendMail }
+
+shop:
+    path:     /shop
+    defaults: { _controller: ProduitsBundle:Produits:shop }
+
+
+filtrerCouleur:
+    path:     /filtrerCouleur/{couleur}
+    defaults: { _controller: ProduitsBundle:Produits:filtrerCouleur }
+
+
+filtrerPrix:
+    path:     /filtrer/{prix}
+    defaults: { _controller: ProduitsBundle:Produits:filtrerPrix }
+
+
+supprimerWishlist:
+    path:     supprimerWishlist/{id}
+    defaults: { _controller: ProduitsBundle:Produits:supprimerWishlist }

@@ -1,9 +1,10 @@
 <?php
 
-namespace BaskelBundle\Entity;
+namespace Produits\ProduitsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -22,6 +23,7 @@ class Categories
      *
      * @ORM\Column(name="ref_c", type="integer")
      * @ORM\Id
+     * @Assert\Range(min=0, minMessage="Negative species! Come on...")
      */
     private $ref_c;
 

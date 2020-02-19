@@ -40,11 +40,16 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-status-wrap" id="div-cat-list">
                     <h4>Liste Des Catégories</h4>
+                    {% for msg in app.flashes('error') %}
+                    <div class="alert alert-danger alert-mg-b" role="alert">
+                       <i class="fa fa-exclamation-triangle adminpro-warning-danger admin-check-pro"></i> {{ msg }}
+                    </div>
+                    {% endfor %}
                     <div class="add-product">
                         <a href="{{ path('ajouterCategorie') }}" id="add-cat-link">+ Une Catégorie</a>
                     </div>
                     <table >
-                        <tr>
+                        <tr style="background-color: #101829">
 
                             <th>Référence</th>
 
@@ -67,15 +72,15 @@
                         {% endfor %}
 
                     </table>
+
+
                     <div class="custom-pagination">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
+                        {# display navigation #}
+                        <div class="navigation">
+                            {{ knp_pagination_render(categorie) }}
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -39,10 +39,25 @@
 
 
     <div class="product-status mg-b-30">
+
+
+
         <div class="container-fluid">
+            {{ form_start(form) }}
+            <table>
+                <tr>
+                    <td>Référence:</td>
+                    <td>{{ form_widget(form.refP) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form_widget(form.rechercher) }}</td>
+                </tr>
+            </table>
+            {{ form_end(form) }}
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap" id="div-cat-list">
+
                         <h4>Liste Des Catégories</h4>
                         <div class="add-product">
                             <a href="{{ path('ajouterProduit') }}" id="add-cat-link">+ Un Produit</a>
@@ -78,25 +93,25 @@
                             </tr>
 
 
-                            {% for c in produits %}
+                            {% for c in form %}
                                 <tr>
                                     <td> <img src="{{ asset('uploads/images/' ~ c.image) }}" alt="product 1"  style="width: 50px; height: 50px;"/></td>
                                     <td>{{ c.refP }}</td>
                                     <td>{{ c.nomP }}</td>
                                     <td>{{ c.genreP }}</td>
                                     <td>[ {% for clr in c.couleurP %}
-                                           {{ clr }} ,
-                                    {% endfor %} ]</td>
+                                            {{ clr }} ,
+                                        {% endfor %} ]</td>
                                     <td>{{ c.quantiteP }}</td>
                                     <td>{{ c.prixP }}</td>
                                     <td>{{ c.marqueP }}</td>
                                     <td>{{ c.refC.libelle }}</td>
                                     <td>{{ c.description }}</td>
                                     <td>{% if c.quantiteP == 0 %}
-                                        <label style=" background-color: #FD4339; border-radius: 5px; padding: 5px 5px 5px 5px;">Rupture de stock</label>
-                                            {% else %}
-                                        <label style=" background-color: #5e7ee1; border-radius: 5px; padding: 5px 5px 5px 5px; ">En stock</label>
-                                            {% endif %}
+                                            <label style=" background-color: #FD4339; border-radius: 5px; padding: 5px 5px 5px 5px;">Rupture de stock</label>
+                                        {% else %}
+                                            <label style=" background-color: #5e7ee1; border-radius: 5px; padding: 5px 5px 5px 5px; ">En stock</label>
+                                        {% endif %}
                                     </td>
 
                                     <td>
