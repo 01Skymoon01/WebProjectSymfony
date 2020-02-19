@@ -49,7 +49,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <div class="review-content-section">
 
-                                                {{ form_start(f)  }}
+                                                {{ form_start(f, {'method': 'post',  'attr': {'class': 'fos_user_registration_register form-horizontal','id':'signupForm1'}}) }}
 
                                                 <div class="input-group mg-b-pro-edt">
                                                     <span class="input-group-addon"><i class="icon nalika-user" aria-hidden="true"></i></span>
@@ -98,6 +98,106 @@
             </div>
         </div>
     </div>
+
+    <!--control de saisie -->
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+    <script>
+        (function($) {
+            $(document).ready(function(){
+
+
+
+                $.validator.addMethod("letters", function(value, element) {
+                    return this.optional(element) || /^[a-z A-Z À-þ]+$/i.test(value);
+                }, "Chiffres et symboles non acceptes");
+
+                $("#signupForm1").validate({
+                    rules: {
+                        "baskelbundle_partenaire[nom]": {
+                            required: true,
+                            minlength: 2,
+                            letters: true
+                        },
+                        "baskelbundle_partenaire[type]": {
+                            required: true,
+                            minlength: 2,
+                        },
+                        "baskelbundle_partenaire[description]": {
+                            required: true,
+                            minlength: 2,
+                        },
+                        "baskelbundle_partenaire[representant]": {
+                            required: true,
+                            minlength: 2,
+                            letters: true
+                        },
+
+                    },
+
+                    messages: {
+
+                        'baskelbundle_partenaire[nom]':{
+                            required: "Entrez le nom",
+                            minlength: "verifier la longueur",
+                            letters: "Veuillez saisir seulement des lettres",
+                        },
+                        'baskelbundle_partenaire[type]':{
+                            required: "Choisir le type (Silver/Gold/Premium)",
+
+                        },
+                        'baskelbundle_partenaire[description]':{
+                            required: "Veuillez saisir la description du partenaire",
+                            minlength: "verifier la longueur",
+                        },
+                        'baskelbundle_partenaire[representant]':{
+                            required: "Veuillez saisir le nom du representant",
+                            minlength: "verifier la longueur",
+                            letters: "Veuillez saisir seulement des lettres",
+
+                        },
+
+
+                    },
+                    errorElement: "em",
+                    errorPlacement: function ( error, element ) {
+                        // Add the `help-block` class to the error element
+                        error.addClass( "help-block" );
+
+                        // Add `has-feedback` class to the parent div.form-group
+                        // in order to add icons to inputs
+                        element.parents( ".input-group" ).addClass( "has-feedback" );
+
+                        if ( element.prop( "type" ) === "checkbox" ) {
+                            error.insertAfter( element.parent( "label" ) );
+                        } else {
+                            error.insertAfter( element );
+                        }
+
+                        // Add the span element, if doesn't exists, and apply the icon classes to it.
+                        if ( !element.next( "span" )[ 0 ] ) {
+                            $( "<span class='glyphicon glyphicon-remove form-control-feedback'></span>" ).insertAfter( element );
+                        }
+                    },
+                    success: function ( label, element ) {
+                        // Add the span element, if doesn't exists, and apply the icon classes to it.
+                        if ( !$( element ).next( "span" )[ 0 ] ) {
+                            $( "<span class='glyphicon glyphicon-ok form-control-feedback'></span>" ).insertAfter( $( element ) );
+                        }
+                    },
+                    highlight: function ( element, errorClass, validClass ) {
+                        $( element ).parents( ".input-group" ).addClass( "has-error" ).removeClass( "has-success" );
+                        $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+                    },
+                    unhighlight: function ( element, errorClass, validClass ) {
+                        $( element ).parents( ".input-group " ).addClass( "has-success" ).removeClass( "has-error" );
+                        $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+                    }
+                } );
+            } );
+        } ) (jQuery);
+
+    </script>
 {% endblock %}
 
 

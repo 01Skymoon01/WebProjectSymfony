@@ -2,6 +2,8 @@
 
 namespace BaskelBundle\Form;
 
+use BaskelBundle\Entity\Event;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +16,20 @@ class ContratType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('pack')->add('description')->add('id_event')->add('id_partenaire')>add('Signer',SubmitType::class);
+        $builder->add('pack')->add('description')
+            ->add('id_event', EntityType::class, [
+                // looks for choices from this entity
+                'class' => Event::class,
+
+                // uses the User.username property as the visible option string
+                'choice_label' => 'nom',
+
+                // used to render a select box, check boxes or radios
+                // 'multiple' => true,
+                // 'expanded' => true,
+            ])
+
+            ->add('Signer',SubmitType::class);
     }/**
      * {@inheritdoc}
      */

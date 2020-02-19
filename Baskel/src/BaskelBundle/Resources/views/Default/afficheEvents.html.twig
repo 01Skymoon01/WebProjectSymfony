@@ -9,11 +9,35 @@
 {% endblock %}
 {% block container %}
 
+    <link rel="stylesheet" href="{{asset('back/css/jquery.dataTables.min.css')}}">
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(function() {
+            $('#ajax-table').DataTable({
+                "language": {
+                    
+                    "zeroRecords": "Aucun enregistrement a été trouvé !",
+
+                    "infoEmpty": "Aucun enregistrement",
+                    "infoFiltered": "(filtré de  MAX total enregistement)",
+                    "search": "Recherche:",
+                    "paginate": {
+                        "previous": "Precédent",
+                        "next" : "suivant"
+                    }
+                }
+
+            });
+        });
+    </script>
+
     <div class="breadcome-area" style="margin-left:14%"
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="breadcome-list">
+
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="breadcomb-wp">
@@ -25,6 +49,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="breadcomb-report">
                                 <button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="icon nalika-download"></i></button>
@@ -40,12 +66,34 @@
 
     <div class="product-status mg-b-30" style="margin-left: 14%">
         <div class="container-fluid">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success ">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap">
+                    <div class="row breadcome-heading">
+                        <div class="col-lg-10">
                         <h4>Liste des Events</h4>
+                        </div>
+                        <div class="col-lg-2">
+                        <form role="search">
+                        <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" placeholder="Search for an event" title="Search for an event">
+                                               <a href=""><i class="fa fa-search"></i></a>
+                        </form>
+                        </div>
 
-                        <table>
+
+                    </div>
+                        </span>
+
+                        <table id="ajax-table">
+                            <thead>
+
                             <tr>
                                 <th scope="col">Nom</th>
                                 <th scope="col">Description</th>
@@ -53,10 +101,19 @@
                                 <th scope="col">Date</th>
                                 <th scope="col">Nombre de participants</th>
                                 <th scope="col">Why Attend?</th>
-                                <th scope="col">Supprimer</th>
-                                <th scope="col">Modifier</th>
+                                <th scope="col">Image</th>
+                                <th scope="col-4">&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;Contactez le responsable</th>
+                                <th>&nbsp;&times;Share</th>
+                                <th>&nbsp;&times;Share</th>
+
+
                             </tr>
-                            <tr>
+                            </thead>
+
+
+                                <tbody id="myTable">
                                 {% for e in events %}
                             <tr>
 
@@ -66,18 +123,42 @@
                                 <td>{{e.date |date("F/d/Y h:i")}}</td>
                                 <td>{{ e.nbParticipants }}</td>
                                 <td>{{ e.whyattend }}</td>
-                                <td>
+                                <td>  <a href="#"><img src="{{ asset('uploads/images/' ~ e.image) }}" width="300" height="300" class="img-fluid"></td>
 
-                                    <a data-toggle="tooltip" class="pd-setting-ed" href="{{ path('Supprimer', {'id': e.id}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                <td>
+                                    <center>
+                                    <a data-toggle="tooltip" class="pd-setting-ed deleteBtn"   data-id="{{ e.id }}" > <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    </center>
                                 </td>
+
+
                                 <td>
 
-
+                                    <center>
                                     <a data-toggle="tooltip" class="pd-setting-ed" href="{{ path('ModifierEv', {'id': e.id}) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    </center>
                                 </td>
+                                <td>
+                                    <center>
+                                        <a data-toggle="tooltip" class="pd-setting-ed" href="{{ path('Mail') }}"> <i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+                                    </center>
+                                </td>
+                                <td>
+                                    <center>
+                                    <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Flocalhost.dev%2F2a7_php5%2Fview%2Fafficher_wishlist.php&layout=button_count&size=small&width=83&height=20&appId" width="83" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                                    </center>
+                                </td>
+
+                                <td>
+                                    <center>
+                                    <a href="https://twitter.com/share?ref_src=https://www.your-domain.com/your-page.html" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                    </center>
+                                </td>
+
 
                             </tr>
                             {% endfor %}
+                                </tbody>
 
 
                             </tr>
@@ -88,6 +169,44 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            var myLink = "{{ app.request.requestUri }}";
+            var ajaxTableLink = myLink +" #ajax-table ";
+
+            $('.deleteBtn').click(function (e) {
+                e.preventDefault();
+                id = $(this).data('id');
+                $.ajax({
+                    url: "/Baskel/SupprimerEv/"+id,
+                    method: 'get',
+                    success: function (data, response) {
+
+                        $('#ajax-table').load(ajaxTableLink)
+
+                    },
+                    error: function () {
+                        //appear pop to say error blabla
+                    },
+                });
+
+            });
+        });
+    </script>
+
 
 {% endblock %}
 

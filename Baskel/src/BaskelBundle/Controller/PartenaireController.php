@@ -5,6 +5,7 @@ namespace BaskelBundle\Controller;
 use BaskelBundle\Entity\Partenaire;
 use BaskelBundle\Form\PartenaireType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class PartenaireController extends Controller
@@ -18,6 +19,7 @@ class PartenaireController extends Controller
         if ($form->isSubmitted()) {
             $em->persist($partenaire);
             $em->flush();
+            $this->addFlash("success","You have added a partner successfully !");
             return $this->redirectToRoute('AfficheP');
         }
         return $this->render('@Baskel/Default/AjoutPartenaire.html.twig', array('f' => $form->createView()));
@@ -31,14 +33,18 @@ class PartenaireController extends Controller
         ));
     }
 
-    function SupprimerPartenaireAction($id)
+    function SupprimerPartenaireAction($id,Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $partenaire = $this->getDoctrine()->getRepository(Partenaire::class)
-            ->find($id);
-        $em->remove($partenaire);
-        $em->flush();
-        return $this->redirectToRoute('AfficheP');
+        if($request->isXmlHttpRequest()) {
+            $id = $request->get('id');
+            $em = $this->getDoctrine()->getManager();
+            $partenaire = $this->getDoctrine()->getRepository(Partenaire::class)
+                ->find($id);
+            $em->remove($partenaire);
+            $em->flush();
+            return new JsonResponse('good');
+
+        }
 
     }
 

@@ -38,8 +38,8 @@ class Contrat
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Event")
-     * @ORM\JoinColumn(name="id_event",referencedColumnName="id",nullable=true)
+     * @ORM\ManyToOne(targetEntity="BaskelBundle\Entity\Event")
+     * @ORM\JoinColumn(name="id_event",referencedColumnName="id")
      */
 
     private $id_event;
@@ -61,8 +61,8 @@ class Contrat
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Partenaire")
-     * @ORM\JoinColumn(name="id_partenaire",referencedColumnName="id",nullable=true)
+     * @ORM\ManyToOne(targetEntity="BaskelBundle\Entity\Partenaire")
+     * @ORM\JoinColumn(name="id_partenaire",referencedColumnName="id")
      */
 
     private $id_partenaire;

@@ -8,6 +8,9 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    image_directory: '%kernel.project_dir%/web/uploads/images'
+
+
 
 framework:
     #esi: ~
@@ -31,6 +34,9 @@ framework:
     assets: ~
     php_errors:
         log: true
+    templating:
+        engines: ['twig']
+
 
 # Twig Configuration
 twig:
@@ -61,12 +67,36 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: '%mailer_transport%'
-    host: '%mailer_host%'
-    username: '%mailer_user%'
-    password: '%mailer_password%'
-    spool: { type: memory }
+    transport: %mailer_transport%
+    host: %mailer_host%
+    port: %mailer_port%
+    encryption: %mailer_encryption%
+    username: %mailer_user%
+    password: %mailer_password%
+
 
 sensio_framework_extra:
    router:
         annotations: false
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: BaskelBundle\Entity\User
+    from_email:
+        address: "nizarbenhmida001@gmail.com   "
+        sender_name: "NizarBenHmida"
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
+        options:
+            ##Set default setiings from config.yml
+            no-outline: true
+            page-size:  LETTER
+            encoding:   UTF-8
+    image:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\""
+        options:    []

@@ -46,6 +46,36 @@ SignerC:
     path:     /SignerC/{id}
     defaults: { _controller: BaskelBundle:Contrat:SignerContrat }
 
+AfficheC:
+    path:     /AfficheC
+    defaults: { _controller: BaskelBundle:Contrat:AfficheContrat }
 
+SupprimerC:
+    path:     /SupprimerC/{id}
+    defaults: { _controller: BaskelBundle:Contrat:SupprimerContrat }
+
+Reserver:
+    path:     /Reservation/{id}
+    defaults: { _controller: BaskelBundle:Reservation:Reservation }
+
+Mail:
+    path:     /Mail
+    defaults: { _controller: BaskelBundle:Mail:sendMail }
+
+AfficheRes:
+    path:     /AfficheReservation
+    defaults: { _controller: BaskelBundle:Reservation:AfficheReservation }
+
+ConfirmerRes:
+    path:     /ConfirmerRes/{id}
+    defaults: { _controller: BaskelBundle:Reservation:ConfirmerReservation }
+
+AnnulerRes:
+    path:     /AnnulerRes/{id}
+    defaults: { _controller: BaskelBundle:Reservation:AnnulerReservation }
+
+PDF:
+    path:     /pdf/{id}
+    defaults: { _controller: BaskelBundle:Contrat:pdf }
 
 

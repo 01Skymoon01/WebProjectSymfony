@@ -1,0 +1,101 @@
+
+{% extends 'default/front/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+<section class="shop-checkout">
+    <div class="container">
+        <!--Start Breadcrumbs-->
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <ul class="tz-breadcrumbs">
+            <li>
+                <a href="#">Acceuil</a>
+            </li>
+            <li class="current">
+                Liste des reservations
+            </li>
+
+        </ul>
+        <!--End Breadcrumbs-->
+        <h1 class="page-title">Liste de vos reservations</h1>
+        <p>NB: Vous pouvez confirmer ou annuler vos reservations.</p>
+
+        <!--Start form table-->
+        <form>
+            <table class="shop_table cart">
+                <!--Table header-->
+                <thead>
+                <tr>
+
+                    <th class="product-thumbnail">ID</th>
+                    <th class="product-price">etat</th>
+                    <th class="product-subtotal">Event description</th>
+                    <th class="product-quantity" >  User </th>
+                    <th class="product-remove">&nbsp;</th>
+                    <th class="product-remove">&nbsp;</th>
+                </tr>
+                </thead>
+                <!--End table header-->
+
+                <!--Table body-->
+                <tbody>
+                {% for r in reservation %}
+
+                    {% if r.etat == 'reserve'  %}
+                        <tr class="cart_item" style="background-color: hsla(88, 47%, 83%, 1)" >
+                    {% elseif r.etat =='confirme' %}
+                        <tr class="cart_item" style="background-color: hsla(174, 46%, 75%, 1)">
+                        {% elseif r.etat =='annule' %}
+                            <tr class="cart_item" style="background-color: hsla(263, 41%, 83%, 1)" >
+                    {% else %}
+                        <tr class="cart_item">
+                    {% endif %}
+
+
+
+                    <td class="product-thumbnail">{{ r.id }}</td>
+                    <td class="product-name">{{ r.etat }}</td>
+                    <td class="product-name"><span class="amount">{{ r.getIdEvent()}}</span></td>
+                    <td class="product-price"><span class="amount">{{ r.getIdUser()}}</span></td>
+
+
+                        <td class="product-remove">
+                            <a  title="confirmer" href="{{ path('ConfirmerRes', {'id': r.id}) }}"><i class="fa fa-check-square" aria-hidden="true"></i></a>
+                        </td>
+
+                        <td class="product-remove">
+                            <a data-toggle="tooltip"  href="{{ path('AnnulerRes', {'id': r.id}) }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        </td>
+
+
+                {% endfor %}
+                <tr>
+                    <td class="actions" colspan="6">
+                        <a class="back-shop" href="#"><i class="fa fa-angle-left"></i> BACK TO SHOP</a>
+
+                    </td>
+                </tr>
+
+
+
+                </tbody>
+                <!--End table body-->
+            </table>
+        </form>
+{% endblock %}
+
+
+
+

@@ -65,6 +65,29 @@ class Event
 
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -217,5 +240,13 @@ class Event
     {
         return $this->whyattend;
     }
+
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+        return $this->description;
+    }
+
+
 }
 
