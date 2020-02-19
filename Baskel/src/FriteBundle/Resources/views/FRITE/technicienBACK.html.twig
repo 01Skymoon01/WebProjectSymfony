@@ -7,6 +7,33 @@
 
 {% endblock %}
 {% block container %}
+
+
+    <link rel="stylesheet" href="{{asset('back/css/jquery.dataTables.min.css')}}">
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(function() {
+            $('#ajax-table').DataTable({
+                "language": {
+
+                    "zeroRecords": "Aucun enregistrement a été trouvé !",
+                    
+                    "infoEmpty": "Aucun enregistrement",
+                    "infoFiltered": "(filtré de  MAX total enregistement)",
+                    "search": "Recherche:",
+                    "paginate": {
+                        "previous": "Precédent",
+                        "next" : "suivant"
+                    }
+                }
+
+            });
+        });
+    </script>
+
+
+
     <div class="breadcome-area" style="margin-left:14%"
     <div class="container-fluid">
         <div class="row">
@@ -49,9 +76,7 @@
                     <div class="product-status-wrap">
                         <div class="breadcome-heading">
                         <h4>Liste des Techniciens </h4>
-                        <form role="search">
-                        <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-                        </form>
+
                         </div>
 
                             <table id="ajax-table"  style="width:100%">
@@ -63,6 +88,7 @@
                                 <th>Prenom</th>
                                 <th>E-mail</th>
                                 <th>NumTel</th>
+                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody id="myTable" >
@@ -94,24 +120,6 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
-
-    <script>
-        $(document).ready(function(){
-            $("#myInput").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $("#myTable tr").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-
-
-
-
-    </script>
 
     <script>
         $(document).ready(function(){
@@ -137,6 +145,8 @@
             });
         });
     </script>
+
+
 
 
 
