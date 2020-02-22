@@ -311,6 +311,9 @@ class DefaultController extends Controller
         return $this -> render('@Panier/Default/connect.html.twig');
     }
 
+   public function TrieParColumn(Request $request){
 
+
+   }
 
 }

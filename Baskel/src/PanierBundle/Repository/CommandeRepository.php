@@ -63,6 +63,16 @@ SET e.quantiteP= e.quantiteP - :nbajouter
     }
 
 
+    public function trieParColumn($Column){
+        $query = $this->getEntityManager()
+            ->createQuery(" SELECT c
+          FROM PanierBundle:Commande c 
+          ORDER BY :Column ASC")
+        ->setParameter('Column',$Column);
+
+
+        return $query->getResult();
+    }
 
 
 }

@@ -36,6 +36,6 @@ AfficherDetailsCommande:
 SupprimerCommande:
     path:     /SupprimerCommande/{id}
     defaults: { _controller: PanierBundle:Default:SupprimerCommande }
-connect:
-    path:     /connect
-    defaults: { _controller: PanierBundle:Default:connect }
+TrieParColumn:
+    path:     /TrieParColumn
+    defaults: { _controller: PanierBundle:Default:TrieParColumn }
