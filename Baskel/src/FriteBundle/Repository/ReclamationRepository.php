@@ -10,4 +10,58 @@ namespace FriteBundle\Repository;
  */
 class ReclamationRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function SelectRecNC(){
+        $query = $this->getEntityManager()
+            ->createQuery(" SELECT COUNT(rec)
+          FROM FriteBundle:Reclamation rec
+          where rec.objetR='Produit non conforme'");
+
+        return $query->getSingleScalarResult();
+    }
+    public function SelectRecAb(){
+        $query = $this->getEntityManager()
+            ->createQuery(" SELECT COUNT(rec)
+          FROM FriteBundle:Reclamation rec
+          where rec.objetR='Produit abime'");
+
+        return $query->getSingleScalarResult();
+    }
+
+    public function SelectLivNR(){
+        $query = $this->getEntityManager()
+            ->createQuery(" SELECT COUNT(rec)
+          FROM FriteBundle:Reclamation rec
+          where rec.objetR='Livraison non recu'");
+
+        return $query->getSingleScalarResult();
+    }
+
+    public function SelectLivNC(){
+        $query = $this->getEntityManager()
+            ->createQuery(" SELECT COUNT(rec)
+          FROM FriteBundle:Reclamation rec
+          where rec.objetR='Livraison non conforme'");
+
+        return $query->getSingleScalarResult();
+    }
+
+    public function SelectFact(){
+        $query = $this->getEntityManager()
+            ->createQuery(" SELECT COUNT(rec)
+          FROM FriteBundle:Reclamation rec
+          where rec.objetR='Probleme de Facturation'");
+
+        return $query->getSingleScalarResult();
+    }
+
+    public function SelectAutre(){
+        $query = $this->getEntityManager()
+            ->createQuery(" SELECT COUNT(rec)
+          FROM FriteBundle:Reclamation rec
+          where rec.objetR='Autres..'");
+
+        return $query->getSingleScalarResult();
+    }
+
 }

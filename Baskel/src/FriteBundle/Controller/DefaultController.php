@@ -53,8 +53,17 @@ class DefaultController extends Controller
 
     public function AfficherReclamationsAction()
     {
+
         $reclamations = $this->getDoctrine()->getManager()->getRepository(Reclamation::class)->findAll();
-        return $this->render('@Frite/FRITE/reclamationBack.html.twig', array('reclamations' => $reclamations));
+        $Pnc=$this->getDoctrine()->getRepository(Reclamation::class)->SelectRecNC();
+        $Pa=$this->getDoctrine()->getRepository(Reclamation::class)->SelectRecAb();
+        $Lnr=$this->getDoctrine()->getRepository(Reclamation::class)->SelectLivNR();
+        $Lnc=$this->getDoctrine()->getRepository(Reclamation::class)->SelectLivNC();
+        $Fact=$this->getDoctrine()->getRepository(Reclamation::class)->SelectFact();
+        $Aut=$this->getDoctrine()->getRepository(Reclamation::class)->SelectAutre();
+
+        return $this->render('@Frite/FRITE/reclamationBack.html.twig', array('reclamations' => $reclamations , 'nonconf'=>$Pnc,
+            'abime'=>$Pa, 'lnr'=>$Lnr, 'lnc'=>$Lnc, 'fact'=>$Fact, 'Aut'=>$Aut));
     }
 
     public function SupprimerReclamationAction($id)
@@ -110,13 +119,20 @@ class DefaultController extends Controller
         $variable->setEtatR('traitee');
         $mm=$variable->getUserid()->getEmail();
 
+        $html = $this -> renderView("@Frite/FRITE/pdf1.html.twig", array('rec'=>$variable));
+        $filename="friiiiiteuuu";
+        $pdf = $this->get("knp_snappy.pdf")->getOutputFromHtml($html);
+
         $message = \Swift_Message::newInstance()
             -> setSubject('Traitement de Votre Reclamation')
             -> setFrom('gintokiismyhusband@gmail.com')
             -> setTo($mm)
-            -> setBody('Votre reclamation a ete traitee avec succees');
-        $this->get('mailer')->send($message);
+            -> setBody('Nous nous informons que votre Reclamation a ete Traitee. Voici les details:',
+                'text/html');
 
+        $attachement = \Swift_Attachment::newInstance($pdf, $filename, 'application/pdf' );
+        $message->attach($attachement);
+        $this->get('mailer')->send($message);
         $em->persist($variable);
         $em->flush();
 
@@ -143,6 +159,7 @@ class DefaultController extends Controller
         );
 
     }
+
 
     /**************************************************END CRUD RECLAMATION**********************************************************************/
 
@@ -171,7 +188,15 @@ class DefaultController extends Controller
     public function AfficherRDVAction()
     {
         $rdv= $this->getDoctrine()->getManager()->getRepository(RDV::class)->findAll();
-        return $this->render('@Frite/FRITE/rdvBACK.html.twig',array('rdv'=>$rdv));
+        $rep=$this->getDoctrine()->getRepository(RDV::class)->Rep();
+        $MT=$this->getDoctrine()->getRepository(RDV::class)->MaintTech();
+        $RDVT=$this->getDoctrine()->getRepository(RDV::class)->RDVTech();
+        $PF=$this->getDoctrine()->getRepository(RDV::class)->ProbFact();
+        $Aut=$this->getDoctrine()->getRepository(RDV::class)->SelectAutre();
+
+
+        return $this->render('@Frite/FRITE/rdvBACK.html.twig',array('rdv'=>$rdv, 'rep'=>$rep,
+            'MT'=>$MT, 'RDVT'=>$RDVT, 'PF'=>$PF, 'Aut'=>$Aut ));
     }
 
     public function SupprimerRDVAction($id)
@@ -225,18 +250,25 @@ class DefaultController extends Controller
         $variable=$em->getRepository(RDV::class)->find($id);
         $variable->setEtatRDV('Accepte');
         $mm=$variable->getUserid()->getEmail();
-
+        $html = $this -> renderView("@Frite/FRITE/pdf.html.twig", array('rdv'=>$variable));
+        $filename="friiiiiteuuu";
+        $pdf = $this->get("knp_snappy.pdf")->getOutputFromHtml($html);
         $message = \Swift_Message::newInstance()
             -> setSubject('Rendez-vous Acceptee')
             -> setFrom('gintokiismyhusband@gmail.com')
             -> setTo($mm)
-            -> setBody('Votre Rendez-vous a ete accepte');
+            -> setBody('Nous nous informons que votre Rendez-vous a ete accepte. Voici les details:',
+                'text/html');
+
+        $attachement = \Swift_Attachment::newInstance($pdf, $filename, 'application/pdf' );
+        $message->attach($attachement);
         $this->get('mailer')->send($message);
 
         $em->persist($variable);
         $em->flush();
-        return $this->redirectToRoute('AfficherRDV');
+        return $this->redirectToRoute('AfficherRDV' );
     }
+
 
     public function RefusRDVAction($id)
     {
@@ -245,34 +277,30 @@ class DefaultController extends Controller
         $variable->setEtatRDV('Refuse');
         $mm=$variable->getUserid()->getEmail();
 
+
+        $html = $this -> renderView("@Frite/FRITE/pdf.html.twig", array('rdv'=>$variable));
+        $filename="friiiiiteuuu";
+        $pdf = $this->get("knp_snappy.pdf")->getOutputFromHtml($html);
+      //  $body = $this->redirectToRoute('pdf');
+
         $message = \Swift_Message::newInstance()
             -> setSubject('Rendez-vous refuse')
             -> setFrom('gintokiismyhusband@gmail.com')
             -> setTo($mm)
-            -> setBody('Votre Rendez-vous a ete malheureusement refuse');
-        $this->get('mailer')->send($message);
+            -> setBody('Nous nous excusons de vous informer que votre Rendez-vous a ete refuse. Voici les details',
+                'text/html');
 
+
+        $attachement = \Swift_Attachment::newInstance($pdf, $filename, 'application/pdf' );
+        $message->attach($attachement);
+        $this->get('mailer')->send($message);
 
         $em->persist($variable);
         $em->flush();
         return $this->redirectToRoute('AfficherRDV');
     }
 
-    public function AffecterTechnicienAction($id,Request $request)
-    {
-        $em= $this->getDoctrine()->getManager();
-        $rdv=$em->getRepository(RDV::class)->find($id);
-        $form=$this->createForm(AffecterTechType::class,$rdv);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $this->addFlash("success","Technicien affecte avec succes");
-            $em->persist($rdv);
-            $em->flush();
-            return $this->redirectToRoute('AfficherRDV');
-        }
-        return $this->render('@Frite/FRITE/affecterTech.html.twig',array('form'=>$form->createView(), 'RDV'=>$rdv));
-    }
+
 
     public function pdfAction($id)
     {
@@ -294,6 +322,25 @@ class DefaultController extends Controller
         );
 
     }
+
+
+    public function AffecterTechnicienAction($id,Request $request)
+    {
+        $em= $this->getDoctrine()->getManager();
+        $rdv=$em->getRepository(RDV::class)->find($id);
+        $form=$this->createForm(AffecterTechType::class,$rdv);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $this->addFlash("success","Technicien affecte avec succes");
+            $em->persist($rdv);
+            $em->flush();
+            return $this->redirectToRoute('AfficherRDV');
+        }
+        return $this->render('@Frite/FRITE/affecterTech.html.twig',array('form'=>$form->createView(), 'RDV'=>$rdv));
+    }
+
+
     /**************************************************END CRUD RDV**********************************************************************/
 
     /**************************************************CRUD TECHNICIEN**********************************************************************/
@@ -376,6 +423,11 @@ class DefaultController extends Controller
         return $this->render('@Frite/FRITE/Mail.html.twig', array('f' => $form->createView()));
     }
 
+
+    public function calendarAction()
+    {
+        return $this->render('@Frite/FRITE/calendar.html.twig');
+    }
 
 
 }

@@ -2,7 +2,10 @@
 
 namespace FriteBundle\Entity;
 
+use AncaRebeca\FullCalendarBundle\FullCalendarBundle;
+use AncaRebeca\FullCalendarBundle\Model\FullCalendarEvent;
 use Doctrine\ORM\Mapping as ORM;
+use FriteBundle\Repository\CalendarEventRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

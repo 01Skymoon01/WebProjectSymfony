@@ -10,4 +10,50 @@ namespace FriteBundle\Repository;
  */
 class RDVRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function Rep(){
+        $query = $this->getEntityManager()
+            ->createQuery(" SELECT COUNT(rdv)
+          FROM FriteBundle:RDV rdv
+                    where rdv.objetRDV='Reparation'");
+
+        return $query->getSingleScalarResult();
+    }
+    public function MaintTech(){
+        $query = $this->getEntityManager()
+            ->createQuery(" SELECT COUNT(rdv)
+          FROM FriteBundle:RDV rdv
+                    where rdv.objetRDV='Maintenance technique'");
+
+        return $query->getSingleScalarResult();
+    }
+
+    public function RDVTech(){
+        $query = $this->getEntityManager()
+            ->createQuery(" SELECT COUNT(rdv)
+          FROM FriteBundle:RDV rdv
+                    where rdv.objetRDV='Rendez-vous technicien'");
+
+        return $query->getSingleScalarResult();
+    }
+
+    public function ProbFact(){
+        $query = $this->getEntityManager()
+            ->createQuery(" SELECT COUNT(rdv)
+          FROM FriteBundle:RDV rdv
+                    where rdv.objetRDV='Probleme de facturation'");
+
+        return $query->getSingleScalarResult();
+    }
+
+
+    public function SelectAutre(){
+        $query = $this->getEntityManager()
+            ->createQuery(" SELECT COUNT(rdv)
+          FROM FriteBundle:RDV rdv
+                    where rdv.objetRDV='Autres..'");
+
+        return $query->getSingleScalarResult();
+    }
+
 }

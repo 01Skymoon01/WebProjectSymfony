@@ -21,7 +21,6 @@ class ReclamationType extends AbstractType
                 'choices'  => [
                     'Produit non conforme' => 'Produit non conforme',
                     'Produit abime' => 'Produit abime',
-                    'Produit non recu' => 'Produit non recu',
                     'Livraison non recu' => 'Livraison non recu',
                     'Livraison non conforme' => 'Livraison non conforme',
                     'Probleme de facturation' => 'Probleme de facturation',
