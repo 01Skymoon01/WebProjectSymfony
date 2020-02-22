@@ -4,6 +4,7 @@ namespace PanierBundle\Controller;
 
 use PanierBundle\Entity\Commande;
 use PanierBundle\Entity\DetailsCommande;
+use Produits\ProduitsBundle\Entity\Mail;
 use Produits\ProduitsBundle\Entity\Wishlist;
 use Symfony\Component\HttpFoundation\Response;
 use Produits\ProduitsBundle\Entity\Produits;
@@ -177,7 +178,7 @@ class DefaultController extends Controller
 
     public function ValiderAction(Request $request)
     {
-
+        $user = $this->getUser();
 
         $session = $request->getSession();
         $panier = $session->get('panier');
@@ -203,7 +204,7 @@ class DefaultController extends Controller
 
 
         $Commande->setEtat(0);
-        $Commande->setIdClient(1);
+        $Commande->setIdClient($user->getId());
         $Commande->setNbrProduit($nbr);
         $Commande->setTotalPrix($PrixTotal);
 
@@ -235,6 +236,37 @@ class DefaultController extends Controller
         $produit = $this -> getDoctrine()
             -> getRepository(Produits::class)
             ->findAll();
+
+
+
+       //**********Mail
+        $commande0=$this->getDoctrine()
+            ->getRepository(Commande::class)
+            ->find($Commande->getId());
+        $DetailsCommande=$this->getDoctrine()
+            ->getRepository(DetailsCommande::class)
+            ->findBy(['idCommande' => $commande0 ]);
+        $html = $this -> renderView('@Panier/Default/DetailsCommandeBack.html.twig', array(
+                'c'=>$DetailsCommande,
+                'c0'=>$commande0
+            )
+        );
+        $filename="Factures";
+        $pdf = $this->get("knp_snappy.pdf")->getOutputFromHtml($html);
+
+        $mm=$user->getEmail();
+            $usename='ashlynx1997@gmail.com';
+            $message=\Swift_Message::newInstance()
+                ->setSubject('nouvelle commande')
+                ->setFrom($usename)
+                ->setTo($mm)
+                ->setBody('Nous nous informons que vous avez une nouvelle commande',
+                    'text/html');
+        $attachement = \Swift_Attachment::newInstance($pdf, $filename, 'application/pdf' );
+        $message->attach($attachement);
+            $this->get('mailer')->send($message);
+            $this->get('session')->getFlashBag()->add('notice','Message envoyé avec success');
+
 
         $session = $request->getSession();
         //$session->clear();
