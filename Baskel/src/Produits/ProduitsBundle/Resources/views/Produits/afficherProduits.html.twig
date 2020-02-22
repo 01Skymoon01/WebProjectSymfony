@@ -142,9 +142,13 @@
                                                                      {% endfor %}
                                                                 </span>
 
-                                                            <span class="tz-stock">
-                                                                    In stock : 10
-                                                                </span>
+                                                            <span class="tz-stock" style="margin-left: -20px">
+                                                               {% if p.quantiteP == 0 %}
+                                                                 - Rupture de stock -
+                                                                 {% else %}
+                                                                 - En stock -
+                                                               {% endif %}
+                                                            </span>
 
 
                                                         </li>

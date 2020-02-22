@@ -37,6 +37,15 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
         return $query->getArrayResult();
     }
 
+    public function FilterSexe($sexe)
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'SELECT p FROM ProduitsBundle:Produits p where p.genreP = :sexe'
+        )->setParameter('sexe',$sexe);
+
+        return $query->getResult();
+    }
+
 
     public function UpdateProducts($refP)
     {
@@ -54,6 +63,16 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
         $query = $this->getEntityManager()->createQuery(
 
             'SELECT quantiteP from Produits\Produits:Produits'
+        );
+
+        return $query->getResult();
+    }
+
+    public function TrierProduits()
+    {
+        $query = $this->getEntityManager()->createQuery(
+
+            'SELECT p from Produits\Produits:Produits ORDER BY p.prixP'
         );
 
         return $query->getResult();

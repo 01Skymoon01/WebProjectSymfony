@@ -7,6 +7,7 @@ use mysql_xdevapi\Session;
 use Produits\ProduitsBundle\Entity\Categories;
 use Produits\ProduitsBundle\Entity\Mail;
 use Produits\ProduitsBundle\Entity\Produits;
+use Produits\ProduitsBundle\Entity\Rating;
 use Produits\ProduitsBundle\Entity\User;
 use Produits\ProduitsBundle\Entity\Wishlist;
 use Produits\ProduitsBundle\Form\CategoriesType;
@@ -37,6 +38,10 @@ class ProduitsController extends Controller
             -> getRepository(Categories::class)
             ->findAll();
 
+        $rating = $this -> getDoctrine()
+            -> getRepository(Produits::class)
+            ->FindAll();
+
         /**
          * @var $paginator \Knp\Component\Pager\Paginator
          */
@@ -53,7 +58,7 @@ class ProduitsController extends Controller
 
         $user = $this->getUser();
 
-        return $this -> render('@Produits/Produits/shop.html.twig', array('produit' => $result,'categorie' => $categorie ,'user' => $user));
+        return $this -> render('@Produits/Produits/shop.html.twig', array('produit' => $result,'categorie' => $categorie ,'user' => $user, 'rating' => $rating));
     }
 
     public function filtrerCouleurAction(Request $request,$couleur)
@@ -93,6 +98,37 @@ class ProduitsController extends Controller
             $request->query->getInt('limit',6)
         );
 
+
+        return $this -> render('@Produits/Produits/filtrer.html.twig', array('produit' => $result,'categorie' => $categorie ,'user' => $user));
+    }
+
+
+
+    public function filtrerSexeAction(Request $request,$sexe)
+    {
+        $produit = $this -> getDoctrine()
+            -> getRepository(Produits::class)
+            ->FilterSexe($sexe);
+
+        $categorie = $this -> getDoctrine()
+            -> getRepository(Categories::class)
+            ->findAll();
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator = $this ->get('knp_paginator');
+        $result=$paginator->paginate(
+            $produit,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',6)
+        );
+
+
+
+        //  $this->container->get('templating');
+
+        $user = $this->getUser();
 
         return $this -> render('@Produits/Produits/filtrer.html.twig', array('produit' => $result,'categorie' => $categorie ,'user' => $user));
     }
@@ -500,7 +536,11 @@ class ProduitsController extends Controller
         $em = $this->getDoctrine()->getManager();
         $produits = $em->getRepository(Produits::class)->findBy(array('ref_p'=>$refP));
 
-        try {
+        $emWish = $this -> getDoctrine() -> getManager();
+        $wishy = $emWish->getRepository(Wishlist::class)->FindTheWishlist($user,$refP);
+
+        if($wishy == null) {
+
 
             foreach ($produits as $p) {
 
@@ -516,11 +556,11 @@ class ProduitsController extends Controller
                 $em2 -> persist($wishlist);
                 $em2 -> flush();
                 $wishlist = new Wishlist();
-            }
-        } catch (UniqueConstraintViolationException $e){
 
-            return $this -> redirectToRoute('alert');
-           // echo "<script>alert('NOOOOO')</script>";
+                var_dump($wishlist);
+            }
+        } else {
+            return $this -> redirectToRoute('alert',array('user'=>$user));
         }
 
 
@@ -580,6 +620,36 @@ class ProduitsController extends Controller
 
         return $this -> redirectToRoute('afficherWishlists');
     }
+
+    function insertRatingAction(Request $request)
+    {
+        //$em = $this->getDoctrine()->getManager();
+        //$p = $em->getRepository(Produits::class)->findOneBy(array('ref_p'=>$refP));
+
+        $id=$request->get('ref');
+        $rating=$request->get('rating');
+
+var_dump($rating);
+
+      /*  $rating = new Rating();
+
+
+
+            $em2 = $this -> getDoctrine() -> getManager();
+
+            $rating -> setIdProd($p);
+            $rating -> setRate($ratingValue);
+
+            $em2 -> persist($rating);
+            $em2 -> flush();
+*/
+
+
+       // return $this -> redirectToRoute('shop');
+    }
+
+
+
 
 
 }

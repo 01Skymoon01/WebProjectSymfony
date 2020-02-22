@@ -42,7 +42,7 @@
                         <th class="product-thumbnail">Produit</th>
                         <th class="product-name">&nbsp;</th>
                         <th class="product-price">Prix</th>
-                        <th class="product-quantity">Quantité</th>
+                        <th class="product-quantity">Stock</th>
 
                     </tr>
                     </thead>
@@ -59,7 +59,8 @@
 
                         </td>
                         <td class="product-thumbnail">
-                            <a href="single-product.html"><img src="{{ asset('uploads/images/' ~ wish.imageProd) }}" alt="cart" /></a>
+                            <a type="button" data-toggle="modal" data-target="#myModal{{ wish.refP.refP }}" ><img src="{{ asset('uploads/images/' ~ wish.imageProd) }}" alt="cart" /></a>
+
                         </td>
 
                         <td class="product-name">
@@ -70,10 +71,21 @@
                         </td>
 
                         <td class="product-quantity">
-                            <div class="quantity"><input type="number" step="1" min="0" name="cart" value="{{ wish.qteProd }}" title="Qty" class="input-text qty text" size="4" disabled="disabled"></div>
+                            {% if wish.qteProd == 0 %}
+                            <div class="quantity"><input type="text" step="1" min="0" name="cart" value="Repture de Stock" title="Qty" class="input-text qty text" size="4" disabled="disabled"></div>
+                            {% else %}
+                             <div class="quantity"><input type="text" step="1" min="0" name="cart" value="En Stock" title="Qty" class="input-text qty text" size="4" disabled="disabled"></div>
+                            {% endif %}
                         </td>
 
                     </tr>
+
+
+
+
+
+
+
                     {% endfor %}
                     <tr>
                         <td class="actions" colspan="6">
@@ -86,9 +98,11 @@
                     <!--End table body-->
                 </table>
 
+
             </form>
             <!--End form table-->
 
+        </div>
 
     </section>
 

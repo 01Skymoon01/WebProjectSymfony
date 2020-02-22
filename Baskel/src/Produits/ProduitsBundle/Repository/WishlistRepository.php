@@ -30,5 +30,16 @@ class WishlistRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
+    public function FindTheWishlist($id_client,$refP)
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'SELECT w
+            FROM ProduitsBundle:Wishlist w where w.refP= :refP and w.idClient= :id_client'
+        )->setParameter('id_client',$id_client)
+        ->setParameter('refP',$refP);
+
+        return $query->getResult();
+    }
+
 
 }

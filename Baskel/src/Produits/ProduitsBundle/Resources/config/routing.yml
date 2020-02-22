@@ -97,3 +97,16 @@ filtrerPrix:
 supprimerWishlist:
     path:     supprimerWishlist/{id}
     defaults: { _controller: ProduitsBundle:Produits:supprimerWishlist }
+
+
+filtrerSexe:
+    path:     /filtrerSexe/{sexe}
+    defaults: { _controller: ProduitsBundle:Produits:filtrerSexe }
+
+insertRating:
+    path:     /insertRating
+    defaults: { _controller: ProduitsBundle:Produits:insertRating }
+
+fetchRating:
+    path:     /fetchRating
+    defaults: { _controller: ProduitsBundle:Produits:fetchRating }

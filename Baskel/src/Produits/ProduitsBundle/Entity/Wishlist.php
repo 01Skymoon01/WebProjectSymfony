@@ -11,8 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="wishlist")
  * @ORM\Entity(repositoryClass="Produits\ProduitsBundle\Repository\WishlistRepository")
- * @ORM\Entity
- * @UniqueEntity("nom_prod")
  */
 
 class Wishlist
@@ -29,7 +27,7 @@ class Wishlist
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="Produits",  inversedBy="wishlist",cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="Produits",  inversedBy="wishlist")
      * @ORM\JoinColumn(name="refP",referencedColumnName="ref_p",nullable=false)
      */
     private $refP;
@@ -39,7 +37,7 @@ class Wishlist
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_prod", type="string", length=255, unique=true)
+     * @ORM\Column(name="nom_prod", type="string", length=255)
      */
     private $nomProd;
 
