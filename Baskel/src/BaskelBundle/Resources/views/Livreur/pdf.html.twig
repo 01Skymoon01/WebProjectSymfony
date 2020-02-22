@@ -1,14 +1,110 @@
-<br>
-<br>
-<h1>Fiche Technique du Livreur</h1> <br>
-<hr>
-<h3>  ID Livreur:   {{ user.id }} </h3> <br>
-<h3> Nom livreur:    {{ user.nom }} </h3> <br>
-<h3> Prenom livreur:    {{ user.prenom }} </h3> <br>
-<h3> Etat livreur:    {{ user.etat }} </h3> <br>
-<h3> Solde livreur:    {{ user.solde }} </h3> <br>
-{% for v in vehicule %}
-<h3>  Matricule vehicule:  {{ v.matricule }} </h3> <br>
-<h3> Type vehicule:    {{ v.type }} </h3> <br>
-<h3>  Marque Vehicule:    {{ v.marque }}  </h3> <br>
-{% endfor %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Example 2</title>
+    /WebProjectSymfony/Baskel/web/back/js/wow.min.js
+    <link rel="stylesheet" href="{{ asset('http://localhost/WebProjectSymfony/Baskel/web/back/css/pdf.css') }}" media="all" />
+</head>
+<body>
+<header class="clearfix">
+    <div id="logo">
+        <img src="{{ asset('http://localhost/WebProjectSymfony/Baskel/web/back/img/notification/logobaskel.png') }}">
+    </div>
+    <div id="company">
+        <h2 class="name">Baskel</h2>
+        <div>123 Rue El Saada Ariana
+            Tunisia</div>
+        <div>(216) 53 88 40 67</div>
+        <div><a href="#">Baskel@baskel.tn</a></div>
+    </div>
+    </div>
+</header>
+<main>
+<h1><center>LIVREUR</center></h1>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th class="no">ID</th>
+            <th class="desc">NOM</th>
+            <th class="unit">PRENOM</th>
+            <th class="qty">ETAT</th>
+            <th class="qty">SOLDE</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td class="no">{{user.id}}</td>
+            <td class="desc">{{user.nom}}</td>
+            <td class="desc">{{user.prenom}}</td>
+            <td class="desc">{{user.etat}}</td>
+            <td class="desc">{{user.solde}}DT</td>
+
+        </tr>
+
+
+
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+    <h1><center>VOITURE(S)</center></h1>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th class="no">ID</th>
+            <th class="desc">MATRICULE</th>
+            <th class="unit">MARQUE</th>
+            <th class="qty">TYPE</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for v in vehicule %}
+
+
+
+
+
+ <tr>
+            <td class="no">{{v.id}}</td>
+            <td>{{v.matricule}}</td>
+
+
+
+
+
+
+            <td>{{v.type}}</td>
+
+
+
+
+            <td>{{v.marque}}</td>
+
+        </tr>
+
+
+        {% endfor %}
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+    <div id="thanks">Merci!</div>
+    <div id="notices">
+
+    </div>
+</main>
+<footer>
+</footer>
+</body>
+</html>
+
