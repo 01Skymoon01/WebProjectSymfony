@@ -1,0 +1,228 @@
+{% extends 'default/back/header.html.twig' %}
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+
+    <link rel="stylesheet" href="{{asset('back/css/jquery.dataTables.min.css')}}">
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(function() {
+            $('#ajax-table').DataTable({
+                "language": {
+
+                    "zeroRecords": "Aucun enregistrement a été trouvé !",
+
+                    "infoEmpty": "Aucun enregistrement",
+                    "infoFiltered": "(filtré de  MAX total enregistement)",
+                    "search": "Recherche:",
+                    "paginate": {
+                        "previous": "Precédent",
+                        "next" : "suivant"
+                    }
+                }
+
+            });
+        });
+    </script>
+
+    <div class="breadcome-area" style="margin-left:14%">
+
+  <!--*****************************************************************StaaaaaaaaaaaaaaaaaaaaaatOUFEEEEE*****************************************************-->
+
+
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style=" margin-bottom: 2%" >
+
+        <div class="admin-content analysis-progrebar-ctn res-mg-t-30" style="background-color:#1b2a47;color:#00ffff;">
+            <div class="stats-icon pull-right">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            </div>
+            <h4 class="text-left text-uppercase" style="color:#00ffff; "><b>Produit non conforme:</b></h4>
+            <div class="row vertical-center-box vertical-center-box-tablet">
+                <div class="col-xs-9 cus-gh-hd-pro">
+                    <h2 class="text-right no-margin" style="color:#00ffff;font-size:20px; "> {{ nonconf }}<span style="color: #00ffff">Reclamations</span></h2>
+                </div>
+            </div>
+            <div class="progress progress-mini">
+                <div style="width: 100%;" class="progress-bar progress-bar-info "></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style=" margin-bottom: 2%" >
+
+        <div class="admin-content analysis-progrebar-ctn res-mg-t-30" style="background-color:#1b2a47;color:#00ffff;">
+            <div class="stats-icon pull-right">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            </div>
+            <h4 class="text-left text-uppercase" style="color:#00ffff; "><b>Produit abime:</b></h4>
+            <div class="row vertical-center-box vertical-center-box-tablet">
+                <div class="col-xs-9 cus-gh-hd-pro">
+                    <h2 class="text-right no-margin" style="color:#00ffff;font-size:20px; "> {{ abime }}<span style="color: #00ffff">Reclamations</span></h2>
+                </div>
+            </div>
+            <div class="progress progress-mini">
+                <div style="width: 100%;" class="progress-bar progress-bar-info "></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style=" margin-bottom: 2%" >
+
+            <div class="admin-content analysis-progrebar-ctn res-mg-t-30" style="background-color:#1b2a47;color:#00ffff;">
+                <div class="stats-icon pull-right">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                </div>
+                <h4 class="text-left text-uppercase" style="color:#00ffff; "><b>Livraison non conforme:</b></h4>
+                <div class="row vertical-center-box vertical-center-box-tablet">
+                    <div class="col-xs-9 cus-gh-hd-pro">
+                        <h2 class="text-right no-margin" style="color:#00ffff;font-size:20px; "> {{ lnc }}<span style="color: #00ffff">Reclamations</span></h2>
+                    </div>
+                </div>
+                <div class="progress progress-mini">
+                    <div style="width: 100%;" class="progress-bar progress-bar-info "></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style=" margin-bottom: 2%" >
+
+            <div class="admin-content analysis-progrebar-ctn res-mg-t-30" style="background-color:#1b2a47;color:#00ffff;">
+                <div class="stats-icon pull-right">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                </div>
+                <h4 class="text-left text-uppercase" style="color:#00ffff; "><b>Livraison non recu:</b></h4>
+                <div class="row vertical-center-box vertical-center-box-tablet">
+                    <div class="col-xs-9 cus-gh-hd-pro">
+                        <h2 class="text-right no-margin" style="color:#00ffff;font-size:20px; "> {{ lnr }}<span style="color: #00ffff">Reclamations</span></h2>
+                    </div>
+                </div>
+                <div class="progress progress-mini">
+                    <div style="width: 100%;" class="progress-bar progress-bar-info "></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style=" margin-bottom: 2%" >
+
+            <div class="admin-content analysis-progrebar-ctn res-mg-t-30" style="background-color:#1b2a47;color:#00ffff;">
+                <div class="stats-icon pull-right">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                </div>
+                <h4 class="text-left text-uppercase" style="color:#00ffff; "><b>Autres:</b></h4>
+                <div class="row vertical-center-box vertical-center-box-tablet">
+                    <div class="col-xs-9 cus-gh-hd-pro">
+                        <h2 class="text-right no-margin" style="color:#00ffff;font-size:20px; "> {{ Aut }}<span style="color: #00ffff">Reclamations</span></h2>
+                    </div>
+                </div>
+                <div class="progress progress-mini">
+                    <div style="width: 100%;" class="progress-bar progress-bar-info "></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--*****************************************************************StaaaaaaaaaaaaaaaaaaaaaatOUFEEEEE*****************************************************-->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="breadcomb-wp">
+                                    <div class="breadcomb-icon">
+                                        <i class="icon nalika-home"></i>
+                                    </div>
+                                    <div class="breadcomb-ctn">
+                                        <h2>Liste des Reclamations</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="breadcomb-report">
+                                    <button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="icon nalika-download"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <div class="product-status mg-b-30 ">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <h4>Liste des Reclamations</h4>
+
+                        <table id="ajax-table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date de Rec</th>
+                                <th>Objet</th>
+                                <th>Etat</th>
+                                <th>Details</th>
+                                <th>User</th>
+                                <th>Action</th>
+                            </tr>
+
+                            </thead>
+                            <tbody>
+
+                                    {% for r in reclamations %}
+
+
+
+                            {% if r.etatR == 'traitee'  %}
+
+                            <tr style="background-color: #A40086">
+                                {% else %}
+                            <tr>
+                                {% endif %}
+                                <td >{{ r.idR }}</td>
+                                <td>{{ r.dateR|date('Y-m-d') }}</td>
+                                <td>{{ r.objetR }}</td>
+                                <td>{{ r.etatR }}</td>
+                                <td>{{ r.detailsR }}</td>
+                                <td>{{ r.userid}}</td>
+                                <td>
+                                    {% if r.etatR == 'non traitee' %}
+                                 <a data-toggle="tooltip" title="Traiter" class="pd-setting-ed" href="{{ path('TraiterReclamation', {'id': r.idR}) }}"><i style="color: whitesmoke" class="fa fa-square-o" aria-hidden="true"></i> </i></a>
+
+                                    {% else %}
+                                   <a data-toggle="tooltip" title="Done" class="pd-setting-ed"><i style="color: whitesmoke" class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                                    {% endif %}
+
+                                   <a data-toggle="tooltip" title="Supprimer" class="pd-setting-ed" href="{{ path('SupprimerReclamation', {'id': r.idR}) }}"> <i style="color: whitesmoke" class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+
+                                  <a data-toggle="tooltip" title="Download" class="pd-setting-ed" href="{{ path('pdfRec', {'id': r.idR}) }}"> <i style="color: whitesmoke" class="fa fa-download" aria-hidden="true"></i></a>
+
+                                </td>
+
+
+                                {% endfor %}
+                            </tbody>
+
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+{% endblock %}

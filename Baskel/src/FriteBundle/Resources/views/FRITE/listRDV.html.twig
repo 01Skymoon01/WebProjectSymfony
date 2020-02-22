@@ -1,0 +1,154 @@
+{% extends 'default/front/header.html.twig' %}
+
+        {% block head %}
+            {{ parent() }}
+
+
+        {% endblock %}
+        {% block container %}
+
+
+<section class="shop-checkout">
+    <div class="container">
+        <!--Start Breadcrumbs-->
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <ul class="tz-breadcrumbs">
+            <li>
+                <a href="#">Acceuil</a>
+            </li>
+            <li class="current">
+                Liste de vos rendez-vous
+            </li>
+        </ul>
+        <!--End Breadcrumbs-->
+        <h1 class="page-title">Liste de vos rendez-vous</h1>
+        <p>NB: Toute modification ou suppression seras impossible apres minuit.</p>
+
+        <!--Start form table-->
+        <form>
+
+            <form role="search">
+                <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+            </form>
+
+            <table class="shop_table cart" id="ajax-table">
+                <!--Table header-->
+                <thead>
+                <tr>
+
+                    <th class="product-thumbnail">Date depot</th>
+                    <th class="product-thumbnail">Date RDV</th>
+                    <th class="product-price">Objet</th>
+                    <th class="product-subtotal">Details</th>
+                    <th class="product-quantity"> Etat</th>
+                    <th class="product-subtotal">Technicien</th>
+                    <th class="product-remove">&nbsp;</th>
+                    <th class="product-remove">&nbsp;</th>
+                </tr>
+                </thead>
+                <!--End table header-->
+
+                <!--Table body-->
+                <tbody id="myTable" >
+                {% for rd in rdv %}
+
+                    {% if rd.etatRDV == 'Accepte'  %}
+                        <tr class="cart_item" style="background-color: hsl(43, 100%, 95%) " >
+                    {% elseif rd.etatRDV == 'Refuse'%}
+                        <tr class="cart_item" style="background-color:hsl(274, 100%, 95%)  ">
+                    {% else %}
+                        <tr class="cart_item">
+                    {% endif %}
+
+                        <td class="product-thumbnail">{{ rd.dateDepotRDV|date('Y-m-d') }}</td>
+                        <td class="product-thumbnail">{{ rd.dateRDV|date('Y-m-d') }}</td>
+                        <td class="product-name">{{ rd.objetRDV }}</td>
+                    <td class="product-name"><span class="amount">{{ rd.detailsRDV }}</span></td>
+                        <td class="product-price"><span class="amount">{{ rd.etatRDV }}</span></td>
+                        {% if rd.technicienid != NULL %}
+                            <td class="product-subtotal"><span class="amount">{{ rd.technicienid.getNom()}} {{ rd.technicienid.getPrenom()}} </span> </td>
+                        {% else %}
+                            <td class="product-price"><span class="amount">non affecter </span> </td>
+                        {% endif %}
+
+                        {% if  rd.dateDepotRDV|date('Y-m-d') == "now"|date('Y-m-d')  %}
+                        <td class="product-remove">
+                            <a  title="Modifier" href="{{ path('ModifierRDV', {'id': rd.idRdv}) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        </td>
+                        <td class="product-remove">
+                            <a data-toggle="tooltip" class="deleteBtn" data-id="{{  rd.idRDV }}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+                        </td>
+                            {% else %}
+                            <td class="product-remove" >
+                                <i style="color: #f44336" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </td>
+                            <td class="product-remove" >
+                                <i style="color: #F44336" class="fa fa-trash-o" aria-hidden="true"></i>
+                            </td>
+                        {% endif %}
+                    </tr>
+
+                {% endfor %}
+                <tr>
+                    <td class="actions" colspan="6">
+                        <a class="back-shop" href="#"><i class="fa fa-angle-left"></i> BACK TO SHOP</a>
+                    </td>
+                </tr>
+
+
+                </tbody>
+                <!--End table body-->
+            </table>
+        </form>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                $("#myInput").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+
+
+        </script>
+
+        <script>
+            $(document).ready(function(){
+                var myLink = "{{ app.request.requestUri }}";
+                var ajaxTableLink = myLink +" #ajax-table ";
+
+                $('.deleteBtn').click(function (e) {
+                    e.preventDefault();
+                    id = $(this).data('id');
+                    $.ajax({
+                        url: "/Frite/RdvDelete/"+id,
+                        method: 'get',
+                        success: function (data, reponse) {
+
+                            $('#ajax-table').load(ajaxTableLink)
+
+                        },
+                        error: function () {
+                            //appear pop to say error blabla
+                        },
+                    });
+
+                });
+            });
+        </script>
+
+        <!--End form table-->
+        {% endblock %}
+

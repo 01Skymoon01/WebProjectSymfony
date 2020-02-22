@@ -1,0 +1,210 @@
+{% extends 'default/back/header.html.twig' %}
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+    <div class="breadcome-area" style="margin-left: 15%">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="breadcomb-wp">
+                                    <div class="breadcomb-icon">
+                                        <i class="icon nalika-home"></i>
+                                    </div>
+                                    <div class="breadcomb-ctn">
+                                        <h2>Modifier Technicien</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Single pro tab start-->
+    <div class="single-product-tab-area mg-b-30" style="margin-left: 15%">
+        <!-- Single pro tab review Start-->
+        <div class="single-pro-review-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="review-tab-pro-inner">
+                            <ul id="myTab3" class="tab-review-design">
+                                <li class="active"><a href="#description"><i class="icon nalika-edit" aria-hidden="true"></i> Modifier Technicien </a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in" id="description">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="review-content-section">
+
+                                                {{ form_start(form, { 'method': 'post', 'attr': {'id':'form' , 'name':'form'}})  }}
+
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="icon nalika-user" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.cin, { 'attr': {'class': 'form-control', 'placeholder':'cin',}}) }}
+                                                </div>
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="icon nalika-edit" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.nom, { 'attr': {'class': 'form-control', 'placeholder':'nom'}}) }}
+                                                </div>
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.prenom, { 'attr': {'class': 'form-control', 'placeholder':'prenom'}}) }}
+                                                </div>
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="icon nalika-new-file" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder':'email'}}) }}
+                                                </div>
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="icon nalika-favorites" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.numtel, { 'attr': {'class': 'form-control', 'placeholder':'numtel'}}) }}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="text-center custom-pro-edt-ds">
+
+                                                {{ form_widget(form.Modifier, { 'attr': {'class': 'btn btn-ctl-bt waves-effect waves-light m-r-10'} }) }}
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+    <script>
+        (function($) {
+            $(document).ready(function(){
+
+                $.validator.addMethod("letters", function(value, element) {
+                    return this.optional(element) || /^[a-z A-Z À-þ]+$/i.test(value);
+                }, "Chiffres et symboles non acceptes");
+
+                $("#form").validate({
+                    rules: {
+                        "fritebundle_technicien[cin]": {
+                            required: true,
+                            minlength: 8,
+                            maxlength: 8
+                        },
+                        "fritebundle_technicien[nom]": {
+                            required: true,
+                            letters: true,
+                        },
+                        "fritebundle_technicien[prenom]": {
+                            required: true,
+                            letters:true,
+                        },
+                        "fritebundle_technicien[email]": {
+                            required:true,
+                            email: true,
+                            maxlength: 255
+                        },
+                        "fritebundle_technicien[numtel]": {
+                            required: true,
+                            minlength: 8,
+                            maxlength: 8,
+                            digits:true
+                        },
+                    },
+
+                    messages: {
+                        'fritebundle_technicien[cin]': {
+                            required: "Entrez votre cin",
+                            minlength: "Minimum 8 characteres!",
+                            maxlength: "maximum 8 characteres!"
+                        },
+                        'fritebundle_technicien[nom]':{
+                            required: "Entrez le nom",
+
+                        },
+                        'fritebundle_technicien[prenom]':{
+                            required: "entrez le prenom",
+                        },
+                        'fritebundle_technicien[email]':{
+                            required: "entrez un email",
+                            email: "email invalide",
+                            maxlength: "trop long"
+                        },
+                        'fritebundle_technicien[numtel]':{
+                            required: "entrez un mumero de telephone",
+                            minlength: "numero de telephone trop court",
+                            maxlength: "numero de telephone trop long",
+                            digits:     "entrez que des numeros"
+                        }
+
+                    },
+                    errorElement: "em",
+                    errorPlacement: function ( error, element ) {
+                        // Add the `help-block` class to the error element
+                        error.addClass( "help-block" );
+
+                        // Add `has-feedback` class to the parent div.form-group
+                        // in order to add icons to inputs
+                        element.parents( ".input-group" ).addClass( "has-feedback" );
+
+                        if ( element.prop( "type" ) === "checkbox" ) {
+                            error.insertAfter( element.parent( "label" ) );
+                        } else {
+                            error.insertAfter( element );
+                        }
+
+                        // Add the span element, if doesn't exists, and apply the icon classes to it.
+                        if ( !element.next( "span" )[ 0 ] ) {
+                            $( "<span class='glyphicon glyphicon-remove form-control-feedback'></span>" ).insertAfter( element );
+                        }
+                    },
+                    success: function ( label, element ) {
+                        // Add the span element, if doesn't exists, and apply the icon classes to it.
+                        if ( !$( element ).next( "span" )[ 0 ] ) {
+                            $( "<span class='glyphicon glyphicon-ok form-control-feedback'></span>" ).insertAfter( $( element ) );
+                        }
+                    },
+                    highlight: function ( element, errorClass, validClass ) {
+                        $( element ).parents( ".input-group" ).addClass( "has-error" ).removeClass( "has-success" );
+                        $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+                    },
+                    unhighlight: function ( element, errorClass, validClass ) {
+                        $( element ).parents( ".input-group " ).addClass( "has-success" ).removeClass( "has-error" );
+                        $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+                    }
+                } );
+            } );
+        } ) (jQuery);
+
+    </script>
+
+
+{% endblock %}
+
+
+
+

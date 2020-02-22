@@ -1,0 +1,151 @@
+
+{% extends 'default/front/header.html.twig' %}
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+<div class="tz-site">
+    <div class="container">
+    <div class="blog">
+        <div class="container">
+            <ul class="tz-breadcrumbs">
+                <li>
+                    <a href="#">Acceuil</a>
+                </li>
+                <li class="current">
+                    Contact
+                </li>
+            </ul>
+            <div class="blog-container">
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <!--Blog Sidebar-->
+                        <div class="blog-sidebar">
+                            <aside class="contact-info widget no-border">
+                                <h4 class="widget-title">Contactez-nous</h4>
+                                <p>Recevez vos velos et accesoires les plus attendus sur Baskel.tn! Attendez beaucoup de nouveaute a venir.</p>
+                                <ul>
+                                    <li>
+                                        <span>Adresse :</span>
+                                        <adress>
+                                            123 Rue Hedi Nouira Ariana <br> Tunisie
+                                        </adress>
+                                    </li>
+                                    <li>
+                                        <span>Telephone :</span>
+                                        (216) 71 801 802
+                                    </li>
+                                    <li>
+                                        <span>Email :</span>
+                                        BaskelTeam@baskel.tn
+                                    </li>
+                                </ul>
+                            </aside>
+                        </div>
+                        <!--End Blog Sidebar-->
+                    </div>
+                    <div class="col-md-8 tz-blog-content">
+                        <h1 class="large-ttle">Passez une reclamation</h1>
+                        <div id="contact-form" class="contact-respond">
+                            <h3 class="tz-title">Laissez-nous vos reclamations</h3>
+                           <!-- <div class="contact-form-7"> -->
+                            <div class="contact-form-7">
+                                {{ form_start(form  , {'attr':{'class':'contact-form-7 contact-form-7', 'id':'form'}})  }}
+                                <p class="comment-for-url">
+                                    <label>Objet Reclamation</label> <br>
+                                    {{ form_widget(form.objetR, { 'attr': {'class': 'input-group-sm'} }) }}
+                                    <i class="fa fa-link"></i>
+                                </p>
+                                <div class="input-group mg-b-pro-edt">
+                                    <span class="input-group-addon"><i class="icon nalika-user" aria-hidden="true"></i></span>
+                                    <label>Details Reclamation</label> <br>
+                                    {{ form_widget(form.detailsR, { 'attr': {'class': 'form-control', 'placeholder':'Donnez-nous plus de details'} }) }}
+                                </div>
+                                <p class="comment-for-submit">
+
+                                    <input  class="button" type="submit" value="Ajouter" />
+                                </p>
+                            {{ form_end(form) }}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+    <script>
+        (function($) {
+
+            $(document).ready(function(){
+
+                $("#form").validate({
+                    rules: {
+                        "fritebundle_reclamation[detailsR]":"required",
+                        "fritebundle_reclamation[detailsR]":  {
+                            required: true,
+                        },
+                    },
+
+                    messages: {
+                        'fritebundle_reclamation[detailsR]': {
+                            required: "Entrez vos details",
+                        },
+
+                    },
+                    errorElement: "em",
+                    errorPlacement: function ( error, element ) {
+                        // Add the `help-block` class to the error element
+                        error.addClass( "help-block" );
+
+                        // Add `has-feedback` class to the parent div.form-group
+                        // in order to add icons to inputs
+                        element.parents( ".input-group" ).addClass( "has-feedback" );
+
+                        if ( element.prop( "type" ) === "checkbox" ) {
+                            error.insertAfter( element.parent( "label" ) );
+                        } else {
+                            error.insertAfter( element );
+                        }
+
+                        // Add the span element, if doesn't exists, and apply the icon classes to it.
+                        if ( !element.next( "span" )[ 0 ] ) {
+                            $( "<span class='glyphicon glyphicon-remove form-control-feedback'></span>" ).insertAfter( element );
+                        }
+                    },
+                    success: function ( label, element ) {
+                        // Add the span element, if doesn't exists, and apply the icon classes to it.
+                        if ( !$( element ).next( "span" )[ 0 ] ) {
+                            $( "<span class='glyphicon glyphicon-ok form-control-feedback'></span>" ).insertAfter( $( element ) );
+                        }
+                    },
+                    highlight: function ( element, errorClass, validClass ) {
+                        $( element ).parents( ".input-group" ).addClass( "has-error" ).removeClass( "has-success" );
+                        $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+                    },
+                    unhighlight: function ( element, errorClass, validClass ) {
+                        $( element ).parents( ".input-group " ).addClass( "has-success" ).removeClass( "has-error" );
+                        $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+                    }
+                } );
+            } );
+        } ) (jQuery);
+
+    </script>
+
+
+
+{% endblock %}
+

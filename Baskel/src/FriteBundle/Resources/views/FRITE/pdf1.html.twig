@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Example 2</title>
+    /WebProjectSymfony/Baskel/web/back/js/wow.min.js
+    <link rel="stylesheet" href="{{ asset('http://localhost/WebProjectSymfony/Baskel/web/back/css/pdf.css') }}" media="all" />
+</head>
+<body>
+<header class="clearfix">
+    <div id="logo">
+        <img src="{{ asset('http://localhost/WebProjectSymfony/Baskel/web/back/img/notification/logobaskel.png') }}">
+    </div>
+    <div id="company">
+        <h2 class="name">Baskel</h2>
+        <div>123 Rue El Saada Ariana
+            Tunisia</div>
+        <div>(216) 53 88 40 67</div>
+        <div><a href="#">Baskel@baskel.tn</a></div>
+    </div>
+    </div>
+</header>
+<main>
+    <h1><center>Fiche Technique de la Reclamation</center></h1>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th class="no">ID RDV</th>
+            <th class="desc">User</th>
+            <th class="unit">Objet RDV</th>
+            <th class="qty">Details RDV</th>
+            <th class="qty">Etat RDV</th>
+            <th class="qty">Technicien</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td class="no"> {{ rec.idR }}</td>
+            <td class="desc">  {{ rec.userid }}</td>
+            <td class="desc">{{ rec.objetR }}</td>
+            <td class="desc">{{ rec.detailsR }}</td>
+            <td class="desc"> {{ rec.etatR }}</td>
+        </tr>
+
+
+
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+        <div id="thanks">Merci!</div>
+        <div id="notices">
+
+        </div>
+</main>
+<footer>
+</footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
