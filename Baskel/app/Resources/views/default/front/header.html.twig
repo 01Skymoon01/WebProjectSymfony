@@ -8,6 +8,7 @@
     <title>Accueil</title>
 
 
+
     <link href="{{ asset('front/css/bootstrap.min.css') }}" rel="stylesheet" type='text/css'>
     <link href='{{ asset('front/css/font-awesome.min.css') }}' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -21,11 +22,12 @@
 
 
 </head>
+
 <body>
-<div class="fh5co-loader"></div>
+<div class="fh5co-loader" ></div>
 <!--Start class site-->
 
-<div class="tz-site">
+<div class="tz-site" id="reveall">
 
     <!--Start id tz header-->
     <header id="tz-header" class="bk-white">
@@ -247,8 +249,11 @@
                 <!--Shop meta-->
                 <ul class="tz-ecommerce-meta pull-right">
                   <!-----wishlist ------>
+                    <li class="tz-menu-wishlist">
+                        <a href="#"><strong id="countItemsWishi">0</strong></a>
+                    </li>
                     <li class="tz-mini-cart">
-                        <a  href="{{  path('MyCart') }}">  <span> <strong id="countItems">{{ panier|length   }}</strong> </span></a>
+                        <a  href="{{ path('MyCart') }}"> <strong id="countItems"> 0 </strong> </a>
 
                         <!--Mini cart-->
 
@@ -510,4 +515,31 @@
     <script type='text/javascript' src='{{ asset('front/js/custom-rs.js') }}'></script>
     </body>
     </html>
+    <script src="{{ asset('jquery-3.4.1.min.js')}}"> </script>
+    <script  type="application/javascript" async>
+        $(document).ready(function(){
+             console.log("here jquery");
+
+                    console.log("dkhal load");
+
+                    $.ajax({
+                        url:'{{ path('CountPanier') }}',
+                        type: 'get',
+                        success: function (data)
+                        {   $date=$.parseJSON(data);
+                            console.log($date.Wishi);
+                            $("#countItems").text($date.articles);
+                            $("#countItemsWishi").text($date.Wishi);
+
+                        }
+
+                    });
+
+
+
+
+
+
+        });
+    </script>
 {% endblock %}

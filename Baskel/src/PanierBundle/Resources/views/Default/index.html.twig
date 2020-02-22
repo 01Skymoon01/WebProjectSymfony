@@ -55,8 +55,6 @@
 
 
 
-
-
         <div class="tab-content">
 
             <!--Tab item-->
@@ -68,7 +66,7 @@
 
         <div class="product-item">
             <div class="product-thubnail">
-                <img src="{{ asset('front/images/'~p.image)}}" alt="product 3" />
+                <img src="{{ asset('uploads/images/' ~ p.image) }}" alt="product 1"  style="width: 300px; height: 280px;"/>
                 <input class="imgItem" type="hidden" name="" value="{{ asset('front/images/'~p.image)}}">
                 <div class="product-meta">
                     <a class="add-to-cart addcart addcart2"  >Add to cart</a>

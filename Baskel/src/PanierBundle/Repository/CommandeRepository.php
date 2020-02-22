@@ -54,7 +54,7 @@ SET c.etat = 1
 
     public function DecrStock($id,$nbr){
         $query = $this->getEntityManager()
-            ->createQuery(" UPDATE PanierBundle:produits e 
+            ->createQuery(" UPDATE ProduitsBundle:Produits e 
 SET e.quantiteP= e.quantiteP - :nbajouter
  where e.refP=:id ")
             ->setParameter('id', $id)

@@ -1,0 +1,91 @@
+
+{% extends 'default/back/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+    <style>
+        #div-add-product{
+            margin-left: 18%;
+            margin-top: 5%;
+            width: 80%;
+        }
+        #inputs-div{
+            margin-left: 27%;
+        }
+
+        .form-control:disabled {
+            background-color: #101829;
+            color: #fd4339;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block container %}
+
+    {{ form_start(form) }}
+    <div class="single-product-tab-area mg-b-30" >
+        <!-- Single pro tab review Start-->
+        <div class="single-pro-review-area" >
+
+            <div class="container-fluid" >
+
+                <div class="row" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                        <div class="review-tab-pro-inner" id="div-add-product">
+
+                            <div id="myTabContent" class="tab-content custom-product-edit" >
+                                <div class="product-tab-list tab-pane fade active in" id="description">
+                                    <div class="row">
+
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="inputs-div">
+                                            <div class="review-content-section">
+
+                                                <div class="input-group mg-b-pro-edt" >
+                                                    <span class="input-group-addon"><i class="icon nalika-edit" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.ref_c, { 'attr': {'class': 'form-control' ,'placeholder': "Référence", 'disabled' : 'disabled' ,'id': 'inputDisab'} }) }}
+                                                </div>
+
+
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="icon nalika-favorites" aria-hidden="true"></i></span>
+                                                    {{ form_widget(form.libelle, { 'attr': {'class': 'form-control' ,'placeholder': "Libellé"} }) }}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="text-center custom-pro-edt-ds">
+
+                                                {{ form_widget(form.Ajouter, { 'attr': {'class': 'btn btn-ctl-bt waves-effect waves-light m-r-10' } , 'label': "Modifier"}) }}
+                                                <a type="button" class="btn btn-ctl-bt waves-effect waves-light" href="{{ path('baskel_homepage') }}">Annuler
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+
+{% endblock %}
+
+
+
+

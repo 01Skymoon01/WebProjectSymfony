@@ -1,0 +1,249 @@
+
+{% extends 'default/front/header.html.twig' %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    {{ parent() }}
+
+    <style>
+        #divimg{
+
+            float: left;
+            width:70%;
+            height:95%;
+        }
+
+        #detailprod{
+            margin-left:35%;
+        }
+    </style>
+
+{% endblock %}
+
+
+
+
+{% block container %}
+
+
+    <script src="{{ asset('jquery-3.4.1.min.js')}}"> </script>
+
+    <script  type="application/javascript" async>
+        $(document).ready(function(){
+            console.log("here jquery");
+            $(".addcart2").click(function(){
+                // $(this).hide();
+                console.log("clicked addcart");
+                $data=$(this).parent().parent().parent().html();
+
+                console.log($data);
+
+                //$data=$data.hasClass('name').val();
+
+                console.log($(this).parent().parent().parent().find('.refProduct').val());
+                $ref=$(this).parent().parent().parent().find('.refProduct').val();
+                $.ajax({
+                    url:'{{ path('ajouterAuPanier') }}',
+                    type: "GET",
+                    data: {
+                        'ref' : $ref
+                    },
+                    dataType:"text",
+                    success: function (data)
+                    {
+                        console.log(data);
+                        // console.log(data.qte);
+                        $date=$.parseJSON(data);
+                        console.log($date.etat);
+                        if (!($date.etat = 1)) {
+                        } else {
+                            alert("Deja ajouter");
+                        }
+                        $("#countItems").text($date.articles);
+                    }
+
+                });
+
+            });
+
+
+
+
+        });
+    </script>
+
+    <!--Start section large top for tabs content-->
+    <div class="section-large-top">
+        <div class="container">
+
+            <!--Tabs Shop-->
+            <div class="tz-shortcode-tabs">
+
+                <!--Tabs Header-->
+                <div class="tz-tabs-header">
+                    <h2 class="tz-tabs-title pull-left">Produits En Vente</h2>
+                    <ul class="nav nav-tabs pull-right tz-nav-tabs">
+                        {% for c in categorie %}
+                        <li role="presentation" class="active"><a  data-toggle="tab">{{ c.libelle }} <i class="fa fa-circle"></i></a></li>
+                       {% endfor %}
+                    </ul>
+                </div>
+                <!--End tab header-->
+
+                <!--Tab content-->
+                <div class="tab-content" >
+
+                    <!--Tab item-->
+                    <div class="tab-pane active" id="one_read" >
+                        <div class="row">
+                            {% for p in produit %}
+                            <div class="col-md-4 col-sm-6"  >
+
+
+
+
+                                <!--Start product item-->
+                                <div class="product-item" >
+                                    <div class="product-thubnail">
+                                        <img src="{{ asset('uploads/images/' ~ p.image) }}" alt="product 1"  style="width: 300px; height: 280px;"/>
+                                        <div class="product-meta">
+                                            <input type="hidden" class="refProduct" value="{{ p.refP }}" >
+                                            <a class="add-to-cart addcart2"  ><i class="fa fa-cart-plus" style="padding: 12px 12px 12px 12px; font-size: 20px; "></i></a>
+                                            <span class="quick-view">
+                                             <a type="button" data-toggle="modal" data-target="#myModal{{ p.refP }}" ><i class="fa fa-info-circle" style="padding: 12px 12px 12px 12px; font-size: 20px; "></i></a>
+
+                                            </span>
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                    <div class="product-infomation">
+                                        <h4><a>{{ p.nomP }}</a></h4>
+                                        <span class="product-price">{{ p.prixP }}DT</span>
+                                        <span class="product-attr">
+
+
+                                            {% for item in p.couleurP %}
+                                                <i class="fa fa-circle" style="color: {{ item }}"></i>
+
+                                            {% endfor %}
+
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!--End product item-->
+                            </div>
+
+
+                                <div id="myModal{{ p.refP }}" class="modal fade refProduct" role="dialog">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header" >
+                                                <button type="button" class="close" data-dismiss="modal" style="margin-left: 15px;">&times;</button>
+                                                <h3 class="modal-title" style="margin-right: 510px;">Détail du produit:</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="divimg">
+                                                    <img src="{{ asset('uploads/images/' ~ p.image) }}" alt="product 1"  style="width: 300px; height: 400px;"/>
+                                                    <p style="font-size: large; font-weight: bold; text-decoration: underline;">Description: </p>
+                                                    <p style="width:180px;">{{ p.description }}</p>
+                                                </div>
+
+                                                <div id="detailprod">
+                                                    <ul class="product-event-content">
+
+                                                        <li>
+                                                            <h3><a href="#" style="margin-left: 79px;">{{ p.nomP }}</a></h3>
+                                                            <span class="product-rating" >
+                                                                    <i class="fa fa-star" style="margin-left: 75px;"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star-half-o"></i>
+
+                                                            </span>
+                                                           <center> <span class="event-price" >Prix: {{ p.prixP }}DT</span></center>
+
+
+                                                        </li>
+
+                                                        <li class="product-event-attr" style="margin-top: -200px;" >
+                                                                <span class="tz-color" style="margin-left: -190px;">
+                                                                    Color:
+                                                                     {% for item in p.couleurP %}
+                                                                         <i class="fa fa-circle" style="color: {{ item }}"></i>
+                                                                     {% endfor %}
+                                                                </span>
+
+                                                            <span class="tz-stock" style="margin-left: -20px">
+                                                               {% if p.quantiteP == 0 %}
+                                                                 - Rupture de stock -
+                                                                 {% else %}
+                                                                 - En stock -
+                                                               {% endif %}
+                                                            </span>
+
+
+                                                        </li>
+
+
+                                                        <li class="event-footer" style="margin-top: -100px;">
+                                                            <a href="#" class="add-to-cart " style="margin-left: 10px;">Ajouter Au Panier.</a>
+                                                            <a href="{{ path('ajouterWishlists', { 'refP': p.refP }) }}" class="add-to-wishlist" style="margin-left: -10px;">Ajouter A Wishlist.</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            {% endfor %}
+                            </div>
+
+
+
+
+
+        <!--End product-->
+
+        </div>
+
+
+
+                    <!--End tab item-->
+
+                </div>
+
+                <!--End tab content-->
+
+            </div>
+            <!--End Tabs Shop-->
+
+        </div>
+
+        </div>
+
+
+{% endblock %}
+
+
+
+

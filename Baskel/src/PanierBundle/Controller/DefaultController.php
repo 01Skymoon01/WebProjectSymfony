@@ -4,8 +4,9 @@ namespace PanierBundle\Controller;
 
 use PanierBundle\Entity\Commande;
 use PanierBundle\Entity\DetailsCommande;
+use Produits\ProduitsBundle\Entity\Wishlist;
 use Symfony\Component\HttpFoundation\Response;
-use PanierBundle\Entity\produits;
+use Produits\ProduitsBundle\Entity\Produits;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
@@ -15,10 +16,35 @@ class DefaultController extends Controller
         return $this->render('@Panier/Default/index.html.twig');
     }
 
+    public function CountPanierAction(Request $request)
+    {
+
+
+        $session = $request->getSession();
+        if (!$session->has('panier')) $session->set('panier',array());
+        $panier = $session->get('panier'); //$panier[ID du produit] => Quantite
+
+
+        $session->set('panier',$panier);
+
+        //Count Items Panier
+        if (!$session->has('panier'))
+            $articles = 0;
+        else
+            $articles = count($session->get('panier'));
+        //*******************
+        //Count Items Wishlist
+        $Wishi = $this -> getDoctrine()
+            -> getRepository(Wishlist::class)
+            ->findAll();
+
+        //******************
+        return new Response(json_encode(array( 'articles'=>$articles,'Wishi'=>count($Wishi))));
+    }
     public function afficherProduitsAction(Request $request)
     {
         $produit = $this -> getDoctrine()
-            -> getRepository(produits::class)
+            -> getRepository(Produits::class)
             ->findAll();
 
         $session = $request->getSession();
@@ -62,14 +88,14 @@ class DefaultController extends Controller
     public function MyCartAction(Request $request)
     {
         $produit = $this -> getDoctrine()
-            -> getRepository(produits::class)
+            -> getRepository(Produits::class)
             ->findAll();
 
         $session = $request->getSession();
         $em = $this->getDoctrine()->getManager();
        $nbr = count($session->get('panier'));
        if($nbr >= 1 )
-        $produits = $em->getRepository('PanierBundle:produits')->findBy(array('refP' => array_keys($session->get('panier'))));
+        $produits = $em->getRepository('ProduitsBundle:Produits')->findBy(array('ref_p' => array_keys($session->get('panier'))));
        else $produits =array();
 
         return $this->render('@Panier/Default/MyCart.html.twig', array('produit' => $produits,'panier' =>$session->get('panier')));
@@ -81,7 +107,7 @@ class DefaultController extends Controller
     {
 
         $id=$request->get('ref');
-        $value = $this->getDoctrine()->getManager()->getRepository('PanierBundle:produits')->find($id);
+        $value = $this->getDoctrine()->getManager()->getRepository('ProduitsBundle:Produits')->find($id);
         $quantite=$value->getQuantiteP();
 
         $session = $request->getSession();
@@ -98,7 +124,7 @@ class DefaultController extends Controller
         //Calcule totale:
         $total=0;
         $em = $this->getDoctrine()->getManager();
-        $produits = $em->getRepository('PanierBundle:produits')->findBy(array('refP' => array_keys($session->get('panier'))));
+        $produits = $em->getRepository('ProduitsBundle:Produits')->findBy(array('ref_p' => array_keys($session->get('panier'))));
         foreach ($produits as $value){
             $total=$total+($value->getPrixP()* $panier[$value->getRefP()] );
 
@@ -128,7 +154,7 @@ class DefaultController extends Controller
             //Calcule totale:
         $total=0;
         $em = $this->getDoctrine()->getManager();
-        $produits = $em->getRepository('PanierBundle:produits')->findBy(array('refP' => array_keys($session->get('panier'))));
+        $produits = $em->getRepository('ProduitsBundle:Produits')->findBy(array('ref_p' => array_keys($session->get('panier'))));
         foreach ($produits as $value){
             $total=$total+($value->getPrixP()* $panier[$value->getRefP()] );
         }
@@ -158,7 +184,7 @@ class DefaultController extends Controller
         //Calcule totale:
         $total=0;
         $em = $this->getDoctrine()->getManager();
-        $produits = $em->getRepository('PanierBundle:produits')->findBy(array('refP' => array_keys($session->get('panier'))));
+        $produits = $em->getRepository('ProduitsBundle:Produits')->findBy(array('ref_p' => array_keys($session->get('panier'))));
         foreach ($produits as $value){
             $total=$total+($value->getPrixP()* $panier[$value->getRefP()] );
         }
@@ -191,7 +217,7 @@ class DefaultController extends Controller
 
         $DCommande=new DetailsCommande();
         $em = $this->getDoctrine()->getManager();
-        $produits = $em->getRepository('PanierBundle:produits')->findBy(array('refP' => array_keys($session->get('panier'))));
+        $produits = $em->getRepository('ProduitsBundle:Produits')->findBy(array('ref_p' => array_keys($session->get('panier'))));
         $panier = $session->get('panier');
         foreach (  $produits as $prod) {
             $em2 = $this->getDoctrine()->getManager();
@@ -207,7 +233,7 @@ class DefaultController extends Controller
         $session->clear();
 
         $produit = $this -> getDoctrine()
-            -> getRepository(produits::class)
+            -> getRepository(Produits::class)
             ->findAll();
 
         $session = $request->getSession();

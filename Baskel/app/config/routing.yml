@@ -1,3 +1,7 @@
+produits:
+    resource: "@ProduitsBundle/Resources/config/routing.yml"
+    prefix:   /Produits
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 fos_user_register:
@@ -5,7 +9,7 @@ fos_user_register:
     prefix: /register
 panier:
     resource: "@PanierBundle/Resources/config/routing.yml"
-    prefix:   /Panier
+    prefix:   /
 
 baskel:
     resource: "@BaskelBundle/Resources/config/routing.yml"

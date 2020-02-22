@@ -1,0 +1,502 @@
+
+{% extends 'default/front/header.html.twig' %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>s
+
+    <script src="{{ asset('jquery.min') }}"></script>
+    <script src="{{ asset('custom.js') }}"></script>
+
+
+
+    <script>
+
+
+        $(document).ready(function(){
+            $(".addcart2").click(function(){
+                // $(this).hide();
+                console.log("clicked addcart");
+                $data=$(this).parent().parent().parent().html();
+
+                console.log($data);
+
+                //$data=$data.hasClass('name').val();
+
+                console.log($(this).parent().parent().parent().find('.refProduct').val());
+                $ref=$(this).parent().parent().parent().find('.refProduct').val();
+                $.ajax({
+                    url:'{{ path('ajouterAuPanier') }}',
+                    type: "GET",
+                    data: {
+                        'ref' : $ref
+                    },
+                    dataType:"text",
+                    success: function (data)
+                    {
+                        console.log(data);
+                        // console.log(data.qte);
+                        $date=$.parseJSON(data);
+                        console.log($date.etat);
+                        if (!($date.etat = 1)) {
+                        } else {
+                            alert("Deja ajouter");
+                        }
+                        $("#countItems").text($date.articles);
+                    }
+
+                });
+
+            });
+
+
+            /* 1. Visualizing things on Hover - See next part for action on click */
+            $('#stars li').on('mouseover', function(){
+                var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+                // Now highlight all the stars that's not after the current hovered star
+                $(this).parent().children('li.star').each(function(e){
+                    if (e < onStar) {
+                        $(this).addClass('hover');
+                    }
+                    else {
+                        $(this).removeClass('hover');
+                    }
+                });
+
+            }).on('mouseout', function(){
+                $(this).parent().children('li.star').each(function(e){
+                    $(this).removeClass('hover');
+                });
+            });
+
+
+            /* 2. Action to perform on click */
+            $('#stars li').on('click', function(){
+                var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+                var stars = $(this).parent().children('li.star');
+
+                var ref=$('#refDiv').attr('data-id');
+
+                for (i = 0; i < stars.length; i++) {
+                    $(stars[i]).removeClass('selected');
+                }
+
+                for (i = 0; i < onStar; i++) {
+                    $(stars[i]).addClass('selected');
+                }
+
+
+                var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+
+                $.ajax({
+                    url:'{{ path('insertRating') }}',
+                    type: "GET",
+                    data: {
+                        'ref' : $ref,
+                        'ratng' : $rating
+                    },
+
+                    success: function (data)
+                    {
+
+                        $total=$rating +1;
+
+
+
+                    }
+
+                });
+
+            });
+
+
+        });
+
+
+        function responseMessage(msg) {
+            $('.success-box').fadeIn(200);
+            $('.success-box div.text-message').html("<span>" + msg + "</span>");
+        }
+
+
+
+    </script>
+
+
+    {{ parent() }}
+
+    <style>
+        #divimg{
+
+            float: left;
+            width:70%;
+            height:95%;
+        }
+
+        #detailprod{
+            margin-left:35%;
+        }
+        #square{
+           font-size: 30px;
+        }
+
+
+        /* Rating Star Widgets Style */
+        .rating-stars ul {
+            list-style-type:none;
+            padding:0;
+
+            -moz-user-select:none;
+            -webkit-user-select:none;
+        }
+        .rating-stars ul > li.star {
+            display:inline-block;
+
+        }
+
+        /* Idle State of the stars */
+        .rating-stars ul > li.star > i.fa {
+            font-size:1.5em; /* Change the size of the stars */
+            color:#ccc; /* Color on idle state */
+        }
+
+        /* Hover state of the stars */
+        .rating-stars ul > li.star.hover > i.fa {
+            color:#FFCC36;
+        }
+
+        /* Selected state of the stars */
+        .rating-stars ul > li.star.selected > i.fa {
+            color:#FF912C;
+        }
+
+    </style>
+
+
+{% endblock %}
+
+
+
+
+{% block container %}
+
+
+
+
+
+    <!--Start shop-->
+<div class="tz-shop">
+    <div class="container">
+       <div class="row">
+
+            <div class="col-md-3">
+
+                    <!--Start for shop sidebar-->
+                    <div class="tz-shop-sidebar">
+                        <aside class="widget widget_product_categories">
+
+                            <h3 class="widget-title">Catalog</h3>
+                            <div class="widget_price_filter">
+                                <h4 class="widget-title-children">
+                                    FILTRE PRIX
+                                </h4>
+                                <form>
+                                    <div id="slider-range"></div>
+                                    <div class="price_label">
+                                        <a href="{{ path('filtrerPrix', { 'prix': 50 }) }}">Prix > 50</a><br>
+                                        <a href="{{ path('filtrerPrix', { 'prix': 100  }) }}">Prix > 100</a><br>
+                                        <a href="{{ path('filtrerPrix', { 'prix': 200 }) }}">Prix > 200</a><br>
+                                        <a href="{{ path('filtrerPrix', { 'prix': 300 }) }}">Prix > 300</a><br>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                            <div class="widget_color_filter">
+                                <h4 class="widget-title-children">
+                                    FILTRE COULEUR
+                                </h4>
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('filtrerCouleur', { 'couleur': 'black' }) }}" class="fa fa-square" style="color: black" id="square"></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('filtrerCouleur', { 'couleur': 'blue' }) }}" class="fa fa-square" style="color: blue" id="square"></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('filtrerCouleur', { 'couleur': 'green' }) }}" class="fa fa-square" style="color: green" id="square"></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('filtrerCouleur', { 'couleur': 'yellow' }) }}" class="fa fa-square" style="color: yellow" id="square"></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('filtrerCouleur', { 'couleur': 'pink' }) }}" class="fa fa-square" style="color: pink" id="square"></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('filtrerCouleur', { 'couleur': 'darkred' }) }}" class="fa fa-square" style="color: darkred" id="square"></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('filtrerCouleur', { 'couleur': 'purple' }) }}" class="fa fa-square" style="color: purple" id="square"></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('filtrerCouleur', { 'couleur': 'whitesmoke' }) }}" class="fa fa-square" style="color: whitesmoke;" id="square" ></a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="widget-size-filter">
+                                <h4 class="widget-title-children">
+                                    FILTRE SEXE
+                                </h4>
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('filtrerSexe', { 'sexe': 'homme' }) }}">HOMME</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('filtrerSexe', { 'sexe': 'femme' }) }}">FEMME</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('filtrerSexe', { 'sexe': 'enfant' }) }}">ENFANT</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+
+
+            </div>
+           <!--End shop sidebar-->
+
+
+           <!--Start shop content-->
+
+                <div class="col-md-9">
+
+                    <div class="tz-shop-content">
+
+
+
+
+                        <ul class="tz-breadcrumbs">
+                            <li>
+                                <a href="{{ path('afficherProduits') }}">Home</a>
+                            </li>
+                            <li class="current">
+                                Magazin.
+                            </li>
+                        </ul>
+
+
+                        <div class="shop-banner">
+                            <img src="{{ asset('front/images/product/banner.jpg') }}" alt="banner">
+                        </div>
+
+
+                        <div class="catalog-meta">
+                            <div class="catalog_top">
+                                <span class="style-switch">
+                                    <a class="nav-grid-view fa fa-th-large active"></a>
+                                    <a class="nav-list-view fa fa-list"></a>
+                                </span>
+
+                                <form class="shop-order">
+
+                                    <label class="form-arrow" for="select-order">
+                                        <select id="select-order" class="orderby" onChange="window.location=this.value;">
+                                            <option value="'">Trier Selon:</option>
+                                            {{ knp_pagination_sortable(produit, 'Nom de produit A-Z', 'nomP', {}, {'direction': 'asc'}) }}
+                                            {{ knp_pagination_sortable(produit, 'Nom du produit Z-A', 'nomP', {}, {'direction': 'desc'}) }}
+                                            {{ knp_pagination_sortable(produit, 'Prix (plus petit au plus grand)', 'prixP', {}, {'direction': 'asc'}) }}
+                                            {{ knp_pagination_sortable(produit, 'Price (plus grand au plus petit)', 'prixP', {}, {'direction': 'desc'}) }}
+                                        </select>
+                                    </label>
+                                </form>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="tz-product row grid-eff" id="productsContainer">
+                            {% for p in produit %}
+                            <!--Product item-->
+                            <div class="product-item col-md-4 col-sm-6" data-name="{{ p.nomP }}" data-price="{{ p.prixP }}" >
+                                <div class="item">
+                                    <div class="product-item-inner">
+
+                                        <div class="product-item">
+                                            <div class="product-thubnail">
+                                                <img src="{{ asset('uploads/images/' ~ p.image) }}" alt="product 1"  style="width: 200px; height: 200px;"/>
+                                                <div class="product-meta">
+                                                    <input type="hidden" class="refProduct" value="{{ p.refP }}" >
+
+                                                    <a class="add-to-cart addcart2" ><i class="fa fa-cart-plus" style="padding: 12px 12px 12px 12px; font-size: 20px; "></i></a>
+                                                    <span class="quick-view">
+                                             <a type="button" data-toggle="modal" data-target="#myModal{{ p.refP }}" ><i class="fa fa-info-circle" style="padding: 12px 12px 12px 12px; font-size: 20px; "></i></a>
+
+                                            </span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="product-infomation" >
+                                                <span class="product-name">{{ p.nomP }}</span>
+                                                <span class="product-price">{{ p.prixP }}DT</span>
+                                                <span class="product-attr">
+                                                    {% for item in p.couleurP %}
+                                                        <i class="fa fa-circle" style="color: {{ item }}"></i>
+                                                    {% endfor %}
+                                                </span>
+                                            </div>
+
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End product item-->
+                            <div id="myModal{{ p.refP }}" class="modal fade" role="dialog">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header" >
+                                            <button type="button" class="close" data-dismiss="modal" style="margin-left: 15px;">&times;</button>
+                                            <h3 class="modal-title" style="margin-right: 510px;">Détail du produit:</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="divimg">
+                                                <img src="{{ asset('uploads/images/' ~ p.image) }}" alt="product 1"  style="width: 300px; height: 400px;"/>
+                                                <p style="font-size: large; font-weight: bold; text-decoration: underline;">Description: </p>
+                                                <p style="width:180px;">{{ p.description }}</p>
+                                            </div>
+
+                                            <div id="detailprod">
+                                                <ul class="product-event-content">
+
+                                                    <li>
+                                                        <h3><a href="#" style="margin-left: 79px;">{{ p.nomP }}</a></h3>
+
+
+                                                        <span class="product-rating" >
+<div id="refDiv" data-id="{{ p.refP }}"></div>
+                                                        <!-- Rating Stars Box -->
+                                                          <div class='rating-stars text-center'>
+                                                            <ul id='stars'>
+                                                              <li class='star' title='Poor' data-value='1'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                              </li>
+                                                              <li class='star' title='Fair' data-value='2'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                              </li>
+                                                              <li class='star' title='Good' data-value='3'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                              </li>
+                                                              <li class='star' title='Excellent' data-value='4'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                              </li>
+                                                              <li class='star' title='WOW!!!' data-value='5'>
+                                                                <i class='fa fa-star fa-fw'></i>
+                                                              </li>
+                                                            </ul>
+                                                          </div>
+
+                                                        </span>
+
+
+                                                        <center> <span class="event-price" >Prix: {{ p.prixP }}DT</span></center>
+
+
+                                                    </li>
+
+                                                    <li class="product-event-attr" style="margin-top: -200px;" >
+                                                                <span class="tz-color" style="margin-left: -190px;">
+                                                                    Color:
+                                                                     {% for item in p.couleurP %}
+                                                                         <i class="fa fa-circle" style="color: {{ item }}"></i>
+                                                                     {% endfor %}
+                                                                </span>
+
+                                                        <span class="tz-stock" style="margin-left: -20px">
+                                                               {% if p.quantiteP == 0 %}
+                                                                   - Rupture de stock -
+                                                               {% else %}
+                                                                   - En stock -
+                                                               {% endif %}
+                                                            </span>
+
+
+                                                    </li>
+
+
+                                                    <li class="event-footer" style="margin-top: -100px;">
+                                                        <a href="#" class="add-to-cart" style="margin-left: 10px;">Ajouter Au Panier.</a>
+                                                        <a href="{{ path('ajouterWishlists', { 'refP': p.refP }) }}" class="add-to-wishlist" style="margin-left: -10px;">Ajouter A Wishlist.</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+
+
+                        <!----------------------------------------------PAGINATION-------------------------------->
+                        <nav class="pagination" style="margin-left: 15px;">
+                            <div class="custom-pagination">
+                                {# display navigation #}
+                                <div class="navigation">
+                                    {{ knp_pagination_render(produit) }}
+                                </div>
+                            </div>
+                        </nav>
+
+                        <!------------------------------------------------------------------------------------------------>
+
+                    </div>
+
+                </div>
+           <!--End shop content-->
+
+
+       </div>
+    </div>
+</div>
+    <!--End Shop-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+

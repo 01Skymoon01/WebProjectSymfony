@@ -1,0 +1,215 @@
+
+{% extends 'default/back/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+    <style>
+        #div-add-product{
+            margin-left: 18%;
+            margin-top: 5%;
+            width: 80%;
+        }
+
+        .form-control:disabled {
+            background-color: #101829;
+            color: #fd4339;
+        }
+
+    </style>
+
+
+    <script>
+        function validate() {
+
+            //var libelle = document.getElementById("libellec").value;
+            var qte = document.getElementById("qte").value;
+            var prix = document.getElementById("prix").value;
+            var nom = document.getElementById("nom").value;
+            var nomMarque = document.getElementById("nomMarque").value;
+
+            //var error_message = document.getElementById("error_message");
+
+            if( qte < 0 ){
+
+                error_message.style.display='block';
+                text = "<i class=\"fa fa-exclamation-triangle adminpro-warning-danger admin-check-pro\"></i> La quantité ne peut pas être négative.";
+                error_message.innerHTML = text;
+                //error_message.appendBefore("ezzd");
+                return false;
+            }
+            else if( prix <= 0 ){
+
+                error_message.style.display='block';
+                text = "<i class=\"fa fa-exclamation-triangle adminpro-warning-danger admin-check-pro\"></i> Le prix ne peut pas être négative ou nul.";
+                error_message.innerHTML = text;
+                //error_message.appendBefore("ezzd");
+                return false;
+            } else if ( nom.length < 2 ){
+
+                error_message.style.display='block';
+                text = "<i class=\"fa fa-exclamation-triangle adminpro-warning-danger admin-check-pro\"></i> Le nom doit contenir au moins 2 caractères.";
+                error_message.innerHTML = text;
+                //error_message.appendBefore("ezzd");
+                return false;
+            }
+            else if ( nomMarque.length < 2 ){
+
+                error_message.style.display='block';
+                text = "<i class=\"fa fa-exclamation-triangle adminpro-warning-danger admin-check-pro\"></i> Le nom de la marque doit contenir au moins 2 caractères.";
+                error_message.innerHTML = text;
+                //error_message.appendBefore("ezzd");
+                return false;
+            }
+            else {
+                error_message.style.display='none';
+                return true;
+            }
+
+        }
+    </script>
+
+{% endblock %}
+
+{% block container %}
+
+    {{ form_start(form,{'attr': {'onsubmit':'return validate();','novalidate': 'novalidate'}}) }}
+    {{ form_errors(form) }}
+    <div class="single-product-tab-area mg-b-30" >
+        <!-- Single pro tab review Start-->
+        <div class="single-pro-review-area" >
+
+            <div class="container-fluid" >
+
+                <div class="row" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                        <div class="review-tab-pro-inner" id="div-add-product">
+
+                            <div id="myTabContent" class="tab-content custom-product-edit" >
+                                <div class="product-tab-list tab-pane fade active in" id="description">
+
+
+
+
+                                    <div class="row">
+                                        <div class="alert alert-danger alert-mg-b" id="error_message" hidden="hidden">
+
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
+
+                                            <div class="review-content-section">
+
+
+
+
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="icon nalika-favorites" aria-hidden="true"></i></span>
+                                                    {{ form_widget(form.nomP, {'id': 'nom', 'attr': {'class': 'form-control' ,'placeholder': "Nom Produit"} }) }}
+                                                </div>
+
+                                                <div class="input-group mg-b-pro-edt" >
+                                                    <span class="input-group-addon"><i class="fa fa-transgender" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.genreP, { 'attr': {'class': 'form-control' ,'placeholder': "Genre"} }) }}
+                                                </div>
+
+
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="icon nalika-like" aria-hidden="true"></i></span>
+                                                    {{ form_widget(form.couleurP,{'attr': {'class':'form-control'}}) }}
+                                                </div>
+
+                                                <div class="input-group mg-b-pro-edt" >
+                                                    <span class="input-group-addon"><i class="fa fa-archive" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.quantiteP, { 'id': 'qte','attr': {'class': 'form-control' ,'placeholder': "Quantité"} }) }}
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
+                                            <div class="review-content-section">
+
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                                                    {{ form_widget(form.prixP, {'id': 'prix', 'attr': {'class': 'form-control' ,'placeholder': "Prix"} }) }}
+                                                </div>
+
+
+                                                <div class="input-group mg-b-pro-edt" >
+                                                    <span class="input-group-addon"><i class="fa fa-diamond" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.marqueP, { 'id':'nomMarque','attr': {'class': 'form-control' ,'placeholder': "Marque"} }) }}
+                                                </div>
+
+                                                <div class="input-group mg-b-pro-edt" >
+                                                    <span class="input-group-addon"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
+
+                                                    {{ form_widget(form.description, { 'attr': {'class': 'form-control' ,'placeholder': "Description"} }) }}
+                                                </div>
+
+
+
+
+
+                                                <div class="input-group mg-b-pro-edt">
+
+
+                                                    {{ form_widget(form.image , {'enctype': 'multipart/form-data'}) }}
+
+                                                </div>
+
+
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="fa fa-th" aria-hidden="true"></i></span>
+                                                    {{ form_widget(form.ref_c, {'attr': {'class':'form-control pro-edt-select form-control-primary'}}) }}
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="text-center custom-pro-edt-ds">
+
+                                                {{ form_widget(form.Modifier, { 'attr': {'class': 'btn btn-ctl-bt waves-effect waves-light m-r-10' ,'placeholder': "Libellé"} }) }}
+                                                <a type="button" class="btn btn-ctl-bt waves-effect waves-light" href="{{ path('baskel_homepage') }}">Annuler
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    {{ form_end(form) }}
+
+
+{% endblock %}
+
+
+
+

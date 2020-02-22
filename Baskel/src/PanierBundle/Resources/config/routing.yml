@@ -39,3 +39,6 @@ SupprimerCommande:
 TrieParColumn:
     path:     /TrieParColumn
     defaults: { _controller: PanierBundle:Default:TrieParColumn }
+CountPanier:
+    path:     /CountPanier
+    defaults: { _controller: PanierBundle:Default:CountPanier }
