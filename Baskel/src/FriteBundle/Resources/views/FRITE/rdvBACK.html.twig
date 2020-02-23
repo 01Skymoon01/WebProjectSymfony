@@ -32,6 +32,32 @@
         });
     </script>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Reparation',     {{ rep }}],
+            ['Maintenance Technique',      {{ MT }}],
+            ['Rendez-vous Technicien',  {{ RDVT }}],
+            ['Autres',  {{ Aut }}],
+                    ]);
+
+        var options = {
+            title: 'Objets des Rendez-vous',
+            is3D: true,
+            'backgroundColor': '#2d4c7d',
+            colors:['#A40086','#FFD66A','#F44336','#AE3FFF',],
+            'color':'white'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+    }
+</script>
+
 
 
     <div class="breadcome-area" style="margin-left:14%">
@@ -204,6 +230,8 @@
                             </tbody>
                             </tr>
                         </table>
+
+                        <center><div id="piechart_3d" style="width: 900px; height: 500px;"></div></center>
 
                     </div>
                 </div>
