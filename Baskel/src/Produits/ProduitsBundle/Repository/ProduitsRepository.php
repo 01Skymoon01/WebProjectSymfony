@@ -77,4 +77,25 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getResult();
     }
+
+    public function UpdateRating($refP,$rating)
+    {
+        $query = $this->getEntityManager()->createQuery(
+
+            'UPDATE ProduitsBundle:Produits p SET p.rating = :rating  WHERE p.ref_p= :refP'
+        )->setParameter('refP',$refP)
+            ->setParameter('rating',$rating);
+
+        return $query->getResult();
+    }
+
+    public function fetchRating()
+    {
+        $query = $this->getEntityManager()->createQuery(
+
+            'SELECT p.rating from ProduitsBundle:Produits p '
+        );
+
+        return $query->getResult();
+    }
 }

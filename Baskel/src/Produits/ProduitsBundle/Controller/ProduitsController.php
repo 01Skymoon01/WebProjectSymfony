@@ -14,6 +14,7 @@ use Produits\ProduitsBundle\Form\CategoriesType;
 use Produits\ProduitsBundle\Form\MailType;
 use Produits\ProduitsBundle\Form\ProduitsModifType;
 use Produits\ProduitsBundle\Form\ProduitsType;
+use Symfony\Component\HttpFoundation\Response;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Produits\ProduitsBundle\Repository\WishlistRepository;
 use Swift_Message;
@@ -699,29 +700,27 @@ class ProduitsController extends Controller
 
     function insertRatingAction(Request $request)
     {
-        //$em = $this->getDoctrine()->getManager();
-        //$p = $em->getRepository(Produits::class)->findOneBy(array('ref_p'=>$refP));
+        $em = $this->getDoctrine()->getManager();
+
 
         $id=$request->get('ref');
         $rating=$request->get('rating');
 
-var_dump($rating);
+        $em->getRepository(Produits::class)->UpdateRating($id,$rating);
+        $msg="saye";
+        return new Response(json_encode(array( 'msg'=>$msg)));
 
-      /*  $rating = new Rating();
+    }
 
-
-
-            $em2 = $this -> getDoctrine() -> getManager();
-
-            $rating -> setIdProd($p);
-            $rating -> setRate($ratingValue);
-
-            $em2 -> persist($rating);
-            $em2 -> flush();
-*/
+    function FetchRatingAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
 
 
-       // return $this -> redirectToRoute('shop');
+        $rating=$em->getRepository(Produits::class)->fetchRating();
+       $nbr=count($rating);
+        return new Response(json_encode(array( 'rating'=>$rating,'nbr'=>$nbr)));
+
     }
 
 

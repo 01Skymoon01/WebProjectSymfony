@@ -109,4 +109,4 @@ insertRating:
 
 fetchRating:
     path:     /fetchRating
-    defaults: { _controller: ProduitsBundle:Produits:fetchRating }
+    defaults: { _controller: ProduitsBundle:Produits:FetchRating }

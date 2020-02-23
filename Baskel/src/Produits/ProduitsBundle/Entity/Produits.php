@@ -102,8 +102,33 @@ class Produits
      */
     private $description;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="rating_p", type="integer")
+     * @Assert\GreaterThanOrEqual(
+     *     value = 0,
+     *     message="Quantite ne peut pas etre négative."
+     * )
+     * @Assert\NotBlank(message="Veuillez remplir ce champ!")
+     */
+    private $rating = 0;
 
+    /**
+     * @return int
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
 
+    /**
+     * @param int $rating
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
+    }
 
 
 
