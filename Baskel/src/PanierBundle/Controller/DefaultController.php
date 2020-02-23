@@ -275,7 +275,7 @@ class DefaultController extends Controller
 
     }
 
-    public function AfficherCommandeAction(){
+    public function AfficherCommandeAction(Request $request){
 
         $PN=0;
         $Totals=0;
@@ -293,8 +293,16 @@ class DefaultController extends Controller
                     ->getRepository(Commande::class)
                     ->SelectCommandePaye();
 
-
-        return $this -> render('@Panier/Default/CommandeBack.html.twig', array('c'=>$commande, 'nonPaye' =>$PN ,'Paye'=>$Paye));
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator = $this ->get('knp_paginator');
+        $result=$paginator->paginate(
+            $commande,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+        );
+        return $this -> render('@Panier/Default/CommandeBack.html.twig', array('c'=>$result, 'nonPaye' =>$PN ,'Paye'=>$Paye));
     }
 
     public function ModifierEtatCommandeAction($id,$etat){

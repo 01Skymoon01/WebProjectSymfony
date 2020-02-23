@@ -190,7 +190,15 @@ class DefaultController extends Controller
     public function AfficherRDVAction()
     {
         $rdv= $this->getDoctrine()->getManager()->getRepository(RDV::class)->findAll();
-        return $this->render('@Frite/FRITE/rdvBACK.html.twig',array('rdv'=>$rdv));
+        $rep=$this->getDoctrine()->getRepository(RDV::class)->Rep();
+        $MT=$this->getDoctrine()->getRepository(RDV::class)->MaintTech();
+        $RDVT=$this->getDoctrine()->getRepository(RDV::class)->RDVTech();
+        $PF=$this->getDoctrine()->getRepository(RDV::class)->ProbFact();
+        $Aut=$this->getDoctrine()->getRepository(RDV::class)->SelectAutre();
+
+
+        return $this->render('@Frite/FRITE/rdvBACK.html.twig',array('rdv'=>$rdv, 'rep'=>$rep,
+            'MT'=>$MT, 'RDVT'=>$RDVT, 'PF'=>$PF, 'Aut'=>$Aut ));
     }
 
     public function SupprimerRDVAction($id)

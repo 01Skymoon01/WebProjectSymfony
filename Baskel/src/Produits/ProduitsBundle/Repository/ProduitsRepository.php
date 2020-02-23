@@ -98,4 +98,35 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getResult();
     }
+
+
+
+    public function StatProdExp()
+    {
+        $query = $this->getEntityManager()->createQuery(
+
+            'SELECT COUNT(p) from ProduitsBundle:Produits p WHERE p.quantiteP=0'
+        );
+
+        return $query->getSingleScalarResult();
+    }
+
+
+    public function StatProdNonExp()
+    {
+        $query = $this->getEntityManager()->createQuery(
+
+            'SELECT COUNT(p) from ProduitsBundle:Produits p WHERE p.quantiteP!=0'
+        );
+
+        return $query->getSingleScalarResult();
+    }
+
+
+
+
+
+
+
+
 }

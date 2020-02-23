@@ -197,7 +197,12 @@
                             {% endfor %}
                         </table>
 
-
+                        <div class="custom-pagination">
+                            {# display navigation #}
+                            <div class="navigation">
+                                {{ knp_pagination_render(c) }}
+                            </div>
+                        </div>
 
 
 

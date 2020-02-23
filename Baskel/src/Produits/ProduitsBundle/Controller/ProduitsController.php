@@ -415,8 +415,13 @@ class ProduitsController extends Controller
 
         $user = $this->getUser();
 
+        $produitsExpire=$this -> getDoctrine()
+            -> getRepository(Produits::class)
+            ->StatProdExp();
 
-
+        $produitsNonExpire=$this -> getDoctrine()
+            -> getRepository(Produits::class)
+            ->StatProdNonExp();
 
         /**
          * @var $paginator \Knp\Component\Pager\Paginator
@@ -430,7 +435,7 @@ class ProduitsController extends Controller
 
 
 
-        return $this -> render('@Produits/Produits/afficherProduitsBack.html.twig', array('produits' => $result,'user' => $user));
+        return $this -> render('@Produits/Produits/afficherProduitsBack.html.twig', array('produits' => $result,'user' => $user, 'prodExp'=>$produitsExpire,'prodNonExp'=>$produitsNonExpire));
     }
 
 
