@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <div class="container" style="margin-top: 30px;margin-bottom: 30px;">
+    <h1 class="text-center" style="margin-bottom: 50px">Commentaires-Forums</h1>
+
+
+    <table class="table-hover table" style=" border-collapse: separate;
+  border-spacing: 40px 0;">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commentairesForum.id }}</td>
+            </tr>
+            <tr>
+                <th>Data</th>
+                <td>{{ commentairesForum.data }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if commentairesForum.date %}{{ commentairesForum.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commentairesforum_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('commentairesforum_edit', { 'id': commentairesForum.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+    </div>
+{% endblock %}

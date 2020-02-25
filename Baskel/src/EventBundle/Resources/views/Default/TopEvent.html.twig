@@ -1,0 +1,22 @@
+
+{% extends 'default/back/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+
+    <center>
+        {% for t in topEvent %}
+            <h1>{{ t.nom }}</h1>
+
+        {% endfor %}
+
+    </center>
+{% endblock %}
+
+

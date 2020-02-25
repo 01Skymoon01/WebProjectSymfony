@@ -2,7 +2,7 @@
 # http://symfony.com/doc/current/book/security.html
 security:
     encoders:
-        AppBundle\Entity\User: bcrypt
+        AppBundle\Entity\User: bcrypt #a  reviser
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         fos_userbundle:
@@ -32,3 +32,4 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLES_ADMIN }
         - { path: ^/client/, role: ROLES_USER }
+        - { path: ^/livreur/, role: ROLE_LIVREUR }

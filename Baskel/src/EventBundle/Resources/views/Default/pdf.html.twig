@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Contrat</title>
+
+    <link rel="stylesheet" href="{{ asset('http://localhost/WebProjectSymfony/Baskel/web/back/css/pdf.css') }}" media="all" />
+</head>
+<body>
+<header class="clearfix">
+    <div id="logo">
+        <img src="{{ asset('http://localhost/WebProjectSymfony/Baskel/web/back/img/notification/logobaskel.png') }}"  class="img-fluid">
+    </div>
+    <div id="company">
+        <h2 class="name">Baskel</h2>
+        <div>123 Rue El Saada Ariana
+            Tunisia</div>
+        <div>(216) 53 88 40 67</div>
+        <div><a href="#">Baskel@baskel.tn</a></div>
+    </div>
+    </div>
+</header>
+<main>
+    <h1><center>Contrat</center></h1>
+
+   <br>
+    <hr>
+    <h3>  ID Contrat: <br>  {{ contrat.id }} </h3> <br>
+    <h3> Pack : <br> {{ contrat.pack }} DT </h3> <br>
+    <h3>  Description : <br>{{ contrat.description }} </h3> <br>
+    <h6>Baskel.</h6>
+
+    <footer>
+</footer>
+</body>
+</html>
+

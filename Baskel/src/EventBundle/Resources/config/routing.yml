@@ -1,0 +1,94 @@
+event_homepage:
+    path:     /
+    defaults: { _controller: EventBundle:Default:index }
+admin_homepage:
+    path:     /admin
+    defaults: { _controller: EventBundle:Default:indexAdmin }
+
+AjoutEv:
+    path:     /AjoutEv
+    defaults: { _controller: EventBundle:Event:AjoutEvent }
+
+AjoutP:
+    path:     /AjoutP
+    defaults: { _controller: EventBundle:Partenaire:AjoutPartenaire }
+
+AfficheEv:
+    path:     /AfficheEv
+    defaults: { _controller: EventBundle:Event:AfficheEvent }
+
+AfficheEvfront:
+    path:     /AfficheEvf
+    defaults: { _controller: EventBundle:Event:AfficheEventfront }
+
+Supprimer:
+    path:     /SupprimerEv/{id}
+    defaults: { _controller: EventBundle:Event:SupprimerEvent }
+
+ModifierEv:
+    path:     /ModifeEv/{id}
+    defaults: { _controller: EventBundle:Event:ModifierEvent }
+
+AfficheP:
+    path:     /AfficheP
+    defaults: { _controller: EventBundle:Partenaire:AffichePartenaire }
+
+SupprimerP:
+    path:     /SupprimerP/{id}
+    defaults: { _controller: EventBundle:Partenaire:SupprimerPartenaire }
+
+ModifierP:
+    path:     /ModifeP/{id}
+    defaults: { _controller: EventBundle:Partenaire:ModifierPartenaire }
+
+
+SignerC:
+    path:     /SignerC/{id}
+    defaults: { _controller: EventBundle:Contrat:SignerContrat }
+
+AfficheC:
+    path:     /AfficheC
+    defaults: { _controller: EventBundle:Contrat:AfficheContrat }
+
+SupprimerC:
+    path:     /SupprimerC/{id}
+    defaults: { _controller: EventBundle:Contrat:SupprimerContrat }
+
+Reserver:
+    path:     /Reservation/{id}
+    defaults: { _controller: EventBundle:Reservation:Reservation }
+
+
+
+MailResp:
+    path:     /Mail/{id}
+    defaults: { _controller: EventBundle:Mail:sendMailResponsable }
+
+AfficheRes:
+    path:     /AfficheReservation/
+    defaults: { _controller: EventBundle:Reservation:AfficheReservation }
+
+ConfirmerRes:
+    path:     /ConfirmerRes/{id}
+    defaults: { _controller: EventBundle:Reservation:ConfirmerReservation }
+
+AnnulerRes:
+    path:     /AnnulerRes/{id}
+    defaults: { _controller: EventBundle:Reservation:AnnulerReservation }
+
+PDF:
+    path:     /pdf/{id}
+    defaults: { _controller: EventBundle:Contrat:pdf }
+
+TopEvent:
+    path:     /topev
+    defaults: { _controller: EventBundle:Event:TopEvent }
+
+
+AfficheReservationBack:
+    path:     /AfficheResBack
+    defaults: { _controller: EventBundle:Reservation:AfficheReservationBack }
+
+calendar:
+    path:     /calendar
+    defaults: { _controller: EventBundle:Event:calendar }

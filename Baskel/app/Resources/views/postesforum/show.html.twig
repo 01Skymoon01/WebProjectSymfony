@@ -1,0 +1,82 @@
+{% extends 'default/front/header.html.twig' %}
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+
+{% block container %}
+ <div class="container" style="margin-top: 30px;margin-bottom: 30px;">
+    <h1 class="text-center" style="margin-bottom: 50px">Postes-Forums</h1>
+     <style>
+         ul {
+             list-style-type: none;
+             margin: 30%;
+             padding: 0;
+             overflow: hidden;
+         }
+
+         li {
+             float: left;
+             margin: 10px;
+         }
+
+         li a {
+             display: block;
+             color: white;
+             text-align: center;
+             padding: 16px;
+             text-decoration: none;
+         }
+
+         li a:hover {
+             background-color: #111111;
+         }
+     </style>
+
+
+    <table class="table-hover table" style=" border-collapse: separate;
+  border-spacing: 40px 0;">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ postesForum.id }}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ postesForum.categorie }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ postesForum.titre }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if postesForum.date %}{{ postesForum.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Data</th>
+                <td>{{ postesForum.data }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul style="">
+        <li>
+            <a href="{{ path('postesforum_index') }}" class="btn btn-default"><i class="fa fa-backward">  Back to the list</i></a>
+        </li>
+        <li>
+            <a href="{{ path('postesforum_edit', { 'id': postesForum.id }) }}"class="btn btn-default"><i class="fa fa-edit">  Modifier</i></a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" class="btn btn-default">
+            {{ form_end(delete_form) }}
+        </li>
+        <li>
+            <a href="{{ path('forum_commenter', { 'id': postesForum.id }) }}"class="btn btn-default"><i class="fa fa-edit">  Commenter</i></a>
+        </li>
+    </ul>
+ </div>
+{% endblock %}

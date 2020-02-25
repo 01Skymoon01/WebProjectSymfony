@@ -73,6 +73,6 @@ pdfRec:
 sendMail:
     path:     /mail
     defaults: { _controller: FriteBundle:Default:sendMail }
-calendar:
+hop:
     path:     /calendrier
     defaults: { _controller: FriteBundle:Default:calendar}

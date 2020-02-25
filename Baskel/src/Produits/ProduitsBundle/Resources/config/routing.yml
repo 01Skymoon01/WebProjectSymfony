@@ -110,3 +110,9 @@ insertRating:
 fetchRating:
     path:     /fetchRating
     defaults: { _controller: ProduitsBundle:Produits:FetchRating }
+
+
+
+soldeEdit:
+    path:     /soldeEdit/{ref_p}
+    defaults: { _controller: ProduitsBundle:Produits:soldeEdit }

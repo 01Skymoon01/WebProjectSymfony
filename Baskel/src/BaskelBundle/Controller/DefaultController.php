@@ -31,4 +31,8 @@ class DefaultController extends Controller
             )
         );
     }
+
+    public  function  ImgFaqAction(){
+        return $this->render('@Baskel/Default/FAQImg.html.twig');
+    }
 }

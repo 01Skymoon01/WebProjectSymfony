@@ -51,6 +51,11 @@
       <path value="$PROJECT_DIR$/Baskel/vendor/ocramius/proxy-manager" />
       <path value="$PROJECT_DIR$/Baskel/vendor/doctrine/doctrine-migrations-bundle" />
       <path value="$PROJECT_DIR$/Baskel/vendor/doctrine/migrations" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/bundles/FOS" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/mrad/notifications-bundle" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/pusher/pusher-php-server" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/paragonie/sodium_compat" />
+      <path value="$PROJECT_DIR$/Baskel/vendor/ancarebeca/full-calendar-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.5.0" />

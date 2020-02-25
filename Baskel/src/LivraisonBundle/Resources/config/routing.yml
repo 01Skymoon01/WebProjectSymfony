@@ -1,0 +1,43 @@
+livreur_homepage:
+    path:     /livreur
+    defaults: { _controller: BaskelBundle:Default:indexLivreur }
+affvehicule:
+    path:     /affvehicule
+    defaults: { _controller: LivraisonBundle:Vehicule:afficheVehicule }
+ajoutvehicule:
+    path:     /ajoutvehicule
+    defaults: { _controller: LivraisonBundle:Vehicule:ajout }
+suppvehicule:
+    path:     /suppvehicule/{id}
+    defaults: { _controller: LivraisonBundle:Vehicule:supprimer }
+modifiervehicule:
+    path:     /modifiervehicule/{id}
+    defaults: { _controller: LivraisonBundle:Vehicule:modifier }
+consliv:
+    path:     /consliv
+    defaults: { _controller: LivraisonBundle:Livreur:afficheLivreur }
+modifetat:
+    path:     /modifetat/{id}
+    defaults: { _controller: LivraisonBundle:Livreur:modifEtat }
+modifsolde:
+    path:     /modifsolde/{id}
+    defaults: { _controller: LivraisonBundle:Livreur:modifSolde }
+
+sendMail:
+    path:     /Mail
+    defaults: { _controller: LivraisonBundle:Mail:sendMail }
+pdf:
+    path:     /pdf/{id}
+    defaults: { _controller: LivraisonBundle\Controller\LivreurController::pdfAction }
+registerLivreur:
+    path:     client/registerLivreur
+    defaults: { _controller: LivraisonBundle:Livreur:registerLivreur }
+login:
+    path:     /login
+    defaults: { _controller: LivraisonBundle:Security:login }
+afficheCommandeNonLivree:
+    path:   /afficheCommandeNonLivree
+    defaults: { _controller: LivraisonBundle:Livreur:afficheCommandeNonLivree }
+ModifierEtatCommandeLivree:
+    path:   /ModifierEtatCommandeLivree/{id}/{etat}
+    defaults: { _controller: LivraisonBundle:Livreur:ModifierEtatCommandeLivree }

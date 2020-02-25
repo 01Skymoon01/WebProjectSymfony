@@ -1,0 +1,133 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Dashboard Livreur</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- favicon
+            ============================================ -->
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('back/img/aa.ico') }}">
+        <!-- Google Fonts
+            ============================================ -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+        <!-- Bootstrap CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('back/css/bootstrap.min.css') }}">
+        <!-- Bootstrap CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('back/css/font-awesome.min.css') }}">
+        <!-- nalika Icon CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('nalika-icon.css') }}">
+        <!-- owl.carousel CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('back/css/owl.carousel.css') }}">
+        <link rel="stylesheet" href="{{ asset('back/css/owl.theme.css') }}">
+        <link rel="stylesheet" href="{{ asset('back/css/owl.transitions.css') }}">
+        <!-- animate CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('back/css/animate.css') }}">
+        <!-- normalize CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('back/css/normalize.css') }}">
+        <!-- meanmenu icon CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('back/css/meanmenu.min.css') }}">
+        <!-- main CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('back/css/main.css') }}">
+        <!-- morrisjs CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('back/css/morrisjs/morris.css') }}">
+        <!-- mCustomScrollbar CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('back/css/scrollbar/jquery.mCustomScrollbar.min.cs') }}s">
+        <!-- metisMenu CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('back/css/metisMenu/metisMenu.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('back/css/metisMenu/metisMenu-vertical.css') }}">
+        <!-- calendar CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('back/css/calendar/fullcalendar.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('back/css/calendar/fullcalendar.print.min.css') }}">
+        <!-- style CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('back/css/style.css') }}">
+        <!-- responsive CSS
+            ============================================ -->
+        <link rel="stylesheet" href="{{ asset('back/css/responsive.css') }}">
+
+
+        <!-- modernizr JS
+            ============================================ -->
+        <script src="{{ asset('back/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+    {% endblock %}
+</head>
+<div class="color-line"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
+        <div class="col-md-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="text-center m-b-md custom-login">
+                <h3>Espace Livreur</h3>
+            </div>
+            <div class="hpanel">
+                <div class="panel-body">
+                    {% if error %}
+
+
+                        <div class="alert alert-danger alert-mg-b">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {{ form_start(form) }}
+
+                        <div class="form-group">
+                            {{ form_row(form._username) }}
+
+                        </div>
+                        <div class="form-group">
+
+                            {{ form_row(form._password) }}
+
+                        </div>
+
+
+                    <div class="form-group">
+
+                        {{ form_row(form.submit) }}
+
+                    </div>
+
+                    <a
+                            href="{{ path('register') }}"
+                            class="btn btn-primary"
+                    >
+                        Register
+                    </a>
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <p>Copyright © 2020 <a href="#">Baskel</a> All rights reserved.</p>
+        </div>
+    </div>
+</div>
+
+
+

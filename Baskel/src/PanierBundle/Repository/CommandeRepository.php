@@ -73,6 +73,16 @@ SET e.quantiteP= e.quantiteP - :nbajouter
 
         return $query->getResult();
     }
+    public function ModifierEtatLivraison($id,$etat){
+
+        $query = $this->getEntityManager()
+            ->createQuery(" UPDATE PanierBundle:Commande c 
+SET c.etatLiv = 1
+ where c.id =:id ")
+            ->setParameter('id', $id)
+        ;
+        return $query->getResult();
+    }
 
 
 }

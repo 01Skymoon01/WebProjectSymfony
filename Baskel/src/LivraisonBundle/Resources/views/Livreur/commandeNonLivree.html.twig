@@ -1,0 +1,165 @@
+
+{% extends 'default/livreur/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+
+    <script src="{{ asset('jquery-3.4.1.min.js')}}"> </script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $(".trie").click(function() {
+                console.log($(this).text());
+                var Column=$(this).text();
+                if(Column == "PRIX TOTAL (.TDN)"){
+                    n=3;
+                }
+
+                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                table = document.getElementById("myTable");
+                switching = true;
+                //Set the sorting direction to ascending:
+                dir = "asc";
+                /*Make a loop that will continue until
+                no switching has been done:*/
+                while (switching) {
+                    //start by saying: no switching is done:
+                    switching = false;
+                    rows = table.rows;
+                    /*Loop through all table rows (except the
+                    first, which contains table headers):*/
+                    for (i = 1; i < (rows.length - 1); i++) {
+                        //start by saying there should be no switching:
+                        shouldSwitch = false;
+                        /*Get the two elements you want to compare,
+                        one from current row and one from the next:*/
+                        x = rows[i].getElementsByTagName("TD")[n];
+                        y = rows[i + 1].getElementsByTagName("TD")[n];
+                        /*check if the two rows should switch place,
+                        based on the direction, asc or desc:*/
+
+                        if (dir == "asc") {
+                            if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                                //if so, mark as a switch and break the loop:
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else if (dir == "desc") {
+                            if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                                //if so, mark as a switch and break the loop:
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+
+                    }
+                    if (shouldSwitch) {
+                        /*If a switch has been marked, make the switch
+                        and mark that a switch has been done:*/
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                        //Each time a switch is done, increase this count by 1:
+                        switchcount ++;
+                    } else {
+                        /*If no switching has been done AND the direction is "asc",
+                        set the direction to "desc" and run the while loop again.*/
+                        if (switchcount == 0 && dir == "asc") {
+                            dir = "desc";
+                            switching = true;
+                        }
+                    }
+                }
+
+            });
+        });
+    </script>
+    <!-- HOUNII COMMANDE§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§-->
+
+    <div class="product-status mg-b-30" style="margin-top:50px;margin-left: 15%">
+
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <div>
+                            <h4>Liste des commandes</h4>
+                        </div>
+
+
+
+
+                        <div class="add-product">
+
+                        </div>
+                        <table id="myTable">
+                            <tr>
+
+                                <th><a class="trie">N°</a></th>
+                                <th><a class="trie">DATE</a></th>
+                                <th><a class="trie">PRIX TOTAL (.TDN)</a></th>
+                                <th><a class="trie">NOMBRE C°</a></th>
+                                <th><a class="trie">CIN CLIENT</a></th>
+                                <th><a class="trie">LIVRAISON</a></th>
+                                <th><a class="trie">DETAILS</a></th>
+
+                            </tr>
+
+                            {% for cc in c %}
+                                {%  if( cc.etat == 0)  %}
+
+                                    <tr id="myTable" style="background-color:#1b2a47">
+                                {% else %}
+
+                                    <tr id="myTable" style="background-color:#365D84;">
+                                {% endif %}
+                                <td>{{ cc.id }}</td>
+                                <td>{{ cc.date|date }}</td>
+                                <td>{{ cc.totalPrix }} </td>
+                                <td>{{ cc.nbrProduit }}</td>
+                                <td>{{ cc.idClient }}</td>
+                                <td>
+                                    <a href="{{ path('ModifierEtatCommandeLivree', {'id' : cc.id, 'etat' : cc.etatLiv }) }}">
+                                        <i class="fa fa-edit"></i>{% if(cc.etatLiv == 1) %} livree {% else %} en attente {% endif %}
+
+                                    </a>
+
+                                </td>
+
+
+                                    <a href="{{ path('AfficherDetailsCommande',{ 'id' :cc.id}) }}">    <i class="fa fa-eye"></i></a>
+
+
+                                </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+
+                        <div class="custom-pagination">
+                            {# display navigation #}
+                            <div class="navigation">
+                                {{ knp_pagination_render(c) }}
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

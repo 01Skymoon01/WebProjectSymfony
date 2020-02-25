@@ -251,7 +251,7 @@ class DefaultController extends Controller
                 'c0'=>$commande0
             )
         );
-        $filename="Factures";
+/*        $filename="Factures";
         $pdf = $this->get("knp_snappy.pdf")->getOutputFromHtml($html);
 
         $mm=$user->getEmail();
@@ -266,7 +266,7 @@ class DefaultController extends Controller
         $message->attach($attachement);
             $this->get('mailer')->send($message);
             $this->get('session')->getFlashBag()->add('notice','Message envoyé avec success');
-
+*/
 
         $session = $request->getSession();
         //$session->clear();

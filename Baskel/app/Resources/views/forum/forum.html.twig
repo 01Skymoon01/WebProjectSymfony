@@ -1,0 +1,620 @@
+{% extends 'base2.html.twig' %}
+{% block title %} Forum {% endblock %}
+
+
+{% block cssIncludes %}
+
+
+
+    <link href="{{ asset('front/css/bootstrap.min.css') }}" rel="stylesheet" type='text/css'>
+    <link href='{{ asset('front/css/font-awesome.min.css') }}' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='{{ asset('front/css/stylesheet.css') }}' rel='stylesheet' type='text/css'>
+
+    <link href='{{ asset('front/css/owl.carousel.css') }}' rel='stylesheet' type='text/css'>
+    <link href='{{ asset('front/css/owl.theme.css') }}' rel='stylesheet' type='text/css'>
+    <link href="{{ asset('front/css/settings.css') }}" rel="stylesheet" type='text/css'>
+    <link href="{{ asset('front/css/custom.css') }}" rel="stylesheet" type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+
+
+    <div class="header-content">
+        <h3 class="tz-logo pull-left"><a href="index.html"><img src="{{ asset('front/images/logo horizontal 297px lengeth.png') }}" alt="home" /></a></h3>
+        <div class="tz-search pull-right">
+
+            <!--Start form search-->
+            <form>
+                <label class="select-arrow">
+                    <select name="category">
+                        <option value="">Catégories</option>
+                        <option value="#">Vélos</option>
+                        <option value="#">Equipements</option>
+                        <option value="#">Vêtements</option>
+
+                    </select>
+                </label>
+                <input type="text" class="tz-query" id="tz-query" value="" placeholder="Trouver un produit...">
+                <button type="submit"></button>
+            </form>
+            <!--End Form search-->
+
+
+            <!--live search-->
+            <div class="live-search">
+                <ul>
+                    <li>
+                        <div class="live-img"><img src="{{ asset('front/images/product-search1.jpg') }}" alt="product search one"></div>
+                        <div class="live-search-content">
+                            <h6><a href="single-product.html">Defy Advanced</a></h6>
+                            <span class="live-meta">
+                                            <a href="single-product.html">DT2650.00</a>
+                                            <span class="product-color">
+                                                <i class="light-blue"></i>
+                                                <i class="orange"></i>
+                                                <i class="orange-dark"></i>
+                                            </span>
+                                        </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="live-img"><img src="{{ asset('front/images/product-search2.jpg') }}" alt="product search two"></div>
+                        <div class="live-search-content">
+                            <h6><a href="single-product.html">Defy Advanced</a></h6>
+                            <span class="live-meta">
+                                            <a href="single-product.html">2650.00 DT</a>
+                                            <span class="product-color">
+                                                <i class="light-blue"></i>
+                                                <i class="orange"></i>
+                                                <i class="blueviolet"></i>
+                                                <i class="orange-dark"></i>
+                                            </span>
+                                        </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="live-img"><img src="{{ asset('front/images/p3.jpg') }}" alt="product search one"></div>
+                        <div class="live-search-content">
+                            <h6><a href="single-product.html">Defy Advanced</a></h6>
+                            <span class="live-meta">
+                                            <a href="single-product.html">2650.00 DT</a>
+                                            <span class="product-color">
+                                                <i class="blueviolet"></i>
+                                                <i class="light-blue"></i>
+                                                <i class="orange-dark"></i>
+                                                <i class="orange"></i>
+                                            </span>
+                                        </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!--End live search-->
+        </div>
+    </div>
+    <!--End class header content-->
+    </div>
+
+    <!--Start main menu -->
+    <nav class="tz-menu-primary">
+        <div class="container">
+
+            <!--Main Menu-->
+            <ul class="tz-main-menu pull-left nav-collapse">
+                <li>
+                    <a href="index.html">Accueil</a>
+                </li>
+
+
+                <li>
+                    <a href="shop.html">Categories</a>
+
+
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="shop-rightsidebar.html">Velos</a>
+                        </li>
+                        <li>
+                            <a href="shop-cart.html">Equipements</a>
+                        </li>
+                        <li>
+                            <a href="shop-cart.html">Vêtements</a>
+                        </li>
+                    </ul>
+
+                </li>
+
+                <li>
+                    <a href="shop.html">Magasin</a>
+                </li>
+
+
+
+
+                <li>
+                    <a href="shop.html">Location</a>
+
+
+
+
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="shop-rightsidebar.html">Velos</a>
+                        </li>
+                        <li>
+                            <a href="shop-cart.html">Equipements</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        Evenements
+                        <span class="cyan-dark">Best off!</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="blog-right.html">Courses</a>
+                        </li>
+                        <li>
+                            <a href="single-blog.html">Volantaires</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="contact.html">Contact</a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="contact.html">Reclamation</a>
+                        </li>
+                        <li>
+                            <a href="RDV.html">Rendez-vous</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!--End Main menu-->
+
+            <!--Shop meta-->
+            <ul class="tz-ecommerce-meta pull-right">
+                <li class="tz-menu-wishlist">
+                    <a href="#"><strong>0</strong></a>
+                </li>
+                <li class="tz-mini-cart">
+                    <a href="shop-cart.html"><strong>2</strong>Panier.</a>
+
+                    <!--Mini cart-->
+                    <ul class="cart-inner">
+                        <li class="mini-cart-content">
+                            <div class="mini-cart-img"><img src="{{ asset('front/images/product-cart1.png') }}" alt="product search one"></div>
+                            <div class="mini-cart-ds">
+                                <h6><a href="single-product.html">Liv Race Day Short</a></h6>
+                                <span class="mini-cart-meta">
+                                            <a href="single-product.html">DT2650.00</a>
+                                            <span class="mini-meta">
+                                               <span class="mini-color">Color: <i class="orange"></i></span>
+                                               <span class="mini-qty">Qty: 5</span>
+                                            </span>
+                                        </span>
+                            </div>
+                            <span class="mini-cart-delete"><img src="{{ asset('front/images/delete.png') }}" alt="delete"></span>
+                        </li>
+                        <li class="mini-cart-content">
+                            <div class="mini-cart-img"><img src="{{ asset('front/images/product-cart2.png') }}" alt="product search one"></div>
+                            <div class="mini-cart-ds">
+                                <h6><a href="single-product.html">City Pedals Sport</a></h6>
+                                <span class="mini-cart-meta">
+                                            <a href="single-product.html">DT2650.00</a>
+                                            <span class="mini-meta">
+                                               <span class="mini-color">Color: <i class="orange"></i></span>
+                                               <span class="mini-qty">Qty: 5</span>
+                                            </span>
+                                        </span>
+                            </div>
+                            <span class="mini-cart-delete"><img src="{{ asset('front/images/delete.png') }}" alt="delete"></span>
+                        </li>
+                        <li class="mini-cart-content">
+                            <div class="mini-cart-img"><img src="{{ asset('front/images/product-cart3.png') }}" alt="product search one"></div>
+                            <div class="mini-cart-ds">
+                                <h6><a href="single-product.html">Gloss</a></h6>
+                                <span class="mini-cart-meta">
+                                            <a href="single-product.html">DT2650.00</a>
+                                            <span class="mini-meta">
+                                               <span class="mini-color">Color: <i class="orange"></i></span>
+                                               <span class="mini-qty">Qty: 5</span>
+                                            </span>
+                                        </span>
+                            </div>
+                            <span class="mini-cart-delete"><img src="{{ asset('front/images/delete.png') }}" alt="delete"></span>
+                        </li>
+                        <li class="mini-subtotal">
+                                    <span class="subtotal-content">
+                                        Subtotal:
+                                        <strong class="pull-right">DT1,100.00</strong>
+                                    </span>
+                        </li>
+                        <li class="mini-footer">
+                            <a href="shop-cart.html" class="view-cart">View Cart</a>
+                            <a href="shop-checkout.html" class="check-out">Checkout</a>
+                        </li>
+                    </ul>
+                    <!--End mini cart-->
+
+                </li>
+            </ul>
+            <!--End Shop meta-->
+
+            <!--navigation mobi-->
+            <button data-target=".nav-collapse" class="btn-navbar tz_icon_menu" type="button">
+                <i class="fa fa-bars"></i>
+            </button>
+            <!--End navigation mobi-->
+        </div>
+    </nav>
+    <!--End stat main menu-->
+
+    </header>
+
+
+
+
+
+
+
+
+
+
+
+    <link href=" {{ asset('forum/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Custom -->
+    <link href=" {{ asset('forum/css/custom.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('forum/css/style.css') }}" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="{{ asset('front/js/search.js') }}"></script>
+    <![endif]-->
+
+    <!-- fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/forum/font-awesome-4.0.3/css/font-awesome.min.css">
+    <!-- CSS STYLE-->
+    <link rel="stylesheet" type="text/css" href="/forum/css/style.css" media="screen" />
+
+    <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+    <link rel="stylesheet" type="text/css" href="/forum/rs-plugin/css/settings.css" media="screen" />
+
+{% endblock %}
+
+
+{% block main %}
+    <div id="donate-popup" class="donate-popup">
+        <div class="close-donate theme-btn"><span class="fa fa-close"></span></div>
+        <div class="popup-inner">
+            <div class="container">
+                <div class="donate-form-area" style="background-color: #a486">
+                    <div style="color: lightyellow;" class="section-title center">
+                        <h2>Nouveau Topique</h2>
+                    </div>
+                    <div class="post">
+                        <form action="{{ path('forum_add') }}" class="form newtopic" method="post">
+                            <div class="topwrap">
+                                <div class="userinfo pull-left">
+                                    <div class="avatar">
+                                        {% if (app.user) %}
+                                            <img src="http://127.0.0.1:8000/forum/images/avatar/anonymous.png" alt="">
+                                        {% else %}
+                                            <img src="/forum/images/avatar/anonymous.png" alt="">
+                                        {% endif %}
+                                        <div class="status red">&nbsp</div>
+                                    </div>
+                                </div>
+                                <div class="posttext pull-left">
+
+                                    <div>
+                                        <input name="subject" id="subject" type="text" placeholder="Entrez le sujet du topic :"
+                                               class="form-control" onblur="verifnom(this)" required>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <select name="category" id="category" class="form-control" required>
+                                                <option value="" disabled="" selected="">Choisir Catégorie :</option>
+                                                {% for c in categories %}
+                                                    <option value="{{ c.id }}">{{ c.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                    <textarea name="desc" id="desc" placeholder="Description"
+                                              class="form-control" onblur="verifdesc(this)" required></textarea>
+                                    </div>
+                                    <div class="row newtopcheckbox">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div><p>Who can see this?</p></div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" id="everyone"> Everyone
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" id="friends"> Only Friends
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div>
+                                                <p>Share on Social Networks</p>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" id="fb"> <i
+                                                                    class="fa fa-facebook-square"></i>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" id="tw"> <i class="fa fa-twitter"></i>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" id="gp"> <i
+                                                                    class="fa fa-google-plus-square"></i>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="postinfobot">
+
+                                <div class="notechbox pull-left">
+                                    <input type="checkbox" name="note" id="note" class="form-control">
+                                </div>
+
+                                <div class="pull-left">
+                                    <label for="note"> Email me when some one post a reply</label>
+                                </div>
+
+                                <div class="pull-right postreply">
+                                    <div class="pull-left smile"><a href="#"><i class="fa fa-smile-o"></i></a></div>
+                                    <div class="pull-left">
+                                        <button type="submit" id="post" class="btn btn-primary" onclick="return verifform()">Post</button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+   {# <div class="container-fluid">
+
+        <!-- Slider -->
+        <div class="tp-banner-container">
+            <div class="tp-banner" >
+                <ul>
+                    <!-- SLIDE  -->
+                    <li data-transition="fade" data-slotamount="7" data-masterspeed="1500" >
+                        <!-- MAIN IMAGE -->
+                        <img src="/images/resource/mslider1.jpg"  alt="slidebg1"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+                        <!-- LAYERS -->
+                    </li>
+                </ul>
+            </div>
+        </div>#}
+        <!-- //Slider -->
+
+        <div class="headernav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo "><a href="/forum/" class="fa fa-4x fa-comments"></a></div>
+                    <div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 selecttopic">
+                        <div class="dropdown">
+                            <a  href="{{ path('forum_homepage') }}" style="color: black;font-family: Lato;font-weight: bold" >Postes :</a> <b class="caret"></b>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 search hidden-xs hidden-sm col-md-3">
+                        <div class="wrap">
+                            <form action="#" method="post" class="form">
+                                <div class="pull-left txt"><input id="searchInput"  type="text" class="form-control" placeholder="Rechercher Topique.."></div>
+                                <div class="pull-right"><button class="btn btn-default"  type="button" ><i class="fa fa-search"></i></button></div>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4 col-xs-12 col-sm-5 col-md-4 avt">
+                        <div class="stnt pull-left" style="font-family: Lato;font-weight: bold;">
+                            {% if (app.user) %}  <button class="btn btn-primary donate-box-btn hover-effect" style=""><i class="fa fa-plus-circle"> </i>  Créer Topique </button> {% else %}
+                                <a href="{{ path('fos_user_security_login') }}">  <button class="btn btn-primary ">   Login</button> </a>
+                                <a href="{{ path('fos_user_registration_register') }}">  <button class="btn btn-primary ">   Register</button> </a>{% endif %}
+                        </div>
+{#                        <div class="env pull-left"><i class="fa fa-envelope"></i></div>#}
+                        {% if (app.user) %}
+                            {{ render(controller('forumBundle:Notifications:display')) }}
+                            <div class="avatar pull-left dropdown" style="margin-left: 10px;">
+                                <a data-toggle="dropdown" href="/forum/#"><i class="fa fa-user fa-3x"></i></a> <b class="caret"></b>
+                                <div class="status green">&nbsp;</div>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/forum/#">My Profile</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-2" href="/forum/#">Inbox</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-3" href="{{ path('fos_user_security_logout') }}">Log Out</a></li>
+                                </ul>
+                            </div>
+
+                        {% else %}
+                          {#  <div class="avatar pull-left dropdown">
+                                <a data-toggle="dropdown" href="/forum/#"><img src="/forum/images/avatar.jpg" alt="" /></a> <b class="caret"></b>
+                                <div class="status green">&nbsp;</div>
+                            </div>#}
+                        {% endif %}
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% block content %}{% endblock %}
+
+    </div>
+
+{% endblock %}
+
+
+
+
+{% block javascripts %}
+
+
+    <!-- END REVOLUTION SLIDER -->
+
+    <script type="text/javascript">
+
+
+        var revapi;
+
+        jQuery(document).ready(function() {
+            "use strict";
+            revapi = jQuery('.tp-banner').revolution(
+                {
+                    delay: 15000,
+                    startwidth: 1200,
+                    startheight: 278,
+                    hideThumbs: 10,
+                    fullWidth: "on"
+                });
+
+        });	//ready*/
+    </script>
+    <script type="text/javascript">
+       $(document).ready(function() {
+            console.log("hello !");
+            if (window.addEventListener) {
+                window.addEventListener("load", loadHandler, false);
+            }
+            else if (window.attachEvent) {
+                window.attachEvent("onload", loadHandler);
+            }
+            else {
+                window.onload = loadHandler; // Or you may want to leave this off and just not support REALLY old browsers
+            }
+
+            function loadHandler() {
+                setTimeout(doMyStuff, 0);
+            }
+
+
+
+            function doMyStuff() {
+                console.log("hello !");
+                // Your stuff here. All images in the original markup are guaranteed
+                // to have been loaded (or failed) by the `load` event, and you know
+                // that other handlers for the `load` event have now been fired since
+                // we yielded back from our `load` handler
+            }
+        })();
+        function mySearch() {
+
+            var dat = $("#searchInput").val();
+            $.ajax({
+                url:        '/forum/search/'+dat,
+                type:       'GET',
+                dataType:   'json',
+                async:      true,
+
+                success: function(data, status) {
+                    console.log(data);
+                    $("#postsContainer").empty();
+                    $("#postsContainer").append(
+                        "<br>\n" +
+                        "            <h1 class=\"title\" style=\"color: #0a6ebd; text-decoration: underline;\">Posts</h1>\n" +
+                        "                <br>\n"
+                    );
+                    $.each( data, function( key, value ) {
+                        // alert( key + ": " + value.subject );
+                        $("#postsContainer").append(
+                            "<div class=\"post\">\n" +
+                            "                            <div class=\"wrap-ut pull-left\">\n" +
+                            "                                <div class=\"userinfo pull-left\">\n" +
+                            "                                    <div class=\"avatar\">\n" +
+                            "                                        <img src=\"/forum/images/avatar/"+value.picture+"\" alt=\"\" />\n" +
+                            "                                        <div class=\"status green\">&nbsp;</div>\n" +
+                            "                                    </div>\n" +
+                            "                                    <a href=\"02_topic.html\">"+value.user+"'s posts</a>\n" +
+                            "                                </div>\n" +
+                            "                                <div class=\"posttext pull-left\">\n" +
+                            "                                    <h2><a href=\"/forum/view/"+value.id+"\">"+value.subject+"</a></h2>\n" +
+                            "                                    <p>"+value.description+" </p>\n" +
+                            "                                </div>\n" +
+                            "                                <div class=\"clearfix\"></div>\n" +
+                            "                            </div>\n" +
+                            "                            <div class=\"postinfo pull-left\">\n" +
+                            "                                <div class=\"comments\">\n" +
+                            "                                    <div class=\"commentbg\">\n" +
+                            "                                        560\n" +
+                            "                                        <div class=\"mark\"></div>\n" +
+                            "                                    </div>\n" +
+                            "\n" +
+                            "                                </div>\n" +
+                            "                                <div class=\"views\"><i class=\"fa fa-eye\"></i> 1,568</div>\n" +
+                            "                                <div class=\"time\"><i class=\"fa fa-clock-o\"></i> 24 min</div>\n" +
+                            "                            </div>\n" +
+                            "                            <div class=\"clearfix\"></div>\n" +
+                            "                        </div>"
+                        );
+
+                    });
+                },
+                error : function(xhr, textStatus, errorThrown) {
+                    alert('Ajax request failed.');
+                }
+            });
+        }
+        $(function() {
+            var knp = new KnpPaginatorAjax();
+
+            knp.init({
+                'loadMoreText': 'Load More', //load more text
+                'loadingText': 'Loading..', //loading text
+                'elementsSelector': '#postsContainer', //this is where the script will append and search results
+                'paginationSelector': 'ul.pagination', //pagination selector
+            });
+        });
+        //document.getElementById ("searchb").addEventListener ("click", mySearch, false);*/
+    </script>
+
+{% endblock javascripts %}

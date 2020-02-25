@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <h1>Commentairesforum creation</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('commentairesforum_index') }}">Back to the list</a>
+        </li>
+    </ul>
+    <h1>Commentairesforum</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ commentairesForum.id }}</td>
+        </tr>
+        <tr>
+            <th>Data</th>
+            <td>{{ commentairesForum.data }}</td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{% if commentairesForum.date %}{{ commentairesForum.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commentairesforum_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('commentairesforum_edit', { 'id': commentairesForum.id }) }}">Edit</a>
+        </li>
+    </ul>
+{% endblock %}

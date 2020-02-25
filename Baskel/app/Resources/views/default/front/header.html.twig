@@ -74,9 +74,13 @@
                     <li>
                         <a href="shop-checkout.html">Commande</a>
                     </li>
-                    <li>
-                        <a href="#">Livraison</a>
-                    </li>
+
+                    {% if is_granted('ROLE_LIVREUR') %}
+                        <li>
+                            <a href="#">Livraison</a>
+                        </li>
+                    {% endif %}
+
                     <li class="tz-header-login">
                     <li class="search"><a href="#" class="js-header-search-toggle"><i class="fa fa-search"></i></a></li>
                     {% if is_granted('ROLE_USER') %}
@@ -500,19 +504,6 @@
     </div>
     <!--End class site-->
 
-    <script type='text/javascript' src="{{ asset('front/js/jquery.min.js') }}"></script>
-    <script type='text/javascript' src="{{ asset('front/bootstrap.min.js') }}"></script>
-    <script type='text/javascript' src="{{ asset('front/js/off-canvas.js') }}"></script>
-    <!--jQuery Countdow-->
-    <script type='text/javascript' src="{{ asset('front/js/jquery.plugin.min.js') }}"></script>
-    <script type='text/javascript' src="{{ asset('front/js/jquery.countdown.min.js') }}"></script>
-    <!--End Countdow-->
-    <script type='text/javascript' src="{{ asset('front/js/jquery.parallax-1.1.3.js') }}"></script>
-    <script type='text/javascript' src="{{ asset('front/js/owl.carousel.js') }}"></script>
-    <script type='text/javascript' src="{{ asset('front/js/custom.js') }}"></script>
-    <script type='text/javascript' src='{{ asset('front/js/jquery.themepunch.tools.min.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('front/js/jquery.themepunch.revolution.min.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('front/js/custom-rs.js') }}'></script>
     </body>
     </html>
     <script src="{{ asset('jquery-3.4.1.min.js')}}"> </script>

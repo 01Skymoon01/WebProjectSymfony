@@ -6,6 +6,9 @@ imports:
     - { resource: "@PanierBundle/Resources/config/services.yml" }
     - { resource: "@ProduitsBundle/Resources/config/services.yml" }
     - { resource: "@FriteBundle/Resources/config/services.yml" }
+    - { resource: "@forumBundle/Resources/config/services.yml" }
+    - { resource: "@EventBundle/Resources/config/services.yml" }
+    - { resource: "@LivraisonBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -98,10 +101,6 @@ fos_user:
         address: "hello@aquanote.com"
         sender_name: "AquaNote Postman"
 
-framework:
-    templating:
-        engines: ['twig']
-
 
 #FOR KNP PAGINATOR################
 knp_paginator:
@@ -117,3 +116,9 @@ knp_paginator:
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig'     # sliding pagination controls template
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
+# NotificationsBundle configuration
+notifications:
+    app_id:     951753
+    app_key:    b6900010ea1d2f76289e
+    app_secret: e32dd8429e03fd734e58
+    cluster:    eu

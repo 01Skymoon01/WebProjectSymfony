@@ -102,6 +102,21 @@ class Produits
      */
     private $description;
 
+
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="solde", type="float")
+     * @Assert\Range(
+     *     min=0,
+     *     max = 100,
+     *     maxMessage="Remise ne peut pas dépasser 100.",
+     *     minMessage="Remise ne peut pas être négative."
+     * )
+     */
+    private $solde=0;
+
     /**
      * @var int
      *
@@ -128,6 +143,22 @@ class Produits
     public function setRating($rating)
     {
         $this->rating = $rating;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSolde()
+    {
+        return $this->solde;
+    }
+
+    /**
+     * @param float $solde
+     */
+    public function setSolde($solde)
+    {
+        $this->solde = $solde;
     }
 
 

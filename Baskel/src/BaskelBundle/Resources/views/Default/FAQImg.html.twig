@@ -1,0 +1,21 @@
+
+{% extends 'default/front/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+<img src="{{ asset("FAQ.png") }}" usemap="#image-map" style="margin-left: 10%">
+
+<map name="image-map">
+    <area target="_self" alt="wheelBack" title="wheelBack" href="wheelBack" coords="307,597,257" shape="circle">
+    <area target="_self" alt="crankset" title="crankset" href="crankset" coords="640,662,79" shape="circle">
+    <area target="_parent" alt="WheelFront" title="WheelFront" href="wheelFront" coords="1096,591,262" shape="circle">
+    <area target="_self" alt="saddle" title="saddle" href="saddle" coords="375,169,578,115" shape="rect">
+    <area target="_self" alt="handlebars" title="handlebars" href="handlebars" coords="1093,70,911,189" shape="rect">
+</map>
+{% endblock %}

@@ -25,6 +25,11 @@ class AppKernel extends Kernel
             new Produits\ProduitsBundle\ProduitsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FriteBundle\FriteBundle(),
+            new forumBundle\forumBundle(),
+            new SBC\NotificationsBundle\NotificationsBundle(),
+            new EventBundle\EventBundle(),
+            new LivraisonBundle\LivraisonBundle(),
+            new AncaRebeca\FullCalendarBundle\FullCalendarBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

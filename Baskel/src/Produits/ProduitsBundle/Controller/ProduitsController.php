@@ -12,6 +12,7 @@ use Produits\ProduitsBundle\Entity\User;
 use Produits\ProduitsBundle\Entity\Wishlist;
 use Produits\ProduitsBundle\Form\CategoriesType;
 use Produits\ProduitsBundle\Form\MailType;
+use Produits\ProduitsBundle\Form\ModifierSoldeType;
 use Produits\ProduitsBundle\Form\ProduitsModifType;
 use Produits\ProduitsBundle\Form\ProduitsType;
 use Symfony\Component\HttpFoundation\Response;
@@ -450,15 +451,22 @@ class ProduitsController extends Controller
     function supprimerProduitAction($ref_p)
     {
 
+
         $produit = $this -> getDoctrine()
             -> getRepository(Produits::class)
             -> find($ref_p);
+        $widhlist = $this -> getDoctrine()
+            -> getRepository(Wishlist::class)
+            -> findOneBy(array("refP"=>$ref_p));
+
+
 
         $image=$produit->getImage();
         $path=$this->getParameter('image_directory').'/'.$image;
         $fs=new Filesystem();
         $fs->remove(array($path));
         $em = $this -> getDoctrine() -> getManager();
+        $em-> remove($widhlist);
         $em -> remove($produit);
         $em -> flush();
 
@@ -728,6 +736,48 @@ class ProduitsController extends Controller
 
     }
 
+
+
+    public function soldeEditAction($ref_p, Request $request){
+
+        $em = $this -> getDoctrine() -> getManager();
+
+        $produit = $this -> getDoctrine()
+            -> getRepository(Produits::class)
+            -> find($ref_p);
+
+        //   var_dump($produit);
+
+        $user = $this->getUser();
+
+        $form = $this -> createForm(ModifierSoldeType::class, $produit);
+        $form -> handleRequest($request);
+
+        $newSolde=$form->get('solde')->getData();
+        $produit->setSolde($newSolde);
+
+
+        $solde = ($produit -> getPrixP() * $newSolde) / 100;
+
+
+
+
+        if ($solde < $produit -> getPrixP()) {
+
+            $newPrice = $produit -> getPrixP() - $solde;
+
+            $produit -> setPrixP($newPrice);
+        } else {
+            $produit -> setPrixP($produit -> getPrixP());
+        }
+        $em -> persist($produit);
+        $em -> flush();
+
+
+        return $this->render('@Produits/Produits/modifierSolde.html.twig',
+            array('form'=>$form->createView(),'user'=>$user));
+
+    }
 
 
 

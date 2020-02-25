@@ -186,7 +186,7 @@
                                     </a>
 
                                 </td>
-                                <td>  </td>
+                                <td> {% if(cc.etatLiv == 1) %} livree {% else %} en attente {% endif %}</td>
                                 <td>
 
                                     <a href="{{ path('AfficherDetailsCommande',{ 'id' :cc.id}) }}">    <i class="fa fa-eye"></i></a>

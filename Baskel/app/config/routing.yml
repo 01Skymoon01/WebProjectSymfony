@@ -1,3 +1,15 @@
+livraison:
+    resource: "@LivraisonBundle/Resources/config/routing.yml"
+    prefix:   /liv
+
+event:
+    resource: "@EventBundle/Resources/config/routing.yml"
+    prefix:   /Event
+
+forum:
+    resource: "@forumBundle/Resources/config/routing.yml"
+    prefix:   /Hatem
+
 frite:
     resource: "@FriteBundle/Resources/config/routing.yml"
     prefix:   /Frite
@@ -18,6 +30,9 @@ panier:
 baskel:
     resource: "@BaskelBundle/Resources/config/routing.yml"
     prefix:   /Baskel
+
+ancarebeca_fullcalendar:
+    resource: "@FullCalendarBundle/Resources/config/routing.yml"
 
 app:
     resource: '@AppBundle/Controller/'

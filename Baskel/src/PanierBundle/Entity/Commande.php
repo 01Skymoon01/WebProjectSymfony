@@ -31,7 +31,7 @@ class Commande
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
@@ -56,6 +56,28 @@ class Commande
      */
     private $etat;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="etat_liv", type="integer",nullable=true )
+     */
+    private $etatLiv = 0;
+
+    /**
+     * @return int
+     */
+    public function getEtatLiv()
+    {
+        return $this->etatLiv;
+    }
+
+    /**
+     * @param int $etatLiv
+     */
+    public function setEtatLiv($etatLiv)
+    {
+        $this->etatLiv = $etatLiv;
+    }
 
     /**
      * Get id

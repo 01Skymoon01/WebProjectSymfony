@@ -1,0 +1,159 @@
+
+{% extends 'default/back/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+
+
+
+    <link rel="stylesheet" href="{{asset('back/css/jquery.dataTables.min.css')}}">
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(function() {
+            $('#ajax-table').DataTable({
+                "language": {
+                    "lengthMenu": "afficher _MENU_ enregistement par page",
+                    "zeroRecords": "Aucun enregistrement a été trouvé !",
+                    "info": "Page _PAGE_ de _PAGES_ pages",
+                    "infoEmpty": "Aucun enregistrement",
+                    "infoFiltered": "(filtré de  _MAX_ total enregistement)",
+                    "search": "Recherche:",
+                    "paginate": {
+                        "previous": "Precédent",
+                        "next" : "suivant"
+                    }
+                }
+
+            });
+        });
+    </script>
+
+
+
+
+    <div class="breadcome-area" style="margin-left:14%">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="breadcomb-wp">
+                                <div class="breadcomb-icon">
+                                    <i class="icon nalika-user"></i>
+                                </div>
+                                <div class="breadcomb-ctn">
+                                    <h2>Liste des  Livreurs</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="breadcomb-report">
+                                <button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="icon nalika-download"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="product-status mg-b-30" style="margin-left: 14%">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <h4>Liste des Livreurs</h4>
+
+                        <table id="ajax-table" class="tab">
+                            <thead>
+
+                            <tr>
+                                <th>Pseudo</th>
+                                <th>E-mail</th>
+
+                                <th>Nom& Prenom</th>
+                                <th>Date de naissance</th>
+                                <th>Solde</th>
+                                <th>Etat</th>
+                                <th>Numero téléphone 1 </th>
+                                <th>Numéro téléphone 2</th>
+                                <th>Matricule Vehicule</th>
+                                <th>Type Vehicule</th>
+                                <th>Action</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for l in livreurs %}
+                            {% if l.etat=="accepté" %}
+                            <tr style="background: #24caa1;">
+                                {% endif %}
+                                {% if l.etat=="refusé" %}
+                            <tr style="background: #eb4b4b;">
+                                {% endif %}
+                                {% if l.etat=="en attente" %}
+                            <tr>
+                                {% endif %}
+                                <td>{{ l.username }}</td>
+                                <td>{{ l.email }}</td>
+                                <td>{{ l.nom }} {{ l.prenom }}</td>
+
+                                <td>{{ l.dateNaiss | date('d/m/Y') }}</td>
+
+                                <td >{{ l.etat }}</td>
+
+
+                                <td>{{ l.solde }} DT</td>
+                                <td>{{ l.numtel1 }}</td>
+                                <td>{{ l.numtel2 }}</td>
+                                <td>
+                                    <ul>
+                                    {% for v in vehicules %}
+
+                                    {% if l.id == v.user.getId() %}
+                                   <li>   {{ v.matricule }}
+{% endif %}
+                                 {% endfor %}
+                                   </li></ul> </td>
+
+                                <td>
+                                    <ul>
+                                        {% for v in vehicules %}
+
+                                        {% if l.id == v.user.getId() %}
+                                        <li>   {{ v.type }}
+                                            {% endif %}
+                                            {% endfor %}
+                                        </li></ul> </td>
+
+                                <td>
+                                    <a data-toggle="tooltip" title="Affecter" class="pd-setting-ed" href="{{ path('modifetat', {'id': l.id}) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
+                                    <a data-toggle="tooltip"title="Solde"  class="pd-setting-ed" href="{{ path('modifsolde', {'id': l.id}) }}"> <i class="fa fa-dollar" aria-hidden="true"></i></a>
+                                    <a data-toggle="tooltip"title="PDF"  class="pd-setting-ed" href="{{ path('pdf', {'id': l.id}) }}"> <i class="fa fa-download" aria-hidden="true"></i></a>
+                                </td>
+                                    </tr>
+
+                                {% endfor %}
+                            </tbody>
+
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

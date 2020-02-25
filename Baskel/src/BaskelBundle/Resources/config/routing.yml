@@ -7,4 +7,8 @@ admin_homepage:
 pdf:
     path:     /pdf
     defaults: { _controller: BaskelBundle:Default:pdf }
+ImgFaq:
+    path:     /ImgFaq
+    defaults: { _controller: BaskelBundle:Default:ImgFaq }
+
 

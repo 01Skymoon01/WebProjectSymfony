@@ -13,18 +13,101 @@ use FOS\UserBundle\Model\User as BaseUser;
 class User extends BaseUser
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="picturePath", type="string", length=50, nullable=true)
+     */
+    private $picturepath;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cin", type="integer", length=50, nullable=true)
+     */
+    private $cin;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numtel", type="integer", length=50, nullable=true)
+     */
+    private $numtel;
 
+    /**
+     * @return int
+     */
+    public function getCin()
+    {
+        return $this->cin;
+    }
 
+    /**
+     * @param int $cin
+     */
+    public function setCin(int $cin)
+    {
+        $this->cin = $cin;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumtel()
+    {
+        return $this->numtel;
+    }
+
+    /**
+     * @param int $numtel
+     *
+     */
+    public function setNumtel(int $numtel)
+    {
+        $this->numtel = $numtel;
+    }
+    /**
+     * @return mixed
+     */
+    public function setPicturepath($picturepath)
+    {
+        $this->picturepath = $picturepath;
+
+        return $this;
+    }
+
+    /**
+     * Get picturepath
+     *
+     * @return string
+     */
+    public function getPicturepath()
+    {
+        return $this->picturepath;
+    }
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
     }
 }
 

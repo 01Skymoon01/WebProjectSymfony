@@ -1,0 +1,239 @@
+{% extends 'forum/forum.html.twig' %}
+
+{% block content %}
+
+
+    <section class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 breadcrumbf">
+                    <a href="{{ path('forum_homepage') }}">Forum Baskel</a> <span class="diviver">&gt;</span> <a href="#">Topics</a> <span class="diviver">&gt;</span> <a href="#">Détails Topic</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8" >
+
+                    <!-- POST -->
+                    <div class="post" style="border-style: solid;border-width: medium">
+                        <div class="wrap-ut pull-left">
+                            <div class="userinfo pull-left">
+                                <div class="avatar">
+                                    <a href="{{ path('forum_view_single_user',{'id': post.iduser.id }) }}"><i class="fa fa-user fa-3x"></i>  <div class="text-capitalize text-bold " style="color:black;font-family: Lato;font-weight: bold">{{ post.iduser.username }}</div></a>
+
+                                    <div class="status green">&nbsp;</div>
+
+                                </div>
+
+                                <br>
+
+                            </div>
+                            <div class="container" style="">
+                                <div class="row">
+                                    <div class="posttext pull-left col-5" style="margin-top: 0px;background-color: lightgoldenrodyellow;height:5%;width: 46.2%;border-style: solid;border-width: thin">
+                                        <h2 style="margin-left: 2%;margin-top: 0px;color: #363838;font-size: 30px; font-family: Lato;">
+                                            <a class="title bold text-capitalize"
+                                               href="{{ path('forum_view_single',{'id': post.id }) }}"><i class="fa fa-caret-right "></i> " {{ post.subject }} "
+                                                </a></h2>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div style="margin-left: 23%"><br>
+                                <p class="font-weight-light">{{ post.description }}</p>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="postinfo pull-left">
+                            <div class="comments">
+                                <div class="commentbg" style="background-color: lightcoral;">
+                                    {{ post.comments|length }}   <i class="fa fa-comment"> </i>
+                                    <div class="mark"></div>
+                                </div>
+
+                            </div>
+                            <div class="views"><i class="fa fa-eye"></i> {{ post.views }}</div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="postinfobot">
+
+                            <div class="likeblock pull-left" style="margin-left: 0%">
+                                <a href="#" class="up"><i class="fa fa-thumbs-o-up"></i>55</a>
+                                <a href="#" class="down"><i class="fa fa-thumbs-o-down"></i>12</a>
+                            </div>
+
+                            <div class="prev pull-left">
+
+                            </div>
+                            <div class="prev pull-left">
+
+                            </div>
+
+
+
+
+
+
+                            <div class="posted pull-left" style="margin-left: 20%><i class="fa fa-clock-o"></i> Crée le : {{ post.postedDate|date("F jS \\a\\t g:ia") }}</div>
+
+                            <div class="next pull-right">
+                                <a href="#"><i class="fa fa-share"></i></a>
+
+                                <a href="#"><i class="fa fa-flag"></i></a>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div><!-- POST -->
+                    {% if (app.user) %}
+                    {% if(post.iduser.id== app.user.id) %}
+                        <div class="stnt row pull-right " >
+                            <div class="col-md-5">
+                                    <button class=" btn  donate-box-btn hover-effect" style="background-color: yellowgreen;color: white;"><i class="fa fa-edit"></i>  Modifier</button>
+                            </div>
+                            <div class="col-md-3">
+                                <form  action="{{ path('forum_delete',{'id': post.id }) }}" class="form-group" method="post">
+                                    <button class="btn " style="background-color: #F44336;    color: white;"><i class="fa fa-trash"></i>   Supprimer</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                    </br>
+                    </br>
+                    </br>
+
+
+                    {% for c in post.comments %}
+                        <div class="post">
+                            <div class="topwrap">
+                                <div class="userinfo pull-left">
+                                    <div class="avatar">
+                                        <a href="{{ path('forum_view_single_user',{'id': c.iduser.id }) }}"><i class="fa fa-user fa-2x"></i>  <div class="text-capitalize text-bold " style="color:black;font-family: Lato;font-weight: bold">{{ c.iduser.username }}</div></a>
+                                        <div class="status red">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <div class="posttext pull-left">
+                                    <p>{{ c.commentaire }}</p>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="postinfobot">
+
+
+
+                                <div class="posted pull-left"><i class="fa fa-clock-o"></i> Posted on : {{ c.postedOn|date('Y-m-d') }}</div>
+
+                                <div class="next pull-right">
+                                    <a href="#"><i class="fa fa-share"></i></a>
+
+                                    <a href="#"><i class="fa fa-flag"></i></a>
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </div><!-- POST -->
+                        {% if (app.user) %}
+                        {% if post.idUser.id == app.user.id or c.idUser.id == app.user.id %}
+                            <div class="pull-right postreply">
+                                <div class="pull-left">
+                                    <a href="{{ path('forum_view_single_Comment_delete',{'id': c.id }) }}" style="background-color: #F44336;    color: white;" class="btn "><i class="fa fa-trash"></i>  Supprimer</a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if (app.user) %}
+                    <div class="post">
+                        <form action="{{ path('forum_add_comment',{'id': post.id }) }}" class="form newtopic" method="post">
+                            <div class="topwrap">
+                                <div class="userinfo pull-left">
+                                    <div class="avatar">
+                                        <a href="{{ path('forum_view_single_user',{'id': app.user.id }) }}"><i class="fa fa-user fa-2x"></i>  <div class="text-capitalize text-bold " style="color:black;font-family: Lato;font-weight: bold">{{ app.user.username }}</div></a>
+                                        <div class="status red">&nbsp;</div>
+                                    </div>
+
+                                </div>
+                                <div class="posttext pull-left">
+                                    <div class="textwraper">
+                                        <div class="postreply">Tapez votre commentaire</div>
+                                        <textarea name="Description" id="Description" placeholder="Soyez Respectueux !"></textarea>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="postinfobot">
+
+                                <div class="notechbox pull-left">
+                                    <input type="checkbox" name="note" id="note" class="form-control">
+                                </div>
+
+                                <div class="pull-left">
+                                    <label for="note"> Email me when some one post a reply</label>
+                                </div>
+
+                                <div class="pull-right postreply">
+                                    <div class="pull-left"><button type="submit" class="btn btn-primary" style="background-color: yellowgreen;"><i class="fa fa-comment"></i>  Commenter</button></div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div><!-- POST -->
+                    {% endif %}
+
+
+                    <!-- POST -->
+                    <!-- POST -->
+
+
+
+                    <!-- POST -->
+
+
+                </div>
+                <div class="col-lg-4 col-md-4">
+
+                    <!-- -->
+                    <div class="sidebarblock ">
+                        <h3 class="bg-info" style="color: black;font-family: Lato;font-weight: bold"><i class="fa fa-list-alt"></i>  Categories</h3>
+                        <div class="divline"></div>
+                        <div class="blocktxt">
+                            <ol class="cats" style="">
+                                {% for c in categories %}
+                                    <li><a style="" href="{{ path('forum_view_singlecat',{'id': c.id }) }}">{{ c.name }} <span class="badge pull-right"></span></a></li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- -->
+
+
+                    <!-- -->
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </section>
+
+{% endblock %}

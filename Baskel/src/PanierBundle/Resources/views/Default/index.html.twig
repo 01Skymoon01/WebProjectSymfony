@@ -60,7 +60,18 @@
             <!--Tab item-->
             <div class="tab-pane active" id="one_read">
                 <div class="row">
-
+                <div style="margin-left: 20%; margin-right: 20%; margin-bottom: 10%">
+                    {% for flash_message in app.session.flashBag.get('success') %}
+                        <div class="alert alert-success">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+                    {% for flash_message in app.session.flashBag.get('error') %}
+                        <div class="alert alert-danger">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+                </div>
     {% for p in produit %}
                     <div class="col-md-4 col-sm-6">
 

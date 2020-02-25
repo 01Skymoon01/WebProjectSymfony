@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+
+<div class="tz-site">
+    <div class="container">
+        <div class="blog">
+            <div class="container">
+                <ul class="tz-breadcrumbs">
+                    <ul>
+                        <li>
+                            <a href="{{ path('postesforum_index') }}" class="btn btn-default button"><i class="fa fa-backward">  Back to the list</i></a>
+                        </li>
+                    </ul>
+                </ul>
+                <div class="blog-container">
+                    <div class="row">
+
+                        <div class="col-md-8 tz-blog-content">
+                            <h1 class="large-ttle">Création-Poste</h1>
+                            <div id="contact-form" class="contact-respond">
+                                <h3 class="tz-title">Laissez-nous Postes</h3>
+                                <!-- <div class="contact-form-7"> -->
+                                <div class="contact-form-7">
+                                    {{ form_start(form  , {'attr':{'class':'contact-form-7', 'id':'commentform'}})  }}
+                                    <p class="comment-for-url">
+                                        <label>Titre</label> <br>
+                                        {{ form_widget(form.titre,  { 'attr': {'class': 'comment', 'placeholder':'Titre'}}) }}
+                                    </p>
+                                    <p class="comment-for-content">
+                                        <label>Categorie</label> <br>
+                                        {{ form_widget(form.categorie, { 'attr': {'class': 'comment', 'placeholder':'Categorie'} }) }}
+                                    </p>
+                                    <p class="comment-for-content">
+                                        <label>date</label> <br>
+                                        {{ form_widget(form.date, { 'attr': {'class': 'comment', 'placeholder':'date'} }) }}
+                                    </p>
+
+                                    <p class="comment-for-content">
+                                        <label>Id Createur</label> <br>
+                                        {{ form_widget(form.idcreateur, { 'attr': {'class': 'comment', 'placeholder':'Donnez-nous plus de details', 'border-color': 'black'} }) }}
+                                    </p>
+
+                                    <p class="comment-for-content">
+                                        <label>Data</label> <br>
+                                        {{ form_widget(form.data, { 'attr': {'class': 'comment', 'placeholder':'Data', 'border-color': 'black'} }) }}
+                                    </p>
+                                    <p class="comment-for-submit">
+
+                                        <input  class="button" type="submit" value="Ajouter" />
+
+                                    </p>
+                                    {{ form_end(form) }}
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

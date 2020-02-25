@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include '@FullCalendar/Calendar/calendar.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
+  {#  <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.default-settings.js') }}"></script>#}
+
+
+<script>
+
+    $(function () {
+        $('#calendar-holder').fullCalendar({
+            header: {
+                left:'title' ,
+                center:   'month, basicWeek, basicDay,',
+                right: 'prev, next today',
+                font: 'open-sans'
+            },
+            eventColor: "#F44366",
+            weekNumbers: true,
+
+            lazyFetching: true,
+            timeFormat: {
+                agenda: 'h:mmt',
+                '': 'h:mmt'
+            },
+            eventSources: [
+                {
+                    url: '{{ path('ancarebeca_full_calendar_load') }}',
+                    type: 'POST',
+                    data: {},
+                    error: function () {}
+                }
+            ]
+        });
+    });
+</script>
+<style>
+    body {
+        margin-top: 40px;
+        text-align: center;
+        font-size: 14px;
+        font-family: "Helvetica Nueue",Arial,Verdana,sans-serif;
+        background-color: #DDDDDD;
+    }
+
+</style>
+{% endblock %}

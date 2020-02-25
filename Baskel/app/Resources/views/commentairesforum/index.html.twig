@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+<div class="container" style="margin-top: 30px;margin-bottom: 30px;">
+    <h1 class="text-center" style="margin-bottom: 50px">Commentaires-Forums</h1>
+
+
+    <table class="table-hover table" style=" border-collapse: separate;
+  border-spacing: 40px 0;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Data</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentairesForum in commentairesForums %}
+            <tr>
+                <td><a href="{{ path('commentairesforum_show', { 'id': commentairesForum.id }) }}">{{ commentairesForum.id }}</a></td>
+                <td>{{ commentairesForum.data }}</td>
+                <td>{% if commentairesForum.date %}{{ commentairesForum.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('commentairesforum_show', { 'id': commentairesForum.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('commentairesforum_edit', { 'id': commentairesForum.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commentairesforum_new') }}">Crée un commentaire</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}

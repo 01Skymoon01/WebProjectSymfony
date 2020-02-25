@@ -1,0 +1,218 @@
+
+{% extends 'default/front/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+
+
+
+    <div class="tz-shop" xmlns="http://www.w3.org/1999/html">
+        <div class="container">
+
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger ">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+        <!--Start shop content-->
+    <div class="tz-shop-content">
+
+        <div class="shop-banner">
+            <img src="{{ asset('front/images/BASKEL EVENTS.png') }}">
+        </div>
+        <div class="catalog-meta">
+            <div class="catalog_top">
+                                <span class="style-switch">
+                                    <a class="nav-grid-view fa fa-th-large active"></a>
+                                    <a class="nav-list-view fa fa-list"></a>
+
+                                </span>
+                <form class="shop-order">
+                    <label class="form-arrow">
+                        <select class="number-item" name="number_item">
+                            <option value="12">12 items/page</option>
+                            <option value="6">6 items/page</option>
+                            <option value="3">3 items/page</option>
+                        </select>
+                    </label>
+                    <label class="form-arrow">
+                        <select name="orderby" class="orderby">
+                            <option value="'">Sort By: Position</option>
+                            <option value="rating">Sort by rating</option>
+                            <option value="date">Sort by newness</option>
+                        </select>
+                    </label>
+                </form>
+            </div>
+        </div>
+
+
+
+
+        <div class="tz-product row grid-eff">
+
+        <!--Product item-->
+            {% for e in events %}
+
+        <div class="product-item col-md-4 col-sm-6">
+
+        <div class="item">
+                <div class="product-item-inner">
+                    <div class="product-thumb">
+                        <img src="{{ asset('uploads/images/' ~ e.image) }}" width="270" height="240" class="img-fluid" >
+                    </div>
+                    <div class="product-info">
+                        <h4>{{ e.nom }}</h4>
+                        <time style="text-align: left;font-weight: bold;font-size: small;color:gray;">
+                            {{ e.date|date("F/d/Y h:i") }}
+                        </time>
+                        <span class="p-meta">
+                                                <span class="p-price"> Participants: {{ e.nbParticipants }}</span>
+                                                <span class="p-vote">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                </span>
+
+                        <span class="p-color">
+                                                 <i class="fa fa-circle light-blue"></i>
+                                                <i class="fa fa-circle orange"></i>
+                                                <i class="fa fa-circle blueviolet"></i>
+                                                <i class="fa fa-circle orange-dark"></i>
+                                                <i class="fa fa-circle steelblue"></i>
+                                            </span>
+                        <time>
+                            {{ e.date|date("F/d/Y h:i") }}
+                        </time>
+                        <p>
+                            {{ e.description }}
+                        </p>
+                        </span>
+
+                        <span class="p-mask">
+                                                <a href="{{ path('Reserver', {'id': e.id}) }}" class="add-to-cart" type="button" >reserver</a>
+
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Start your project here-->
+
+            <!-- Modal: modalQuickView -->
+            <div class="modal fade" id="modalQuickView" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <img src="{{ asset('uploads/images/' ~ e.image) }}" width="270" height="240" class="img-fluid" >
+                                </div>
+                                <div class="col-lg-7">
+                                    <h2 class="h2-responsive product-name">
+                                        <strong>{{e.nom}}</strong>
+                                    </h2>
+                                    <h4 class="h4-responsive">
+                <span class="green-text">
+                  <strong>{{e.date |date("F/d/Y h:i")}}</strong>
+                </span>
+                           <br>    <br>          <span class="green-text">
+                  <strong>Participants : {{ e.nbParticipants }}</strong>
+                </span>
+
+                                    </h4>
+
+                                    <!--Accordion wrapper-->
+                                    <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+                                        <!-- Accordion card -->
+                                        <div class="card">
+
+                                            <!-- Card header -->
+                                            <div class="card-header" role="tab" id="headingOne1">
+                                                <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                                                   aria-controls="collapseOne1">
+                                                    <h5 class="mb-0">
+                                                        Event description <i class="fas fa-angle-down rotate-icon"></i>
+                                                    </h5>
+                                                </a>
+                                            </div>
+
+                                            <!-- Card body -->
+                                            <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+                                                 data-parent="#accordionEx">
+                                                <div class="card-body">
+                                                    {{e.description}}
+                                                </div>
+                                            </div>
+                                            <!-- Card header -->
+                                            <div class="card-header" role="tab" id="headingTwo2">
+                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
+                                                   aria-expanded="false" aria-controls="collapseTwo2">
+                                                    <h5 class="mb-0">
+                                                        Why attend our events? <i class="fas fa-angle-down rotate-icon"></i>
+                                                    </h5>
+                                                </a>
+                                            </div>
+
+                                            <!-- Card body -->
+                                            <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2"
+                                                 data-parent="#accordionEx">
+                                                <div class="card-body">
+                                                    Our events inBaskel target all classes from youth to adults to elderly.We believe that the power of cycling ecofreely
+                                                    will lead our society to its betterment and this could only happen with the contribution of us all.Donations are all redirected
+                                                    toc harity NGOs and most importantly we give you the opportunity to meet people with the same interests as you and have fun!
+                                                    <strong>Register now!</strong>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <!-- Accordion card -->
+
+
+                                    </div>
+                                    <!-- Accordion wrapper -->
+
+
+                                    <!-- Add to Cart -->
+                                    <div class="card-body">
+
+                                        <div class="text-center">
+
+                                            <button type="button" class="btn btn-outline-success" data-dismiss="modal">Close</button>
+                                            <a   class="btn btn-success" >Register
+                                                <i  class="fa fa-check-circle" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- /.Add to Cart -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End your project here-->
+        </div>
+
+            {% endfor %}
+
+        </div>
+
+
+             </div>
+        </div>
+    </div>
+
+        {% endblock %}

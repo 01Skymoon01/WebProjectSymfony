@@ -4,10 +4,14 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/Baskel/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/Baskel/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/Baskel/vendor/ancarebeca/full-calendar-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/Baskel/vendor/doctrine/doctrine-migrations-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/Baskel/vendor/doctrine/migrations" />
       <excludeFolder url="file://$MODULE_DIR$/Baskel/vendor/friendsofsymfony/user-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/Baskel/vendor/mrad/notifications-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/Baskel/vendor/ocramius/proxy-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/Baskel/vendor/paragonie/sodium_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/Baskel/vendor/pusher/pusher-php-server" />
       <excludeFolder url="file://$MODULE_DIR$/Baskel/vendor/zendframework/zend-code" />
       <excludeFolder url="file://$MODULE_DIR$/Baskel/vendor/zendframework/zend-eventmanager" />
     </content>

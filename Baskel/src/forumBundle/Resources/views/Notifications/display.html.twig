@@ -1,0 +1,56 @@
+
+{% extends 'forum/forum.html.twig' %}
+
+{% block content %}
+{#    {{ render(controller('forumBundle:Notifications:display')) }}#}
+        {# Call NotificationsBundles's assets #}
+        {{ notifications_assets() }}
+    <script>
+        function onNotificationsPushed(data){
+            console.log('data',data);
+            data.forEach(function(item){
+                let li = `<li>
+                        `+item.title+`<br>
+                        `+item.description+`
+                           </li>`;
+            $('#notifications').append(li);
+            });
+        }
+    </script>
+
+    {% block body %}
+        <h1>Welcome to the Notifications:display page</h1>
+        <h5>Notifications</h5>
+            <ul id="notifications">
+                {% for notif in notifications %}
+                    <li>{{ notif.title }}<br>
+                    {{ notif.description }}
+                        {{ notif.route }}
+{#                        {{ notif.parameters.id }}#}
+{#                        {{ notif.route }}#}
+                    <br>
+{#                   <a href="{{ path(notif.route,notif.parameters.id) }}"></a>#}
+                    </li>
+
+                {% else %}
+                    <li>List is empty</li>
+                {% endfor %}
+            </ul>
+            <script>
+                /**
+                 * After calling notifications_assets() "pusher" is now available
+                 * and you can use it this way
+                 */
+                var channel = pusher.subscribe("notifications");// notifications channel
+                channel.bind("my-event", function(data) {
+                    console.log('from notifications channel', data);
+                });
+
+                var channel = pusher.subscribe("messages");// messages channel
+                channel.bind("my-event", function(data) {
+                    console.log('from messages channel', data);
+                });
+            </script>
+
+        {% endblock body %}
+{% endblock content %}

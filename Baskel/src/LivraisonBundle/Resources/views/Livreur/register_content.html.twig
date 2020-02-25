@@ -1,0 +1,134 @@
+
+
+{% extends 'default/front/header.html.twig' %}
+{% block container %}
+<section class="default-page">
+    <div class="container">
+        <div class="tz-register">
+            <h2>Inscription Livreur</h2>
+            {{ form_start(form, {'attr': {'class': 'fos_user_registration_register form-horizontal','id':'signupForm1'}}) }}
+
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="firstname1">Nom *</label>
+                <div class="col-sm-5">
+                    {{ form_widget(form.nom, { 'attr': {'placeholder': 'Votre Nom'} }) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="firstname1">Prenom *</label>
+                <div class="col-sm-5">
+                    {{ form_widget(form.prenom, { 'attr': {'placeholder': 'Votre Prenom'} }) }}
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="firstname1">Date de naissance *</label>
+                <div class="col-sm-5">
+                    {{ form_widget(form.dateNaiss, { 'attr': {'placeholder': 'Votre date de naissance'} }) }}
+                </div>
+            </div>
+
+            <div>
+                <p class="form-row">
+
+                    <input  class="button" type="submit" value="S'inscrire" />
+                </p>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</section>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+    (function($) {
+
+        $.validator.addMethod("phonenumber", function(value, element) {
+            return $('#fos_user_registration_form_numtel1').val() != $('#fos_user_registration_form_numtel2').val()
+        }, "* nwemer mouch kif kif");
+        $.validator.addMethod("letters", function(value, element) {
+            return this.optional(element) || /^[a-z A-Z À-þ]+$/i.test(value);
+        }, "Letters only please");
+        $( document ).ready( function () {
+
+
+            $( "#signupForm1" ).validate( {
+                rules: {
+
+                    'livraisonbundle_livreur[nom]': "required",
+                    'livraisonbundle_livreur[prenom]': "required",
+
+                    'livraisonbundle_livreur[datenNaiss]': "required",
+
+
+
+
+                    'livraisonbundle_livreur[nom]': {
+                        required: true,
+                        minlength: 2,
+                        letters:true
+                    },
+                    'livraisonbundle_livreur[prenom]': {
+                        required: true,
+                        minlength: 2,
+                        letters:true
+
+                    },
+
+
+
+
+                    agree1: "required"
+                },
+                messages: {
+
+
+
+
+                    email1: "Please enter a valid email address",
+                    agree1: "Please accept our policy"
+                },
+                errorElement: "em",
+                errorPlacement: function ( error, element ) {
+                    // Add the `help-block` class to the error element
+                    error.addClass( "help-block" );
+
+                    // Add `has-feedback` class to the parent div.form-group
+                    // in order to add icons to inputs
+                    element.parents( ".col-sm-5" ).addClass( "has-feedback" );
+
+                    if ( element.prop( "type" ) === "checkbox" ) {
+                        error.insertAfter( element.parent( "label" ) );
+                    } else {
+                        error.insertAfter( element );
+                    }
+
+                    // Add the span element, if doesn't exists, and apply the icon classes to it.
+                    if ( !element.next( "span" )[ 0 ] ) {
+                        $( "<span class='glyphicon glyphicon-remove form-control-feedback'></span>" ).insertAfter( element );
+                    }
+                },
+                success: function ( label, element ) {
+                    // Add the span element, if doesn't exists, and apply the icon classes to it.
+                    if ( !$( element ).next( "span" )[ 0 ] ) {
+                        $( "<span class='glyphicon glyphicon-ok form-control-feedback'></span>" ).insertAfter( $( element ) );
+                    }
+                },
+                highlight: function ( element, errorClass, validClass ) {
+                    $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+                    $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+                },
+                unhighlight: function ( element, errorClass, validClass ) {
+                    $( element ).parents( ".col-sm-5 " ).addClass( "has-success" ).removeClass( "has-error" );
+                    $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+                }
+            } );
+        } );
+    })(jQuery);
+
+</script>
+{% endblock %}

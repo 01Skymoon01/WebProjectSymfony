@@ -1,0 +1,54 @@
+
+{{ notifications_assets() }}
+{% if (app.user) %}
+<div class="avatar pull-left dropdown" style="margin-left: 25%;">
+    <a data-toggle="dropdown" href="/forum/#"class="fa fa-bell-o fa-2x"  id="bell" ></a> <b class="caret"></b>
+<ul style="margin-left: 40%;font-family: lato;" id="notifications" class="dropdown-menu" role="menu" >
+    {% for notif in notifications %}
+        <li   style="width: 230px;margin-top: -8%">&nbsp;
+{#            {{ notif.route }}#}
+{#                                    {{ dump(notif.parameters.id.id|trans) }}#}
+            {#                        {{ notif.route }}#}
+            <a style="font-family: lato;margin-left: -5%" href="{{ path('forum_view_single', {'id': notif.parameters.id.id }) }}"> <strong> {{ notif.title }} </strong> a commenté :<strong> {{ notif.description }} </strong></a><br>
+            &nbsp;{{ notif.date|date("F jS \\a\\t g:ia")  }}
+        </li><hr>
+
+    {% else %}
+        <li>No Notifications</li>
+    {% endfor %}
+
+</ul>
+{% else %}
+    <p>l ogin :</p>
+{% endif %}
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+            crossorigin="anonymous"></script>
+<script>
+    var channel = pusher.subscribe("notifications");// notifications channel
+    channel.bind("my-event", function(data) {
+        console.log('from notifications channel', data);
+        data.forEach(function(item){
+            let li = `<li style="width: 230px;font-weight: bold;margin-left: 2%">
+                        `+item.title+`  a commenté :
+                        `+item.description+`
+                           </li><hr>
+            `;
+            $('#notifications').prepend(li);
+            $('#bell').css('color','#F44336;');
+            $( '#bell' ).click(function() {
+                $(this).css('color','#000000');
+            });
+        });
+    });
+    var channel = pusher.subscribe("messages");// messages channel
+    channel.bind("my-event", function(data) {
+        console.log('from messages channel', data);
+    });
+    function onNotificationsPushed(data){
+        console.log('data',data);
+        console.log('hello');
+
+    }
+</script>
