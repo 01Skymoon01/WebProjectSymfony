@@ -36,9 +36,9 @@ AfficherDetailsCommande:
 SupprimerCommande:
     path:     /SupprimerCommande/{id}
     defaults: { _controller: PanierBundle:Default:SupprimerCommande }
-TrieParColumn:
-    path:     /TrieParColumn
-    defaults: { _controller: PanierBundle:Default:TrieParColumn }
+afficherCommandeDunUser:
+    path:     /afficherCommandeDunUser
+    defaults: { _controller: PanierBundle:Default:afficherCommandeDunUser }
 CountPanier:
     path:     /CountPanier
     defaults: { _controller: PanierBundle:Default:CountPanier }

@@ -1,0 +1,67 @@
+{% extends 'default/front/header.html.twig' %}
+
+
+{% block head %}
+
+    {{ parent() }}
+
+
+
+{% endblock %}
+
+
+
+
+{% block container %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+<div style="margin-left: 10%;margin-top: 10%;margin-right: 10%">
+
+    <table >
+
+
+    </table >
+<h2 style="margin: auto">Mes commandes</h2>
+    <table class="table" style="margin-bottom: 50%">
+        <tr>
+            <th scope="col"><a class="trie">N°</a></th>
+            <th scope="col"><a class="trie">DATE</a></th>
+            <th scope="col"><a class="trie">PRIX TOTAL (.TDN)</a></th>
+            <th scope="col"> <a class="trie">NOMBRE C°</a></th>
+            <th scope="col"><a class="trie">CIN CLIENT</a></th>
+            <th scope="col"><a class="trie">ETAT DE PAYMENT</a></th>
+            <th scope="col"><a class="trie">LIVRAISON</a></th>
+            <th scope="col"><a class="trie">DETAILS</a></th>
+
+        </tr>
+
+        {% for cc in c0 %}
+            {%  if( cc.etat == 0)  %}
+
+                <tr id="myTable" scope="row">
+            {% else %}
+
+                <tr id="myTable" scope="row">
+            {% endif %}
+
+            <td>{{ cc.id }}</td>
+            <td>{{ cc.date|date }}</td>
+            <td>{{ cc.totalPrix }} </td>
+            <td>{{ cc.nbrProduit }}</td>
+            <td>{{ cc.idClient }}</td>
+            <td>
+                {% if(cc.etat == 1) %} VALIDE {% else %} NON {% endif %}
+
+            </td>
+            <td> {% if(cc.etatLiv == 1) %} livree {% else %} en attente {% endif %}</td>
+            <td>
+
+                <a href="{{ path('AfficherDetailsCommande',{ 'id' :cc.id}) }}">    <i class="fa fa-eye"></i></a>
+
+
+            </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock %}

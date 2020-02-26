@@ -253,7 +253,7 @@ class DefaultController extends Controller
                 'c0'=>$commande0
             )
         );
-/*        $filename="Factures";
+     $filename="Factures";
         $pdf = $this->get("knp_snappy.pdf")->getOutputFromHtml($html);
 
         $mm=$user->getEmail();
@@ -268,7 +268,7 @@ class DefaultController extends Controller
         $message->attach($attachement);
             $this->get('mailer')->send($message);
             $this->get('session')->getFlashBag()->add('notice','Message envoyé avec success');
-*/
+
 
         $session = $request->getSession();
         //$session->clear();
@@ -383,5 +383,20 @@ class DefaultController extends Controller
 
 
    }
+public function afficherCommandeDunUserAction(){
+    $usr = $this->get('security.token_storage')->getToken()->getUser();
 
+    $commande0=$this->getDoctrine()
+        ->getRepository(Commande::class)
+        ->findBy(array('idClient'=>$usr->getId()));
+
+    $DetailsCommande=$this->getDoctrine()
+        ->getRepository(DetailsCommande::class)
+        ->findBy(['idCommande' => $commande0 ]);
+     return $this -> render('@Panier/Default/AfficherCommandeFront.html.twig', array(
+            'c'=>$DetailsCommande,
+            'c0'=>$commande0
+        )
+    );
+}
 }
