@@ -26,10 +26,13 @@ security:
 
     access_control:
         - { path: ^/admin, roles: ROLE_USER }
-        - { path: ^/Panier/Valider, role: ROLE_USER }
+        - { path: ^/Valider, role: ROLE_USER }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLES_ADMIN }
         - { path: ^/client/, role: ROLES_USER }
         - { path: ^/livreur/, role: ROLE_LIVREUR }
+        - { path: ^/Frite/reclamation, role: ROLE_USER }
+        - { path: ^/Frite/reclamation, role: ROLE_USER }
+        - { path: ^/CountPanier, role: ROLE_USER }

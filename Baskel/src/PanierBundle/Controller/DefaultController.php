@@ -34,6 +34,8 @@ class DefaultController extends Controller
         else
             $articles = count($session->get('panier'));
         //*******************
+        $usr = $this->get('security.token_storage')->getToken()->getUser();
+
         //Count Items Wishlist
         $Wishi = $this -> getDoctrine()
             -> getRepository(Wishlist::class)

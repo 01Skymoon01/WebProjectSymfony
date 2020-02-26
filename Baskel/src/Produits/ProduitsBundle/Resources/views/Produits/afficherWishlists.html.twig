@@ -72,9 +72,9 @@
 
                         <td class="product-quantity">
                             {% if wish.qteProd == 0 %}
-                            <div class="quantity"><input type="text" step="1" min="0" name="cart" value="Repture de Stock" title="Qty" class="input-text qty text" size="4" disabled="disabled"></div>
+                            <div class="quantity"><input type="text" step="1" min="0" name="cart" value="Repture de Stock" title="Qty" class="input-text qty text" size="4" disabled="disabled" style="width: 100%"></div>
                             {% else %}
-                             <div class="quantity"><input type="text" step="1" min="0" name="cart" value="En Stock" title="Qty" class="input-text qty text" size="4" disabled="disabled"></div>
+                             <div class="quantity"><input type="text" step="1" min="0" name="cart" value="En Stock" title="Qty" class="input-text qty text" size="4" disabled="disabled" style="width: 100%"></div>
                             {% endif %}
                         </td>
 
@@ -90,7 +90,6 @@
                     <tr>
                         <td class="actions" colspan="6">
                             <a class="back-shop" href="{{ path('shop') }}"><i class="fa fa-angle-left"></i> RETOUR AU MAGASIN.</a>
-                            <button class="update-cart" type="submit">AJOUTER AU PANIER</button>
                         </td>
                     </tr>
 

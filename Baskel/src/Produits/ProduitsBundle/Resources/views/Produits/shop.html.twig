@@ -16,8 +16,68 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>s
 
-    <script src="{{ asset('jquery.min') }}"></script>
-    <script src="{{ asset('custom.js') }}"></script>
+
+
+
+
+
+    {{ parent() }}
+
+    <style>
+        #divimg{
+
+            float: left;
+            width:70%;
+            height:95%;
+        }
+
+        #detailprod{
+            margin-left:35%;
+        }
+        #square{
+           font-size: 30px;
+        }
+
+
+        /* Rating Star Widgets Style */
+        .rating-stars ul {
+            list-style-type:none;
+            padding:0;
+
+            -moz-user-select:none;
+            -webkit-user-select:none;
+        }
+        .rating-stars ul > li.star {
+            display:inline-block;
+
+        }
+
+        /* Idle State of the stars */
+        .rating-stars ul > li.star > i.fa {
+            font-size:1.5em; /* Change the size of the stars */
+            color:#ccc; /* Color on idle state */
+        }
+
+        /* Hover state of the stars */
+        .rating-stars ul > li.star.hover > i.fa {
+            color:#FFCC36;
+        }
+
+        /* Selected state of the stars */
+        .rating-stars ul > li.star.selected > i.fa {
+            color:#FF912C;
+        }
+
+    </style>
+
+
+{% endblock %}
+
+
+
+
+{% block container %}
+
 
 
 
@@ -25,6 +85,7 @@
 
 
         $(document).ready(function(){
+
             $(".addcart2").click(function(){
                 // $(this).hide();
                 console.log("clicked addcart");
@@ -114,7 +175,7 @@
 
 
                         console.log("rating jawou behi");
-                       // console.log($(".stars").html());
+                        // console.log($(".stars").html());
 
                     }
 
@@ -137,68 +198,6 @@
 
 
     </script>
-
-
-    {{ parent() }}
-
-    <style>
-        #divimg{
-
-            float: left;
-            width:70%;
-            height:95%;
-        }
-
-        #detailprod{
-            margin-left:35%;
-        }
-        #square{
-           font-size: 30px;
-        }
-
-
-        /* Rating Star Widgets Style */
-        .rating-stars ul {
-            list-style-type:none;
-            padding:0;
-
-            -moz-user-select:none;
-            -webkit-user-select:none;
-        }
-        .rating-stars ul > li.star {
-            display:inline-block;
-
-        }
-
-        /* Idle State of the stars */
-        .rating-stars ul > li.star > i.fa {
-            font-size:1.5em; /* Change the size of the stars */
-            color:#ccc; /* Color on idle state */
-        }
-
-        /* Hover state of the stars */
-        .rating-stars ul > li.star.hover > i.fa {
-            color:#FFCC36;
-        }
-
-        /* Selected state of the stars */
-        .rating-stars ul > li.star.selected > i.fa {
-            color:#FF912C;
-        }
-
-    </style>
-
-
-{% endblock %}
-
-
-
-
-{% block container %}
-
-
-
-
 
     <!--Start shop-->
 <div class="tz-shop">
@@ -492,7 +491,7 @@
                                                                     <li class='star ' title='Poor' data-value='1' >
                                                                 <i class='fa fa-star fa-fw '></i>
                                                               </li>
-                                                                    <li class='star ' title='Fair' data-value='2'><
+                                                                    <li class='star ' title='Fair' data-value='2'>
                                                                 <i class='fa fa-star fa-fw'></i>
                                                               </li>
                                                                     <li class='star ' title='Good' data-value='3'>

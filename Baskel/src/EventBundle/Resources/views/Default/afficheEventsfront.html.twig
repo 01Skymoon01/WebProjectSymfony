@@ -15,10 +15,12 @@
     <div class="tz-shop" xmlns="http://www.w3.org/1999/html">
         <div class="container">
 
-            {% for message in app.flashes('error') %}
-                <div class="alert alert-danger ">
-                    {{ message }}
-                </div>
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
             {% endfor %}
 
         <!--Start shop content-->
@@ -31,25 +33,9 @@
             <div class="catalog_top">
                                 <span class="style-switch">
                                     <a class="nav-grid-view fa fa-th-large active"></a>
-                                    <a class="nav-list-view fa fa-list"></a>
 
                                 </span>
-                <form class="shop-order">
-                    <label class="form-arrow">
-                        <select class="number-item" name="number_item">
-                            <option value="12">12 items/page</option>
-                            <option value="6">6 items/page</option>
-                            <option value="3">3 items/page</option>
-                        </select>
-                    </label>
-                    <label class="form-arrow">
-                        <select name="orderby" class="orderby">
-                            <option value="'">Sort By: Position</option>
-                            <option value="rating">Sort by rating</option>
-                            <option value="date">Sort by newness</option>
-                        </select>
-                    </label>
-                </form>
+
             </div>
         </div>
 
@@ -63,10 +49,10 @@
 
         <div class="product-item col-md-4 col-sm-6">
 
-        <div class="item">
+        <div class="item" style="margin-bottom: 100%">
                 <div class="product-item-inner">
                     <div class="product-thumb">
-                        <img src="{{ asset('uploads/images/' ~ e.image) }}" width="270" height="240" class="img-fluid" >
+                        <img src="{{ asset('uploads/images/'~ e.image) }}" >
                     </div>
                     <div class="product-info">
                         <h4>{{ e.nom }}</h4>
@@ -75,21 +61,9 @@
                         </time>
                         <span class="p-meta">
                                                 <span class="p-price"> Participants: {{ e.nbParticipants }}</span>
-                                                <span class="p-vote">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half-o"></i>
-                                                </span>
 
-                        <span class="p-color">
-                                                 <i class="fa fa-circle light-blue"></i>
-                                                <i class="fa fa-circle orange"></i>
-                                                <i class="fa fa-circle blueviolet"></i>
-                                                <i class="fa fa-circle orange-dark"></i>
-                                                <i class="fa fa-circle steelblue"></i>
-                                            </span>
+
+
                         <time>
                             {{ e.date|date("F/d/Y h:i") }}
                         </time>
@@ -116,7 +90,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-lg-5">
-                                    <img src="{{ asset('uploads/images/' ~ e.image) }}" width="270" height="240" class="img-fluid" >
+                                    <img src="{{ asset('uploads/images/' ~ e.image) }}" >
                                 </div>
                                 <div class="col-lg-7">
                                     <h2 class="h2-responsive product-name">

@@ -1,3 +1,4 @@
+
 {% block head %}
 <!DOCTYPE html>
 <html lang="fr">
@@ -62,27 +63,24 @@
                     </li>
                 </ul>
                 <ul class="pull-right">
-                    <li>
-                        <a href="shop-register.html"> Compte</a>
-                    </li>
-                    <li>
-                        <a href="#">Wishlist</a>
-                    </li>
-                    <li>
-                        <a href="shop-cart.html">Panier</a>
-                    </li>
+
+
+                    {% if is_granted('ROLE_LIVREUR') and is_granted('ROLE_USER') %}
                     <li>
                         <a href="shop-checkout.html">Commande</a>
                     </li>
-
+                    {% else %}
+                    <li>
+                        <a href="{{ asset(path('fos_user_registration_register')) }}">Faire un Compte</a>
+                    </li>
+                    {% endif %}
                     {% if is_granted('ROLE_LIVREUR') %}
                         <li>
-                            <a href="#">Livraison</a>
+                            <a href="{{  asset(path('afficheCommandeNonLivree')) }}">Platform Livreur</a>
                         </li>
                     {% endif %}
 
                     <li class="tz-header-login">
-                    <li class="search"><a href="#" class="js-header-search-toggle"><i class="fa fa-search"></i></a></li>
                     {% if is_granted('ROLE_USER') %}
                         <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
                     {% else %}
@@ -100,21 +98,6 @@
                 <h3 class="tz-logo pull-left"><a href="index.html"><img src="{{ asset('front/images/logo horizontal 297px lengeth.png') }}" alt="home" /></a></h3>
                 <div class="tz-search pull-right">
 
-                    <!--Start form search-->
-                    <form>
-                        <label class="select-arrow">
-                            <select name="category">
-                                <option value="">Catégories</option>
-                                <option value="#">Vélos</option>
-                                <option value="#">Equipements</option>
-                                <option value="#">Vêtements</option>
-
-                            </select>
-                        </label>
-                        <input type="text" class="tz-query" id="tz-query" value="" placeholder="Trouver un produit...">
-                        <button type="submit"></button>
-                    </form>
-                    <!--End Form search-->
 
                     <!--live search-->
                     <div class="live-search">
@@ -183,70 +166,76 @@
 
 
                     <li>
-                        <a href="shop.html">Categories</a>
-
-
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="shop-rightsidebar.html">Velos</a>
-                            </li>
-                            <li>
-                                <a href="shop-cart.html">Equipements</a>
-                            </li>
-                            <li>
-                                <a href="shop-cart.html">Vêtements</a>
-                            </li>
-                        </ul>
-
+                        <a href="{{ path('shop') }}">Magasin</a>
                     </li>
 
-                    <li>
-                        <a href="shop.html">Magasin</a>
-                    </li>
+                    {% if is_granted('ROLE_LIVREUR') and is_granted('ROLE_USER') %}
 
-
-
-
-                    <li>
-                        <a href="shop.html">Location</a>
-
-
-
-
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="shop-rightsidebar.html">Velos</a>
-                            </li>
-                            <li>
-                                <a href="shop-cart.html">Equipements</a>
-                            </li>
-                        </ul>
-                    </li>
                     <li>
                         <a href="#">
                             Evenements
-                            <span class="cyan-dark">Best off!</span>
+                            <!--span class="cyan-dark">Best off!</span-->
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="blog-right.html">Courses</a>
+                                <a href="{{ asset( path('AfficheEvfront')) }}">Join us</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ asset( path('AfficheRes')) }}">mes evenements</a>
                             </li>
                             <li>
-                                <a href="single-blog.html">Volantaires</a>
+                                <a href="{{ asset( path('calendar')) }}">Calendrier</a>
+
                             </li>
                         </ul>
                     </li>
+                        <li>
+                            <a href="{{ asset(path('forum_homepage')) }}">
+                                Forum
+                            </a>
+                        </li>
+                        {% else  %}
+                            <li>
+                                <a href="#">
+                                    Evenements
+                                    <!--span class="cyan-dark">Best off!</span-->
+                                </a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="{{ path('fos_user_security_login') }}">Join us</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                    {% endif %}
+
                     <li>
-                        <a href="contact.html">Contact</a>
+                        <a href="#">Contact</a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="contact.html">Reclamation</a>
+                                <a href="{{ asset( path('reclamation') ) }}">Faire une Reclamation</a>
+
+
                             </li>
+                            {% if is_granted('ROLE_LIVREUR') and is_granted('ROLE_USER') %}
                             <li>
-                                <a href="RDV.html">Rendez-vous</a>
+                                <a href="{{ asset( path('DisplayReclamation') ) }}">Mes Reclamations</a>
                             </li>
+                            {% endif %}
+                            <li>
+                                <a href="{{ asset( path('rdv') ) }}">Rendez-vous</a>
+                            </li>
+                            {% if is_granted('ROLE_LIVREUR') and is_granted('ROLE_USER') %}
+                            <li>
+                                <a href="{{ asset( path('DisplayRdv') ) }}">Mes Reclamations</a>
+                            </li>
+                            {% endif %}
                         </ul>
                     </li>
+
+
+
                 </ul>
                 <!--End Main menu-->
                 <div id="fh5co-product">
@@ -254,7 +243,7 @@
                 <ul class="tz-ecommerce-meta pull-right">
                   <!-----wishlist ------>
                     <li class="tz-menu-wishlist">
-                        <a href="#"><strong id="countItemsWishi">0</strong></a>
+                        <a href="{{ asset(path('afficherWishlists')) }}"><strong id="countItemsWishi">0</strong></a>
                     </li>
                     <li class="tz-mini-cart">
                         <a  href="{{ path('MyCart') }}"> <strong id="countItems"> 0 </strong> </a>
@@ -507,6 +496,7 @@
     </body>
     </html>
     <script src="{{ asset('jquery-3.4.1.min.js')}}"> </script>
+
     <script  type="application/javascript" async>
         $(document).ready(function(){
              console.log("here jquery");
@@ -518,7 +508,7 @@
                         type: 'get',
                         success: function (data)
                         {   $date=$.parseJSON(data);
-                            console.log($date.Wishi);
+                            console.log($date);
                             $("#countItems").text($date.articles);
                             $("#countItemsWishi").text($date.Wishi);
 
