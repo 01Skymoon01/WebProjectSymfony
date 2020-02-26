@@ -304,7 +304,7 @@ class DefaultController extends Controller
             $request->query->getInt('page',1),
             $request->query->getInt('limit',4)
         );
-        return $this -> render('@Panier/Default/CommandeBack.html.twig', array('c'=>$result, 'nonPaye' =>$PN ,'Paye'=>$Paye));
+        return $this -> render('@Panier/Default/CommandeBack.html.twig', array('c'=>$result, 'nonPaye' =>$PN ,'Paye'=>count($Paye)));
     }
 
     public function ModifierEtatCommandeAction($id,$etat){
@@ -399,4 +399,6 @@ public function afficherCommandeDunUserAction(){
         )
     );
 }
+
+
 }

@@ -10,5 +10,20 @@ pdf:
 ImgFaq:
     path:     /ImgFaq
     defaults: { _controller: BaskelBundle:Default:ImgFaq }
+crankset:
+    path:     /crankset
+    defaults: { _controller: BaskelBundle:Default:crankset}
+wheel:
+    path:     /wheel
+    defaults: { _controller: BaskelBundle:Default:wheel}
+handlebars:
+    path:     /handlebars
+    defaults: { _controller: BaskelBundle:Default:handlebars}
+saddle:
+    path:     /saddle
+    defaults: { _controller: BaskelBundle:Default:saddle}
 
+Game:
+    path:     /Game
+    defaults: { _controller: BaskelBundle:Default:Game}
 

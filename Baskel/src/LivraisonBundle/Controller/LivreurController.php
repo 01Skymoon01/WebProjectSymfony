@@ -70,8 +70,9 @@ class LivreurController extends  Controller
             ['form' => $form->createView()]
         );
     }
+
     public  function  afficheLivreurAction(){
-        $livreurs=$this->getDoctrine()->getRepository(Livreur::class)->findAll();
+        $livreurs=$em= $this->getDoctrine()->getManager()->getRepository(Livreur::class)->findAll();
 
         $vehicules=$this->getDoctrine()->getRepository(Vehicule::class)->findAll();
         return $this->render('@Livraison/Livreur/consliv.html.twig',array('vehicules'=>$vehicules,'livreurs'=>$livreurs));

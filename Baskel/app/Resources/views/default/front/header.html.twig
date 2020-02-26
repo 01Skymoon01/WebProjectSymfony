@@ -64,6 +64,9 @@
                 </ul>
                 <ul class="pull-right">
 
+                    <li>
+                        <a href="{{ asset( path('Game')) }}">Construire une Baskla!</a>
+                    </li>
 
                     {% if is_granted('ROLE_LIVREUR') and is_granted('ROLE_USER') %}
                     <li>
@@ -228,13 +231,15 @@
                             </li>
                             {% if is_granted('ROLE_LIVREUR') and is_granted('ROLE_USER') %}
                             <li>
-                                <a href="{{ asset( path('DisplayRdv') ) }}">Mes Reclamations</a>
+                                <a href="{{ asset( path('DisplayRdv') ) }}">Mes rendez-vous</a>
                             </li>
                             {% endif %}
                         </ul>
                     </li>
 
-
+                    <li>
+                        <a href="{{ path('ImgFaq') }}">FAQ</a>
+                    </li>
 
                 </ul>
                 <!--End Main menu-->

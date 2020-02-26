@@ -35,4 +35,26 @@ class DefaultController extends Controller
     public  function  ImgFaqAction(){
         return $this->render('@Baskel/Default/FAQImg.html.twig');
     }
+    public function cranksetAction()
+    {
+        return $this->render('@Baskel/Default/twiget/crankset.html.twig');
+    }
+    public function wheelAction()
+    {
+        return $this->render('@Baskel/Default/twiget/wheel.html.twig');
+    }
+    public function saddleAction()
+    {
+        return $this->render('@Baskel/Default/twiget/saddle.html.twig');
+    }
+    public function handlebarsAction()
+    {
+        return $this->render('@Baskel/Default/twiget/handlebars.html.twig');
+    }
+    public function GameAction()
+    {
+        return $this->render('@Baskel/Default/Game/game.html.twig');
+    }
+
+
 }

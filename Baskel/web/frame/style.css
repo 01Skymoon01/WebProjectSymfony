@@ -1,0 +1,80 @@
+body{
+	background-color: #cc9ad6;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+
+
+img {
+	position: absolute;
+	margin-left: 15%;
+display:inline-block;
+  height:100%;
+}
+
+
+button{
+  margin-top:20%;
+}
+
+ul{
+	list-style-type: none;
+	display:inline-block;
+}
+
+
+character{
+z-index: -1000;
+}
+
+.shirt{
+	visibility:hidden;
+  z-index: 2;
+	width: 500px;
+	height: 500px;
+	margin-top: 10%;
+}
+
+.pant{
+	visibility:hidden;
+  z-index: 5;
+width: 100px;
+	height: 100px;
+	margin-top: 13.5%;
+	margin-left: 21%;
+	}
+.hand{
+	visibility:hidden;
+	z-index: 3;
+	width: 150px;
+	height: 110px;
+	margin-top: 13.3%;
+	margin-left:30%;}
+.wheel{
+	visibility:hidden;
+	z-index: 1;
+	width: 300px;
+	height: 300px;
+	margin-top: 20.8%;
+	margin-left: 31.35%;
+}
+.wheel2{
+	visibility:hidden;
+	z-index: 1;
+	width: 300px;
+	height: 300px;
+	margin-top: 20.6%;
+	margin-left: 9%;
+}
+
+
+.crankset{
+	visibility: hidden;
+	z-index: 3;
+	width: 330px;
+	height: 150px;
+	margin-top: 25.8%;
+	margin-left: 12%;
+	transform: rotate(15deg);
+ }
+

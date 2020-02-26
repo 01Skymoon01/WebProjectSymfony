@@ -26,7 +26,7 @@ class Livreur
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(name="id_username",referencedColumnName="id",unique=true)
      */
     private $id_username;

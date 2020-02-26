@@ -85,8 +85,6 @@
                                 <th>Date de naissance</th>
                                 <th>Solde</th>
                                 <th>Etat</th>
-                                <th>Numero téléphone 1 </th>
-                                <th>Numéro téléphone 2</th>
                                 <th>Matricule Vehicule</th>
                                 <th>Type Vehicule</th>
                                 <th>Action</th>
@@ -105,8 +103,8 @@
                                 {% if l.etat=="en attente" %}
                             <tr>
                                 {% endif %}
-                                <td>{{ l.username }}</td>
-                                <td>{{ l.email }}</td>
+
+
                                 <td>{{ l.nom }} {{ l.prenom }}</td>
 
                                 <td>{{ l.dateNaiss | date('d/m/Y') }}</td>
@@ -115,11 +113,10 @@
 
 
                                 <td>{{ l.solde }} DT</td>
-                                <td>{{ l.numtel1 }}</td>
-                                <td>{{ l.numtel2 }}</td>
+
                                 <td>
                                     <ul>
-                                    {% for v in vehicules %}
+                             /     {# for v in vehicules %}
 
                                     {% if l.id == v.user.getId() %}
                                    <li>   {{ v.matricule }}
@@ -134,7 +131,7 @@
                                         {% if l.id == v.user.getId() %}
                                         <li>   {{ v.type }}
                                             {% endif %}
-                                            {% endfor %}
+                                            {% endfor #}
                                         </li></ul> </td>
 
                                 <td>

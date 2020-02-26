@@ -9,13 +9,14 @@
 
 {% endblock %}
 {% block container %}
+    <h1 style="margin-left: 30%;margin-top: 5%;margin-bottom:5% ">Cliquer sur la partie endommagée:</h1>
 <img src="{{ asset("FAQ.png") }}" usemap="#image-map" style="margin-left: 10%">
 
 <map name="image-map">
-    <area target="_self" alt="wheelBack" title="wheelBack" href="wheelBack" coords="307,597,257" shape="circle">
-    <area target="_self" alt="crankset" title="crankset" href="crankset" coords="640,662,79" shape="circle">
-    <area target="_parent" alt="WheelFront" title="WheelFront" href="wheelFront" coords="1096,591,262" shape="circle">
-    <area target="_self" alt="saddle" title="saddle" href="saddle" coords="375,169,578,115" shape="rect">
-    <area target="_self" alt="handlebars" title="handlebars" href="handlebars" coords="1093,70,911,189" shape="rect">
+    <area target="_self" alt="wheelBack" title="wheelBack" href="{{ asset( path('wheel')) }}" coords="307,597,257" shape="circle">
+    <area target="_self" alt="crankset" title="crankset" href="{{ asset( path('crankset')) }}" coords="640,662,79" shape="circle">
+    <area target="_parent" alt="WheelFront" title="WheelFront" href="{{ asset( path('wheel')) }}" coords="1096,591,262" shape="circle">
+    <area target="_self" alt="saddle" title="saddle" href="{{ asset( path('saddle')) }}" coords="375,169,578,115" shape="rect">
+    <area target="_self" alt="handlebars" title="handlebars" href="{{ asset( path('handlebars')) }}" coords="1093,70,911,189" shape="rect">
 </map>
 {% endblock %}

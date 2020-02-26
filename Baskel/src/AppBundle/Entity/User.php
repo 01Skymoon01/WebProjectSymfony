@@ -48,7 +48,7 @@ class User extends BaseUser
     /**
      * @param int $cin
      */
-    public function setCin(int $cin)
+    public function setCin( $cin)
     {
         $this->cin = $cin;
     }
@@ -65,7 +65,7 @@ class User extends BaseUser
      * @param int $numtel
      *
      */
-    public function setNumtel(int $numtel)
+    public function setNumtel( $numtel)
     {
         $this->numtel = $numtel;
     }

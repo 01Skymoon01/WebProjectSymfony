@@ -737,42 +737,47 @@ class ProduitsController extends Controller
     }
 
 
-
     public function soldeEditAction($ref_p, Request $request){
 
         $em = $this -> getDoctrine() -> getManager();
-
         $produit = $this -> getDoctrine()
             -> getRepository(Produits::class)
             -> find($ref_p);
 
-        //   var_dump($produit);
+
 
         $user = $this->getUser();
 
         $form = $this -> createForm(ModifierSoldeType::class, $produit);
         $form -> handleRequest($request);
 
-        $newSolde=$form->get('solde')->getData();
-        $produit->setSolde($newSolde);
+
+        if($form->isSubmitted()){
+
+            $newSolde=$form->get('solde')->getData();
+            $produit->setSolde($newSolde);
 
 
-        $solde = ($produit -> getPrixP() * $newSolde) / 100;
+            $solde = ($produit -> getPrixP() * $newSolde) / 100;
 
 
 
 
-        if ($solde < $produit -> getPrixP()) {
+            if ($solde < $produit -> getPrixP()) {
 
-            $newPrice = $produit -> getPrixP() - $solde;
+                $newPrice = $produit -> getPrixP() - $solde;
 
-            $produit -> setPrixP($newPrice);
-        } else {
-            $produit -> setPrixP($produit -> getPrixP());
+                $produit -> setPrixP($newPrice);
+
+            } else {
+                $produit -> setPrixP($produit -> getPrixP());
+            }
+
+            $em -> persist($produit);
+            $em -> flush();
+
+            return $this->redirectToRoute('afficherProduitsBack');
         }
-        $em -> persist($produit);
-        $em -> flush();
-
 
         return $this->render('@Produits/Produits/modifierSolde.html.twig',
             array('form'=>$form->createView(),'user'=>$user));

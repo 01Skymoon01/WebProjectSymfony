@@ -1,0 +1,81 @@
+{% extends 'default/front/header.html.twig' %}
+
+
+
+{% block head %}
+    {{ parent() }}
+
+
+{% endblock %}
+{% block container %}
+
+
+
+    <div class="tz-shop" xmlns="http://www.w3.org/1999/html">
+        <div class="container">
+
+            <!--Start shop content-->
+            <div class="tz-shop-content">
+
+                <div class="shop-banner">
+                    <img src="{{ asset('front/images/wheel.png') }}">
+                </div>
+
+                <div class="container">
+                <h1 class="tz-tabs-title" style="margin-top: 40px; margin-bottom: 5%">Probleme de direction et roues </h1>
+
+                <div>
+                    <div style="margin-top: 5px;  ">
+                        <div style="">
+                       <h3  style=",margin-left: 2%">Direction instable</h3> </div>
+                    </div>
+                    <hr>
+                    <p  style="font-family: Lato, sans-serif">Quand vous actionnez le frein avant et que vous poussez le vélo vers l’avant, le jeu de direction bouge et avance par rapport au tube de direction. </p>
+                 </div>
+
+                    <div>
+                        <div style="margin-top: 5px;  ">
+                            <div style="">
+                              <h3  style=",margin-left: 2%"> Claquement de roue</h3> </div>
+                        </div>
+                        <hr>
+                        <p  style="font-family: Lato, sans-serif">La roue émet un claquement soudain pendant que vous roulez et/ou la roue se désaxe. Rayon casse et doit etre remplace”  </p>
+                    </div>
+
+                    <div>
+                        <div style="margin-top: 5px;  ">
+                            <div style="">
+                               <h3  style=",margin-left: 2%"> Roulements du moyeu usés </h3> </div>
+                        </div>
+                        <hr>
+                        <p  style="font-family: Lato, sans-serif">Il y a un jeu latéral du moyeu sur son axe ou bien, quand vous tournez l’axe  dans le moyeu, vous sentez un point de résistance, ou encore une alternance de jeu et de résistance. </p>
+                    </div>
+
+                    <div>
+                        <div style="margin-top: 5px;  ">
+                            <div style="">
+                               <h3  style=",margin-left: 2%">Corps de roue libre usé</h3> </div>
+                        </div>
+                        <hr>
+                        <p  style="font-family: Lato, sans-serif">Quand vous pédalez, la cassette mouline mais la transmission ne se fait pas. Autre possibilité, la cassette mouline avant que la vitesse ne soit engagée ou bien il y a trop de jeu latéral dans la cassette </p>
+                    </div>
+                    <h1 class="tz-tabs-title" style="margin-top: 40px; margin-bottom: 5%">N'hesitez-plus! Apportez-nous votre velo!</h1>
+
+                    <a   href="{{ path('rdv')}}"> <input style="margin-top: 5%" title="Passez un Rendez-vous" value="Passez un Rendez-Vous" type="submit" id="Passez un Rendez-Vous" class="btn btn-button-secondary-ct btn-lg btn-block  " >
+                    </a>
+
+
+
+
+                    <div class="tz-product row grid-eff">
+
+                    <!--Product item-->
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
