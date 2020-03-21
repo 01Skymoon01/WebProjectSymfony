@@ -304,7 +304,7 @@ class DefaultController extends Controller
             $request->query->getInt('page',1),
             $request->query->getInt('limit',4)
         );
-        return $this -> render('@Panier/Default/CommandeBack.html.twig', array('c'=>$result, 'nonPaye' =>$PN ,'Paye'=>count($Paye)));
+        return $this -> render('@Panier/Default/CommandeBack.html.twig', array('c'=>$result, 'nonPaye' =>$PN ,'Paye'=>$Paye));
     }
 
     public function ModifierEtatCommandeAction($id,$etat){
@@ -343,7 +343,6 @@ class DefaultController extends Controller
     }
 
     public function AfficherDetailsCommandeAction($id){
-
         $commande0=$this->getDoctrine()
             ->getRepository(Commande::class)
             ->find($id);
@@ -352,24 +351,32 @@ class DefaultController extends Controller
             ->findBy(['idCommande' => $commande0 ]);
 
 
+        $usr = $this->get('security.token_storage')->getToken()->getUser();
 
-        $snappy=$this->get('knp_snappy.pdf');
-        $html = $this -> renderView('@Panier/Default/DetailsCommandeBack.html.twig', array(
+        $mm=$usr->getEmail();
+        $html = $html = $this -> renderView('@Panier/Default/DetailsCommandeBack.html.twig', array(
                 'c'=>$commande,
                 'c0'=>$commande0
             )
         );
-        $filename="Factures";
+        $filename="commande";
+        $pdf = $this->get("knp_snappy.pdf")->getOutputFromHtml($html);
 
-        return new Response(
-            $snappy->getOutputFromHtml($html),
-            200,
-            array(
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition'=> 'attachment ; filename="' .$filename.'.pdf"'
-            )
-        );
+        $usename='ashlynx1997@gmail.com';
+        $message=\Swift_Message::newInstance()
+            -> setSubject(' Facture ')
+            -> setFrom($usename)
+            -> setTo($mm)
+            -> setBody('Votre facture a ete bien traite',
+                'text/html');
 
+        $attachement = \Swift_Attachment::newInstance($pdf, $filename, 'application/pdf' );
+        $message->attach($attachement);
+        $this->get('mailer')->send($message);
+
+
+
+        return $this->redirectToRoute('AfficherCommande');
     }
 
     public function connectAction(){

@@ -31,3 +31,6 @@ forum_view_singlecat:
 notif_display:
     path:     /display
     defaults: { _controller: forumBundle:Notifications:display }
+botIni:
+    path:     /botIni
+    defaults: { _controller: forumBundle:Default:botIni }

@@ -210,5 +210,9 @@ class DefaultController extends Controller
 
         }
 
+        public function botIniAction(){
+        return $this->render('@forum/Default/botman.html.twig');
+        }
+
 
 }

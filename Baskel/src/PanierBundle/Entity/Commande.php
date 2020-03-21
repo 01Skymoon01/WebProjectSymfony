@@ -116,7 +116,7 @@ class Commande
     /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param \Date $date
      *
      * @return Commande
      */

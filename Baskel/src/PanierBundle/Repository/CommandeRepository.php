@@ -56,7 +56,7 @@ SET c.etat = 1
         $query = $this->getEntityManager()
             ->createQuery(" UPDATE ProduitsBundle:Produits e 
 SET e.quantiteP= e.quantiteP - :nbajouter
- where e.refP=:id ")
+ where e.ref_p=:id ")
             ->setParameter('id', $id)
             ->setParameter('nbajouter', $nbr);
         return $query->getResult();
@@ -68,19 +68,9 @@ SET e.quantiteP= e.quantiteP - :nbajouter
             ->createQuery(" SELECT c
           FROM PanierBundle:Commande c 
           ORDER BY :Column ASC")
-        ->setParameter('Column',$Column);
+            ->setParameter('Column',$Column);
 
 
-        return $query->getResult();
-    }
-    public function ModifierEtatLivraison($id,$etat){
-
-        $query = $this->getEntityManager()
-            ->createQuery(" UPDATE PanierBundle:Commande c 
-SET c.etatLiv = 1
- where c.id =:id ")
-            ->setParameter('id', $id)
-        ;
         return $query->getResult();
     }
 

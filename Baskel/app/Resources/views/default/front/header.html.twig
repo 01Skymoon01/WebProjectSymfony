@@ -83,6 +83,12 @@
                         </li>
                     {% endif %}
 
+                    {% if is_granted('ROLES_ADMIN') %}
+                        <li>
+                            <a href="{{ asset( path('ajouterProduit') ) }}">Administration</a>
+                        </li>
+                    {% endif %}
+
                     <li class="tz-header-login">
                     {% if is_granted('ROLE_USER') %}
                         <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
@@ -91,6 +97,7 @@
                     {% endif %}
 
                     </li>
+
 
                 </ul>
             </div>
@@ -234,6 +241,7 @@
                                 <a href="{{ asset( path('DisplayRdv') ) }}">Mes rendez-vous</a>
                             </li>
                             {% endif %}
+
                         </ul>
                     </li>
 

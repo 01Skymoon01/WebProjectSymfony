@@ -175,7 +175,7 @@
 
                                 </td>
                                 <td>{{ cc.id }}</td>
-                                <td>{{ cc.date|date }}</td>
+                                <td>{{ cc.date|date('Y-m-d') }}</td>
                                 <td>{{ cc.totalPrix }} </td>
                                 <td>{{ cc.nbrProduit }}</td>
                                 <td>{{ cc.idClient }}</td>
@@ -208,28 +208,7 @@
 
                     </div>
 
-                    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-                    <script type="text/javascript">
-                        google.charts.load("current", {packages:["corechart"]});
-                        google.charts.setOnLoadCallback(drawChart);
-                        function drawChart() {
-                            var data = google.visualization.arrayToDataTable([
-                                ['Task', 'Hours per Day'],
-                                ['Commande Paye',     {{ nonPaye }} ],
-                                ['Commande Non Paye',     {{ Paye }} ],
-                            ]);
-
-                            var options = {
-                                title: 'Commande Paye/ Non Paye.',
-                                backgroundColor: '#2d4c7d',
-                                is3D: true,
-                            };
-
-                            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-                            chart.draw(data, options);
-                        }
-                    </script>
                     <div id="piechart_3d" style="width: 555px; height: 195px; margin-left: 16.5%; margin-top: 2%; margin-bottom: -2%;" ></div>
 
                 </div>
