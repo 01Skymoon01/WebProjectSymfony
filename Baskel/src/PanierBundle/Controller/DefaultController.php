@@ -2,14 +2,19 @@
 
 namespace PanierBundle\Controller;
 
+use DateTime;
 use PanierBundle\Entity\Commande;
 use PanierBundle\Entity\DetailsCommande;
 use Produits\ProduitsBundle\Entity\Mail;
 use Produits\ProduitsBundle\Entity\Wishlist;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Produits\ProduitsBundle\Entity\Produits;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+
 class DefaultController extends Controller
 {
     public function indexAction()
@@ -407,5 +412,54 @@ public function afficherCommandeDunUserAction(){
     );
 }
 
+/*******************************************************************************/
+public function AllCommandeJsonAction()
+    {
 
+
+        $commande=$this->getDoctrine()->getManager()
+            ->getRepository(Commande::class)
+            ->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($commande);
+        return new JsonResponse($formatted);
+    }
+
+    public function AllDetailsCommandeJsonAction($id)
+    {
+
+
+        $commande0=$this->getDoctrine()
+            ->getRepository(Commande::class)
+            ->find($id);
+        $commande=$this->getDoctrine()
+            ->getRepository(DetailsCommande::class)
+            ->findBy(['idCommande' => $commande0 ]);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($commande);
+        return new JsonResponse($formatted);
+    }
+
+    public function ReadAllCommandeJsonAction()
+    {
+
+
+
+
+        $commande=$this->getDoctrine()->getManager()
+            ->getRepository(Commande::class)
+            ->findAll();
+
+        $data =  array();
+        foreach ($commande as $key => $commandes){
+            $data[$key]['id']= $commandes->getId();
+            $data[$key]['idClient']= $commandes->getIdClient();
+            $data[$key]['date']= $commandes->getDate()->format('Y-m-d H:i:s');
+            $data[$key]['TotalePrix']= $commandes->getTotalPrix();
+            $data[$key]['nbrProduit']= $commandes->getNbrProduit();
+            $data[$key]['etat']= $commandes->getEtat();
+
+        }
+        return new JsonResponse($data);
+    }
 }

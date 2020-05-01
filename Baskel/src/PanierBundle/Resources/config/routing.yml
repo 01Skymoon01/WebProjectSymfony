@@ -42,3 +42,15 @@ afficherCommandeDunUser:
 CountPanier:
     path:     /CountPanier
     defaults: { _controller: PanierBundle:Default:CountPanier }
+
+AllCommandeJson:
+    path:     /AllCommandeJson
+    defaults: { _controller: PanierBundle:Default:AllCommandeJson }
+
+AllDetailsCommandeJson:
+    path:     /AllDetailsCommandeJson/{id}
+    defaults: { _controller: PanierBundle:Default:AllDetailsCommandeJson }
+
+ReadAllCommandeJson:
+    path:     /ReadAllCommandeJson
+    defaults: { _controller: PanierBundle:Default:ReadAllCommandeJson }
