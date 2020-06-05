@@ -116,3 +116,57 @@ fetchRating:
 soldeEdit:
     path:     /soldeEdit/{ref_p}
     defaults: { _controller: ProduitsBundle:Produits:soldeEdit }
+
+
+
+getProdDetailsJson:
+    path:     /getProdDetailsJson
+    defaults: { _controller: ProduitsBundle:Produits:getProdDetailsJson }
+
+
+getProdImageJson:
+    path:     /getProdImageJson/{ref}
+    defaults: { _controller: ProduitsBundle:Produits:getProdImageJson }
+
+
+
+addToWishlistJSON:
+    path:     /addToWishlistJSON/{refP}/{idClient}
+    defaults: { _controller: ProduitsBundle:Produits:addToWishlistJSON }
+
+
+
+getWishlistJSON:
+    path:     /getWishlistJSON/{idClient}
+    defaults: { _controller: ProduitsBundle:Produits:getWishlistJSON }
+
+
+
+deleteFromWishlistJson:
+    path:     /deleteFromWishlistJson/{id}
+    defaults: { _controller: ProduitsBundle:Produits:deleteFromWishlistJson }
+
+
+
+getRatingJSON:
+    path:     /getRatingJSON/{idProd}
+    defaults: { _controller: ProduitsBundle:Produits:getRatingJSON }
+
+
+
+submitRatingJSON:
+    path:     /submitRatingJSON/{idProd}/{idClient}/{totalRate}
+    defaults: { _controller: ProduitsBundle:Produits:submitRatingJSON }
+
+
+
+
+getRatingJSON:
+    path:     /getRatingJSON/{idProd}
+    defaults: { _controller: ProduitsBundle:Produits:getRatingJSON }
+
+
+getAllRatingJSON:
+    path:     /getAllRatingJSON
+    defaults: { _controller: ProduitsBundle:Produits:getAllRatingJSON }
+

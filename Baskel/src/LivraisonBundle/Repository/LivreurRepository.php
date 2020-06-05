@@ -10,4 +10,14 @@ namespace LivraisonBundle\Repository;
  */
 class LivreurRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function ModifierSolde($id,$solde){
+
+        $query = $this->getEntityManager()
+            ->createQuery(" UPDATE LivraisonBundle:Livreur c SET c.solde =  c.solde+:solde 
+ where c.id =:id ")
+            ->setParameter('solde',$solde)
+            ->setParameter('id', $id)
+        ;
+        return $query->getResult();
+    }
 }

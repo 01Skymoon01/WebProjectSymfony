@@ -76,3 +76,27 @@ sendMail:
 hop:
     path:     /calendrier
     defaults: { _controller: FriteBundle:Default:calendar}
+ReadAllReclamationJson:
+    path:     /ReadAllReclamationJson
+    defaults: { _controller: FriteBundle:Default:ReadAllReclamationJson}
+AjoutReclamationJson:
+    path:     /AjoutReclamationJson/{objet}/{details}/{idClient}
+    defaults: { _controller: FriteBundle:Default:AjoutReclamationJson}
+SupprimerReclamationJSON:
+    path:     /SupprimerReclamationJSON/{id}
+    defaults: { _controller: FriteBundle:Default:SupprimerReclamationJSON}
+ModifierReclamationJson:
+    path:     /ModifierReclamationJson/{objet}/{details}/{id}
+    defaults: { _controller: FriteBundle:Default:ModifierReclamationJson}
+ReadAllRdvJson:
+    path:     /ReadAllRdvJson
+    defaults: { _controller: FriteBundle:Default:ReadAllRdvJson}
+AjoutRDVJson:
+    path:     /AjoutRDVJson/{objet}/{details}/{idClient}/{date}
+    defaults: { _controller: FriteBundle:Default:AjoutRDVJson}
+SupprimerRDVJSON:
+    path:     /SupprimerRDVJSON/{id}
+    defaults: { _controller: FriteBundle:Default:SupprimerRDVJSON}
+ModifierRDVJson:
+    path:     /ModifierRDVJson/{objet}/{details}/{id}/{date}
+    defaults: { _controller: FriteBundle:Default:ModifierRDVJson}

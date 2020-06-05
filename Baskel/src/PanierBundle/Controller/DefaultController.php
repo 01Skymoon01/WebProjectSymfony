@@ -2,7 +2,14 @@
 
 namespace PanierBundle\Controller;
 
+use AppBundle\Entity\User;
 use DateTime;
+use EventBundle\Entity\Event;
+use EventBundle\Entity\Partenaire;
+use EventBundle\Entity\Reservation;
+use LivraisonBundle\Entity\livraison;
+use LivraisonBundle\Entity\Livreur;
+use LivraisonBundle\Entity\Vehicule;
 use PanierBundle\Entity\Commande;
 use PanierBundle\Entity\DetailsCommande;
 use Produits\ProduitsBundle\Entity\Mail;
@@ -461,5 +468,545 @@ public function AllCommandeJsonAction()
 
         }
         return new JsonResponse($data);
+    }
+
+    public function AllProductsJsonAction()
+    {
+
+
+        $commande=$this->getDoctrine()
+            ->getRepository(Produits::class)
+            ->findAll();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($commande);
+        return new JsonResponse($formatted);
+    }
+
+
+    public function LouayPanierCommandeJsonAction($size,$PrixTotal,$idClient){
+
+        $Commande=new Commande();
+        $Commande->setDate(new \DateTime('now'));
+
+
+        $Commande->setEtat(0);
+        $Commande->setIdClient($idClient);
+        $Commande->setNbrProduit($size);
+        $Commande->setTotalPrix($PrixTotal);
+
+
+        $em=$this->getDoctrine()->getManager();
+        $em->persist($Commande);
+        $em->flush();
+        $data =  array();
+
+            $data[0]['id']= $Commande->getId();
+            $data[0]['idClient']= $Commande->getIdClient();
+            $data[0]['date']= $Commande->getDate()->format('Y-m-d H:i:s');
+            $data[0]['TotalePrix']= $Commande->getTotalPrix();
+            $data[0]['nbrProduit']= $Commande->getNbrProduit();
+            $data[0]['etat']= $Commande->getEtat();
+
+
+        return new JsonResponse($data);
+
+    }
+
+    public function NouayDetailsCommandeJsonAction($Commande,$getRefP,$getNomP,$getPrixP){
+        $DCommande=new DetailsCommande();
+        $commande0=$this->getDoctrine()
+            ->getRepository(Commande::class)
+            ->find($Commande);
+        $em2 = $this->getDoctrine()->getManager();
+        $DCommande->setIdCommande($commande0);
+        $DCommande->setIdProduit($getRefP);
+        $DCommande->setNomProduit($getNomP);
+        $DCommande->setQteProduit(1);
+        $DCommande->setPrixPrduit($getPrixP);
+        $em2->persist($DCommande);
+        $em2->flush();
+        $data =  array();
+        $data[0]['etat']= 1;
+
+
+        return new JsonResponse($data);
+
+    }
+
+    public function DetailsJsonAction($id,$ref,$nom,$prix){
+        $DCommande=new DetailsCommande();
+        $commande0=$this->getDoctrine()
+            ->getRepository(Commande::class)
+            ->find($id);
+        $em2 = $this->getDoctrine()->getManager();
+        $DCommande->setIdCommande($commande0);
+        $DCommande->setIdProduit($ref);
+        $DCommande->setNomProduit($nom);
+        $DCommande->setQteProduit(1);
+        $DCommande->setPrixPrduit($prix);
+        $em2->persist($DCommande);
+        $em2->flush();
+        $data =  array();
+        $data[0]['etat']= 1;
+
+
+        return new JsonResponse($data);
+
+    }
+
+    public function SendMailApresValiderJsonAction(){
+
+
+
+        $mm='nour.khedher@esprit.tn';
+        $usename='nour.khedher@esprit.tn';
+        $message= \Swift_Message::newInstance()
+            ->setSubject('nouvelle commande')
+            -> setFrom('gintokiismyhusband@gmail.com')
+            ->setTo($mm)
+            ->setBody('Nous nous informons que vous avez une nouvelle commande',
+                'text/html');
+
+        $this->get('mailer')->send($message);
+        $this->get('session')->getFlashBag()->add('notice','Message envoyé avec success');
+
+
+        $data =  array();
+        $data[0]['etat']= 1;
+
+
+       return new JsonResponse($data);
+        //return $this->redirectToRoute('AfficherCommande');
+    }
+
+
+    /******************** User ***********************************************/
+    public function ReadAllUsersJsonAction()
+    {
+        $users=$this->getDoctrine()->getManager()
+            ->getRepository(User::class)
+            ->findAll();
+
+        $data =  array();
+        foreach ($users as $key => $user){
+            $data[$key]['id']= $user->getId();
+            $data[$key]['cin']= $user->getcin();
+            $data[$key]['password']= $user->getPassword();
+            $data[$key]['email']= $user->getEmail();
+            $data[$key]['username']= $user->getUsername();
+
+
+        }
+        //var_dump(new JsonResponse($data));
+        return new JsonResponse($data);
+    }
+
+    public function LoginAction($username, $password)
+    {
+        $user_manager = $this->get('fos_user.user_manager');
+        $factory = $this->get('security.encoder_factory');
+
+        $user = $user_manager->findUserByUsername($username);
+        $encoder = $factory->getEncoder($user);
+
+        $users = $this->getDoctrine()->getRepository(User::class)->findBy(array('username'=>$username));
+        $bool = ($encoder->isPasswordValid($user->getPassword(),$password,$user->getSalt())) ? "true" : "false";
+        if($bool == "true" )
+        {
+            $normalizer = new ObjectNormalizer();
+            $normalizer->setCircularReferenceLimit(2);
+            $normalizer->setCircularReferenceHandler(function ($object) {
+                return $object->getId();
+            });
+
+            $serializer = new Serializer([$normalizer]);
+            $formatted = $serializer->normalize($users);
+            return new JsonResponse($formatted);
+        }
+        else
+        {
+            $serializer = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize(false);
+            return new JsonResponse($formatted);
+        }
+
+    }
+
+
+    /**************Livraison ***************************************/
+
+    public function ReadLivreurJsonAction()
+    {
+
+
+
+
+        $commande=$this->getDoctrine()->getManager()
+            ->getRepository(Livreur::class)
+            ->findBy(array('id'=>47));
+
+        $data =  array();
+        foreach ($commande as $key => $commandes){
+            $data[$key]['id']= $commandes->getId();
+            $data[$key]['nom']= $commandes->getNom();
+            $data[$key]['prenom']= $commandes->getPrenom();
+            $data[$key]['dateNaiss']= $commandes->getDateNaiss()->format('Y-m-d H:i:s');
+            $data[$key]['solde']= $commandes->getSolde();
+
+
+
+        }
+        return new JsonResponse($data);
+    }
+
+
+
+    public function ReadAllLivraisonJsonAction()
+    {
+
+
+
+
+        $commande=$this->getDoctrine()->getManager()
+            ->getRepository(livraison::class)
+            ->findAll();
+
+        $data =  array();
+        foreach ($commande as $key => $commandes){
+            $data[$key]['id']= $commandes->getId();
+            $data[$key]['idLivreur']= $commandes->getIdLivreur()->getId();
+            $data[$key]['dateLiv']= $commandes->getDateLivraison()->format('Y-m-d H:i:s');
+            $data[$key]['code']= $commandes->getCodeConf();
+            $data[$key]['idCommande']= $commandes->getIdCommande()->getId();
+
+
+        }
+        return new JsonResponse($data);
+    }
+
+
+    public function EtatCommandeJsonAction()
+    {
+
+
+        $commande=$this->getDoctrine()->getManager()
+            ->getRepository(Commande::class)
+            ->findBy(array('etatLiv'=>0));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($commande);
+        return new JsonResponse($formatted);
+    }
+    public function ConfirmerJsonAction($id){
+        $DCommande=new livraison();
+        $commande0=$this->getDoctrine()
+            ->getRepository(livraison::class)
+            ->findOneBy(array("idCommande"=>$id));
+        $em2 = $this->getDoctrine()->getManager();
+
+        $DCommande->setDateLivraison(new \DateTime('now'));
+        $this->modifEtat2($id);
+        $this->modifsolde(47,+2);
+        $em2->persist($commande0);
+        $em2->flush();
+        $data =  array();
+        $data[0]['etat']= 1;
+
+
+        return new JsonResponse($data);
+
+    }
+    public function modifiDateLiv($id){
+        $DCommande=new livraison();
+        $commande0=$this->getDoctrine()
+            ->getRepository(livraison::class)
+            ->findOneBy(array("idCommande"=>$id));
+        $em2 = $this->getDoctrine()->getManager();
+        $DCommande->setDateLivraison(new \DateTime('now'));
+        $em2->persist($commande0);
+        $em2->flush();
+    }
+    public function modifEtat($id){
+        $em= $this->getDoctrine()->getManager();
+        $this->getDoctrine()
+            ->getRepository(Commande::class)
+            ->ModifierEtatLivraison($id,1);
+    }
+
+
+    public function modifEtat2($id){
+        $em= $this->getDoctrine()->getManager();
+        $this->getDoctrine()
+            ->getRepository(Commande::class)
+            ->ModifierEtatLivraison2($id,2);
+    }
+
+    public function modifsolde($id,$solde){
+        $em= $this->getDoctrine()->getManager();
+        $this->getDoctrine()
+            ->getRepository(Livreur::class)
+            ->ModifierSolde($id,$solde);
+    }
+    public function AddLivraisonJsonAction($Commande,$idLivreur){
+        $livraison=new livraison();
+        $commande0=$this->getDoctrine()
+            ->getRepository(Commande::class)
+            ->find($Commande);
+
+        $this->modifEtat($Commande);
+
+
+        $idLivreur0=$this->getDoctrine()
+            ->getRepository(Livreur::class)
+            ->find($idLivreur);
+        $em2 = $this->getDoctrine()->getManager();
+        $livraison->setIdCommande($commande0);
+        $livraison->setIdLivreur($idLivreur0);
+        $livraison->setDateLivraison(new \DateTime('now'));
+
+
+        $em2->persist($livraison);
+        $em2->flush();
+        $data =  array();
+        $data[0]['etat']= 1;
+
+
+        return new JsonResponse($data);
+
+    }
+
+
+    public function getlivcomJsonAction($commande)
+    {
+
+
+        $commandes=$this->getDoctrine()
+            ->getRepository(livraison::class)
+            ->getCommande($commande);
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($commandes);
+        return new JsonResponse($formatted);
+    }
+    public function  coderecupAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $livraison = $em->getRepository(livraison::class)->findOneBy(array("idCommande"=>$id));
+
+        $this->modifEtat2($id);
+        $this->modifsolde(47,2);
+        $this->modifiDateLiv($id);
+        $data =  array();
+        $data[0]['etat']= $livraison->getCodeConf();
+        // $data[1]['id']= $Reclamation->getIdR();
+        //$data=1;
+        return new JsonResponse($data);
+    }
+
+
+
+
+    //-----------------------------------------Vehicules-----------------------------------------------------------------
+
+    public function ReadVehiculeJsonAction()
+    {
+
+        $vehicules=$this->getDoctrine()->getManager()
+            ->getRepository(Vehicule::class)
+            ->findBy(array('user'=>9));
+
+        $data =  array();
+        foreach ($vehicules as $key => $vehicule){
+            $data[$key]['id']= $vehicule->getId();
+            $data[$key]['matricule']= $vehicule->getMatricule();
+            $data[$key]['marque']= $vehicule->getMarque();
+            $data[$key]['type']= $vehicule->getType();
+
+        }
+        return new JsonResponse($data);
+    }
+
+
+    public function AjoutVehiculeJsonAction($matricule,$marque,$type){
+
+        $vehicule=new Vehicule();
+
+
+
+
+
+        // $userManager = $container->get('fos_user.user_manager');
+        $vehicule->setMatricule($matricule);
+        $vehicule->setMarque($marque);
+        $vehicule->setType($type);
+        $us= new Livreur();
+
+        $us=$this->getDoctrine()->getManager()
+            ->getRepository(Livreur::class)
+            ->find(9);
+
+        $vehicule->setUser($us);
+
+        $em=$this->getDoctrine()->getManager();
+        $em->persist($vehicule);
+        $em->flush();
+        $data =  array();
+        $data[0]['etat']= 1;
+        // $data[1]['id']= $Reclamation->getIdR();
+        //$data=1;
+        return new JsonResponse($data);
+
+    }
+
+
+    public function ModifierVehiculeJsonAction($id,$matricule,$marque,$type){
+
+        $em = $this->getDoctrine()->getManager();
+        $vehicule = $em->getRepository(Vehicule::class)->find($id);
+        $vehicule->setMatricule($matricule);
+        $vehicule->setMarque($marque);
+        $vehicule->setType($type);
+        $em=$this->getDoctrine()->getManager();
+        $em->persist($vehicule);
+        $em->flush();
+        $data =  array();
+        $data[0]['etat']= 1;
+        // $data[1]['id']= $Reclamation->getIdR();
+        //$data=1;
+        return new JsonResponse($data);
+
+    }
+
+
+
+    public function SupprimerVehiculeJSONAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $vehicule = $em->getRepository(Vehicule::class)->find($id);
+        $em->remove($vehicule);
+        $em->flush();
+        $data =  array();
+        $data[0]['etat']= 1;
+        // $data[1]['id']= $Reclamation->getIdR();
+        //$data=1;
+        return new JsonResponse($data);
+
+    }
+
+
+    /*********************************************EVENTS*****************************************************/
+    public function ReadAllEventJsonAction()
+    {
+
+
+
+
+        $event=$this->getDoctrine()->getManager()
+            ->getRepository(Event::class)
+            ->findAll();
+
+        $data =  array();
+        foreach ($event as $key => $events){
+            $data[$key]['id']= $events->getId();
+            $data[$key]['nom']= $events->getNom();
+            $data[$key]['date']= $events->getDate()->format('Y-m-d');
+            $data[$key]['description']= $events->getDescription();
+            $data[$key]['nbparticipants']= $events->getNbParticipants();
+            $data[$key]['whyattend']= $events->getWhyattend();
+            $data[$key]['image']= $events->getImage();
+            $data[$key]['emailresponsable']= $events->getEmailresponsable();
+
+
+        }
+        return new JsonResponse($data);
+    }
+
+    public function ReadAllPartenaireJsonAction()
+    {
+
+
+
+
+        $partenaire=$this->getDoctrine()->getManager()
+            ->getRepository(Partenaire::class)
+            ->findAll();
+
+        $data =  array();
+        foreach ($partenaire as $key => $partenaires){
+            $data[$key]['id']= $partenaires->getId();
+            $data[$key]['nom']= $partenaires->getNom();
+            $data[$key]['description']= $partenaires->getDescription();
+            $data[$key]['type']= $partenaires->getType();
+            $data[$key]['representant']= $partenaires->getRepresentant();
+
+
+
+        }
+        return new JsonResponse($data);
+    }
+
+
+    public function SupprimerReservationJSONAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $reservation = $em->getRepository(Reservation::class)->find($id);
+        $em->remove($reservation);
+        $em->flush();
+        $data =  array();
+        $data[0]['rep']= 1;
+        // $data[1]['id']= $Reclamation->getIdR();
+        //$data=1;
+        return new JsonResponse($data);
+    }
+
+    public function ReadAllReservationJsonAction($idClient)
+    {
+
+        $user = $this->get('fos_user.user_manager')->findUserBy(array('id' => $idClient));
+
+
+        $reservation=$this->getDoctrine()->getManager()
+            ->getRepository(Reservation::class)
+            ->findBy(array('id_user'=>$user));
+
+        $data =  array();
+        foreach ($reservation as $key => $reservations){
+            $data[$key]['id']= $reservations->getId();
+            $data[$key]['etat']= $reservations->getEtat();
+            if($reservations->getIdEvent()==null){
+                $data[$key]['nom']= " ";
+                $data[$key]['date']=" ";
+            }
+            else{
+                $data[$key]['nom']= $reservations->getIdEvent()->getNom();
+                $data[$key]['date']= $reservations->getIdEvent()->getDate()->format('Y-m-d');
+            }
+
+
+
+
+        }
+        return new JsonResponse($data);
+    }
+    public function ReserverJsonAction($idEvent,$idClient){
+
+
+        $user = $this->get('fos_user.user_manager')->findUserBy(array('id' => $idClient));
+        $Reservation=new Reservation();
+        $Event=$this->getDoctrine()
+            ->getRepository(Event::class)
+            ->find($idEvent);
+        $em2 = $this->getDoctrine()->getManager();
+        $Reservation->setIdUser($user);
+        $Reservation->setIdEvent($Event);
+
+
+        $em2->persist($Reservation);
+        $em2->flush();
+        $data =  array();
+        $data[0]['rep']= 1;
+
+
+        return new JsonResponse($data);
+
     }
 }

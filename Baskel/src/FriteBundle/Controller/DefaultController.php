@@ -432,6 +432,172 @@ class DefaultController extends Controller
     }
 
 
+    /******************************************************MOBIIILE SAV**********************************************************************/
+
+    public function ReadAllReclamationJsonAction()
+    {
+
+        $reclamation=$this->getDoctrine()->getManager()
+            ->getRepository(Reclamation::class)
+            ->findAll();
+
+        $data =  array();
+        foreach ($reclamation as $key => $reclamation){
+            $data[$key]['id']= $reclamation->getIdR();
+            $data[$key]['idUser']= $reclamation->getUserid()->getId();
+            $data[$key]['date']= $reclamation->getDateR()->format('Y-m-d');
+            $data[$key]['objetR']= $reclamation->getObjetR();
+            $data[$key]['etatR']= $reclamation->getEtatR();
+            $data[$key]['detailsR']= $reclamation->getDetailsR();
+
+        }
+        return new JsonResponse($data);
+    }
+
+    public function ReadAllRdvJsonAction()
+    {
+
+        $rdv=$this->getDoctrine()->getManager()
+            ->getRepository(RDV::class)
+            ->findAll();
+
+
+        $data =  array();
+        foreach ($rdv as $key => $rdv){
+            $data[$key]['id']= $rdv->getIdRDV();
+            $data[$key]['idUser']= $rdv->getUserid()->getId();
+            $data[$key]['dateDep']= $rdv->getDateDepotRDV()->format('Y-m-d');
+            $data[$key]['date']= $rdv->getDateRDV()->format('Y-m-d');
+            $data[$key]['objetR']= $rdv->getObjetRDV();
+            $data[$key]['etatR']= $rdv->getEtatRDV();
+            $data[$key]['detailsR']= $rdv->getDetailsRDV();
+            if($rdv->getTechnicienid()==null)
+            {
+                $data[$key]['tech']="Non affectee";
+            }else
+                $data[$key]['tech']= $rdv->getTechnicienid()->getNom();
+
+        }
+        return new JsonResponse($data);
+    }
+
+
+    public function AjoutReclamationJsonAction($objet,$details,$idClient){
+
+        $Reclamation=new Reclamation();
+        $Reclamation->setDateR(new \DateTime('now'));
+
+
+        $Reclamation->setEtatR("non traitee");
+        $user = $this->get('fos_user.user_manager')->findUserBy(array('id' => $idClient));
+        // $userManager = $container->get('fos_user.user_manager');
+        $Reclamation->setUserid($user);
+        $Reclamation->setDetailsR($details);
+        $Reclamation->setObjetR($objet);
+        $Reclamation->setEtatR("Non traitee");
+
+        $em=$this->getDoctrine()->getManager();
+        $em->persist($Reclamation);
+        $em->flush();
+        $data =  array();
+        $data[0]['etat']= 1;
+        // $data[1]['id']= $Reclamation->getIdR();
+        //$data=1;
+        return new JsonResponse($data);
+
+    }
+
+
+    public function AjoutRDVJsonAction($objet,$details,$idClient,$date){
+
+        $rdv=new RDV();
+        $rdv->setDateDepotRDV(new \DateTime('now'));
+
+        $rdv->setEtatRDV("non traitee");
+        $user = $this->get('fos_user.user_manager')->findUserBy(array('id' => $idClient));
+        // $userManager = $container->get('fos_user.user_manager');
+        $rdv->setUserid($user);
+        $rdv->setDetailsRDV($details);
+        $rdv->setObjetRDV($objet);
+        $rdv->setEtatRDV("Non traitee");
+        $rdv->setDateRDV(new \DateTime($date));
+        //$rdv->setTechnicienid(null);
+        $em=$this->getDoctrine()->getManager();
+        $em->persist($rdv);
+        $em->flush();
+        $data =  array();
+        $data[0]['etat']= 1;
+        // $data[1]['id']= $Reclamation->getIdR();
+        //$data=1;
+        return new JsonResponse($data);
+
+    }
+
+
+    public function SupprimerReclamationJSONAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $reclamation = $em->getRepository(Reclamation::class)->find($id);
+        $em->remove($reclamation);
+        $em->flush();
+        $data =  array();
+        $data[0]['etat']= 1;
+        // $data[1]['id']= $Reclamation->getIdR();
+        //$data=1;
+        return new JsonResponse($data);
+
+    }
+
+    public function SupprimerRDVJSONAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $reclamation = $em->getRepository(RDV::class)->find($id);
+        $em->remove($reclamation);
+        $em->flush();
+        $data =  array();
+        $data[0]['etat']= 1;
+        // $data[1]['id']= $Reclamation->getIdR();
+        //$data=1;
+        return new JsonResponse($data);
+
+    }
+
+
+    public function ModifierReclamationJsonAction($objet,$details,$id){
+
+        $em = $this->getDoctrine()->getManager();
+        $reclamation = $em->getRepository(Reclamation::class)->find($id);
+        $reclamation->setDetailsR($details);
+        $reclamation->setObjetR($objet);
+        $em=$this->getDoctrine()->getManager();
+        $em->persist($reclamation);
+        $em->flush();
+        $data =  array();
+        $data[0]['etat']= 1;
+        // $data[1]['id']= $Reclamation->getIdR();
+        //$data=1;
+        return new JsonResponse($data);
+
+    }
+
+    public function ModifierRDVJsonAction($objet,$details,$id,$date){
+
+        $em = $this->getDoctrine()->getManager();
+        $reclamation = $em->getRepository(RDV::class)->find($id);
+        $reclamation->setDetailsRDV($details);
+        $reclamation->setObjetRDV($objet);
+        $reclamation->setDateRDV(new \DateTime($date));
+        $em=$this->getDoctrine()->getManager();
+        $em->persist($reclamation);
+        $em->flush();
+        $data =  array();
+        $data[0]['etat']= 1;
+        // $data[1]['id']= $Reclamation->getIdR();
+        //$data=1;
+        return new JsonResponse($data);
+
+    }
+
 }
 
 

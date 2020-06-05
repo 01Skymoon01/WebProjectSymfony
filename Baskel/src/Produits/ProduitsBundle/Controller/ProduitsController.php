@@ -15,6 +15,7 @@ use Produits\ProduitsBundle\Form\MailType;
 use Produits\ProduitsBundle\Form\ModifierSoldeType;
 use Produits\ProduitsBundle\Form\ProduitsModifType;
 use Produits\ProduitsBundle\Form\ProduitsType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Produits\ProduitsBundle\Repository\WishlistRepository;
@@ -25,6 +26,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 
 
@@ -67,7 +70,7 @@ class ProduitsController extends Controller
         if($nbr >= 1 )
             $produits = $em->getRepository('ProduitsBundle:Produits')->findBy(array('ref_p' => array_keys($session->get('panier'))));
         else $produits =array();
-         //**************END Nour PART *************************//
+        //**************END Nour PART *************************//
         return $this -> render('@Produits/Produits/shop.html.twig', array('produit' => $result,'categorie' => $categorie ,'user' => $user,
             'rating' => $rating,
             'panier' =>$session->get('panier'),
@@ -90,7 +93,7 @@ class ProduitsController extends Controller
         $arrayC=array();
         $i=0;
 
-       foreach ($produit as $value){
+        foreach ($produit as $value){
 
             foreach ($value->getCouleurP() as $ac){
 
@@ -98,8 +101,8 @@ class ProduitsController extends Controller
                     $arrayC[$i] = $value;
                     $i++;
                 }
-           }
-       }
+            }
+        }
 
         /**
          * @var $paginator \Knp\Component\Pager\Paginator
@@ -237,7 +240,7 @@ class ProduitsController extends Controller
             -> getRepository(Categories::class)
             ->findAll();
 
-      //  $this->container->get('templating');
+        //  $this->container->get('templating');
 
         $user = $this->getUser();
         //**************Nour PART *************************//
@@ -703,8 +706,8 @@ class ProduitsController extends Controller
             -> getRepository(Wishlist::class)
             -> find($id);
         //var_dump($wishlist);
-            $em -> remove($wishlist);
-            $em -> flush();
+        $em -> remove($wishlist);
+        $em -> flush();
 
 
 
@@ -731,7 +734,7 @@ class ProduitsController extends Controller
 
 
         $rating=$em->getRepository(Produits::class)->fetchRating();
-       $nbr=count($rating);
+        $nbr=count($rating);
         return new Response(json_encode(array( 'rating'=>$rating,'nbr'=>$nbr)));
 
     }
@@ -783,6 +786,317 @@ class ProduitsController extends Controller
             array('form'=>$form->createView(),'user'=>$user));
 
     }
+
+
+    public function getProdDetailsJsonAction()
+    {
+
+        $produit=$this->getDoctrine()->getManager()
+            ->getRepository(Produits::class)
+            ->findAll();
+
+        $data =  array();
+        foreach ($produit as $key => $p){
+            $data[$key]['ref_p']= $p->getRefP();
+
+            $data[$key]['nomP']= $p->getNomP();
+            $data[$key]['quantiteP']= $p->getQuantiteP();
+            //echo $data[$key]['nomP'];
+            $data[$key]['prixP']= $p->getPrixP();
+            $data[$key]['image']= $p->getImage();
+
+        }
+
+        return new JsonResponse($data);
+
+    }
+
+
+    public function getProdImageJsonAction( $ref)
+    {
+
+        $produit=$this->getDoctrine()->getManager()
+            ->getRepository(Produits::class)
+            ->getImage($ref);
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($produit);
+        return new JsonResponse($formatted);
+
+
+    }
+
+    /* public function getProdDetailsJsonAction($refP)
+     {
+
+
+         $produit=$this->getDoctrine()->getManager()
+             ->getRepository(Produits::class)
+             ->find($refP);
+         $serializer = new Serializer([new ObjectNormalizer()]);
+         $formatted = $serializer->normalize($produit);
+         echo $formatted;
+         return new JsonResponse($formatted);
+     }*/
+
+
+    public function addToWishlistJSONAction(Request $request,$refP,$idClient)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $wishlist = new Wishlist();
+        $produits = $em->getRepository(Produits::class)->findBy(array('ref_p'=>$refP));
+
+
+        // $myUser = $em->getRepository(FOSUser::class)->findBy(array('ref_p'=>$refP));
+        $userManager = $this->get('fos_user.user_manager');
+
+        $user = $userManager->findUserBy(array('id' => $idClient));
+
+        //$idClient = $this->getUser()->get
+        //var_dump($idClient);
+
+        /*$wishlist->setIdClient($request->get('idClient'));
+        $wishlist->nomProd($request->get('nomProd'));
+        $wishlist->setPrixProd($request->get('prixProd'));
+        $wishlist->setQteProd($request->get('qteProd'));
+        $wishlist->setImageProd($request->get('imageProd'));
+        $wishlist->setRefP($request->get('refP'));*/
+        $data =  array();
+        $data[0]["rep"]= 0;
+
+        $emWish = $this -> getDoctrine() -> getManager();
+        $wishy = $emWish->getRepository(Wishlist::class)->FindTheWishlist($idClient,$refP);
+
+        if($wishy == null) {
+
+
+            foreach ($produits as $p) {
+
+                $em2 = $this -> getDoctrine() -> getManager();
+
+                $wishlist -> setRefP($p);
+                $wishlist -> setNomProd($p -> getNomP());
+                $wishlist -> setPrixProd($p -> getPrixP());
+                $wishlist -> setQteProd($p -> getQuantiteP());
+                $wishlist -> setIdClient($user);
+                $wishlist -> setImageProd($p -> getImage());
+
+                $em2 -> persist($wishlist);
+                $em2 -> flush();
+
+
+            }
+
+
+
+            $data[0]["rep"]= 1;
+
+            /*
+                $serializer = new Serializer([new ObjectNormalizer()]);
+                $formatted = $serializer->normalize($wishlist);*/
+        }
+
+
+
+
+        return new JsonResponse($data);
+    }
+
+
+
+    public function getWishlistJSONAction($idClient)
+    {
+
+        $wishlist = $this -> getDoctrine()
+            -> getRepository(Wishlist::class)
+            -> findBy(array('idClient'=>$idClient));
+
+
+
+        $data =  array();
+        foreach ($wishlist as $key => $p){
+            $data[$key]['refP']= $p->getRefP()->getRefP();
+            $data[$key]['nomProd']= $p->getNomProd();
+            $data[$key]['prixProd']= $p->getPrixProd();
+            $data[$key]['imageProd']= $p->getImageProd();
+            $data[$key]['id']= $p->getId();
+
+
+
+        }
+
+        return new JsonResponse($data);
+
+    }
+
+
+    public function deleteFromWishlistJsonAction($id)
+    {
+
+
+        $em = $this -> getDoctrine() -> getManager();
+
+        $wishlist = $this -> getDoctrine()
+            -> getRepository(Wishlist::class)
+            -> find($id);
+
+        $em -> remove($wishlist);
+        $em -> flush();
+
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($wishlist);
+        // echo $formatted;
+        return new JsonResponse($formatted);
+    }
+
+
+    public function submitRatingJSONAction($idProd,$idClient,$totalRate)
+    {
+
+        $rating =new Rating();
+        $produits = $this->getDoctrine()->getManager()->getRepository(Produits::class)->findBy(array('ref_p'=>$idProd));
+
+        $userManager = $this->get('fos_user.user_manager');
+
+        $user = $userManager->findUserBy(array('id' => $idClient));
+
+        $rating2 = $this->getDoctrine()->getManager()
+            ->getRepository(Rating::class)->checkRating($idProd,$idClient);
+
+        $rating3 = $this->getDoctrine()->getManager()
+            ->getRepository(Rating::class)->checkRating2($idProd);
+
+
+        $allRates2 =0;
+
+        if($rating2 == null) {
+
+
+            foreach ($produits as $p) {
+
+                $em2 = $this -> getDoctrine() -> getManager();
+
+                $rating -> setIdProd($p);
+
+                $rating -> setIdClient($user);
+
+
+                $rating -> setRate($totalRate);
+
+                $rating->setTotalRate(0);
+
+
+
+
+                $em2 -> persist($rating);
+                $em2 -> flush();
+
+                $ratingCount =$this -> getDoctrine()
+                    -> getRepository(Rating::class)
+                    -> countRating($idProd);
+
+                $ratingSum=$this -> getDoctrine()
+                    -> getRepository(Rating::class)
+                    -> getRating($idProd);
+
+                $moy = $ratingSum / $ratingCount;
+
+                $upRate= $this -> getDoctrine()
+                    -> getRepository(Rating::class)
+                    -> UpdateTotalRating2($idProd,$moy);
+
+                $serializer = new Serializer([new ObjectNormalizer()]);
+                $formatted = $serializer->normalize($rating);
+
+            }
+        } else {
+
+            $ratingUpdate = $this -> getDoctrine()
+                -> getRepository(Rating::class)
+                -> UpdateTotalRating($idProd,$idClient,$totalRate);
+
+
+            $ratingCount =$this -> getDoctrine()
+                -> getRepository(Rating::class)
+                -> countRating($idProd);
+
+            $ratingSum=$this -> getDoctrine()
+                -> getRepository(Rating::class)
+                -> getRating($idProd);
+
+            $moy = $ratingSum / $ratingCount;
+
+
+            $upRate= $this -> getDoctrine()
+                -> getRepository(Rating::class)
+                -> UpdateTotalRating2($idProd,$moy);
+
+
+            $serializer = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize($ratingUpdate,$upRate);
+
+
+        }
+
+        return new JsonResponse($formatted);
+
+    }
+
+
+    public function getRatingJSONAction($idProd)
+    {
+
+        $moy = 0;
+
+        $rating = $this -> getDoctrine()
+            -> getRepository(Rating::class)
+            -> findBy(array('idProd'=>$idProd));
+
+
+
+
+
+        $data =  array();
+        foreach ($rating as $key => $r){
+            //   $data[$key]['id']= $r->getId();
+
+            $data[0]['totalRate']= $r->getTotalRate();
+        }
+
+
+
+        return new JsonResponse($data);
+
+    }
+
+    public function getAllRatingJSONAction()
+    {
+
+        $moy = 0;
+
+        $rating = $this -> getDoctrine()
+            -> getRepository(Rating::class)
+            -> findAll();
+
+
+
+
+
+        $data =  array();
+        foreach ($rating as $key => $r){
+            //   $data[$key]['id']= $r->getId();
+
+            $data[$key]['idProd']= $r->getIdProd()->getRefP();
+        }
+
+
+
+        return new JsonResponse($data);
+
+    }
+
+
 
 
 

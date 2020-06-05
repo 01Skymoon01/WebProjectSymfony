@@ -107,7 +107,7 @@ class Produits
     /**
      * @var float
      *
-     * @ORM\Column(name="solde", type="float")
+     * @ORM\Column(name="solde", type="float",nullable=true)
      * @Assert\Range(
      *     min=0,
      *     max = 100,
@@ -120,7 +120,7 @@ class Produits
     /**
      * @var int
      *
-     * @ORM\Column(name="rating_p", type="integer")
+     * @ORM\Column(name="rating_p", type="integer",nullable=true)
      * @Assert\GreaterThanOrEqual(
      *     value = 0,
      *     message="Quantite ne peut pas etre négative."

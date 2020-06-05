@@ -68,6 +68,17 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
+
+    public function getImage($ref)
+    {
+        $query = $this->getEntityManager()->createQuery(
+
+            'SELECT p.ref_p, p.image from ProduitsBundle:Produits p WHERE p.ref_p=:ref'
+        )->setParameter('ref',$ref);
+
+        return $query->getResult();
+    }
+
     public function TrierProduits()
     {
         $query = $this->getEntityManager()->createQuery(

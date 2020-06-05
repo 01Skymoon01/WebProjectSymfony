@@ -54,3 +54,85 @@ AllDetailsCommandeJson:
 ReadAllCommandeJson:
     path:     /ReadAllCommandeJson
     defaults: { _controller: PanierBundle:Default:ReadAllCommandeJson }
+
+AllProductsJson:
+    path:     /AllProductsJson
+    defaults: { _controller: PanierBundle:Default:AllProductsJson }
+
+LouayPanierCommandeJson:
+    path:     /LouayPanierCommandeJson/{size}/{PrixTotal}/{idClient}
+    defaults: { _controller: PanierBundle:Default:LouayPanierCommandeJson }
+
+NouayDetailsCommandeJson:
+    path:     /NouayDetailsCommandeJson/{Commande}/{getRefP}/{getNomP}/{getPrixP)
+    defaults: { _controller: PanierBundle:Default:NouayDetailsCommandeJson }
+
+DetailsJson:
+    path:     /DetailsJson/{id}/{ref}/{nom}/{prix}
+    defaults: { _controller: PanierBundle:Default:DetailsJson }
+SendMailApresValiderJson:
+    path:     /SendMailApresValiderJson
+    defaults: { _controller: PanierBundle:Default:SendMailApresValiderJson }
+
+
+ReadAllUserJson:
+    path:     /ReadAllUser
+    defaults: { _controller: PanierBundle:Default:ReadAllUsersJson }
+login_api:
+    path:     /login_api/{username}/{password}
+    defaults: { _controller: PanierBundle:Default:Login }
+
+
+ReadAllLivraisonJson:
+    path:     /ReadAllLivraisonJson
+    defaults: { _controller: PanierBundle:Default:ReadAllLivraisonJson }
+AddLivraisonJson:
+    path:     /AddLivraisonJson/{Commande}/{idLivreur}
+    defaults: { _controller: PanierBundle:Default:AddLivraisonJson }
+ReadLivreurJson:
+    path:     /ReadLivreurJson
+    defaults: { _controller: PanierBundle:Default:ReadLivreurJson }
+ConfirmerJson:
+    path:     /ConfirmerJson/{id}
+    defaults: { _controller: PanierBundle:Default:ConfirmerJson }
+getlivcomJson:
+    path:     /getlivcomJson/{commande}
+    defaults: { _controller: PanierBundle:Default:getlivcomJson }
+EtatCommandeJson:
+    path:     /EtatCommandeJson
+    defaults: { _controller: PanierBundle:Default:EtatCommandeJson }
+coderecup:
+    path:     /coderecup/{id}
+    defaults: { _controller: PanierBundle:Default:coderecup }
+ReadVehiculeJson:
+    path:     /ReadVehiculeJson
+    defaults: { _controller: PanierBundle:Default:ReadVehiculeJson }
+AjoutVehiculeJson:
+    path:     /AjoutVehiculeJson/{matricule}/{marque}/{type}
+    defaults: { _controller: PanierBundle:Default:AjoutVehiculeJson }
+ModifierVehiculeJson:
+    path:     /ModifierVehiculeJson/{id}/{matricule}/{marque}/{type}
+    defaults: { _controller: PanierBundle:Default:ModifierVehiculeJson }
+SupprimerVehiculeJSON:
+    path:     /SupprimerVehiculeJSON/{id}
+    defaults: { _controller: PanierBundle:Default:SupprimerVehiculeJSON }
+
+
+ReadAllEventJson:
+    path:     /ReadAllEventJson
+    defaults: { _controller: PanierBundle:Default:ReadAllEventJson }
+
+ReadAllPartenairetJson:
+    path:     /ReadAllPartenaireJson
+    defaults: { _controller: PanierBundle:Default:ReadAllPartenaireJson }
+
+SupprimerReservationJSON:
+    path:     /SupprimerReservationJSON/{id}
+    defaults: { _controller: PanierBundle:Default:SupprimerReservationJSON }
+
+ReadAllReservationtJson:
+    path:     /ReadAllReservationJson/{idClient}
+    defaults: { _controller: PanierBundle:Default:ReadAllReservationJson }
+ReserverJson:
+    path:     /ReserverJson/{idEvent}/{idClient}
+    defaults: { _controller: PanierBundle:Default:ReserverJson }

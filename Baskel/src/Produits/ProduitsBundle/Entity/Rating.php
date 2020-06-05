@@ -28,12 +28,30 @@ class Rating
      */
     private $idProd;
 
+
+    /**
+     * @var int
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="idClient",referencedColumnName="id",nullable=false)
+     */
+    private $idClient;
+
+
+
     /**
      * @var int
      *
      * @ORM\Column(name="rate", type="integer")
      */
     private $rate;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="totalRate", type="integer")
+     */
+    private $totalRate;
 
 
     /**
@@ -93,5 +111,42 @@ class Rating
     {
         return $this->rate;
     }
+
+    /**
+     * @return int
+     */
+    public function getIdClient()
+    {
+        return $this->idClient;
+    }
+
+    /**
+     * @param int $idClient
+     */
+    public function setIdClient($idClient)
+    {
+        $this->idClient = $idClient;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalRate()
+    {
+        return $this->totalRate;
+    }
+
+    /**
+     * @param int $totalRate
+     */
+    public function setTotalRate($totalRate)
+    {
+        $this->totalRate = $totalRate;
+    }
+
+
+
+
+
 }
 

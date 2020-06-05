@@ -9,9 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="livreur")
  * @ORM\Entity(repositoryClass="LivraisonBundle\Repository\LivreurRepository")
- * @UniqueEntity(fields={"id_username"},
- *     errorPath="id_username",
- *     message="It looks like your already have an account!")
  */
 class Livreur
 {
@@ -27,7 +24,7 @@ class Livreur
     /**
      * @var
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="id_username",referencedColumnName="id",unique=true)
+     * @ORM\JoinColumn(name="id_username",referencedColumnName="id")
      */
     private $id_username;
 
